@@ -1,67 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>碎碎念</title>
-    <url>/2024/12/01/Life/%E7%A2%8E%E7%A2%8E%E5%BF%B5/</url>
-    <content><![CDATA[<p><font size=4>🚩 真正的自由意味着控制你整个生活，学会计划、承诺和决定，为你自己的行为负责！</font><br><br></p>
-<blockquote>
-<p><font face="楷体"> 没有一种批判比自我批判更强烈，也没有一种法官比我们自己更严苛。  ——《蛤蟆先生去看心理医生》</font></p>
-</blockquote>
-<br>
-
-<blockquote>
-<p><font face="楷体">  对抗消极的不是积极，而是专注。积极的情绪是无法击退消极情绪的，只有把自己沉浸在某件事件上才能从消极情绪中走出来。 —— 若林正恭 </font></p>
-</blockquote>
-<br>
-
-<blockquote>
-<p><font face="楷体">  生活的不确定性正是我们希望的来源。  ——阿德勒 </font></p>
-</blockquote>
-<br>
-
-<blockquote>
-<p><font face="楷体"> 那些看起来比你勇敢的人也像你一样害怕，他们只是在黑暗中把口哨吹得响亮一些罢了。  ——《为什么长大》 </font></p>
-</blockquote>
-<br>
-
-<blockquote>
-<p><font face="楷体"> 那晚，我点了一把篝火，大地在月亮眼中亮起了一颗星星。   ——弱智吧  </font></p>
-</blockquote>
-<br>
-
-<blockquote>
-<p><font face="楷体"> 这乱糟糟的世上还有人拿着花四处走走    ——李沧东《火与灰》 </font></p>
-</blockquote>
-<br>
-
-<blockquote>
-<p><font face="楷体"> 好在，别人如何分析我，跟我本身是一点关系都没有的。    ——三毛《撒哈拉的故事》  </font></p>
-</blockquote>
-<br>
-
-<blockquote>
-<p><font face="楷体"> 你极目远望，其余的由心去完成。 </font></p>
-</blockquote>
-<br>
-
-<blockquote>
-<p><font face="楷体"> 一个人变好的前提是，允许自己不好。    ——武志红  </font></p>
-</blockquote>
-<br>
- 
-<blockquote>
-<p><font face="楷体"> 纯粹，就是不要一心要成为高贵或者强大的人，而是成为自己。     ——佩索阿《惶然录》 </font></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>名言积累</tag>
-        <tag>生活</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>设置hexo首页只显示部分摘要（不显示全文）</title>
     <url>/2024/12/03/Hexo/%E8%AE%BE%E7%BD%AEhexo%E9%A6%96%E9%A1%B5%E5%8F%AA%E6%98%BE%E7%A4%BA%E9%83%A8%E5%88%86%E6%91%98%E8%A6%81/</url>
     <content><![CDATA[<p>❗本文针对hexo的Next主题的设置有效，其他主题可以看看有没有相同字段<br>Next默认是会在首页显示全文的，看起来冗长不简洁。要想首页仅展示文章标题或者摘要，请按照以下步骤进行：</p>
@@ -382,6 +321,67 @@
       <tags>
         <tag>力扣</tag>
         <tag>面试经典150题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>碎碎念</title>
+    <url>/2024/12/01/Life/%E7%A2%8E%E7%A2%8E%E5%BF%B5/</url>
+    <content><![CDATA[<p><font size=4>🚩 真正的自由意味着控制你整个生活，学会计划、承诺和决定，为你自己的行为负责！</font><br><br></p>
+<blockquote>
+<p><font face="楷体"> 没有一种批判比自我批判更强烈，也没有一种法官比我们自己更严苛。  ——《蛤蟆先生去看心理医生》</font></p>
+</blockquote>
+<br>
+
+<blockquote>
+<p><font face="楷体">  对抗消极的不是积极，而是专注。积极的情绪是无法击退消极情绪的，只有把自己沉浸在某件事件上才能从消极情绪中走出来。 —— 若林正恭 </font></p>
+</blockquote>
+<br>
+
+<blockquote>
+<p><font face="楷体">  生活的不确定性正是我们希望的来源。  ——阿德勒 </font></p>
+</blockquote>
+<br>
+
+<blockquote>
+<p><font face="楷体"> 那些看起来比你勇敢的人也像你一样害怕，他们只是在黑暗中把口哨吹得响亮一些罢了。  ——《为什么长大》 </font></p>
+</blockquote>
+<br>
+
+<blockquote>
+<p><font face="楷体"> 那晚，我点了一把篝火，大地在月亮眼中亮起了一颗星星。   ——弱智吧  </font></p>
+</blockquote>
+<br>
+
+<blockquote>
+<p><font face="楷体"> 这乱糟糟的世上还有人拿着花四处走走    ——李沧东《火与灰》 </font></p>
+</blockquote>
+<br>
+
+<blockquote>
+<p><font face="楷体"> 好在，别人如何分析我，跟我本身是一点关系都没有的。    ——三毛《撒哈拉的故事》  </font></p>
+</blockquote>
+<br>
+
+<blockquote>
+<p><font face="楷体"> 你极目远望，其余的由心去完成。 </font></p>
+</blockquote>
+<br>
+
+<blockquote>
+<p><font face="楷体"> 一个人变好的前提是，允许自己不好。    ——武志红  </font></p>
+</blockquote>
+<br>
+ 
+<blockquote>
+<p><font face="楷体"> 纯粹，就是不要一心要成为高贵或者强大的人，而是成为自己。     ——佩索阿《惶然录》 </font></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>名言积累</tag>
+        <tag>生活</tag>
       </tags>
   </entry>
 </search>
