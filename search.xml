@@ -23,6 +23,48 @@
       </tags>
   </entry>
   <entry>
+    <title>英文单词</title>
+    <url>/2024/12/04/Life/%E8%8B%B1%E6%96%87%E5%8D%95%E8%AF%8D/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>英语</category>
+      </categories>
+      <tags>
+        <tag>英语单词3000个</tag>
+        <tag>积累</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Item2Vec</title>
+    <url>/2024/12/05/Recommend/embedding/Item2Vec/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>推荐算法</category>
+        <category>embedding</category>
+      </categories>
+      <tags>
+        <tag>embedding</tag>
+        <tag>item2vec</tag>
+        <tag>word2vec</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>协同过滤算法</title>
+    <url>/2024/12/05/Recommend/%E5%8F%AC%E5%9B%9E/%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<h3 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h3><h3 id="二、用户协同过滤"><a href="#二、用户协同过滤" class="headerlink" title="二、用户协同过滤"></a>二、用户协同过滤</h3><h4 id="1-主要思想"><a href="#1-主要思想" class="headerlink" title="1. 主要思想"></a>1. 主要思想</h4><p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/%E7%94%A8%E6%88%B7%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4.png"></p>
+]]></content>
+      <categories>
+        <category>推荐算法</category>
+        <category>召回</category>
+      </categories>
+      <tags>
+        <tag>recommend system</tag>
+        <tag>推荐系统</tag>
+        <tag>召回</tag>
+        <tag>协同过滤</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>碎碎念</title>
     <url>/2024/12/01/Life/%E7%A2%8E%E7%A2%8E%E5%BF%B5/</url>
     <content><![CDATA[<p><font size=4>🚩 真正的自由意味着控制你整个生活，学会计划、承诺和决定，为你自己的行为负责！</font><br><br></p>
@@ -109,34 +151,6 @@
       </tags>
   </entry>
   <entry>
-    <title>英文单词</title>
-    <url>/2024/12/04/Life/%E8%8B%B1%E6%96%87%E5%8D%95%E8%AF%8D/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>英语</category>
-      </categories>
-      <tags>
-        <tag>英语单词3000个</tag>
-        <tag>积累</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>协同过滤算法</title>
-    <url>/2024/12/05/Recommend/%E5%8F%AC%E5%9B%9E/%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<h3 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h3><h3 id="二、用户协同过滤"><a href="#二、用户协同过滤" class="headerlink" title="二、用户协同过滤"></a>二、用户协同过滤</h3><h4 id="1-主要思想"><a href="#1-主要思想" class="headerlink" title="1. 主要思想"></a>1. 主要思想</h4><p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/%E7%94%A8%E6%88%B7%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4.png"></p>
-]]></content>
-      <categories>
-        <category>推荐算法</category>
-        <category>召回</category>
-      </categories>
-      <tags>
-        <tag>recommend system</tag>
-        <tag>推荐系统</tag>
-        <tag>召回</tag>
-        <tag>协同过滤</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>召回算法发展</title>
     <url>/2024/12/05/Recommend/%E5%8F%AC%E5%9B%9E/%E5%8F%AC%E5%9B%9E%E7%AE%97%E6%B3%95%E5%8F%91%E5%B1%95/</url>
     <content><![CDATA[]]></content>
@@ -149,34 +163,6 @@
         <tag>推荐系统</tag>
         <tag>召回</tag>
         <tag>发展历程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>精排算法发展</title>
-    <url>/2024/12/05/Recommend/%E7%B2%BE%E6%8E%92/%E7%B2%BE%E6%8E%92%E7%AE%97%E6%B3%95%E5%8F%91%E5%B1%95/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>推荐算法</category>
-        <category>精排</category>
-      </categories>
-      <tags>
-        <tag>recommend system</tag>
-        <tag>推荐系统</tag>
-        <tag>精排</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Item2Vec</title>
-    <url>/2024/12/05/Recommend/embedding/Item2Vec/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>推荐算法</category>
-        <category>embedding</category>
-      </categories>
-      <tags>
-        <tag>embedding</tag>
-        <tag>item2vec</tag>
-        <tag>word2vec</tag>
       </tags>
   </entry>
   <entry>
@@ -524,6 +510,29 @@
 <h5 id="二叉树的右视图"><a href="#二叉树的右视图" class="headerlink" title="二叉树的右视图"></a><a href="https://leetcode.cn/problems/binary-tree-right-side-view/?envType=study-plan-v2&envId=top-interview-150">二叉树的右视图</a></h5><p>——层序遍历</p>
 <p>层序遍历，取每一层的最右边的节点，加入到返回的数组中即可。</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title function_">rightSideView</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">    List&lt;Integer&gt; res = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">if</span> (Objects.isNull(root)) <span class="keyword">return</span> res;</span><br><span class="line">    Queue&lt;TreeNode&gt; queue = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    queue.add(root);</span><br><span class="line">    <span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> queue.size();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">            <span class="type">TreeNode</span> <span class="variable">node</span> <span class="operator">=</span> queue.poll();</span><br><span class="line">            <span class="keyword">if</span> (Objects.nonNull(node.left)) queue.add(node.left);</span><br><span class="line">            <span class="keyword">if</span> (Objects.nonNull(node.right)) queue.add(node.right);</span><br><span class="line">            <span class="keyword">if</span> (i == len - <span class="number">1</span>) res.add(node.val);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h5 id="二叉树的层平均值"><a href="#二叉树的层平均值" class="headerlink" title="二叉树的层平均值"></a><a href="https://leetcode.cn/problems/average-of-levels-in-binary-tree/?envType=study-plan-v2&envId=top-interview-150">二叉树的层平均值</a></h5><p>——层序遍历</p>
+<p>对于每一层，求出每一层的节点数和节点值的总和，然后每一层记录下这一层的平均值</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;Double&gt; <span class="title function_">averageOfLevels</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">    List&lt;Double&gt; res = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    Queue&lt;TreeNode&gt; queue = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    queue.add(root);</span><br><span class="line">    <span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">        <span class="type">long</span> <span class="variable">len</span> <span class="operator">=</span> queue.size(), sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; ++i) &#123;</span><br><span class="line">            <span class="type">TreeNode</span> <span class="variable">cur</span> <span class="operator">=</span> queue.poll();</span><br><span class="line">            sum += cur.val;</span><br><span class="line">            <span class="keyword">if</span> (Objects.nonNull(cur.left)) queue.add(cur.left);</span><br><span class="line">            <span class="keyword">if</span> (Objects.nonNull(cur.right)) queue.add(cur.right);</span><br><span class="line">        &#125;</span><br><span class="line">        res.add(sum * <span class="number">1.0</span> / len);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="二叉树的层序遍历"><a href="#二叉树的层序遍历" class="headerlink" title="二叉树的层序遍历"></a><a href="https://leetcode.cn/problems/binary-tree-level-order-traversal/?envType=study-plan-v2&envId=top-interview-150">二叉树的层序遍历</a></h5><p>——层序遍历模板题，写模板，每一层用一个列表存储即可。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">levelOrder</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; res = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">if</span> (Objects.isNull(root)) <span class="keyword">return</span> res;</span><br><span class="line">    Queue&lt;TreeNode&gt; queue = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    queue.add(root);</span><br><span class="line">    <span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> queue.size();</span><br><span class="line">        List&lt;Integer&gt; level = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; ++i) &#123;</span><br><span class="line">            <span class="type">TreeNode</span> <span class="variable">node</span> <span class="operator">=</span> queue.poll();</span><br><span class="line">            level.add(node.val);</span><br><span class="line">            <span class="keyword">if</span> (Objects.nonNull(node.left)) queue.add(node.left);</span><br><span class="line">            <span class="keyword">if</span> (Objects.nonNull(node.right)) queue.add(node.right);</span><br><span class="line">        &#125;</span><br><span class="line">        res.add(level);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="二叉树的锯齿形层次遍历"><a href="#二叉树的锯齿形层次遍历" class="headerlink" title="二叉树的锯齿形层次遍历"></a><a href="https://leetcode.cn/problems/binary-tree-zigzag-level-order-traversal/?envType=study-plan-v2&envId=top-interview-150">二叉树的锯齿形层次遍历</a></h5><p>——层次遍历</p>
+<p>跟上一题几乎一样的模板，只是多加了一个判断。当在遍历的层数为奇数层（根节点算第 0 层）时，我们需要翻转存储该层数的列表</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">zigzagLevelOrder</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; res = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">if</span> (Objects.isNull(root)) <span class="keyword">return</span> res;</span><br><span class="line">    Queue&lt;TreeNode&gt; queue = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    queue.add(root);</span><br><span class="line">    <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> queue.size();</span><br><span class="line">        List&lt;Integer&gt; level = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; ++i) &#123;</span><br><span class="line">            <span class="type">TreeNode</span> <span class="variable">node</span> <span class="operator">=</span> queue.poll();</span><br><span class="line">            level.add(node.val);</span><br><span class="line">            <span class="keyword">if</span> (Objects.nonNull(node.left)) queue.add(node.left);</span><br><span class="line">            <span class="keyword">if</span> (Objects.nonNull(node.right)) queue.add(node.right);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (num % <span class="number">2</span> == <span class="number">1</span>) &#123;</span><br><span class="line">            Collections.reverse(level);</span><br><span class="line">        &#125;</span><br><span class="line">        res.add(level);</span><br><span class="line">        num++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="二叉搜索树的最小绝对差"><a href="#二叉搜索树的最小绝对差" class="headerlink" title="二叉搜索树的最小绝对差"></a><a href="https://leetcode.cn/problems/minimum-absolute-difference-in-bst/description/?envType=study-plan-v2&envId=top-interview-150">二叉搜索树的最小绝对差</a></h5><p>首先，我们如何获取到一棵二叉搜索树的所有节点数值，并且按照升序排序？答案是中序遍历。对于这道题目，一棵二叉树中序遍历出来的结果，min(arr[i] - arr[i+1]) 的结果就是答案。怎么写代码呢？很明显这个公式是两个值，所以我们需要额外的一个变量 pre 记录前一个节点的值。然后呢？按照中序遍历的顺序，先遍历左子树；然后处理当前节点，取当前节点与上一个节点的值的差值；最后遍历右子树。 其实每一道题目讲起来都是抽象的，我画个图解释一下吧。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">pre</span> <span class="operator">=</span> -<span class="number">1</span>, res = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getMinimumDifference</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">    pre = -<span class="number">1</span>;</span><br><span class="line">    res = Integer.MAX_VALUE;</span><br><span class="line">    inorderPrint(root);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">inorderPrint</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (Objects.isNull(root)) <span class="keyword">return</span>;</span><br><span class="line">    inorderPrint(root.left);</span><br><span class="line">    <span class="keyword">if</span> (pre == -<span class="number">1</span>) &#123;</span><br><span class="line">        pre = root.val;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        res = Math.min(res, root.val - pre); <span class="comment">// 这里只需要用当前数 - 前一个数； 因为中序遍历的结果就是递增的，所以相减一定是正数</span></span><br><span class="line">        pre = root.val;</span><br><span class="line">    &#125;</span><br><span class="line">    inorderPrint(root.right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="验证二叉搜索树"><a href="#验证二叉搜索树" class="headerlink" title="验证二叉搜索树"></a><a href="https://leetcode.cn/problems/validate-binary-search-tree/description/?envType=study-plan-v2&envId=top-interview-150https://leetcode.cn/problems/validate-binary-search-tree/description/?envType=study-plan-v2&envId=top-interview-150">验证二叉搜索树</a></h5><p>跟上一道题目一样的模板。上一道题目是记录前后两个值的差的最小值，这道题目是判断上一个值是否大于等于当前值，如果是，说明不是二叉搜索树。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">long</span> <span class="variable">pre</span> <span class="operator">=</span> Long._MIN_VALUE_;</span><br><span class="line"><span class="type">boolean</span> <span class="variable">flag</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isValidBST</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (Objects._isNull_(root)) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    inorderPrint(root);</span><br><span class="line">    <span class="keyword">return</span> flag;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">inorderPrint</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (Objects._isNull_(root)) <span class="keyword">return</span>;</span><br><span class="line">    inorderPrint(root.left);</span><br><span class="line">    <span class="keyword">if</span> (!flag) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span> (pre == Long._MIN_VALUE_) &#123;</span><br><span class="line">        pre = root.val;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (pre &gt;= root.val) flag = <span class="literal">false</span>;</span><br><span class="line">        pre = root.val;</span><br><span class="line">    &#125;</span><br><span class="line">    inorderPrint(root.right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="二叉搜索树中第-k-小的元素"><a href="#二叉搜索树中第-k-小的元素" class="headerlink" title="二叉搜索树中第 k 小的元素"></a><a href="https://leetcode.cn/problems/kth-smallest-element-in-a-bst/?envType=study-plan-v2&envId=top-interview-150">二叉搜索树中第 k 小的元素</a></h5><p>——中序遍历</p>
+<p>其实就是取二叉搜索树中序遍历的结果列表中的第 k 个小标的数。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">res</span> <span class="operator">=</span> <span class="number">0</span>, k = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">kthSmallest</span><span class="params">(TreeNode root, <span class="type">int</span> k)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.k = k;</span><br><span class="line">        inorderPrint(root);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">inorderPrint</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (Objects.isNull(root)) <span class="keyword">return</span>;</span><br><span class="line">        inorderPrint(root.left);</span><br><span class="line">        <span class="keyword">if</span> (k == <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span> (--k == <span class="number">0</span>) res = root.val;</span><br><span class="line">        inorderPrint(root.right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>算法</category>
@@ -531,6 +540,20 @@
       <tags>
         <tag>力扣</tag>
         <tag>面试经典150题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>精排算法发展</title>
+    <url>/2024/12/05/Recommend/%E7%B2%BE%E6%8E%92/%E7%B2%BE%E6%8E%92%E7%AE%97%E6%B3%95%E5%8F%91%E5%B1%95/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>推荐算法</category>
+        <category>精排</category>
+      </categories>
+      <tags>
+        <tag>recommend system</tag>
+        <tag>推荐系统</tag>
+        <tag>精排</tag>
       </tags>
   </entry>
 </search>
