@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>设置hexo首页只显示部分摘要（不显示全文）</title>
+    <url>/2024/12/03/Hexo/%E8%AE%BE%E7%BD%AEhexo%E9%A6%96%E9%A1%B5%E5%8F%AA%E6%98%BE%E7%A4%BA%E9%83%A8%E5%88%86%E6%91%98%E8%A6%81/</url>
+    <content><![CDATA[<p>❗本文针对hexo的Next主题的设置有效，其他主题可以看看有没有相同字段<br>Next默认是会在首页显示全文的，看起来冗长不简洁。要想首页仅展示文章标题或者摘要，请按照以下步骤进行：</p>
+<h3 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h3><p>首先需要在Next主题的<code>_config.yml</code>中把设置打开(默认安装时就打开了): </p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">excerpt_description:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="设置展示的内容"><a href="#设置展示的内容" class="headerlink" title="设置展示的内容"></a>设置展示的内容</h3><h4 id="方法一：写概述"><a href="#方法一：写概述" class="headerlink" title="方法一：写概述"></a>方法一：写概述</h4><p>在文章的<code>front-matter</code>中添加<code>description</code>，其中<code>descriptio</code>n中的内容就会被显示在首页上，其余一律不显示。<br><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/Snipaste_2024-12-04_00-04-00.png"></p>
+<p>PS: 这种方法主要是要自己对文章内容进行简单总结，有时候不喜欢写总结介绍的话，可以用下面第二种方法</p>
+<h4 id="方法二：文章截断"><a href="#方法二：文章截断" class="headerlink" title="方法二：文章截断"></a>方法二：文章截断</h4><p>在需要截断的地方加入：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--more--&gt;</span></span><br></pre></td></tr></table></figure>
+<p>首页就会显示这条以上的所有内容，隐藏接下来的所有内容。</p>
+<p>这个明显会方便很多，但当然有利有弊，我一般喜欢用方法一，也希望自己写的<code>description</code>能够给读者快速了解文章内容的效果</p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>教程</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Acwing基础算法板子</title>
     <url>/2024/12/14/Algorithm/Acwing%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E6%9D%BF%E5%AD%90/</url>
     <content><![CDATA[<h1 id="第一讲-基础算法"><a href="#第一讲-基础算法" class="headerlink" title="第一讲 基础算法"></a>第一讲 基础算法</h1><h2 id="1-快速排序"><a href="#1-快速排序" class="headerlink" title="1. 快速排序"></a>1. 快速排序</h2><h3 id="1-1-快速排序"><a href="#1-1-快速排序" class="headerlink" title="1.1 快速排序"></a>1.1 <a href="https://www.acwing.com/problem/content/787/">快速排序</a></h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">1e5</span> + <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> arr[N], n;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">quickSort</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> l, <span class="type">int</span> r)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (l &gt;= r)<span class="keyword">return</span>;</span><br><span class="line">	<span class="type">int</span> i = l - <span class="number">1</span>, j = r + <span class="number">1</span>, base = arr[l + r &gt;&gt; <span class="number">1</span>];</span><br><span class="line">	<span class="keyword">while</span> (i &lt; j) &#123;</span><br><span class="line">		<span class="keyword">do</span> ++i; <span class="keyword">while</span> (arr[i] &lt; base);</span><br><span class="line">		<span class="keyword">do</span> --j; <span class="keyword">while</span> (arr[j] &gt; base);</span><br><span class="line">		<span class="keyword">if</span> (i &lt; j) <span class="built_in">swap</span>(arr[i], arr[j]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">quickSort</span>(arr, l, j);</span><br><span class="line">	<span class="built_in">quickSort</span>(arr, j + <span class="number">1</span>, r);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;arr[i]);</span><br><span class="line">	<span class="built_in">quickSort</span>(arr, <span class="number">0</span>, n - <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, arr[i]);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -37,8 +59,7 @@
 
 <h2 id="9-区间合并"><a href="#9-区间合并" class="headerlink" title="9.区间合并"></a>9.区间合并</h2><h3 id="9-1-区间合并"><a href="#9-1-区间合并" class="headerlink" title="9.1 区间合并"></a>9.1 <a href="https://www.acwing.com/problem/content/805/">区间合并</a></h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">100010</span>;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt;PII;</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line">vector&lt;PII&gt;segs;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">merge</span><span class="params">(vector&lt;PII&gt;&amp; segs)</span> </span>&#123;</span><br><span class="line">	vector&lt;PII&gt;res;</span><br><span class="line">	<span class="built_in">sort</span>(segs.<span class="built_in">begin</span>(), segs.<span class="built_in">end</span>());</span><br><span class="line">	<span class="type">int</span> st = <span class="number">-2e9</span>, ed = <span class="number">-2e9</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> item : segs) &#123;</span><br><span class="line">		<span class="keyword">if</span> (ed &lt; item.first) &#123;</span><br><span class="line">			<span class="keyword">if</span> (st != <span class="number">-2e9</span>)res.<span class="built_in">push_back</span>(&#123; st,ed &#125;);</span><br><span class="line">			st = item.first;   ed = item.second;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> ed = <span class="built_in">max</span>(ed, item.second);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (st != <span class="number">-2e9</span>)res.<span class="built_in">push_back</span>(&#123; st,ed &#125;);</span><br><span class="line">	segs = res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	cin &gt;&gt; n;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">		<span class="type">int</span> l, r;</span><br><span class="line">		cin &gt;&gt; l &gt;&gt; r;</span><br><span class="line">		segs.<span class="built_in">push_back</span>(&#123; l,r &#125;);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">merge</span>(segs);</span><br><span class="line">	cout &lt;&lt; segs.<span class="built_in">size</span>() &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>algorithm</category>
-        <category>acwing</category>
+        <category>算法</category>
       </categories>
       <tags>
         <tag>algorithm</tag>
@@ -47,25 +68,15 @@
       </tags>
   </entry>
   <entry>
-    <title>设置hexo首页只显示部分摘要（不显示全文）</title>
-    <url>/2024/12/03/Hexo/%E8%AE%BE%E7%BD%AEhexo%E9%A6%96%E9%A1%B5%E5%8F%AA%E6%98%BE%E7%A4%BA%E9%83%A8%E5%88%86%E6%91%98%E8%A6%81/</url>
-    <content><![CDATA[<p>❗本文针对hexo的Next主题的设置有效，其他主题可以看看有没有相同字段<br>Next默认是会在首页显示全文的，看起来冗长不简洁。要想首页仅展示文章标题或者摘要，请按照以下步骤进行：</p>
-<h3 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h3><p>首先需要在Next主题的<code>_config.yml</code>中把设置打开(默认安装时就打开了): </p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">excerpt_description:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="设置展示的内容"><a href="#设置展示的内容" class="headerlink" title="设置展示的内容"></a>设置展示的内容</h3><h4 id="方法一：写概述"><a href="#方法一：写概述" class="headerlink" title="方法一：写概述"></a>方法一：写概述</h4><p>在文章的<code>front-matter</code>中添加<code>description</code>，其中<code>descriptio</code>n中的内容就会被显示在首页上，其余一律不显示。<br><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/Snipaste_2024-12-04_00-04-00.png"></p>
-<p>PS: 这种方法主要是要自己对文章内容进行简单总结，有时候不喜欢写总结介绍的话，可以用下面第二种方法</p>
-<h4 id="方法二：文章截断"><a href="#方法二：文章截断" class="headerlink" title="方法二：文章截断"></a>方法二：文章截断</h4><p>在需要截断的地方加入：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--more--&gt;</span></span><br></pre></td></tr></table></figure>
-<p>首页就会显示这条以上的所有内容，隐藏接下来的所有内容。</p>
-<p>这个明显会方便很多，但当然有利有弊，我一般喜欢用方法一，也希望自己写的<code>description</code>能够给读者快速了解文章内容的效果</p>
-]]></content>
+    <title>英文单词</title>
+    <url>/2024/12/04/Life/%E8%8B%B1%E6%96%87%E5%8D%95%E8%AF%8D/</url>
+    <content><![CDATA[]]></content>
       <categories>
-        <category>Hexo</category>
+        <category>英语</category>
       </categories>
       <tags>
-        <tag>Hexo</tag>
-        <tag>教程</tag>
+        <tag>英语单词3000个</tag>
+        <tag>积累</tag>
       </tags>
   </entry>
   <entry>
@@ -175,6 +186,11 @@
 <blockquote>
 <p><font face="楷体"> 时间不是一条直线，而是一个循环，我们在其中不断重复着相似的故事，直到我们学会从中解脱。    ——《悉达多》  </font></p>
 </blockquote>
+<br>
+
+<blockquote>
+<p><font face="楷体"> 你不能在赢的时候才自信，那不是自信，是对结果的复读    ——冯骥  </font></p>
+</blockquote>
 ]]></content>
       <categories>
         <category>生活</category>
@@ -182,18 +198,6 @@
       <tags>
         <tag>名言积累</tag>
         <tag>生活</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>英文单词</title>
-    <url>/2024/12/04/Life/%E8%8B%B1%E6%96%87%E5%8D%95%E8%AF%8D/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>英语</category>
-      </categories>
-      <tags>
-        <tag>英语单词3000个</tag>
-        <tag>积累</tag>
       </tags>
   </entry>
   <entry>
