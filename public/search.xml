@@ -1,34 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>设置hexo首页只显示部分摘要（不显示全文）</title>
-    <url>/2024/12/03/Hexo/%E8%AE%BE%E7%BD%AEhexo%E9%A6%96%E9%A1%B5%E5%8F%AA%E6%98%BE%E7%A4%BA%E9%83%A8%E5%88%86%E6%91%98%E8%A6%81/</url>
-    <content><![CDATA[<p>❗本文针对hexo的Next主题的设置有效，其他主题可以看看有没有相同字段
-Next默认是会在首页显示全文的，看起来冗长不简洁。要想首页仅展示文章标题或者摘要，请按照以下步骤进行：</p>
-<h3 id="修改配置">修改配置</h3>
-<p>首先需要在Next主题的<code>_config.yml</code>中把设置打开(默认安装时就打开了):
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">excerpt_description:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="设置展示的内容">设置展示的内容</h3>
-<h4 id="方法一写概述">方法一：写概述</h4>
-<p>在文章的<code>front-matter</code>中添加<code>description</code>，其中<code>descriptio</code>n中的内容就会被显示在首页上，其余一律不显示。
-<img
-src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/Snipaste_2024-12-04_00-04-00.png" /></p>
-<p>PS:
-这种方法主要是要自己对文章内容进行简单总结，有时候不喜欢写总结介绍的话，可以用下面第二种方法</p>
-<h4 id="方法二文章截断">方法二：文章截断</h4>
-<p>在需要截断的地方加入： <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--more--&gt;</span></span><br></pre></td></tr></table></figure>
-首页就会显示这条以上的所有内容，隐藏接下来的所有内容。</p>
-<p>这个明显会方便很多，但当然有利有弊，我一般喜欢用方法一，也希望自己写的<code>description</code>能够给读者快速了解文章内容的效果</p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>教程</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Acwing基础算法板子</title>
     <url>/2024/12/14/Algorithm/Acwing%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E6%9D%BF%E5%AD%90/</url>
     <content><![CDATA[<h1 id="第一讲-基础算法">第一讲 基础算法</h1>
@@ -169,6 +141,224 @@ href="https://www.acwing.com/problem/content/843/">字符串哈希</a></h3>
         <tag>algorithm</tag>
         <tag>C++</tag>
         <tag>算法板子</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>生活心得</title>
+    <url>/2024/12/17/Life/%E7%94%9F%E6%B4%BB%E5%BF%83%E5%BE%97/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="39a3e91f4c5d7c1cb6483996f53257fe2795255f840c0cc7179afd0fb8315f2c">1f6bb8509d126916afe1b073331b8b3022b18b79a6847b5197580c9561aefcdb7ef0d420fd891ef5503bc83738620ef4a03ae5124c312909ce9f60dd3706ecabbc0cd5634cd8567a22be1e022bf0beac66afc389469082db29e3c78737e66c4869d462d61098a196d97f1fb073e9db885418219d96e4bc9e2f913f689beea7090dea7ab83fc87afe9d2ff383fe1e248dbbaf05ac0c1ec0500b944ded297209fe18aff9a11d46d9a4fc6ab496725c433095de62d152a9162636a045a2cdc03161295105e4916ee87e6cc7b11d01b9e3abe31b4547d444f892500e8ec573e8f69aa16e5b86d4b67b40d4ee4c250366d93855d964061885b29695c54d19dd8071a224b942c7c980457c01d379b1a8dddf4a5958e7751778e79b5630b8b05b918843</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>碎碎念</title>
+    <url>/2024/12/01/Life/%E7%A2%8E%E7%A2%8E%E5%BF%B5/</url>
+    <content><![CDATA[<p><font size=4>🚩
+真正的自由意味着控制你整个生活，学会计划、承诺和决定，为你自己的行为负责！</font>
+<br></p>
+<blockquote>
+<p><font face="楷体">
+原来，让内心强大，我只需要看到自己，接纳我还不能做的，欣赏我已经做到的
+——《当我真的足够强大》 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+没有一种批判比自我批判更强烈，也没有一种法官比我们自己更严苛。
+——《蛤蟆先生去看心理医生》</font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+对抗消极的不是积极，而是专注。积极的情绪是无法击退消极情绪的，只有把自己沉浸在某件事件上才能从消极情绪中走出来。
+——若林正恭 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体"> 生活的不确定性正是我们希望的来源。 ——阿德勒
+</font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+那些看起来比你勇敢的人也像你一样害怕，他们只是在黑暗中把口哨吹得响亮一些罢了。
+——《为什么长大》 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+那晚，我点了一把篝火，大地在月亮眼中亮起了一颗星星。 ——弱智吧
+</font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体"> 这乱糟糟的世上还有人拿着花四处走走。
+——李沧东《火与灰》 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体"> 好在，别人如何分析我，跟我本身是一点关系都没有的。
+——三毛《撒哈拉的故事》 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体"> 你极目远望，其余的由心去完成。 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体"> 一个人变好的前提是，允许自己不好。 ——武志红
+</font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+纯粹，就是不要一心要成为高贵或者强大的人，而是成为自己。
+——佩索阿《惶然录》 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+人人都有天赋，但可贵的是，你是否有勇气追随你的天赋到黑暗之地。
+——艾丽卡·琼 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+随着年龄的增长，你越来越不在意别人怎么看你，只有那时你才能愈加自由。
+——《失踪树木的岛屿》 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+人脑虽然可以努力什么都试图记住，但写下来就可以安心忘记了。 ——《告白》
+</font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+后来我知道了，人生在世，临到每一个紧要关头，你都是孤军衰兵。
+——《关山夺路》 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+我们本能地把错误归咎于他人，但最重要的是，坏事情发生时，应该寻找原因，而不是寻找坏人。
+——《事实》 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+勇气，并不是闪闪发光的英雄主义，勇敢中也包含怯懦，就像爱中也有不爱的时刻。这来回摇摆的踱步，斑驳的杂质，才是真相。
+——《茫然尘世的珍宝》 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体"> 我独自度过了太多时光，沉默已成一种习惯。
+——《夜航西飞》 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+幸福的关键，并不在于你是否结婚、是否有孩子等，而是无论你处于什么样的状态都有不停追求幸福的行动力，以及无论多小的一件事，你都能感到幸福的能力。可以说，幸福的关键是一种心态。
+——《超单身社会》 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+因为有了仪式，某一天才有别于其他任何一天，某一个小时才有别于其他任何一个时刻。
+——圣·埃克絮佩里 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+时间不是一条直线，而是一个循环，我们在其中不断重复着相似的故事，直到我们学会从中解脱。
+——《悉达多》 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+你不能在赢的时候才自信，那不是自信，是对结果的复读。 ——冯骥 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+出路只有一条：在别人头脑发热大声喧闹的时候，退回到自己的内心并保持沉默
+——《昨日的世界》 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+无论风暴将我带到什么样的岸边，我都将以主人的身份上岸
+——昆图斯·贺拉斯·弗拉库斯 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体"> 而我，还是那个身披霞光的人
+<br>雨水流过山岚，孤独如杜鹃开放 ——余秀华 </font></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>生活</tag>
+        <tag>名言积累</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>英文单词</title>
+    <url>/2024/12/04/Life/%E8%8B%B1%E6%96%87%E5%8D%95%E8%AF%8D/</url>
+    <content><![CDATA[
+]]></content>
+      <categories>
+        <category>英语</category>
+      </categories>
+      <tags>
+        <tag>英语单词3000个</tag>
+        <tag>积累</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>设置hexo首页只显示部分摘要（不显示全文）</title>
+    <url>/2024/12/03/Hexo/%E8%AE%BE%E7%BD%AEhexo%E9%A6%96%E9%A1%B5%E5%8F%AA%E6%98%BE%E7%A4%BA%E9%83%A8%E5%88%86%E6%91%98%E8%A6%81/</url>
+    <content><![CDATA[<p>❗本文针对hexo的Next主题的设置有效，其他主题可以看看有没有相同字段
+Next默认是会在首页显示全文的，看起来冗长不简洁。要想首页仅展示文章标题或者摘要，请按照以下步骤进行：</p>
+<h3 id="修改配置">修改配置</h3>
+<p>首先需要在Next主题的<code>_config.yml</code>中把设置打开(默认安装时就打开了):
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">excerpt_description:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="设置展示的内容">设置展示的内容</h3>
+<h4 id="方法一写概述">方法一：写概述</h4>
+<p>在文章的<code>front-matter</code>中添加<code>description</code>，其中<code>descriptio</code>n中的内容就会被显示在首页上，其余一律不显示。
+<img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/Snipaste_2024-12-04_00-04-00.png" /></p>
+<p>PS:
+这种方法主要是要自己对文章内容进行简单总结，有时候不喜欢写总结介绍的话，可以用下面第二种方法</p>
+<h4 id="方法二文章截断">方法二：文章截断</h4>
+<p>在需要截断的地方加入： <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--more--&gt;</span></span><br></pre></td></tr></table></figure>
+首页就会显示这条以上的所有内容，隐藏接下来的所有内容。</p>
+<p>这个明显会方便很多，但当然有利有弊，我一般喜欢用方法一，也希望自己写的<code>description</code>能够给读者快速了解文章内容的效果</p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>教程</tag>
       </tags>
   </entry>
   <entry>
@@ -1215,8 +1405,8 @@ href="https://leetcode.cn/problems/word-break?envType=study-plan-v2&amp;envId=to
 <p>——前缀树</p>
 <p>被样例整破防了，前缀树压根过不了，这里写一个没有完全通过的版本，题解竟然叫去写前缀树。看来还是我学不够。</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Trie</span>&#123;</span><br><span class="line">        <span class="keyword">private</span> Node root;</span><br><span class="line">        Trie()&#123;</span><br><span class="line">            root = <span class="keyword">new</span> <span class="title class_">Node</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">insertWord</span><span class="params">(String word)</span>&#123;</span><br><span class="line">            <span class="type">Node</span> <span class="variable">cur</span> <span class="operator">=</span> root;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">char</span> ch : word.toCharArray()) &#123;</span><br><span class="line">                <span class="keyword">if</span>(cur.subNodes.containsKey(ch))&#123;</span><br><span class="line">                    cur = cur.subNodes.get(ch);</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    cur.subNodes.put(ch,<span class="keyword">new</span> <span class="title class_">Node</span>());</span><br><span class="line">                    cur = cur.subNodes.get(ch);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            cur.isEnd = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">class</span> <span class="title class_">Node</span>&#123;</span><br><span class="line">            <span class="type">boolean</span> isEnd;</span><br><span class="line">            Map&lt;Character,Node&gt; subNodes = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">wordBreak</span><span class="params">(String s, List&lt;String&gt; wordDict)</span> &#123;</span><br><span class="line">        Set&lt;String&gt; wordSet = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;(wordDict);</span><br><span class="line">        <span class="type">Trie</span> <span class="variable">root</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Trie</span>();</span><br><span class="line">        <span class="keyword">for</span> (String word : wordSet) &#123;</span><br><span class="line">            root.insertWord(word);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> <span class="variable">idx</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        Trie.<span class="type">Node</span> <span class="variable">tmp</span> <span class="operator">=</span> root.root;</span><br><span class="line">        <span class="keyword">while</span> (idx &lt; s.length())&#123;</span><br><span class="line">            <span class="keyword">if</span>(tmp.subNodes.containsKey(s.charAt(idx)))&#123;</span><br><span class="line">                tmp = tmp.subNodes.get(s.charAt(idx));</span><br><span class="line">                ++idx;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(tmp.isEnd) tmp = root.root;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> tmp.isEnd;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="零钱兑换"><a
-href="https://leetcode.cn/problems/coin-change/?envType=study-plan-v2&amp;envId=top-interview-150">零钱兑换</a></h5>
+<h3 id="零钱兑换">22.4 <a
+href="https://leetcode.cn/problems/coin-change/?envType=study-plan-v2&amp;envId=top-interview-150">零钱兑换</a></h3>
 <ol type="1">
 <li>确定 dp 数组 (dp table) 以及下标的含义<br> dp[i]表示的是：当总金额为
 i 时，所需的最少的硬币数。</li>
@@ -1230,8 +1420,8 @@ i-coins[j] 的最少硬币数 + 1 来赋值；不取的话，就只能赋回原�
 <li>举例推导 dp 数组<br></li>
 </ol>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">coinChange</span><span class="params">(<span class="type">int</span>[] coins, <span class="type">int</span> amount)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">max</span> <span class="operator">=</span> amount + <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span>[] dp = <span class="keyword">new</span> <span class="title class_">int</span>[max];</span><br><span class="line">    Arrays._fill_(dp, max);</span><br><span class="line">    dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= amount; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; coins.length; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i &gt;= coins[j]) &#123;</span><br><span class="line">                dp[i] = Math._min_(dp[i], dp[i - coins[j]] + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[amount] &gt; amount ? -<span class="number">1</span> : dp[amount];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="最长递增子序列"><a
-href="https://leetcode.cn/problems/longest-increasing-subsequence/description/?envType=study-plan-v2&amp;envId=top-interview-150">最长递增子序列</a></h5>
+<h3 id="最长递增子序列">22.5 <a
+href="https://leetcode.cn/problems/longest-increasing-subsequence/description/?envType=study-plan-v2&amp;envId=top-interview-150">最长递增子序列</a></h3>
 <p>——动态规划 + 二分查找</p>
 <p>还是画个图模拟一下代码的整个流程更好理解一点。如下图，二分查找插入的目的是什么？其实目的就是为了让我们的
 dp
@@ -1239,31 +1429,37 @@ dp
 <img
 src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20241221111852.png" />
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">lengthOfLIS</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> <span class="number">1</span>, n = nums.length;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span>[] dp = <span class="keyword">new</span> <span class="title class_">int</span>[n + <span class="number">1</span>];</span><br><span class="line">    dp[len] = nums[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (nums[i] &gt; dp[len]) dp[++len] = nums[i];</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">l</span> <span class="operator">=</span> <span class="number">1</span>, r = len, pos = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> (l &lt;= r) &#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> l + r &gt;&gt; <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">if</span> (dp[mid] &lt; nums[i]) &#123;</span><br><span class="line">                    pos = mid;</span><br><span class="line">                    l = mid + <span class="number">1</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    r = mid - <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            dp[pos + <span class="number">1</span>] = nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> len;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h5 id="三角形最小路径和"><a
-href="https://leetcode.cn/problems/triangle/?envType=study-plan-v2&amp;envId=top-interview-150">三角形最小路径和</a></h5>
+<h2 id="多维动态规划">23. 多维动态规划</h2>
+<h3 id="三角形最小路径和">23.1 <a
+href="https://leetcode.cn/problems/triangle/?envType=study-plan-v2&amp;envId=top-interview-150">三角形最小路径和</a></h3>
 <p><img
 src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20241221111914.png" />
 从最下面往上面走，第 i 层 第 j 个数的最终结果是什么呢？</p>
-<p>dp[i][j] = min(dp[i+1][j],dp[i+1][j+1]) + triangle[i][j];</p>
+<p><span class="math display">\[
+dp[i][j] = min(dp[i+1][j],dp[i+1][j+1]) + triangle[i][j];
+\]</span></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">minimumTotal</span><span class="params">(List&lt;List&lt;Integer&gt;&gt; triangle)</span> &#123;</span><br><span class="line">    <span class="comment">// 由底部到顶部</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> triangle.size();</span><br><span class="line">    <span class="type">int</span>[] dp = <span class="keyword">new</span> <span class="title class_">int</span>[n];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; ++i) dp[i] = triangle.get(n - <span class="number">1</span>).get(i);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> n - <span class="number">2</span>; i &gt;= <span class="number">0</span>; --i)</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt;= i; ++j)</span><br><span class="line">            dp[j] = Math._min_(dp[j], dp[j + <span class="number">1</span>]) + triangle.get(i).get(j);</span><br><span class="line">    <span class="keyword">return</span> dp[<span class="number">0</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="最小路径和"><a
-href="https://leetcode.cn/problems/minimum-path-sum/?envType=study-plan-v2&amp;envId=top-interview-150">最小路径和</a></h5>
+<h3 id="最小路径和">23.2 <a
+href="https://leetcode.cn/problems/minimum-path-sum/?envType=study-plan-v2&amp;envId=top-interview-150">最小路径和</a></h3>
 <p>先处理边界格子（下图标绿色的格子），对于非边界的格子，可以由左边和上边推导得到。边缘只能从左边或者上面来，所以没得优化，所以我们对最上面的边和最左面的边，我们使用前缀和算出到每一个格子需要的路径。对于不是最左边和最上边的格子，我们的递推公式为：</p>
-<p>dp[i][j] = Math.min(dp[i-1][j], dp[i][j-1])</p>
-<p>其中 dp[i-1][j] 表示从上面来，dp[i][j-1]表示从左边来 <img
+<p><span class="math display">\[
+dp[i][j] = Math.min(dp[i-1][j], dp[i][j-1])
+\]</span> 其中 dp[i-1][j] 表示从上面来，dp[i][j-1]表示从左边来 <img
 src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20241221111936.png" />
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">minPathSum</span><span class="params">(<span class="type">int</span>[][] grid)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> grid.length, m = grid[<span class="number">0</span>].length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; n; ++i) grid[i][<span class="number">0</span>] += grid[i - <span class="number">1</span>][<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt; m; ++j) grid[<span class="number">0</span>][j] += grid[<span class="number">0</span>][j - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt; m; ++j) &#123;</span><br><span class="line">            grid[i][j] = Math.min(grid[i - <span class="number">1</span>][j], grid[i][j - <span class="number">1</span>]) + grid[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> grid[n - <span class="number">1</span>][m - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h5 id="不同路径-ⅱ"><a
+<h3 id="不同路径-ⅱ">23.3 <a
 href="https://leetcode.cn/problems/unique-paths-ii/description/?envType=study-plan-v2&amp;envId=top-interview-150">不同路径
-Ⅱ</a></h5>
+Ⅱ</a></h3>
 <p>其实跟上一道题目思路差不多，都是先处理边界格子。但还是存在差别，本题我们是计算到达格子的路线有几条，不是求最小值，而是求和。另外在处理格子时，对于边界的格子，都只有从左边来或者从上边来一种路线，所以我们初始化为
 1，但是，遇到障碍物后，后面的格子都没法到达，所以为 0
 。对于非边界的格子，也同样需要对存在障碍物进行处理，存在障碍物不更新，不存在障碍物才更新</p>
 <p>递推公式</p>
-<p>dp[i][j] = dp[i-1][j] + dp[i][j-1]</p>
+<p><span class="math display">\[
+dp[i][j] = dp[i-1][j] + dp[i][j-1]
+\]</span></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">uniquePathsWithObstacles</span><span class="params">(<span class="type">int</span>[][] obstacleGrid)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> obstacleGrid.length, m = obstacleGrid[<span class="number">0</span>].length;</span><br><span class="line">    <span class="type">int</span>[][] dp = <span class="keyword">new</span> <span class="title class_">int</span>[n][m];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (obstacleGrid[i][<span class="number">0</span>] == <span class="number">1</span>) <span class="keyword">break</span>;</span><br><span class="line">        dp[i][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; m; ++j) &#123;</span><br><span class="line">        <span class="keyword">if</span> (obstacleGrid[<span class="number">0</span>][j] == <span class="number">1</span>) <span class="keyword">break</span>;</span><br><span class="line">        dp[<span class="number">0</span>][j] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt; m; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (obstacleGrid[i][j] != <span class="number">1</span>) dp[i][j] = dp[i - <span class="number">1</span>][j] + dp[i][j - <span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[n - <span class="number">1</span>][m - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="交错字符串"><a
-href="https://leetcode.cn/problems/interleaving-string/description/?envType=study-plan-v2&amp;envId=top-interview-150">交错字符串</a></h5>
+<h3 id="交错字符串">23.4 <a
+href="https://leetcode.cn/problems/interleaving-string/description/?envType=study-plan-v2&amp;envId=top-interview-150">交错字符串</a></h3>
 <p>——动态规划</p>
 <p>其实题目说了一堆交错组成的概念，真的需要考虑是否是交错组合吗？其实不用，设想一下，当
 s3 已经有字符跟 s1 的字符匹配了，下一个字符无论是 s1 的还是 s2
@@ -1277,8 +1473,8 @@ src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20241221111959.png" />
 <p><img
 src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20241221112028.png" /></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isInterleave</span><span class="params">(String s1, String s2, String s3)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> s1.length(), m = s2.length(), t = s3.length();</span><br><span class="line">    <span class="keyword">if</span> (n + m != t) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="type">boolean</span>[][] dp = <span class="keyword">new</span> <span class="title class_">boolean</span>[n + <span class="number">1</span>][m + <span class="number">1</span>];</span><br><span class="line">    dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt;= m; ++j) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">q</span> <span class="operator">=</span> i + j - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (i &gt; <span class="number">0</span>) dp[i][j] = dp[i][j] || (s1.charAt(i - <span class="number">1</span>) == s3.charAt(q) &amp;&amp; dp[i - <span class="number">1</span>][j]);</span><br><span class="line">            <span class="keyword">if</span> (j &gt; <span class="number">0</span>) dp[i][j] = dp[i][j] || (s2.charAt(j-<span class="number">1</span>) == s3.charAt(q) &amp;&amp; dp[i][j - <span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[n][m];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="编辑距离"><a
-href="https://leetcode.cn/problems/edit-distance/?envType=study-plan-v2&amp;envId=top-interview-150">编辑距离</a></h5>
+<h3 id="编辑距离">23.5 <a
+href="https://leetcode.cn/problems/edit-distance/?envType=study-plan-v2&amp;envId=top-interview-150">编辑距离</a></h3>
 <p>假设我们有两个字符串 word1 和 word2，我们的目标是将 word1 转换成
 word2。设 dp[i][j] 表示的是将 word1 的前 i 个字符转换成 word2 的前 j
 个字符所需的最小编辑操作数。</p>
@@ -1302,9 +1498,9 @@ word2[j-1]
 \end{equation}
 \]</span></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">minDistance</span><span class="params">(String word1, String word2)</span> &#123;</span><br><span class="line">    word1 = <span class="string">&quot;0&quot;</span> + word1;</span><br><span class="line">    word2 = <span class="string">&quot;0&quot;</span> + word2;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> word1.length(), m = word2.length();</span><br><span class="line">    <span class="type">int</span>[][] dp = <span class="keyword">new</span> <span class="title class_">int</span>[n + <span class="number">10</span>][m + <span class="number">10</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt;= n; ++i) dp[i][<span class="number">0</span>] = i;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt;= m; ++j) dp[<span class="number">0</span>][j] = j;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt; m; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (word1.charAt(i) == word2.charAt(j)) dp[i][j] = dp[i-<span class="number">1</span>][j-<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                dp[i][j] = Math.min(dp[i - <span class="number">1</span>][j], dp[i][j - <span class="number">1</span>]) + <span class="number">1</span>;</span><br><span class="line">                dp[i][j] = Math.min(dp[i][j], dp[i - <span class="number">1</span>][j - <span class="number">1</span>] + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[n - <span class="number">1</span>][m - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="买卖股票的最佳时机-ⅱ"><a
+<h3 id="买卖股票的最佳时机-ⅱ">23.6 <a
 href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/description/">买卖股票的最佳时机
-Ⅱ</a></h5>
+Ⅱ</a></h3>
 <p>——投机取巧</p>
 <p>题目说没有限制一天里只能买或者只能卖，并且也没有限制买卖的次数，我们只需要看有涨幅就进行买卖操作，就能获得最大收益。</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxProfit</span><span class="params">(<span class="type">int</span>[] prices)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> prices.length;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">res</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt; n; ++j) &#123;</span><br><span class="line">        <span class="keyword">if</span> (prices[j] &gt; prices[j - <span class="number">1</span>]) res += prices[j] - prices[j - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -1339,9 +1535,9 @@ dp[0][0]=0，dp[0][1]=−prices[0]。</p>
 dp[n−1][0] 的收益必然是大于 dp[n−1][1] 的，最后的答案即为
 dp[n−1][0]。</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxProfit</span><span class="params">(<span class="type">int</span>[] prices)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> prices.length;</span><br><span class="line">    <span class="type">int</span>[][] dp = <span class="keyword">new</span> <span class="title class_">int</span>[n][<span class="number">2</span>];</span><br><span class="line">    dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    dp[<span class="number">0</span>][<span class="number">1</span>] = -prices[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        dp[i][<span class="number">0</span>] = Math.max(dp[i - <span class="number">1</span>][<span class="number">0</span>], dp[i - <span class="number">1</span>][<span class="number">1</span>] + prices[i]);</span><br><span class="line">        dp[i][<span class="number">1</span>] = Math.max(dp[i - <span class="number">1</span>][<span class="number">1</span>], dp[i - <span class="number">1</span>][<span class="number">0</span>] - prices[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[n-<span class="number">1</span>][<span class="number">0</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="买卖股票的最佳时机-ⅲ"><a
+<h3 id="买卖股票的最佳时机-ⅲ">23.7 <a
 href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iii/description/?envType=study-plan-v2&amp;envId=top-interview-150">买卖股票的最佳时机
-Ⅲ</a></h5>
+Ⅲ</a></h3>
 <p>——动态规划</p>
 <ol type="1">
 <li><p>定义状态</p>
@@ -1378,30 +1574,33 @@ dp[i][3]=max(dp[i-1][3],dp[i-1][1]+prices[i-1])
 <li>j=4 表示第 i 天结束时，未持有股票，且购买次数为 1
 。可得到状态方程：</li>
 </ol>
-<p><span
-class="math inline">\(dp[i][4]=max(dp[i-1][4],dp[i-1][2]+prices[i-1])\)</span></p></li>
+<p><span class="math display">\[
+dp[i][4]=max(dp[i-1][4],dp[i-1][2]+prices[i-1])
+\]</span></p></li>
 <li><p>对于初始状态</p></li>
 </ol>
 <p>由于第 1 天卖出股票的情况都是当天买当天卖，因此 0、3、4 状态都为
 0，讨论 1、2 状态</p>
 <p>第一天第一次买入：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">dp[1][1]=-prices[0];</span><br></pre></td></tr></table></figure>
-<p>第一天第二次买入（第一次当天买当天卖）：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">dp[1][2]=-prices[0];</span><br></pre></td></tr></table></figure>
-<ol type="1">
-<li>返回值</li>
-</ol>
+<p><span class="math display">\[
+dp[1][1]=-prices[0];
+\]</span> 第一天第二次买入（第一次当天买当天卖）：</p>
+<p><span class="math display">\[
+dp[1][2]=-prices[0];
+\]</span> ​ 3. 返回值</p>
 <p>考虑到如果最后一天买入并不会使最大值的结果发生变化，因此，答案只会在
 3、4 状态产生</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">max（dp[n][3],dp[n][4]）; </span><br></pre></td></tr></table></figure>
+<p><span class="math display">\[
+max（dp[n][3],dp[n][4]）;
+\]</span></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxProfit</span><span class="params">(<span class="type">int</span>[] prices)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> prices.length;</span><br><span class="line">    <span class="type">int</span>[][] dp = <span class="keyword">new</span> <span class="title class_">int</span>[n + <span class="number">1</span>][<span class="number">5</span>];</span><br><span class="line">    dp[<span class="number">1</span>][<span class="number">1</span>] = -prices[<span class="number">0</span>];</span><br><span class="line">    dp[<span class="number">1</span>][<span class="number">2</span>] = -prices[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        dp[i][<span class="number">0</span>] = dp[i - <span class="number">1</span>][<span class="number">0</span>];</span><br><span class="line">        dp[i][<span class="number">1</span>] = Math.max(dp[i - <span class="number">1</span>][<span class="number">1</span>], dp[i - <span class="number">1</span>][<span class="number">0</span>] - prices[i - <span class="number">1</span>]);</span><br><span class="line">        dp[i][<span class="number">2</span>] = Math.max(dp[i - <span class="number">1</span>][<span class="number">2</span>], dp[i - <span class="number">1</span>][<span class="number">3</span>] - prices[i - <span class="number">1</span>]);</span><br><span class="line">        dp[i][<span class="number">3</span>] = Math.max(dp[i - <span class="number">1</span>][<span class="number">3</span>], dp[i - <span class="number">1</span>][<span class="number">1</span>] + prices[i - <span class="number">1</span>]);</span><br><span class="line">        dp[i][<span class="number">4</span>] = Math.max(dp[i - <span class="number">1</span>][<span class="number">4</span>], dp[i - <span class="number">1</span>][<span class="number">2</span>] + prices[i - <span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Math.max(dp[n][<span class="number">4</span>], dp[n][<span class="number">3</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="买卖股票的最佳时机-ⅳ"><a
+<h3 id="买卖股票的最佳时机-ⅳ">23.8 <a
 href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iv/description/?envType=study-plan-v2&amp;envId=top-interview-150">买卖股票的最佳时机
-Ⅳ</a></h5>
+Ⅳ</a></h3>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxProfit</span><span class="params">(<span class="type">int</span> k, <span class="type">int</span>[] prices)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> prices.length;</span><br><span class="line">    <span class="type">int</span>[][][] dp = <span class="keyword">new</span> <span class="title class_">int</span>[n + <span class="number">1</span>][k + <span class="number">2</span>][<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span>[][] matrix : dp) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span>[] row : matrix) &#123;</span><br><span class="line">            Arrays.fill(row, Integer.MIN_VALUE / <span class="number">2</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= k + <span class="number">1</span>; ++i) dp[<span class="number">0</span>][i][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt;= k + <span class="number">1</span>; ++j) &#123;</span><br><span class="line">            dp[i + <span class="number">1</span>][j][<span class="number">0</span>] = Math.max(dp[i][j][<span class="number">0</span>], dp[i][j][<span class="number">1</span>] + prices[i]);</span><br><span class="line">            dp[i + <span class="number">1</span>][j][<span class="number">1</span>] = Math.max(dp[i][j][<span class="number">1</span>], dp[i][j - <span class="number">1</span>][<span class="number">0</span>] - prices[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[n][k + <span class="number">1</span>][<span class="number">0</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="统计全为-1-的正方形子矩阵"><a
+<h3 id="统计全为-1-的正方形子矩阵">23.9 <a
 href="https://leetcode.cn/problems/count-square-submatrices-with-all-ones/description/">统计全为
-1 的正方形子矩阵</a></h5>
+1 的正方形子矩阵</a></h3>
 <p>贴一下官方题解吧，写的很清晰。不过我再解释一下为什么递推公式可以是下面这个</p>
 <p><span class="math display">\[
 \begin{equation}
@@ -1416,8 +1615,8 @@ min(dp[i-1][j],dp[i][j-1],dp[i-1][j-1] &amp;  &amp; matrxi[i][j]==1 \\
 <p>我们画个图讲一下吧 <img
 src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20241221112105.png" />
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">countSquares</span><span class="params">(<span class="type">int</span>[][] matrix)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">res</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (Objects.isNull(matrix) || matrix.length == <span class="number">0</span> || matrix[<span class="number">0</span>].length == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> matrix.length, m = matrix[<span class="number">0</span>].length;</span><br><span class="line">    <span class="type">int</span>[][] dp = <span class="keyword">new</span> <span class="title class_">int</span>[n][m];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; m; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i == <span class="number">0</span> || j == <span class="number">0</span> || matrix[i][j] == <span class="number">0</span>) dp[i][j] = matrix[i][j];</span><br><span class="line">            <span class="keyword">else</span> dp[i][j] = Math.min(Math.min(dp[i - <span class="number">1</span>][j], dp[i][j - <span class="number">1</span>]), dp[i - <span class="number">1</span>][j - <span class="number">1</span>]) + <span class="number">1</span>;</span><br><span class="line">            res += dp[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h5 id="最大正方形"><a
-href="https://leetcode.cn/problems/maximal-square/description/?envType=study-plan-v2&amp;envId=top-interview-150">最大正方形</a></h5>
+<h3 id="最大正方形">23.10 <a
+href="https://leetcode.cn/problems/maximal-square/description/?envType=study-plan-v2&amp;envId=top-interview-150">最大正方形</a></h3>
 <p>这个题目的解法基本跟上面的题目思路一致。 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maximalSquare</span><span class="params">(<span class="type">char</span>[][] matrix)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">res</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (Objects.isNull(matrix) || matrix.length == <span class="number">0</span> || matrix[<span class="number">0</span>].length == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> matrix.length, m = matrix[<span class="number">0</span>].length;</span><br><span class="line">    <span class="type">int</span>[][] dp = <span class="keyword">new</span> <span class="title class_">int</span>[n][m];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        dp[i][<span class="number">0</span>] = matrix[i][<span class="number">0</span>] == <span class="string">&#x27;1&#x27;</span> ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">        res = Math.max(dp[i][<span class="number">0</span>], res);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; m; ++j) &#123;</span><br><span class="line">        dp[<span class="number">0</span>][j] = matrix[<span class="number">0</span>][j] == <span class="string">&#x27;1&#x27;</span> ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">        res = Math.max(dp[<span class="number">0</span>][j], res);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt; m; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (matrix[i][j] == <span class="string">&#x27;1&#x27;</span>) &#123;</span><br><span class="line">                dp[i][j] = Math.min(Math.min(dp[i - <span class="number">1</span>][j], dp[i][j - <span class="number">1</span>]), dp[i - <span class="number">1</span>][j - <span class="number">1</span>]) + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            res = Math.max(res, dp[i][j]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res * res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 ]]></content>
       <categories>
@@ -1426,196 +1625,6 @@ href="https://leetcode.cn/problems/maximal-square/description/?envType=study-pla
       <tags>
         <tag>力扣</tag>
         <tag>面试经典150题</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>碎碎念</title>
-    <url>/2024/12/01/Life/%E7%A2%8E%E7%A2%8E%E5%BF%B5/</url>
-    <content><![CDATA[<p><font size=4>🚩
-真正的自由意味着控制你整个生活，学会计划、承诺和决定，为你自己的行为负责！</font>
-<br></p>
-<blockquote>
-<p><font face="楷体">
-原来，让内心强大，我只需要看到自己，接纳我还不能做的，欣赏我已经做到的
-——《当我真的足够强大》 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-没有一种批判比自我批判更强烈，也没有一种法官比我们自己更严苛。
-——《蛤蟆先生去看心理医生》</font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-对抗消极的不是积极，而是专注。积极的情绪是无法击退消极情绪的，只有把自己沉浸在某件事件上才能从消极情绪中走出来。
-——若林正恭 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体"> 生活的不确定性正是我们希望的来源。 ——阿德勒
-</font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-那些看起来比你勇敢的人也像你一样害怕，他们只是在黑暗中把口哨吹得响亮一些罢了。
-——《为什么长大》 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-那晚，我点了一把篝火，大地在月亮眼中亮起了一颗星星。 ——弱智吧
-</font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体"> 这乱糟糟的世上还有人拿着花四处走走。
-——李沧东《火与灰》 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体"> 好在，别人如何分析我，跟我本身是一点关系都没有的。
-——三毛《撒哈拉的故事》 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体"> 你极目远望，其余的由心去完成。 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体"> 一个人变好的前提是，允许自己不好。 ——武志红
-</font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-纯粹，就是不要一心要成为高贵或者强大的人，而是成为自己。
-——佩索阿《惶然录》 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-人人都有天赋，但可贵的是，你是否有勇气追随你的天赋到黑暗之地。
-——艾丽卡·琼 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-随着年龄的增长，你越来越不在意别人怎么看你，只有那时你才能愈加自由。
-——《失踪树木的岛屿》 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-人脑虽然可以努力什么都试图记住，但写下来就可以安心忘记了。 ——《告白》
-</font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-后来我知道了，人生在世，临到每一个紧要关头，你都是孤军衰兵。
-——《关山夺路》 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-我们本能地把错误归咎于他人，但最重要的是，坏事情发生时，应该寻找原因，而不是寻找坏人。
-——《事实》 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-勇气，并不是闪闪发光的英雄主义，勇敢中也包含怯懦，就像爱中也有不爱的时刻。这来回摇摆的踱步，斑驳的杂质，才是真相。
-——《茫然尘世的珍宝》 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体"> 我独自度过了太多时光，沉默已成一种习惯。
-——《夜航西飞》 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-幸福的关键，并不在于你是否结婚、是否有孩子等，而是无论你处于什么样的状态都有不停追求幸福的行动力，以及无论多小的一件事，你都能感到幸福的能力。可以说，幸福的关键是一种心态。
-——《超单身社会》 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-因为有了仪式，某一天才有别于其他任何一天，某一个小时才有别于其他任何一个时刻。
-——圣·埃克絮佩里 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-时间不是一条直线，而是一个循环，我们在其中不断重复着相似的故事，直到我们学会从中解脱。
-——《悉达多》 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-你不能在赢的时候才自信，那不是自信，是对结果的复读。 ——冯骥 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-出路只有一条：在别人头脑发热大声喧闹的时候，退回到自己的内心并保持沉默
-——《昨日的世界》 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-无论风暴将我带到什么样的岸边，我都将以主人的身份上岸
-——昆图斯·贺拉斯·弗拉库斯 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体"> 而我，还是那个身披霞光的人
-<br>雨水流过山岚，孤独如杜鹃开放 ——余秀华 </font></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>名言积累</tag>
-        <tag>生活</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>英文单词</title>
-    <url>/2024/12/04/Life/%E8%8B%B1%E6%96%87%E5%8D%95%E8%AF%8D/</url>
-    <content><![CDATA[
-]]></content>
-      <categories>
-        <category>英语</category>
-      </categories>
-      <tags>
-        <tag>英语单词3000个</tag>
-        <tag>积累</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>生活心得</title>
-    <url>/2024/12/17/Life/%E7%94%9F%E6%B4%BB%E5%BF%83%E5%BE%97/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="39a3e91f4c5d7c1cb6483996f53257fe2795255f840c0cc7179afd0fb8315f2c">1f6bb8509d126916afe1b073331b8b3022b18b79a6847b5197580c9561aefcdb7ef0d420fd891ef5503bc83738620ef4a03ae5124c312909ce9f60dd3706ecabbc0cd5634cd8567a22be1e022bf0beac66afc389469082db29e3c78737e66c4869d462d61098a196d97f1fb073e9db885418219d96e4bc9e2f913f689beea7090dea7ab83fc87afe9d2ff383fe1e248dbbaf05ac0c1ec0500b944ded297209fe18aff9a11d46d9a4fc6ab496725c433095de62d152a9162636a045a2cdc03161295105e4916ee87e6cc7b11d01b9e3abe31b4547d444f892500e8ec573e8f69aa16e5b86d4b67b40d4ee4c250366d93855d964061885b29695c54d19dd8071a224b942c7c980457c01d379b1a8dddf4a5958e7751778e79b5630b8b05b918843</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>生活</tag>
       </tags>
   </entry>
 </search>
