@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>设置hexo首页只显示部分摘要（不显示全文）</title>
+    <url>/2024/12/03/Hexo/%E8%AE%BE%E7%BD%AEhexo%E9%A6%96%E9%A1%B5%E5%8F%AA%E6%98%BE%E7%A4%BA%E9%83%A8%E5%88%86%E6%91%98%E8%A6%81/</url>
+    <content><![CDATA[<p>❗本文针对hexo的Next主题的设置有效，其他主题可以看看有没有相同字段
+Next默认是会在首页显示全文的，看起来冗长不简洁。要想首页仅展示文章标题或者摘要，请按照以下步骤进行：</p>
+<h3 id="修改配置">修改配置</h3>
+<p>首先需要在Next主题的<code>_config.yml</code>中把设置打开(默认安装时就打开了):
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">excerpt_description:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="设置展示的内容">设置展示的内容</h3>
+<h4 id="方法一写概述">方法一：写概述</h4>
+<p>在文章的<code>front-matter</code>中添加<code>description</code>，其中<code>descriptio</code>n中的内容就会被显示在首页上，其余一律不显示。
+<img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/Snipaste_2024-12-04_00-04-00.png" /></p>
+<p>PS:
+这种方法主要是要自己对文章内容进行简单总结，有时候不喜欢写总结介绍的话，可以用下面第二种方法</p>
+<h4 id="方法二文章截断">方法二：文章截断</h4>
+<p>在需要截断的地方加入： <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--more--&gt;</span></span><br></pre></td></tr></table></figure>
+首页就会显示这条以上的所有内容，隐藏接下来的所有内容。</p>
+<p>这个明显会方便很多，但当然有利有弊，我一般喜欢用方法一，也希望自己写的<code>description</code>能够给读者快速了解文章内容的效果</p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>教程</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Acwing基础算法板子</title>
     <url>/2024/12/14/Algorithm/Acwing%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E6%9D%BF%E5%AD%90/</url>
     <content><![CDATA[<h1 id="第一讲-基础算法">第一讲 基础算法</h1>
@@ -144,6 +172,28 @@ href="https://www.acwing.com/problem/content/843/">字符串哈希</a></h3>
       </tags>
   </entry>
   <entry>
+    <title>生活心得</title>
+    <url>/2024/12/17/Life/%E7%94%9F%E6%B4%BB%E5%BF%83%E5%BE%97/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="39a3e91f4c5d7c1cb6483996f53257fe2795255f840c0cc7179afd0fb8315f2c">1f6bb8509d126916afe1b073331b8b3022b18b79a6847b5197580c9561aefcdb7ef0d420fd891ef5503bc83738620ef4a03ae5124c312909ce9f60dd3706ecabbc0cd5634cd8567a22be1e022bf0beac66afc389469082db29e3c78737e66c4869d462d61098a196d97f1fb073e9db885418219d96e4bc9e2f913f689beea7090dea7ab83fc87afe9d2ff383fe1e248dbbaf05ac0c1ec0500b944ded297209fe18aff9a11d46d9a4fc6ab496725c433095de62d152a9162636a045a2cdc03161295105e4916ee87e6cc7b11d01b9e3abe31b4547d444f892500e8ec573e8f69aa16e5b86d4b67b40d4ee4c250366d93855d964061885b29695c54d19dd8071a224b942c7c980457c01d379b1a8dddf4a5958e7751778e79b5630b8b05b918843</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>碎碎念</title>
     <url>/2024/12/01/Life/%E7%A2%8E%E7%A2%8E%E5%BF%B5/</url>
     <content><![CDATA[<p><font size=4>🚩
@@ -272,63 +322,43 @@ href="https://www.acwing.com/problem/content/843/">字符串哈希</a></h3>
 <p><font face="楷体">
 你不能在赢的时候才自信，那不是自信，是对结果的复读。 ——冯骥 </font></p>
 </blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+出路只有一条：在别人头脑发热大声喧闹的时候，退回到自己的内心并保持沉默
+——《昨日的世界》 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+无论风暴将我带到什么样的岸边，我都将以主人的身份上岸
+——昆图斯·贺拉斯·弗拉库斯 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体"> 而我，还是那个身披霞光的人
+<br>雨水流过山岚，孤独如杜鹃开放 ——余秀华 </font></p>
+</blockquote>
 ]]></content>
       <categories>
         <category>生活</category>
       </categories>
       <tags>
+        <tag>生活</tag>
         <tag>名言积累</tag>
-        <tag>生活</tag>
       </tags>
   </entry>
   <entry>
-    <title>设置hexo首页只显示部分摘要（不显示全文）</title>
-    <url>/2024/12/03/Hexo/%E8%AE%BE%E7%BD%AEhexo%E9%A6%96%E9%A1%B5%E5%8F%AA%E6%98%BE%E7%A4%BA%E9%83%A8%E5%88%86%E6%91%98%E8%A6%81/</url>
-    <content><![CDATA[<p>❗本文针对hexo的Next主题的设置有效，其他主题可以看看有没有相同字段
-Next默认是会在首页显示全文的，看起来冗长不简洁。要想首页仅展示文章标题或者摘要，请按照以下步骤进行：</p>
-<h3 id="修改配置">修改配置</h3>
-<p>首先需要在Next主题的<code>_config.yml</code>中把设置打开(默认安装时就打开了):
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">excerpt_description:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="设置展示的内容">设置展示的内容</h3>
-<h4 id="方法一写概述">方法一：写概述</h4>
-<p>在文章的<code>front-matter</code>中添加<code>description</code>，其中<code>descriptio</code>n中的内容就会被显示在首页上，其余一律不显示。
-<img
-src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/Snipaste_2024-12-04_00-04-00.png" /></p>
-<p>PS:
-这种方法主要是要自己对文章内容进行简单总结，有时候不喜欢写总结介绍的话，可以用下面第二种方法</p>
-<h4 id="方法二文章截断">方法二：文章截断</h4>
-<p>在需要截断的地方加入： <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--more--&gt;</span></span><br></pre></td></tr></table></figure>
-首页就会显示这条以上的所有内容，隐藏接下来的所有内容。</p>
-<p>这个明显会方便很多，但当然有利有弊，我一般喜欢用方法一，也希望自己写的<code>description</code>能够给读者快速了解文章内容的效果</p>
+    <title>英文单词</title>
+    <url>/2024/12/04/Life/%E8%8B%B1%E6%96%87%E5%8D%95%E8%AF%8D/</url>
+    <content><![CDATA[
 ]]></content>
       <categories>
-        <category>Hexo</category>
+        <category>英语</category>
       </categories>
       <tags>
-        <tag>Hexo</tag>
-        <tag>教程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>生活心得</title>
-    <url>/2024/12/17/Life/%E7%94%9F%E6%B4%BB%E5%BF%83%E5%BE%97/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="39a3e91f4c5d7c1cb6483996f53257fe2795255f840c0cc7179afd0fb8315f2c">1f6bb8509d126916afe1b073331b8b3022b18b79a6847b5197580c9561aefcdb7ef0d420fd891ef5503bc83738620ef4a03ae5124c312909ce9f60dd3706ecabbc0cd5634cd8567a22be1e022bf0beac66afc389469082db29e3c78737e66c4869d462d61098a196d97f1fb073e9db885418219d96e4bc9e2f913f689beea7090dea7ab83fc87afe9d2ff383fe1e248dbbaf05ac0c1ec0500b944ded297209fe18aff9a11d46d9a4fc6ab496725c433095de62d152a9162636a045a2cdc03161295105e4916ee87e6cc7b11d01b9e3abe31b4547d444f892500e8ec573e8f69aa16e5b86d4b67b40d4ee4c250366d93855d964061885b29695c54d19dd8071a224b942c7c980457c01d379b1a8dddf4a5958e7751778e79b5630b8b05b918843</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>生活</tag>
+        <tag>英语单词3000个</tag>
+        <tag>积累</tag>
       </tags>
   </entry>
   <entry>
@@ -1340,10 +1370,10 @@ href="https://leetcode.cn/problems/climbing-stairs/description/?envType=study-pl
 <h3 id="打家劫舍">22.2 <a
 href="https://leetcode.cn/problems/house-robber/description/?envType=study-plan-v2&amp;envId=top-interview-150">打家劫舍</a></h3>
 <ol type="1">
-<li>确定 dp 数组 (dp table) 以及下标的含义 dp
+<li>确定 dp 数组 (dp table) 以及下标的含义 <br> dp
 数组表示能偷窃到当前房屋的最高金额。其中 dp[i]的下标 i 表示的是第 i+1
 间房屋</li>
-<li>确定递推公式 怎么推导递推公式呢？ 对于当前位置 i
+<li>确定递推公式 <br> 怎么推导递推公式呢？ 对于当前位置 i
 来讲，要么就是前一个相邻位置 i-1 取得的收益高，我们此时就需要以 i-1
 作为起点；要么就是再前面的一个位置 i - 2 取得的收益 +
 当前房屋能取得的收益
@@ -1360,11 +1390,11 @@ dp[i-1]
 \end{equation}
 \]</span></p>
 <ol type="1">
-<li>dp 数组如何初始化
+<li>dp 数组如何初始化 <br>
 根据递推公式我们可以知道，我们需要初始化的值只有两个，dp[0],
 dp[1]，dp[0]是什么，是打劫第一间房屋取得的收益，没得选，只有第一家能选。dp[1]是什么，dp[1]是打劫完第一和第二间房屋后，所取得的最大收益，那是什么，肯定是第一间和第二间房屋取得更大收益那个，所以我们的初始化就出来了
 dp[0] = nums[0]; dp[1] = Math.max(nums[0],nums[1]);</li>
-<li>确定遍历顺序</li>
+<li>确定遍历顺序 <br></li>
 </ol>
 <p>一维数组，基本都是从小到大，只有设计背包问题，两个条件才需要考虑遍历顺序</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">rob</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> nums.length;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">1</span>) <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">    <span class="type">int</span>[] dp = <span class="keyword">new</span> <span class="title class_">int</span>[n];</span><br><span class="line">    dp[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line">    dp[<span class="number">1</span>] = Math._max_(nums[<span class="number">0</span>], nums[<span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">2</span>; i &lt; nums.length; ++i) &#123;</span><br><span class="line">        dp[i] = Math._max_(dp[i - <span class="number">2</span>] + nums[i], dp[i - <span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[n - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -1378,17 +1408,16 @@ href="https://leetcode.cn/problems/word-break?envType=study-plan-v2&amp;envId=to
 <h5 id="零钱兑换"><a
 href="https://leetcode.cn/problems/coin-change/?envType=study-plan-v2&amp;envId=top-interview-150">零钱兑换</a></h5>
 <ol type="1">
-<li>确定 dp 数组 (dp table) 以及下标的含义 dp[i]表示的是：当总金额为 i
-时，所需的最少的硬币数。</li>
-<li>确定递推公式 dp[i] = Math._min_(dp[i], dp[i - coins[j]] + 1)
+<li>确定 dp 数组 (dp table) 以及下标的含义<br> dp[i]表示的是：当总金额为
+i 时，所需的最少的硬币数。</li>
+<li>确定递推公式<br> dp[i] = Math._min_(dp[i], dp[i - coins[j]] + 1)
 对于总金额为 i 的情况，我们需要考虑第 j 个硬币到底取不取。取的话，应该由
-i-coins[j] 的最少硬币数 + 1
-来赋值；不取的话，就只能赋回原来的值。（这里应该画个表格讲解比较合适，但是现在时间比较紧张）</li>
-<li>dp 数组如何初始化 dp[0] = 0 当总金额为 0 时，我们需要的硬币数也为 0
-.</li>
-<li>确定遍历顺序
+i-coins[j] 的最少硬币数 + 1 来赋值；不取的话，就只能赋回原来的值。</li>
+<li>dp 数组如何初始化<br> dp[0] = 0 当总金额为 0
+时，我们需要的硬币数也为 0 .</li>
+<li>确定遍历顺序<br>
 其实，这道题目很像多重背包，但又存在很多不同。首先一个是这道题目想要求解的是计数问题，并不是最大化价值问题；其次是这道题目的遍历顺序跟多重背包的遍历顺序不太一样，多重背包是先遍历物品，再遍历背包。这道题目是先遍历的背包，再遍历物品。因为对于每一个总金额，我们都需要考虑所有的硬币所组成的搭配。并优化器</li>
-<li>举例推导 dp 数组</li>
+<li>举例推导 dp 数组<br></li>
 </ol>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">coinChange</span><span class="params">(<span class="type">int</span>[] coins, <span class="type">int</span> amount)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">max</span> <span class="operator">=</span> amount + <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span>[] dp = <span class="keyword">new</span> <span class="title class_">int</span>[max];</span><br><span class="line">    Arrays._fill_(dp, max);</span><br><span class="line">    dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= amount; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; coins.length; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i &gt;= coins[j]) &#123;</span><br><span class="line">                dp[i] = Math._min_(dp[i], dp[i - coins[j]] + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[amount] &gt; amount ? -<span class="number">1</span> : dp[amount];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h5 id="最长递增子序列"><a
@@ -1396,19 +1425,24 @@ href="https://leetcode.cn/problems/longest-increasing-subsequence/description/?e
 <p>——动态规划 + 二分查找</p>
 <p>还是画个图模拟一下代码的整个流程更好理解一点。如下图，二分查找插入的目的是什么？其实目的就是为了让我们的
 dp
-数组更好插入后面的数。二分查找为新到来的数在新数组中找到一个最合适的插入位置，使得新数组中的数保持递增并尽量小。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">lengthOfLIS</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> <span class="number">1</span>, n = nums.length;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span>[] dp = <span class="keyword">new</span> <span class="title class_">int</span>[n + <span class="number">1</span>];</span><br><span class="line">    dp[len] = nums[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (nums[i] &gt; dp[len]) dp[++len] = nums[i];</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">l</span> <span class="operator">=</span> <span class="number">1</span>, r = len, pos = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> (l &lt;= r) &#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> l + r &gt;&gt; <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">if</span> (dp[mid] &lt; nums[i]) &#123;</span><br><span class="line">                    pos = mid;</span><br><span class="line">                    l = mid + <span class="number">1</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    r = mid - <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            dp[pos + <span class="number">1</span>] = nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> len;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+数组更好插入后面的数。二分查找为新到来的数在新数组中找到一个最合适的插入位置，使得新数组中的数保持递增并尽量小。
+<img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20241221111852.png" />
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">lengthOfLIS</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> <span class="number">1</span>, n = nums.length;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span>[] dp = <span class="keyword">new</span> <span class="title class_">int</span>[n + <span class="number">1</span>];</span><br><span class="line">    dp[len] = nums[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (nums[i] &gt; dp[len]) dp[++len] = nums[i];</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">l</span> <span class="operator">=</span> <span class="number">1</span>, r = len, pos = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> (l &lt;= r) &#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> l + r &gt;&gt; <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">if</span> (dp[mid] &lt; nums[i]) &#123;</span><br><span class="line">                    pos = mid;</span><br><span class="line">                    l = mid + <span class="number">1</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    r = mid - <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            dp[pos + <span class="number">1</span>] = nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> len;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h5 id="三角形最小路径和"><a
 href="https://leetcode.cn/problems/triangle/?envType=study-plan-v2&amp;envId=top-interview-150">三角形最小路径和</a></h5>
-<p>从最下面往上面走，第 i 层 第 j 个数的最终结果是什么呢？</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20241221111914.png" />
+从最下面往上面走，第 i 层 第 j 个数的最终结果是什么呢？</p>
 <p>dp[i][j] = min(dp[i+1][j],dp[i+1][j+1]) + triangle[i][j];</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">minimumTotal</span><span class="params">(List&lt;List&lt;Integer&gt;&gt; triangle)</span> &#123;</span><br><span class="line">    <span class="comment">// 由底部到顶部</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> triangle.size();</span><br><span class="line">    <span class="type">int</span>[] dp = <span class="keyword">new</span> <span class="title class_">int</span>[n];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; ++i) dp[i] = triangle.get(n - <span class="number">1</span>).get(i);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> n - <span class="number">2</span>; i &gt;= <span class="number">0</span>; --i)</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt;= i; ++j)</span><br><span class="line">            dp[j] = Math._min_(dp[j], dp[j + <span class="number">1</span>]) + triangle.get(i).get(j);</span><br><span class="line">    <span class="keyword">return</span> dp[<span class="number">0</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h5 id="最小路径和"><a
 href="https://leetcode.cn/problems/minimum-path-sum/?envType=study-plan-v2&amp;envId=top-interview-150">最小路径和</a></h5>
 <p>先处理边界格子（下图标绿色的格子），对于非边界的格子，可以由左边和上边推导得到。边缘只能从左边或者上面来，所以没得优化，所以我们对最上面的边和最左面的边，我们使用前缀和算出到每一个格子需要的路径。对于不是最左边和最上边的格子，我们的递推公式为：</p>
 <p>dp[i][j] = Math.min(dp[i-1][j], dp[i][j-1])</p>
-<p>其中 dp[i-1][j] 表示从上面来，dp[i][j-1]表示从左边来</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">minPathSum</span><span class="params">(<span class="type">int</span>[][] grid)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> grid.length, m = grid[<span class="number">0</span>].length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; n; ++i) grid[i][<span class="number">0</span>] += grid[i - <span class="number">1</span>][<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt; m; ++j) grid[<span class="number">0</span>][j] += grid[<span class="number">0</span>][j - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt; m; ++j) &#123;</span><br><span class="line">            grid[i][j] = Math.min(grid[i - <span class="number">1</span>][j], grid[i][j - <span class="number">1</span>]) + grid[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> grid[n - <span class="number">1</span>][m - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中 dp[i-1][j] 表示从上面来，dp[i][j-1]表示从左边来 <img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20241221111936.png" />
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">minPathSum</span><span class="params">(<span class="type">int</span>[][] grid)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> grid.length, m = grid[<span class="number">0</span>].length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; n; ++i) grid[i][<span class="number">0</span>] += grid[i - <span class="number">1</span>][<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt; m; ++j) grid[<span class="number">0</span>][j] += grid[<span class="number">0</span>][j - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt; m; ++j) &#123;</span><br><span class="line">            grid[i][j] = Math.min(grid[i - <span class="number">1</span>][j], grid[i][j - <span class="number">1</span>]) + grid[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> grid[n - <span class="number">1</span>][m - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h5 id="不同路径-ⅱ"><a
 href="https://leetcode.cn/problems/unique-paths-ii/description/?envType=study-plan-v2&amp;envId=top-interview-150">不同路径
 Ⅱ</a></h5>
@@ -1427,9 +1461,11 @@ s3 已经有字符跟 s1 的字符匹配了，下一个字符无论是 s1 的还
 组成，但这也是交错。所以我们可以大胆的以字符串匹配的想法来做。但是这里会存在一个疑问，为什么不能用双指针呢？如下图所示，当遍历到
 s3 这个位置时，我们会发现此时用来遍历 s1 和 s2 的指针都满足与 s3
 匹配的要求，所以此时如果走 s1，尚且能通过样例，一旦样例需要先走
-s2，那就过不了了。</p>
-<p>再来讲一下动态规划的思路吧。</p>
-<p><img src="static/H3ATbGBbAo6dkcxN4Wdcwmacn0b.png" /></p>
+s2，那就过不了了。 <img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20241221111959.png" />
+再来讲一下动态规划的思路吧。</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20241221112028.png" /></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isInterleave</span><span class="params">(String s1, String s2, String s3)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> s1.length(), m = s2.length(), t = s3.length();</span><br><span class="line">    <span class="keyword">if</span> (n + m != t) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="type">boolean</span>[][] dp = <span class="keyword">new</span> <span class="title class_">boolean</span>[n + <span class="number">1</span>][m + <span class="number">1</span>];</span><br><span class="line">    dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt;= m; ++j) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">q</span> <span class="operator">=</span> i + j - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (i &gt; <span class="number">0</span>) dp[i][j] = dp[i][j] || (s1.charAt(i - <span class="number">1</span>) == s3.charAt(q) &amp;&amp; dp[i - <span class="number">1</span>][j]);</span><br><span class="line">            <span class="keyword">if</span> (j &gt; <span class="number">0</span>) dp[i][j] = dp[i][j] || (s2.charAt(j-<span class="number">1</span>) == s3.charAt(q) &amp;&amp; dp[i][j - <span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[n][m];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h5 id="编辑距离"><a
 href="https://leetcode.cn/problems/edit-distance/?envType=study-plan-v2&amp;envId=top-interview-150">编辑距离</a></h5>
@@ -1567,11 +1603,12 @@ min(dp[i-1][j],dp[i][j-1],dp[i-1][j-1] &amp;  &amp; matrxi[i][j]==1 \\
 \right.
 \end{equation}
 \]</span></p>
-<p>我们画个图讲一下吧</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">countSquares</span><span class="params">(<span class="type">int</span>[][] matrix)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">res</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (Objects.isNull(matrix) || matrix.length == <span class="number">0</span> || matrix[<span class="number">0</span>].length == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> matrix.length, m = matrix[<span class="number">0</span>].length;</span><br><span class="line">    <span class="type">int</span>[][] dp = <span class="keyword">new</span> <span class="title class_">int</span>[n][m];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; m; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i == <span class="number">0</span> || j == <span class="number">0</span> || matrix[i][j] == <span class="number">0</span>) dp[i][j] = matrix[i][j];</span><br><span class="line">            <span class="keyword">else</span> dp[i][j] = Math.min(Math.min(dp[i - <span class="number">1</span>][j], dp[i][j - <span class="number">1</span>]), dp[i - <span class="number">1</span>][j - <span class="number">1</span>]) + <span class="number">1</span>;</span><br><span class="line">            res += dp[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们画个图讲一下吧 <img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20241221112105.png" />
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">countSquares</span><span class="params">(<span class="type">int</span>[][] matrix)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">res</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (Objects.isNull(matrix) || matrix.length == <span class="number">0</span> || matrix[<span class="number">0</span>].length == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> matrix.length, m = matrix[<span class="number">0</span>].length;</span><br><span class="line">    <span class="type">int</span>[][] dp = <span class="keyword">new</span> <span class="title class_">int</span>[n][m];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; m; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i == <span class="number">0</span> || j == <span class="number">0</span> || matrix[i][j] == <span class="number">0</span>) dp[i][j] = matrix[i][j];</span><br><span class="line">            <span class="keyword">else</span> dp[i][j] = Math.min(Math.min(dp[i - <span class="number">1</span>][j], dp[i][j - <span class="number">1</span>]), dp[i - <span class="number">1</span>][j - <span class="number">1</span>]) + <span class="number">1</span>;</span><br><span class="line">            res += dp[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h5 id="最大正方形"><a
 href="https://leetcode.cn/problems/maximal-square/description/?envType=study-plan-v2&amp;envId=top-interview-150">最大正方形</a></h5>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maximalSquare</span><span class="params">(<span class="type">char</span>[][] matrix)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">res</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (Objects.isNull(matrix) || matrix.length == <span class="number">0</span> || matrix[<span class="number">0</span>].length == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> matrix.length, m = matrix[<span class="number">0</span>].length;</span><br><span class="line">    <span class="type">int</span>[][] dp = <span class="keyword">new</span> <span class="title class_">int</span>[n][m];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        dp[i][<span class="number">0</span>] = matrix[i][<span class="number">0</span>] == <span class="string">&#x27;1&#x27;</span> ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">        res = Math.max(dp[i][<span class="number">0</span>], res);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; m; ++j) &#123;</span><br><span class="line">        dp[<span class="number">0</span>][j] = matrix[<span class="number">0</span>][j] == <span class="string">&#x27;1&#x27;</span> ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">        res = Math.max(dp[<span class="number">0</span>][j], res);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt; m; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (matrix[i][j] == <span class="string">&#x27;1&#x27;</span>) &#123;</span><br><span class="line">                dp[i][j] = Math.min(Math.min(dp[i - <span class="number">1</span>][j], dp[i][j - <span class="number">1</span>]), dp[i - <span class="number">1</span>][j - <span class="number">1</span>]) + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            res = Math.max(res, dp[i][j]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res * res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个题目的解法基本跟上面的题目思路一致。 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maximalSquare</span><span class="params">(<span class="type">char</span>[][] matrix)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">res</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (Objects.isNull(matrix) || matrix.length == <span class="number">0</span> || matrix[<span class="number">0</span>].length == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> matrix.length, m = matrix[<span class="number">0</span>].length;</span><br><span class="line">    <span class="type">int</span>[][] dp = <span class="keyword">new</span> <span class="title class_">int</span>[n][m];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        dp[i][<span class="number">0</span>] = matrix[i][<span class="number">0</span>] == <span class="string">&#x27;1&#x27;</span> ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">        res = Math.max(dp[i][<span class="number">0</span>], res);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; m; ++j) &#123;</span><br><span class="line">        dp[<span class="number">0</span>][j] = matrix[<span class="number">0</span>][j] == <span class="string">&#x27;1&#x27;</span> ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">        res = Math.max(dp[<span class="number">0</span>][j], res);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt; m; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (matrix[i][j] == <span class="string">&#x27;1&#x27;</span>) &#123;</span><br><span class="line">                dp[i][j] = Math.min(Math.min(dp[i - <span class="number">1</span>][j], dp[i][j - <span class="number">1</span>]), dp[i - <span class="number">1</span>][j - <span class="number">1</span>]) + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            res = Math.max(res, dp[i][j]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res * res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 ]]></content>
       <categories>
         <category>算法</category>
@@ -1579,19 +1616,6 @@ href="https://leetcode.cn/problems/maximal-square/description/?envType=study-pla
       <tags>
         <tag>力扣</tag>
         <tag>面试经典150题</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>英文单词</title>
-    <url>/2024/12/04/Life/%E8%8B%B1%E6%96%87%E5%8D%95%E8%AF%8D/</url>
-    <content><![CDATA[
-]]></content>
-      <categories>
-        <category>英语</category>
-      </categories>
-      <tags>
-        <tag>英语单词3000个</tag>
-        <tag>积累</tag>
       </tags>
   </entry>
 </search>
