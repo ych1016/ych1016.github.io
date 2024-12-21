@@ -26,14 +26,12 @@
 <meta property="og:site_name" content="攻城狮-旺仔">
 <meta property="og:description" content="Hexo的Next主题的设置只展示文章摘要效果教程">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/Snipaste_2024-12-04_00-04-00.png">
 <meta property="article:published_time" content="2024-12-03T15:46:51.000Z">
 <meta property="article:modified_time" content="2024-12-03T16:10:22.601Z">
 <meta property="article:author" content="旺仔">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="教程">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/Snipaste_2024-12-04_00-04-00.png">
 
 
 <link rel="canonical" href="https://ych1016.github.io/2024/12/03/Hexo/%E8%AE%BE%E7%BD%AEhexo%E9%A6%96%E9%A1%B5%E5%8F%AA%E6%98%BE%E7%A4%BA%E9%83%A8%E5%88%86%E6%91%98%E8%A6%81/">
@@ -142,7 +140,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE"><span class="nav-text">修改配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%B1%95%E7%A4%BA%E7%9A%84%E5%86%85%E5%AE%B9"><span class="nav-text">设置展示的内容</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A%E5%86%99%E6%A6%82%E8%BF%B0"><span class="nav-text">方法一：写概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A%E6%96%87%E7%AB%A0%E6%88%AA%E6%96%AD"><span class="nav-text">方法二：文章截断</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE"><span class="nav-text">修改配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%B1%95%E7%A4%BA%E7%9A%84%E5%86%85%E5%AE%B9"><span class="nav-text">设置展示的内容</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%E5%86%99%E6%A6%82%E8%BF%B0"><span class="nav-text">方法一：写概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%E6%96%87%E7%AB%A0%E6%88%AA%E6%96%AD"><span class="nav-text">方法二：文章截断</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -283,15 +281,21 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>❗本文针对hexo的Next主题的设置有效，其他主题可以看看有没有相同字段<br>Next默认是会在首页显示全文的，看起来冗长不简洁。要想首页仅展示文章标题或者摘要，请按照以下步骤进行：</p>
-<h3 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h3><p>首先需要在Next主题的<code>_config.yml</code>中把设置打开(默认安装时就打开了): </p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">excerpt_description:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="设置展示的内容"><a href="#设置展示的内容" class="headerlink" title="设置展示的内容"></a>设置展示的内容</h3><h4 id="方法一：写概述"><a href="#方法一：写概述" class="headerlink" title="方法一：写概述"></a>方法一：写概述</h4><p>在文章的<code>front-matter</code>中添加<code>description</code>，其中<code>descriptio</code>n中的内容就会被显示在首页上，其余一律不显示。<br><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/Snipaste_2024-12-04_00-04-00.png"></p>
-<p>PS: 这种方法主要是要自己对文章内容进行简单总结，有时候不喜欢写总结介绍的话，可以用下面第二种方法</p>
-<h4 id="方法二：文章截断"><a href="#方法二：文章截断" class="headerlink" title="方法二：文章截断"></a>方法二：文章截断</h4><p>在需要截断的地方加入：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--more--&gt;</span></span><br></pre></td></tr></table></figure>
-<p>首页就会显示这条以上的所有内容，隐藏接下来的所有内容。</p>
+    <div class="post-body" itemprop="articleBody"><p>❗本文针对hexo的Next主题的设置有效，其他主题可以看看有没有相同字段
+Next默认是会在首页显示全文的，看起来冗长不简洁。要想首页仅展示文章标题或者摘要，请按照以下步骤进行：</p>
+<h3 id="修改配置">修改配置</h3>
+<p>首先需要在Next主题的<code>_config.yml</code>中把设置打开(默认安装时就打开了):
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">excerpt_description:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="设置展示的内容">设置展示的内容</h3>
+<h4 id="方法一写概述">方法一：写概述</h4>
+<p>在文章的<code>front-matter</code>中添加<code>description</code>，其中<code>descriptio</code>n中的内容就会被显示在首页上，其余一律不显示。
+<img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/Snipaste_2024-12-04_00-04-00.png" /></p>
+<p>PS:
+这种方法主要是要自己对文章内容进行简单总结，有时候不喜欢写总结介绍的话，可以用下面第二种方法</p>
+<h4 id="方法二文章截断">方法二：文章截断</h4>
+<p>在需要截断的地方加入： <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--more--&gt;</span></span><br></pre></td></tr></table></figure>
+首页就会显示这条以上的所有内容，隐藏接下来的所有内容。</p>
 <p>这个明显会方便很多，但当然有利有弊，我一般喜欢用方法一，也希望自己写的<code>description</code>能够给读者快速了解文章内容的效果</p>
 
     </div>
@@ -418,14 +422,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">31k</span>
+    <span title="站点总字数">35k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:54</span>
+    <span title="站点阅读时长">2:07</span>
   </span>
 </div>
 <div class="busuanzi-count">
@@ -488,6 +492,12 @@
   <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 
