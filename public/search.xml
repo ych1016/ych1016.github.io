@@ -17,6 +17,34 @@
       </tags>
   </entry>
   <entry>
+    <title>设置hexo首页只显示部分摘要（不显示全文）</title>
+    <url>/2024/12/03/Hexo/%E8%AE%BE%E7%BD%AEhexo%E9%A6%96%E9%A1%B5%E5%8F%AA%E6%98%BE%E7%A4%BA%E9%83%A8%E5%88%86%E6%91%98%E8%A6%81/</url>
+    <content><![CDATA[<p>❗本文针对hexo的Next主题的设置有效，其他主题可以看看有没有相同字段
+Next默认是会在首页显示全文的，看起来冗长不简洁。要想首页仅展示文章标题或者摘要，请按照以下步骤进行：</p>
+<h3 id="修改配置">修改配置</h3>
+<p>首先需要在Next主题的<code>_config.yml</code>中把设置打开(默认安装时就打开了):
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">excerpt_description:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="设置展示的内容">设置展示的内容</h3>
+<h4 id="方法一写概述">方法一：写概述</h4>
+<p>在文章的<code>front-matter</code>中添加<code>description</code>，其中<code>descriptio</code>n中的内容就会被显示在首页上，其余一律不显示。
+<img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/Snipaste_2024-12-04_00-04-00.png" /></p>
+<p>PS:
+这种方法主要是要自己对文章内容进行简单总结，有时候不喜欢写总结介绍的话，可以用下面第二种方法</p>
+<h4 id="方法二文章截断">方法二：文章截断</h4>
+<p>在需要截断的地方加入： <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--more--&gt;</span></span><br></pre></td></tr></table></figure>
+首页就会显示这条以上的所有内容，隐藏接下来的所有内容。</p>
+<p>这个明显会方便很多，但当然有利有弊，我一般喜欢用方法一，也希望自己写的<code>description</code>能够给读者快速了解文章内容的效果</p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>教程</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Acwing基础算法板子</title>
     <url>/2024/12/14/Algorithm/Acwing%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E6%9D%BF%E5%AD%90/</url>
     <content><![CDATA[<h1 id="第一讲-基础算法">第一讲 基础算法</h1>
@@ -157,6 +185,425 @@ href="https://www.acwing.com/problem/content/843/">字符串哈希</a></h3>
         <tag>algorithm</tag>
         <tag>C++</tag>
         <tag>算法板子</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>生活心得</title>
+    <url>/2024/12/17/Life/%E7%94%9F%E6%B4%BB%E5%BF%83%E5%BE%97/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="39a3e91f4c5d7c1cb6483996f53257fe2795255f840c0cc7179afd0fb8315f2c">1f6bb8509d126916afe1b073331b8b3022b18b79a6847b5197580c9561aefcdb7ef0d420fd891ef5503bc83738620ef4a03ae5124c312909ce9f60dd3706ecabbc0cd5634cd8567a22be1e022bf0beac66afc389469082db29e3c78737e66c4869d462d61098a196d97f1fb073e9db885418219d96e4bc9e2f913f689beea7090dea7ab83fc87afe9d2ff383fe1e248dbbaf05ac0c1ec0500b944ded297209fe18aff9a11d46d9a4fc6ab496725c433095de62d152a9162636a045a2cdc03161295105e4916ee87e6cc7b11d01b9e3abe31b4547d444f892500e8ec573e8f69aa16e5b86d4b67b40d4ee4c250366d93855d964061885b29695c54d19dd8071a224b942c7c980457c01d379b1a8dddf4a5958e7751778e79b5630b8b05b918843</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>碎碎念</title>
+    <url>/2024/12/01/Life/%E7%A2%8E%E7%A2%8E%E5%BF%B5/</url>
+    <content><![CDATA[<p><font size=4>🚩
+真正的自由意味着控制你整个生活，学会计划、承诺和决定，为你自己的行为负责！</font>
+<br></p>
+<blockquote>
+<p><font face="楷体">
+原来，让内心强大，我只需要看到自己，接纳我还不能做的，欣赏我已经做到的
+——《当我真的足够强大》 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+没有一种批判比自我批判更强烈，也没有一种法官比我们自己更严苛。
+——《蛤蟆先生去看心理医生》</font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+对抗消极的不是积极，而是专注。积极的情绪是无法击退消极情绪的，只有把自己沉浸在某件事件上才能从消极情绪中走出来。
+——若林正恭 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体"> 生活的不确定性正是我们希望的来源。 ——阿德勒
+</font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+那些看起来比你勇敢的人也像你一样害怕，他们只是在黑暗中把口哨吹得响亮一些罢了。
+——《为什么长大》 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+那晚，我点了一把篝火，大地在月亮眼中亮起了一颗星星。 ——弱智吧
+</font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体"> 这乱糟糟的世上还有人拿着花四处走走。
+——李沧东《火与灰》 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体"> 好在，别人如何分析我，跟我本身是一点关系都没有的。
+——三毛《撒哈拉的故事》 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体"> 你极目远望，其余的由心去完成。 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体"> 一个人变好的前提是，允许自己不好。 ——武志红
+</font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+纯粹，就是不要一心要成为高贵或者强大的人，而是成为自己。
+——佩索阿《惶然录》 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+人人都有天赋，但可贵的是，你是否有勇气追随你的天赋到黑暗之地。
+——艾丽卡·琼 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+随着年龄的增长，你越来越不在意别人怎么看你，只有那时你才能愈加自由。
+——《失踪树木的岛屿》 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+人脑虽然可以努力什么都试图记住，但写下来就可以安心忘记了。 ——《告白》
+</font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+后来我知道了，人生在世，临到每一个紧要关头，你都是孤军衰兵。
+——《关山夺路》 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+我们本能地把错误归咎于他人，但最重要的是，坏事情发生时，应该寻找原因，而不是寻找坏人。
+——《事实》 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+勇气，并不是闪闪发光的英雄主义，勇敢中也包含怯懦，就像爱中也有不爱的时刻。这来回摇摆的踱步，斑驳的杂质，才是真相。
+——《茫然尘世的珍宝》 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体"> 我独自度过了太多时光，沉默已成一种习惯。
+——《夜航西飞》 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+幸福的关键，并不在于你是否结婚、是否有孩子等，而是无论你处于什么样的状态都有不停追求幸福的行动力，以及无论多小的一件事，你都能感到幸福的能力。可以说，幸福的关键是一种心态。
+——《超单身社会》 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+因为有了仪式，某一天才有别于其他任何一天，某一个小时才有别于其他任何一个时刻。
+——圣·埃克絮佩里 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+时间不是一条直线，而是一个循环，我们在其中不断重复着相似的故事，直到我们学会从中解脱。
+——《悉达多》 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+你不能在赢的时候才自信，那不是自信，是对结果的复读。 ——冯骥 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+出路只有一条：在别人头脑发热大声喧闹的时候，退回到自己的内心并保持沉默
+——《昨日的世界》 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+无论风暴将我带到什么样的岸边，我都将以主人的身份上岸
+——昆图斯·贺拉斯·弗拉库斯 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体"> 而我，还是那个身披霞光的人
+<br>雨水流过山岚，孤独如杜鹃开放 ——余秀华 </font></p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font face="楷体">
+能够用干净利落、毫不妥协的态度看待事情，本身就是一种成就。
+——《永不停步》 </font></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>生活</tag>
+        <tag>名言积累</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>英文单词</title>
+    <url>/2024/12/04/Life/%E8%8B%B1%E6%96%87%E5%8D%95%E8%AF%8D/</url>
+    <content><![CDATA[
+]]></content>
+      <categories>
+        <category>英语</category>
+      </categories>
+      <tags>
+        <tag>英语单词3000个</tag>
+        <tag>积累</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java面试</title>
+    <url>/2025/01/04/Java/Java%E9%9D%A2%E8%AF%95/</url>
+    <content><![CDATA[<h1 id="一美团">一、美团</h1>
+<h1 id="二字节">二、字节</h1>
+<h1 id="三momenta">三、Momenta</h1>
+<h2 id="一http请求报文解析的过程">一、HTTP请求报文解析的过程</h2>
+<h3 id="http基本概念">1. HTTP基本概念</h3>
+<p>HTTP是指超文本传输协议，全称HyperText Transfer
+Protocol，它的名称由三部分组成</p>
+<p>超文本：指的不仅仅限于文本的多样性，还包括视频、图片等</p>
+<p>传输：表示数据的传输</p>
+<p>协议：表示通信双方的在传输过程中约定俗成的规范</p>
+<h3 id="http请求位于计算机网络的哪一层呢">2.
+HTTP请求位于计算机网络的哪一层呢？</h3>
+<p>应用层。
+在网络通信中，应用层是最接近用户的一层，它负责为特定的网络应用提供服务和功能。应用层协议定义了数据交换的规则和格式，以便不同的应用程序能够相互通信和交换信息。</p>
+<h3 id="http请求的整个流程">3. HTTP请求的整个流程</h3>
+<h4 id="总体流程"><strong>（1）总体流程</strong></h4>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250104142003.png" /></p>
+<h4 id="实际例子"><strong>（2）实际例子</strong></h4>
+<p>以一个实际的案例，来深入探讨一下HTTP的请求响应过程，假设我们访问的网址是：https://baidu.com</p>
+<p>当我们在浏览器地址栏输入该网址并按下回车键后，浏览器会进行如下操作：</p>
+<ol type="1">
+<li>首先浏览器会使用DNS域名解析协议，解析输入的网站域名，然后获取实际服务器的ip地址返回给浏览器。</li>
+<li>浏览器接收到实际的服务器ip地址后，会随机选择一个可用的客户端端口，与服务器默认的80端口建立TCP连接（3次握手）。在客户端和服务器之间会建立一个套接字用于通信。</li>
+<li>接着浏览器会通过套接字向服务器发送一个HTTP请求，该请求会携带客户端想要的对象的相关信息。</li>
+<li>服务器通过套接字接收到这个请求报文后，会对请求进行解析，并从存储器(RAM或磁盘)中检索出请求的对象。然后，服务器会将检索到的对象封装到HTTP响应报文中，并通过套接字发送给客户端。</li>
+<li>客户端会从响应报文中提取出响应的文件，并对HTML文件进行检查。然后，客户端会循环检查报文中的其他内部对象。在检查完成后，HTTP客户端会将相应的资源通过显示器呈现给用户。</li>
+<li>当服务器响应完客户端请求后，会主动通知TCP断开连接，跟浏览器进行4次挥手最终断开TCP连接。</li>
+</ol>
+<h3 id="双向连接">4. 双向连接</h3>
+<p>​ 从上面的流程描述可以看到，HTTP
+协议是一种单向无状态协议，这意味着只有客户端向服务器端发送请求时，服务器才会响应并返回数据给客户端。然而，服务器并不会主动发送HTTP请求返回给客户端。因此，单向通信有对应的双向通信方式，通过某些技术和扩展，HTTP协议也可以实现类似于双向通信的效果。例如，通过长轮询（Long
+Polling），客户端可以发送一个请求并保持连接打开，直到服务器有新的数据可用时才返回响应。这种方式使得服务器能够向客户端推送数据，从而实现了类似于双向通信的效果。</p>
+<p>​
+WebSockets是一种全双工通信协议，它允许客户端和服务器之间进行双向通信。通过建立持久的连接，WebSockets实现了更实时的双向通信。</p>
+<h2 id="二redis">二、Redis</h2>
+<h3 id="基本数据类型">1. 基本数据类型</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">类型</th>
+<th style="text-align: center;">举例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">String</td>
+<td style="text-align: center;">hello world</td>
+</tr>
+<tr>
+<td style="text-align: center;">Hash</td>
+<td style="text-align: center;">{name:"jack", age:21}</td>
+</tr>
+<tr>
+<td style="text-align: center;">List</td>
+<td style="text-align: center;">[A-&gt;B-&gt;B-&gt;C]</td>
+</tr>
+<tr>
+<td style="text-align: center;">Set</td>
+<td style="text-align: center;">{A,C,B}</td>
+</tr>
+<tr>
+<td style="text-align: center;">SortSet</td>
+<td style="text-align: center;">{A:1,B:2,C:3}</td>
+</tr>
+</tbody>
+</table>
+<h3 id="特殊数据类型">2. 特殊数据类型</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">类型</th>
+<th style="text-align: center;">举例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">GEO</td>
+<td style="text-align: center;">{A:(120.3, 30.5)}</td>
+</tr>
+<tr>
+<td style="text-align: center;">BitMap</td>
+<td style="text-align: center;">0111001000101010101</td>
+</tr>
+<tr>
+<td style="text-align: center;">HyperLog</td>
+<td style="text-align: center;">101001010110101</td>
+</tr>
+</tbody>
+</table>
+<h3 id="redis和mysql保持数据一致性">3. Redis和MySQL保持数据一致性</h3>
+<h4 id="一缓存先后删除问题"><strong>（一）缓存先后删除问题</strong></h4>
+<blockquote>
+<p>不管是先写<a
+href="https://cloud.tencent.com/product/cdb?from_column=20065&amp;from=20065">MySQL数据库</a>，再删除Redis缓存；还是先删除缓存，再写库，都有可能出现数据不一致的情况。</p>
+</blockquote>
+<h5 id="先删除缓存">1.1 先删除缓存</h5>
+<ul>
+<li>如果先删除Redis缓存数据，然而还没有来得及写入MySQL，另一个线程就来读取</li>
+<li>这个时候发现缓存为空，则去Mysql数据库中读取旧数据写入缓存，此时缓存中为脏数据。</li>
+<li>然后数据库更新后发现Redis和Mysql出现了数据不一致的问题</li>
+</ul>
+<h5 id="后删除缓存">1.2 后删除缓存</h5>
+<ul>
+<li>如果先写了库，然后再删除缓存，不幸的写库的线程挂了，导致了缓存没有删除</li>
+<li>这个时候就会直接读取旧缓存，最终也导致了数据不一致情况</li>
+<li>因为写和读是并发的，没法保证顺序,就会出现缓存和数据库的数据不一致的问题</li>
+</ul>
+<h4 id="二解决办法">（二）解决办法</h4>
+<h5 id="延时双删策略">2.1 延时双删策略</h5>
+<ul>
+<li>1.先删除缓存</li>
+<li>2.再写数据库</li>
+<li>3.休眠500毫秒</li>
+<li>4.再次删除缓存</li>
+</ul>
+<h5 id="异步更新缓存基于mysql-binlog的同步机制">2.2
+异步更新缓存（基于Mysql binlog的同步机制）</h5>
+<ul>
+<li>1.涉及到更新的数据操作，利用Mysql binlog 进行增量订阅消费</li>
+<li>2.将消息发送到消息队列</li>
+<li>3.通过消息队列消费将增量数据更新到Redis上</li>
+<li>4.操作情况</li>
+<li>读取Redis缓存：热数据都在Redis上</li>
+<li>写Mysql：增删改都是在Mysql进行操作</li>
+<li>更新Redis数据：Mysql的数据操作都记录到binlog，通过消息队列及时更新到Redis上</li>
+</ul>
+<h3 id="缓存穿透">4. 缓存穿透</h3>
+<h4 id="概念">（1）概念</h4>
+<p>指客户端请求的数据在缓存和数据库中都不存在，这样缓存永远不会生效，这些请求都会直接打到数据库</p>
+<h4 id="解决方案">（2）解决方案</h4>
+<ul>
+<li>缓存空对象</li>
+<li>布隆过滤器</li>
+<li>增强id的复杂度，避免被猜测id规律</li>
+<li>做好数据的基础格式校验</li>
+<li>加强用户权限校验</li>
+<li>做好热点参数的限流</li>
+</ul>
+<h3 id="缓存雪崩">5. 缓存雪崩</h3>
+<h4 id="概念-1">（1）概念</h4>
+<p>指同一时段，大量的缓存key同时失效，或者Redis服务宕机，导致大量的请求直接打到数据库，带来巨大的压力</p>
+<h4 id="解决方案-1">（2）解决方案</h4>
+<ul>
+<li>给不同key的TTL添加随机值</li>
+<li>利用Redis集群提高服务的可用性</li>
+<li>给缓存业务添加降级限流策略</li>
+<li>给业务添加多级缓存</li>
+</ul>
+<h3 id="缓存击穿">6. 缓存击穿</h3>
+<h4 id="概念-2">（1）概念</h4>
+<p>也叫热点Key问题，就是被一个高并发访问并且缓存重建业务较复杂的key突然失效了，无数的请求访问会在瞬间给数据库带来巨大的压力。</p>
+<h4 id="解决方案-2">（2）解决方案</h4>
+<ul>
+<li>互斥锁</li>
+<li>逻辑过期</li>
+</ul>
+<h3 id="redis持久化">7. Redis持久化</h3>
+<h4 id="一rdb持久化">（一）RDB持久化</h4>
+<h5 id="概念-3">1. 概念</h5>
+<p>​ RDB全称Redis Database Backup
+file（Redis数据备份文件），也被叫做Redis数据快照。（快照文件称为RDB文件，默认是保存在当前运行目录。）简单来说就是把内存中的所有数据都记录到磁盘中。当Redis实例故障重启后，从磁盘读取快照文件，恢复数据。Redis停机时会执行一次RDB。</p>
+<h5 id="过程">2. 过程</h5>
+<p>bgsave开始时会fork主进程得到子进程，子进程共享主进程的内存数据。完成fork后读取内存数据并写入
+RDB 文件。 fork采用的是copy-on-write技术：</p>
+<ul>
+<li>当主进程执行读操作时，访问共享内存；</li>
+<li>当主进程执行写操作时，则会拷贝一份数据，执行写操作。</li>
+</ul>
+<h4 id="二aof持久化">（二）AOF持久化</h4>
+<h5 id="概念-4">1. 概念</h5>
+<p>AOF全称为Append Only
+File（追加文件）。Redis处理的每一个写命令都会记录在AOF文件，可以看做是命令日志文件。</p>
+<h5 id="过程-1">2. 过程</h5>
+<p>其实就是一个执行日志文件，每次进行操作都写入日志中。</p>
+<h3 id="redis主从">8. Redis主从</h3>
+<h4 id="一数据同步">（一）数据同步</h4>
+<h5 id="全量同步">1. 全量同步</h5>
+<ul>
+<li>slave节点请求增量同步</li>
+<li>master节点判断replid，发现不一致，拒绝增量同步</li>
+<li>master将完整内存数据生成RDB，发送RDB到slave</li>
+<li>slave清空本地数据，加载master的RDB</li>
+<li>master将RDB期间的命令记录在repl_baklog，并持续将log中的命令发送给slave</li>
+<li>slave执行接收到的命令，保持与master之间的同步</li>
+</ul>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250104163740.png" style="zoom: 33%;" /></p>
+<h5 id="增量同步">2. 增量同步</h5>
+<h2 id="java性能优化">Java性能优化</h2>
+<h2 id="transactional-注解失效"><span class="citation"
+data-cites="Transactional">@Transactional</span> 注解失效</h2>
+]]></content>
+      <tags>
+        <tag>后端面试</tag>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>实习坑点</title>
+    <url>/2025/01/04/Java/%E5%AE%9E%E4%B9%A0%E5%9D%91%E7%82%B9/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="39f6fc65c56b885e0fadb17bc2a8eeb1a64c28db461f500933fdcec77f7e0e02">1f6bb8509d126916afe1b073331b8b303e8fc819b81490765ad837df7dc1353814a72d845b5617ce1fc01ae8d2343ee9e00ca198754762b83bc34dc85adcadb9565ade93116558bad147e024d233f6fd50676540c5cfc12ef02bdb9408ec77a9cd0fd45cd751c067d00a32d02564a9ded5e79fab6af90cb1efe5602c3a23dbe85bc00b055b02a7731ad71244f3df0a0e4b22e405093904fdb426d271773c3cd945f10cef61240550fe1fc4511c9ce05e4299e86b95d3c2629b712259f3645574d5450c3915182a5b63f52fd1b9a987470d809318389bf47264abc009d75e63699fe01e548d0ccd5c5a5393bac04d96ba61630da33c84987a274094cae6c6fb00be8a457b5703d7bf2dc1e6825e0314e1bd96e928fc5384ab593e02b2028ac65117828b0a7171311817a002c4804b5e87d6b862a31cfee9328e8793a5763a6f7998bee9741e2163ad1fdc40b65842374a933ac726a26b96e1d1f09fa850a77136af875dadf227595bae3174aaead10bf6be33ad53fe0b55a65c627c7361b07e6b00e8e9b0c51cddcc2d99bb5247a33dea91e5f30f48ae20d72e65e22f909fe3ba4ed66a3344b608738ad3eab169b50d6fe0097944f2e1f4af6ef793a37a5cf3ab8c7d027451039abc4a88d9ce6ee052c506c77959dd1e471e137ff984b576d9011611a60632198f2bb59b7330544a51958a13b094b5a1b39cf8f1c817e57e0ba87f2ae06d347bd39c25953b40c518d8167f0beef5cc0e7982735fd0fffc1c699dd9923e1f4570d5255f0f985dabcc890e004b6fbc9faf80cd66cee28b03be73b0b2a3edf2da7fcaa9bf50059da89ae9be</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>实习</category>
+      </categories>
+      <tags>
+        <tag>实习</tag>
+        <tag>记录</tag>
       </tags>
   </entry>
   <entry>
@@ -792,622 +1239,9 @@ src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309203233.png" /></p>
         <category>Java</category>
       </categories>
       <tags>
+        <tag>Java</tag>
         <tag>JUC</tag>
-        <tag>Java</tag>
         <tag>并发编程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java面试</title>
-    <url>/2025/01/04/Java/Java%E9%9D%A2%E8%AF%95/</url>
-    <content><![CDATA[<h1 id="一美团">一、美团</h1>
-<h1 id="二字节">二、字节</h1>
-<h1 id="三momenta">三、Momenta</h1>
-<h2 id="一http请求报文解析的过程">一、HTTP请求报文解析的过程</h2>
-<h3 id="http基本概念">1. HTTP基本概念</h3>
-<p>HTTP是指超文本传输协议，全称HyperText Transfer
-Protocol，它的名称由三部分组成</p>
-<p>超文本：指的不仅仅限于文本的多样性，还包括视频、图片等</p>
-<p>传输：表示数据的传输</p>
-<p>协议：表示通信双方的在传输过程中约定俗成的规范</p>
-<h3 id="http请求位于计算机网络的哪一层呢">2.
-HTTP请求位于计算机网络的哪一层呢？</h3>
-<p>应用层。
-在网络通信中，应用层是最接近用户的一层，它负责为特定的网络应用提供服务和功能。应用层协议定义了数据交换的规则和格式，以便不同的应用程序能够相互通信和交换信息。</p>
-<h3 id="http请求的整个流程">3. HTTP请求的整个流程</h3>
-<h4 id="总体流程"><strong>（1）总体流程</strong></h4>
-<p><img
-src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250104142003.png" /></p>
-<h4 id="实际例子"><strong>（2）实际例子</strong></h4>
-<p>以一个实际的案例，来深入探讨一下HTTP的请求响应过程，假设我们访问的网址是：https://baidu.com</p>
-<p>当我们在浏览器地址栏输入该网址并按下回车键后，浏览器会进行如下操作：</p>
-<ol type="1">
-<li>首先浏览器会使用DNS域名解析协议，解析输入的网站域名，然后获取实际服务器的ip地址返回给浏览器。</li>
-<li>浏览器接收到实际的服务器ip地址后，会随机选择一个可用的客户端端口，与服务器默认的80端口建立TCP连接（3次握手）。在客户端和服务器之间会建立一个套接字用于通信。</li>
-<li>接着浏览器会通过套接字向服务器发送一个HTTP请求，该请求会携带客户端想要的对象的相关信息。</li>
-<li>服务器通过套接字接收到这个请求报文后，会对请求进行解析，并从存储器(RAM或磁盘)中检索出请求的对象。然后，服务器会将检索到的对象封装到HTTP响应报文中，并通过套接字发送给客户端。</li>
-<li>客户端会从响应报文中提取出响应的文件，并对HTML文件进行检查。然后，客户端会循环检查报文中的其他内部对象。在检查完成后，HTTP客户端会将相应的资源通过显示器呈现给用户。</li>
-<li>当服务器响应完客户端请求后，会主动通知TCP断开连接，跟浏览器进行4次挥手最终断开TCP连接。</li>
-</ol>
-<h3 id="双向连接">4. 双向连接</h3>
-<p>​ 从上面的流程描述可以看到，HTTP
-协议是一种单向无状态协议，这意味着只有客户端向服务器端发送请求时，服务器才会响应并返回数据给客户端。然而，服务器并不会主动发送HTTP请求返回给客户端。因此，单向通信有对应的双向通信方式，通过某些技术和扩展，HTTP协议也可以实现类似于双向通信的效果。例如，通过长轮询（Long
-Polling），客户端可以发送一个请求并保持连接打开，直到服务器有新的数据可用时才返回响应。这种方式使得服务器能够向客户端推送数据，从而实现了类似于双向通信的效果。</p>
-<p>​
-WebSockets是一种全双工通信协议，它允许客户端和服务器之间进行双向通信。通过建立持久的连接，WebSockets实现了更实时的双向通信。</p>
-<h2 id="二redis">二、Redis</h2>
-<h3 id="基本数据类型">1. 基本数据类型</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;">类型</th>
-<th style="text-align: center;">举例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;">String</td>
-<td style="text-align: center;">hello world</td>
-</tr>
-<tr>
-<td style="text-align: center;">Hash</td>
-<td style="text-align: center;">{name:"jack", age:21}</td>
-</tr>
-<tr>
-<td style="text-align: center;">List</td>
-<td style="text-align: center;">[A-&gt;B-&gt;B-&gt;C]</td>
-</tr>
-<tr>
-<td style="text-align: center;">Set</td>
-<td style="text-align: center;">{A,C,B}</td>
-</tr>
-<tr>
-<td style="text-align: center;">SortSet</td>
-<td style="text-align: center;">{A:1,B:2,C:3}</td>
-</tr>
-</tbody>
-</table>
-<h3 id="特殊数据类型">2. 特殊数据类型</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;">类型</th>
-<th style="text-align: center;">举例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;">GEO</td>
-<td style="text-align: center;">{A:(120.3, 30.5)}</td>
-</tr>
-<tr>
-<td style="text-align: center;">BitMap</td>
-<td style="text-align: center;">0111001000101010101</td>
-</tr>
-<tr>
-<td style="text-align: center;">HyperLog</td>
-<td style="text-align: center;">101001010110101</td>
-</tr>
-</tbody>
-</table>
-<h3 id="redis和mysql保持数据一致性">3. Redis和MySQL保持数据一致性</h3>
-<h4 id="一缓存先后删除问题"><strong>（一）缓存先后删除问题</strong></h4>
-<blockquote>
-<p>不管是先写<a
-href="https://cloud.tencent.com/product/cdb?from_column=20065&amp;from=20065">MySQL数据库</a>，再删除Redis缓存；还是先删除缓存，再写库，都有可能出现数据不一致的情况。</p>
-</blockquote>
-<h5 id="先删除缓存">1.1 先删除缓存</h5>
-<ul>
-<li>如果先删除Redis缓存数据，然而还没有来得及写入MySQL，另一个线程就来读取</li>
-<li>这个时候发现缓存为空，则去Mysql数据库中读取旧数据写入缓存，此时缓存中为脏数据。</li>
-<li>然后数据库更新后发现Redis和Mysql出现了数据不一致的问题</li>
-</ul>
-<h5 id="后删除缓存">1.2 后删除缓存</h5>
-<ul>
-<li>如果先写了库，然后再删除缓存，不幸的写库的线程挂了，导致了缓存没有删除</li>
-<li>这个时候就会直接读取旧缓存，最终也导致了数据不一致情况</li>
-<li>因为写和读是并发的，没法保证顺序,就会出现缓存和数据库的数据不一致的问题</li>
-</ul>
-<h4 id="二解决办法">（二）解决办法</h4>
-<h5 id="延时双删策略">2.1 延时双删策略</h5>
-<ul>
-<li>1.先删除缓存</li>
-<li>2.再写数据库</li>
-<li>3.休眠500毫秒</li>
-<li>4.再次删除缓存</li>
-</ul>
-<h5 id="异步更新缓存基于mysql-binlog的同步机制">2.2
-异步更新缓存（基于Mysql binlog的同步机制）</h5>
-<ul>
-<li>1.涉及到更新的数据操作，利用Mysql binlog 进行增量订阅消费</li>
-<li>2.将消息发送到消息队列</li>
-<li>3.通过消息队列消费将增量数据更新到Redis上</li>
-<li>4.操作情况</li>
-<li>读取Redis缓存：热数据都在Redis上</li>
-<li>写Mysql：增删改都是在Mysql进行操作</li>
-<li>更新Redis数据：Mysql的数据操作都记录到binlog，通过消息队列及时更新到Redis上</li>
-</ul>
-<h3 id="缓存穿透">4. 缓存穿透</h3>
-<h4 id="概念">（1）概念</h4>
-<p>指客户端请求的数据在缓存和数据库中都不存在，这样缓存永远不会生效，这些请求都会直接打到数据库</p>
-<h4 id="解决方案">（2）解决方案</h4>
-<ul>
-<li>缓存空对象</li>
-<li>布隆过滤器</li>
-<li>增强id的复杂度，避免被猜测id规律</li>
-<li>做好数据的基础格式校验</li>
-<li>加强用户权限校验</li>
-<li>做好热点参数的限流</li>
-</ul>
-<h3 id="缓存雪崩">5. 缓存雪崩</h3>
-<h4 id="概念-1">（1）概念</h4>
-<p>指同一时段，大量的缓存key同时失效，或者Redis服务宕机，导致大量的请求直接打到数据库，带来巨大的压力</p>
-<h4 id="解决方案-1">（2）解决方案</h4>
-<ul>
-<li>给不同key的TTL添加随机值</li>
-<li>利用Redis集群提高服务的可用性</li>
-<li>给缓存业务添加降级限流策略</li>
-<li>给业务添加多级缓存</li>
-</ul>
-<h3 id="缓存击穿">6. 缓存击穿</h3>
-<h4 id="概念-2">（1）概念</h4>
-<p>也叫热点Key问题，就是被一个高并发访问并且缓存重建业务较复杂的key突然失效了，无数的请求访问会在瞬间给数据库带来巨大的压力。</p>
-<h4 id="解决方案-2">（2）解决方案</h4>
-<ul>
-<li>互斥锁</li>
-<li>逻辑过期</li>
-</ul>
-<h3 id="redis持久化">7. Redis持久化</h3>
-<h4 id="一rdb持久化">（一）RDB持久化</h4>
-<h5 id="概念-3">1. 概念</h5>
-<p>​ RDB全称Redis Database Backup
-file（Redis数据备份文件），也被叫做Redis数据快照。（快照文件称为RDB文件，默认是保存在当前运行目录。）简单来说就是把内存中的所有数据都记录到磁盘中。当Redis实例故障重启后，从磁盘读取快照文件，恢复数据。Redis停机时会执行一次RDB。</p>
-<h5 id="过程">2. 过程</h5>
-<p>bgsave开始时会fork主进程得到子进程，子进程共享主进程的内存数据。完成fork后读取内存数据并写入
-RDB 文件。 fork采用的是copy-on-write技术：</p>
-<ul>
-<li>当主进程执行读操作时，访问共享内存；</li>
-<li>当主进程执行写操作时，则会拷贝一份数据，执行写操作。</li>
-</ul>
-<h4 id="二aof持久化">（二）AOF持久化</h4>
-<h5 id="概念-4">1. 概念</h5>
-<p>AOF全称为Append Only
-File（追加文件）。Redis处理的每一个写命令都会记录在AOF文件，可以看做是命令日志文件。</p>
-<h5 id="过程-1">2. 过程</h5>
-<p>其实就是一个执行日志文件，每次进行操作都写入日志中。</p>
-<h3 id="redis主从">8. Redis主从</h3>
-<h4 id="一数据同步">（一）数据同步</h4>
-<h5 id="全量同步">1. 全量同步</h5>
-<ul>
-<li>slave节点请求增量同步</li>
-<li>master节点判断replid，发现不一致，拒绝增量同步</li>
-<li>master将完整内存数据生成RDB，发送RDB到slave</li>
-<li>slave清空本地数据，加载master的RDB</li>
-<li>master将RDB期间的命令记录在repl_baklog，并持续将log中的命令发送给slave</li>
-<li>slave执行接收到的命令，保持与master之间的同步</li>
-</ul>
-<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250104163740.png" style="zoom: 33%;" /></p>
-<h5 id="增量同步">2. 增量同步</h5>
-<h2 id="java性能优化">Java性能优化</h2>
-<h2 id="transactional-注解失效"><span class="citation"
-data-cites="Transactional">@Transactional</span> 注解失效</h2>
-]]></content>
-      <tags>
-        <tag>Java</tag>
-        <tag>后端面试</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>设置hexo首页只显示部分摘要（不显示全文）</title>
-    <url>/2024/12/03/Hexo/%E8%AE%BE%E7%BD%AEhexo%E9%A6%96%E9%A1%B5%E5%8F%AA%E6%98%BE%E7%A4%BA%E9%83%A8%E5%88%86%E6%91%98%E8%A6%81/</url>
-    <content><![CDATA[<p>❗本文针对hexo的Next主题的设置有效，其他主题可以看看有没有相同字段
-Next默认是会在首页显示全文的，看起来冗长不简洁。要想首页仅展示文章标题或者摘要，请按照以下步骤进行：</p>
-<h3 id="修改配置">修改配置</h3>
-<p>首先需要在Next主题的<code>_config.yml</code>中把设置打开(默认安装时就打开了):
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">excerpt_description:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="设置展示的内容">设置展示的内容</h3>
-<h4 id="方法一写概述">方法一：写概述</h4>
-<p>在文章的<code>front-matter</code>中添加<code>description</code>，其中<code>descriptio</code>n中的内容就会被显示在首页上，其余一律不显示。
-<img
-src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/Snipaste_2024-12-04_00-04-00.png" /></p>
-<p>PS:
-这种方法主要是要自己对文章内容进行简单总结，有时候不喜欢写总结介绍的话，可以用下面第二种方法</p>
-<h4 id="方法二文章截断">方法二：文章截断</h4>
-<p>在需要截断的地方加入： <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--more--&gt;</span></span><br></pre></td></tr></table></figure>
-首页就会显示这条以上的所有内容，隐藏接下来的所有内容。</p>
-<p>这个明显会方便很多，但当然有利有弊，我一般喜欢用方法一，也希望自己写的<code>description</code>能够给读者快速了解文章内容的效果</p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>教程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>实习坑点</title>
-    <url>/2025/01/04/Java/%E5%AE%9E%E4%B9%A0%E5%9D%91%E7%82%B9/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="39f6fc65c56b885e0fadb17bc2a8eeb1a64c28db461f500933fdcec77f7e0e02">1f6bb8509d126916afe1b073331b8b303e8fc819b81490765ad837df7dc1353814a72d845b5617ce1fc01ae8d2343ee9e00ca198754762b83bc34dc85adcadb9565ade93116558bad147e024d233f6fd50676540c5cfc12ef02bdb9408ec77a9cd0fd45cd751c067d00a32d02564a9ded5e79fab6af90cb1efe5602c3a23dbe85bc00b055b02a7731ad71244f3df0a0e4b22e405093904fdb426d271773c3cd945f10cef61240550fe1fc4511c9ce05e4299e86b95d3c2629b712259f3645574d5450c3915182a5b63f52fd1b9a987470d809318389bf47264abc009d75e63699fe01e548d0ccd5c5a5393bac04d96ba61630da33c84987a274094cae6c6fb00be8a457b5703d7bf2dc1e6825e0314e1bd96e928fc5384ab593e02b2028ac65117828b0a7171311817a002c4804b5e87d6b862a31cfee9328e8793a5763a6f7998bee9741e2163ad1fdc40b65842374a933ac726a26b96e1d1f09fa850a77136af875dadf227595bae3174aaead10bf6be33ad53fe0b55a65c627c7361b07e6b00e8e9b0c51cddcc2d99bb5247a33dea91e5f30f48ae20d72e65e22f909fe3ba4ed66a3344b608738ad3eab169b50d6fe0097944f2e1f4af6ef793a37a5cf3ab8c7d027451039abc4a88d9ce6ee052c506c77959dd1e471e137ff984b576d9011611a60632198f2bb59b7330544a51958a13b094b5a1b39cf8f1c817e57e0ba87f2ae06d347bd39c25953b40c518d8167f0beef5cc0e7982735fd0fffc1c699dd9923e1f4570d5255f0f985dabcc890e004b6fbc9faf80cd66cee28b03be73b0b2a3edf2da7fcaa9bf50059da89ae9be</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      <categories>
-        <category>实习</category>
-      </categories>
-      <tags>
-        <tag>实习</tag>
-        <tag>记录</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>生活心得</title>
-    <url>/2024/12/17/Life/%E7%94%9F%E6%B4%BB%E5%BF%83%E5%BE%97/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="39a3e91f4c5d7c1cb6483996f53257fe2795255f840c0cc7179afd0fb8315f2c">1f6bb8509d126916afe1b073331b8b3022b18b79a6847b5197580c9561aefcdb7ef0d420fd891ef5503bc83738620ef4a03ae5124c312909ce9f60dd3706ecabbc0cd5634cd8567a22be1e022bf0beac66afc389469082db29e3c78737e66c4869d462d61098a196d97f1fb073e9db885418219d96e4bc9e2f913f689beea7090dea7ab83fc87afe9d2ff383fe1e248dbbaf05ac0c1ec0500b944ded297209fe18aff9a11d46d9a4fc6ab496725c433095de62d152a9162636a045a2cdc03161295105e4916ee87e6cc7b11d01b9e3abe31b4547d444f892500e8ec573e8f69aa16e5b86d4b67b40d4ee4c250366d93855d964061885b29695c54d19dd8071a224b942c7c980457c01d379b1a8dddf4a5958e7751778e79b5630b8b05b918843</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>生活</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis实战与源码解析</title>
-    <url>/2025/03/09/Java/Redis%E5%AE%9E%E6%88%98%E4%B8%8E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
-    <content><![CDATA[<h1 id="一使用redis实现登录校验">一、使用Redis实现登录校验</h1>
-<p>​
-主要验证是校验码验证和密码验证，我觉得可以这样设计，把验证码存入到Redis中，用户信息使用JWT生成对应的token，然后将JWT生成的token存入到Redis中（替代直接将用户信息存入Redis中），这样可以减少Redis的内存负担。具体流程图如下方所示，</p>
-<p>​
-下图的具体做法是将用户的信息采用JWT进行加密保存了，出于安全考虑，我觉得对于前端页面上用户的基本信息可以使用JWT存储，这样在解析的时候也会比去Redis中再获取一次要快。但是对于用户一些常用的敏感信息，我觉得还是有必要放在Redis中的。</p>
-<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309103254.png" style="zoom:50%;" /></p>
-<h1 id="二缓存">二、缓存</h1>
-<p>使用缓存主要会存在几种问题：缓存雪崩，缓存击穿，缓存穿透。</p>
-<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309110729.png" style="zoom:50%;" /></p>
-<h2 id="缓存雪崩">1、 缓存雪崩</h2>
-<h3 id="什么是缓存雪崩">（1）什么是缓存雪崩？</h3>
-<p>​
-如果缓存在某一个时刻出现大规模key失效，那么就会导致大量的请求打在数据库上面，导致数据库压力巨大，如果高并发的情况下，可能瞬间就会导师数据库宕机。这时如果运维马上又重启数据库，马上又会有新的流量把数据库打死，这就是缓存雪崩。</p>
-<p><img src="C:\Users\28778\AppData\Roaming\Typora\typora-user-images\image-20250309180454471.png" alt="image-20250309180454471" style="zoom:70%;" /></p>
-<h3 id="问题分析">（2）问题分析：</h3>
-<p>存在这种情况的问题所在：</p>
-<ul>
-<li>Redis宕机</li>
-<li>大量缓存采用了相同的过期时间</li>
-</ul>
-<h3 id="解决方案">（3）解决方案：</h3>
-<h4 id="事前">&lt;1&gt; 事前：</h4>
-<ol type="1">
-<li><p>均匀过期：设置不同的过期时间，让缓存失效的时间尽量均匀，避免相同的过期时间导致缓存雪崩，造成大量数据库的访问</p></li>
-<li><p>分级缓存：第一级缓存失效的基础上，访问二级缓存，每一级缓存的失效时间都不相同</p></li>
-<li><p>热点数据永远不过期。</p>
-<blockquote>
-<p>永不过期实际包含两层意思：</p>
-<ul>
-<li>物理不过期：针对热点key不设置过期时间</li>
-<li>逻辑过期：把过期时间存在key对应的value中，如果发现要过期了，通过一个后台的异步线程进行缓存的构建。</li>
-</ul>
-</blockquote></li>
-<li><p>保证Redis缓存的高可用，防止Redis宕机导致缓存雪崩的问题。可以使用
-主从 + 哨兵，Redis集群来避免Redis全盘崩溃的情况</p></li>
-</ol>
-<h4 id="事中">&lt;2&gt; 事中：</h4>
-<ol type="1">
-<li>互斥锁：在缓存失效后，通过互斥锁或者队列来控制读写数据写缓存的线程数量，比如某个key只允许一个线程查询数据和写缓存，其他线程等待。这种方式会阻塞其他线程，此时系统的吞吐量会下降</li>
-<li>使用熔断机制，限流降级。当流量达到一定的阈值，直接返回“系统繁忙”之类的提示，防止过多的请求打在数据库上将数据库击垮，至少能保证一部分用户是可以正常使用，其他用户多刷新几次也能得到结果</li>
-</ol>
-<h4 id="事后">&lt;3&gt; 事后：</h4>
-<p>开启Redis持久化机制，尽快回复缓存数据，一旦重启，就能从磁盘上自动加载数据恢复内存中的数据。</p>
-<h2 id="缓存击穿">2、缓存击穿</h2>
-<h3 id="什么是缓存击穿">（1）什么是缓存击穿</h3>
-<p>​
-缓存击穿跟缓存雪崩有点类似，缓存雪崩是大规模的key失效，而缓存击穿则是某个热点key失效，大规模并发对其进行请求，就会导致大量请求读缓存读取不到数据，从而导致大规模请求直接打到数据库，引起数据库压力剧增，这就是缓存击穿。</p>
-<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309135734.png" style="zoom:70%;" /></p>
-<h3 id="问题分析-1">（2）问题分析</h3>
-<p>​
-关键在于某个热点key失效了，导致大并发集中打在数据库上。所以要从两个方面解决。第一是否可以考虑热点key不设置过期时间，第二是否可以考虑降低打在数据库上的请求数量</p>
-<h3 id="解决方案-1">（3）解决方案</h3>
-<h4 id="互斥锁或者队列">&lt;1&gt; 互斥锁或者队列</h4>
-<p>​
-在缓存失效后，通过<strong>互斥锁或者队列</strong>来控制读数据写缓存的线程数量</p>
-<h4 id="永不过期">&lt;2&gt; 永不过期</h4>
-<p>​ 热点数据缓存<strong>永不过期</strong></p>
-<h2 id="缓存穿透">3、缓存穿透</h2>
-<h3 id="什么是缓存穿透">（1）什么是缓存穿透</h3>
-<p>​
-缓存穿透是指用户请求的数据在<strong>缓存中不存在</strong>，即读请求时没有命中缓存，同时<strong>数据库也不存在该数据</strong>。导致用户每次请求该数据都要去数据库查询一遍。如果有恶意攻击者不断请求系统中不存在的数据，会导致短时间内大量请求直接打在数据库上，造成数据库压力过大，甚至导致数据库承受不住而宕机崩溃。</p>
-<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309135630.png" style="zoom:70%;" /></p>
-<h3 id="问题分析-2">（2）问题分析</h3>
-<p>​
-缓存穿透的关键在于在Redis中查不到key值。一般导致缓存穿透主要有两种情况：一个是业务误操作，删除了数据库和redis中的缓存；另外一个是黑客恶意攻击。假如有黑客传进大量的不存在key，那么大量的请求打在数据库上是很致命的问题。所以在日常开发中要对参数做好校验，一些非法参数，不可能存在的key就直接返回错误提示。</p>
-<h3 id="解决方案-2">（3）解决方案</h3>
-<h4 id="非法请求的限制">&lt;1&gt; 非法请求的限制</h4>
-<p>​
-在API入口处判断请求参数是否合理，请求参数是否含有非法值，请求字段是否存在，如果判断出是恶意请求则直接返回错误，避免进一步访问缓存和数据库</p>
-<h4 id="将无效key存放在redis中">&lt;2&gt; 将无效key存放在Redis中</h4>
-<p>​
-当出现Redis查不到数据，数据库也查不到数据的情况，则把这个key保存到Redis中，这是value=“null”，并设置其过期时间极短，后面再出现查询这个key的请求的时候，直接返回null，不再需要查询数据库。但该方法存在一定的问题，假如传进来的不存在的key每次都是随机的，那存入Redis也没有意义</p>
-<h4 id="使用布隆过滤器">&lt;3&gt; 使用布隆过滤器</h4>
-<p>​
-在缓存之前再加一个布隆过滤器，将数据库中的所有key都存储在布隆过滤器中，在查询Redis前先去布隆过滤器查询key是否存在，如果不存在就直接返回，不让其访问数据库，从而避免了对底层存储系统的查询压力。</p>
-<blockquote>
-<p>什么是布隆过滤器？</p>
-<p>布隆过滤器实际上是一个很长的二进制向量和一系列随机映射函数。布隆过滤器可以用于检索一个元素是否在一个集合中。它的优点是空间效率和查询时间都比一般的算法要好得多，缺点是有一定的误识别率和删除困难。</p>
-</blockquote>
-<p>布隆过滤器原理：</p>
-<ul>
-<li>第一步，使用N个哈希函数分贝对数据做哈希计算，得到N个哈希值；</li>
-<li>第二步，将第一步得到的N个哈希值对位图数组的长度取模，得到每个哈希值在位图数组的对应位置；</li>
-<li>第三步，将每个哈希值在位图数组的对应位置的值设置为1。</li>
-</ul>
-<p><img src="C:\Users\28778\AppData\Roaming\Typora\typora-user-images\image-20250309181235449.png" alt="image-20250309181235449" style="zoom:80%;" /></p>
-<blockquote>
-<p>如何选择：针对一些恶意攻击，攻击带过来的大量key是随机的，若采用缓存空对象方案会缓存大量不存在key的数据，并不合适。所以需要采用布隆过滤器方案，布隆过滤器先过滤掉不存在的key。针对key异常多、请求重复率比较低的数据，优先使用布隆过滤器方案。对于空数据的key有限，重复率比较高的，则优先采用缓存空对象方案</p>
-</blockquote>
-<h2 id="汇总">汇总</h2>
-<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309181748.png" style="zoom:80%;" /></p>
-<h1 id="三数据库缓存保持一致性">三、数据库缓存保持一致性</h1>
-<blockquote>
-<p>先说结论：大多数业务采用的都是【先更新数据库，再删除缓存】的 Cache
-Aside（旁路缓存）策略，同时给缓存设定过期时间，防止在第二步，删除缓存数据失败导致数据不一致的问题。</p>
-<p>若业务对缓存命中率有很高的要求，则可以采用【先更新数据库，再更新缓存】的方案，因为主动更新缓存可以减少缓存未命中的情况</p>
-</blockquote>
-<h2 id="先更新数据库还是先更新缓存">1、先更新数据库还是先更新缓存</h2>
-<p>​
-<strong>都不可行。</strong>无论是【先更新数据库，再更新缓存】，还是【先更新缓存，再更新数据库】，这两个方案都存在并发问题，当两个请求并发更新同一条数据的时候，可能出现数据库和缓存中的数据不一致的情况。常见的缓存更新策略主要有三种：Cache
-Aside（旁路缓存）策略；Read/Write Through（读穿 / 写穿）策略；Write
-Back（写回）策略；</p>
-<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309190713.png" style="zoom:50%;" /></p>
-<p>但在实际开发中，Redis和MySQL的更新策略用的是Cache
-Aside策略，另外两种主要是用在操作系统中。</p>
-<h2 id="cache-aside旁路缓存策略">2、 Cache Aside（旁路缓存）策略</h2>
-<p>​
-先更新数据库数据，然后不更新缓存，直接删除缓存中的数据。等客户端要读取数据时，发现缓存中没有，再从数据库中读取数据放到缓存中。</p>
-<p><img src="C:\Users\28778\AppData\Roaming\Typora\typora-user-images\image-20250309183945747.png" alt="image-20250309183945747" style="zoom: 50%;" /></p>
-<h3 id="写策略">（1）写策略</h3>
-<ul>
-<li>更新数据库中的数据</li>
-<li>删除缓存中的数据</li>
-</ul>
-<h3 id="读策略">（2）读策略</h3>
-<ul>
-<li>如果读取的数据命中了缓存，则直接返回数据</li>
-<li>如果读取的数据未命中缓存，则直接读取数据库中的数据，再将数据放入缓存。</li>
-</ul>
-<h2 id="先更新数据库还是先删缓存">2.1 先更新数据库还是先删缓存</h2>
-<p>​
-先说结论，<strong>先更新数据库，再删缓存</strong>。理论上来说，无论是【先更新数据库，再删除缓存】，还是【先删除缓存，再更新数据库】都会导致数据库与缓存数据不一致的问题。但为什么还是推崇【先更新数据库，再删除缓存】呢？</p>
-<p>​
-主要原因还是在【先更新数据库，再更新缓存】出现数据库与缓存数据不一致的情况较少。因为缓存的写入通常要远远快于数据库的写入。具体例子参考：https://xiaolincoding.com/redis/architecture/mysql_redis_consistency.html#%E5%85%88%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE%E5%BA%93-%E8%BF%98%E6%98%AF%E5%85%88%E5%88%A0%E9%99%A4%E7%BC%93%E5%AD%98</p>
-<h2 id="readwrite-through读穿-写穿策略">3、 Read/Write Through（读穿 /
-写穿）策略</h2>
-<p>​ Read / Write
-Through（读穿/写穿）策略原则是应用程序只和缓存交互，不再和数据库交互，而是有缓存和数据库交互，相当于更新数据库的操作由缓存自己代理了。</p>
-<h3 id="read-through">（1）Read Through</h3>
-<p>​
-先查询缓存中数据是否存在，如果存在则直接返回；如果不存在，则由缓存组件负责从数据库查询数据，并将结果写入到缓存组件，最后缓存组件将数据返回给应用</p>
-<h3 id="write-through">（2）Write Through</h3>
-<p>当有数据更新的时候，先查询要写入的数据在缓存中是否已经存在：</p>
-<ul>
-<li>如果缓存中数据已存在，则更新缓存中的数据，并且由缓存组件同步更新到数据库中，然后缓存组件告知应用程序更新完成。</li>
-<li>如果缓存中数据不存在，则直接更新数据库，然后返回。</li>
-</ul>
-<h2 id="write-back写回策略">4、Write Back（写回）策略</h2>
-<p>​ Write
-Back（写回）策略在更新数据的时候，只更新缓存，同时将缓存数据设置为脏的，然后立马返回，并不会更新数据库。对于数据库的更新，会通过批量异步更新的方式进行。【主要用于操作系统】</p>
-<h2 id="小结">5、小结</h2>
-<h3
-id="使用先删除缓存再更新数据库">（1）使用【先删除缓存，再更新数据库】</h3>
-<p>​ 针对【先删除缓存，再更新数据库】方案在【读 +
-写】并发请求而造成缓存不一致的解决办法是<strong>【延迟双删】</strong>。就是等更新数据库的线程更新完数据库之后先睡眠一段时间，然后再删一次缓存，可以避免由于高并发使缓存中放入脏数据。但是这个睡眠时间需要大于另外一个读取数据的时间（查数据库
-+ 将数据放入缓存）。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 删除缓存</span></span><br><span class="line">redis.delKey(X)</span><br><span class="line"><span class="comment"># 更新数据库		</span></span><br><span class="line">db.update(X)</span><br><span class="line"><span class="comment"># 睡眠一段时间</span></span><br><span class="line">thread.sleep(N)</span><br><span class="line"><span class="comment"># 删除缓存</span></span><br><span class="line">redis.delKey(X)</span><br></pre></td></tr></table></figure>
-<h3
-id="保证先更新数据库再删除缓存成功">（2）保证【先更新数据库，再删除缓存】成功</h3>
-<p>为了保证【先更新数据库，再删除缓存】的第二个步骤，也就是删除缓存能成功，可以使用：</p>
-<ul>
-<li>消息队列重试缓存的删除，优点是保证缓存一致性问题，缺点是对业务代码入侵</li>
-<li>订阅MySQL binlog + 消息队列 +
-重试缓存的删除，优点是规避了代码入侵问题，也很好的保证缓存一致性的问题。缺点是引入的组件较多，对团队的运维能力有比较高要求。</li>
-</ul>
-<h1 id="四redis持久化机制">四、Redis持久化机制</h1>
-<p>Redis持久化数据的主要方式有两个，分别是：RDB快照和AOF日志。</p>
-<p><img
-src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309112643.png" /></p>
-<h2 id="rdb快照">1、 RDB快照</h2>
-<p>记录某一瞬间的内存数据，记录的是实际数据。</p>
-<h2 id="aof日志">2、AOF日志</h2>
-<p>对于Redis的每一次写操作，都会将这次写操作追加到一个文件里。</p>
-<h1 id="五redis实现秒杀">五、Redis实现秒杀</h1>
-<h2 id="全局唯一id">1、 全局唯一id</h2>
-<h3 id="需要具备的特点">（1）需要具备的特点</h3>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>Redis</tag>
-        <tag>中间件</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>碎碎念</title>
-    <url>/2024/12/01/Life/%E7%A2%8E%E7%A2%8E%E5%BF%B5/</url>
-    <content><![CDATA[<p><font size=4>🚩
-真正的自由意味着控制你整个生活，学会计划、承诺和决定，为你自己的行为负责！</font>
-<br></p>
-<blockquote>
-<p><font face="楷体">
-原来，让内心强大，我只需要看到自己，接纳我还不能做的，欣赏我已经做到的
-——《当我真的足够强大》 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-没有一种批判比自我批判更强烈，也没有一种法官比我们自己更严苛。
-——《蛤蟆先生去看心理医生》</font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-对抗消极的不是积极，而是专注。积极的情绪是无法击退消极情绪的，只有把自己沉浸在某件事件上才能从消极情绪中走出来。
-——若林正恭 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体"> 生活的不确定性正是我们希望的来源。 ——阿德勒
-</font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-那些看起来比你勇敢的人也像你一样害怕，他们只是在黑暗中把口哨吹得响亮一些罢了。
-——《为什么长大》 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-那晚，我点了一把篝火，大地在月亮眼中亮起了一颗星星。 ——弱智吧
-</font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体"> 这乱糟糟的世上还有人拿着花四处走走。
-——李沧东《火与灰》 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体"> 好在，别人如何分析我，跟我本身是一点关系都没有的。
-——三毛《撒哈拉的故事》 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体"> 你极目远望，其余的由心去完成。 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体"> 一个人变好的前提是，允许自己不好。 ——武志红
-</font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-纯粹，就是不要一心要成为高贵或者强大的人，而是成为自己。
-——佩索阿《惶然录》 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-人人都有天赋，但可贵的是，你是否有勇气追随你的天赋到黑暗之地。
-——艾丽卡·琼 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-随着年龄的增长，你越来越不在意别人怎么看你，只有那时你才能愈加自由。
-——《失踪树木的岛屿》 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-人脑虽然可以努力什么都试图记住，但写下来就可以安心忘记了。 ——《告白》
-</font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-后来我知道了，人生在世，临到每一个紧要关头，你都是孤军衰兵。
-——《关山夺路》 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-我们本能地把错误归咎于他人，但最重要的是，坏事情发生时，应该寻找原因，而不是寻找坏人。
-——《事实》 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-勇气，并不是闪闪发光的英雄主义，勇敢中也包含怯懦，就像爱中也有不爱的时刻。这来回摇摆的踱步，斑驳的杂质，才是真相。
-——《茫然尘世的珍宝》 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体"> 我独自度过了太多时光，沉默已成一种习惯。
-——《夜航西飞》 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-幸福的关键，并不在于你是否结婚、是否有孩子等，而是无论你处于什么样的状态都有不停追求幸福的行动力，以及无论多小的一件事，你都能感到幸福的能力。可以说，幸福的关键是一种心态。
-——《超单身社会》 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-因为有了仪式，某一天才有别于其他任何一天，某一个小时才有别于其他任何一个时刻。
-——圣·埃克絮佩里 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-时间不是一条直线，而是一个循环，我们在其中不断重复着相似的故事，直到我们学会从中解脱。
-——《悉达多》 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-你不能在赢的时候才自信，那不是自信，是对结果的复读。 ——冯骥 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-出路只有一条：在别人头脑发热大声喧闹的时候，退回到自己的内心并保持沉默
-——《昨日的世界》 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-无论风暴将我带到什么样的岸边，我都将以主人的身份上岸
-——昆图斯·贺拉斯·弗拉库斯 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体"> 而我，还是那个身披霞光的人
-<br>雨水流过山岚，孤独如杜鹃开放 ——余秀华 </font></p>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><font face="楷体">
-能够用干净利落、毫不妥协的态度看待事情，本身就是一种成就。
-——《永不停步》 </font></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>生活</tag>
-        <tag>名言积累</tag>
       </tags>
   </entry>
   <entry>
@@ -2682,16 +2516,183 @@ href="https://leetcode.cn/problems/maximal-square/description/?envType=study-pla
       </tags>
   </entry>
   <entry>
-    <title>英文单词</title>
-    <url>/2024/12/04/Life/%E8%8B%B1%E6%96%87%E5%8D%95%E8%AF%8D/</url>
-    <content><![CDATA[
+    <title>Redis实战与源码解析</title>
+    <url>/2025/03/09/Java/Redis%E5%AE%9E%E6%88%98%E4%B8%8E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
+    <content><![CDATA[<h1 id="一使用redis实现登录校验">一、使用Redis实现登录校验</h1>
+<p>​
+主要验证是校验码验证和密码验证，我觉得可以这样设计，把验证码存入到Redis中，用户信息使用JWT生成对应的token，然后将JWT生成的token存入到Redis中（替代直接将用户信息存入Redis中），这样可以减少Redis的内存负担。具体流程图如下方所示，</p>
+<p>​
+下图的具体做法是将用户的信息采用JWT进行加密保存了，出于安全考虑，我觉得对于前端页面上用户的基本信息可以使用JWT存储，这样在解析的时候也会比去Redis中再获取一次要快。但是对于用户一些常用的敏感信息，我觉得还是有必要放在Redis中的。</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309103254.png" style="zoom:50%;" /></p>
+<h1 id="二缓存">二、缓存</h1>
+<p>使用缓存主要会存在几种问题：缓存雪崩，缓存击穿，缓存穿透。</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309110729.png" style="zoom:50%;" /></p>
+<h2 id="缓存雪崩">1、 缓存雪崩</h2>
+<h3 id="什么是缓存雪崩">（1）什么是缓存雪崩？</h3>
+<p>​
+如果缓存在某一个时刻出现大规模key失效，那么就会导致大量的请求打在数据库上面，导致数据库压力巨大，如果高并发的情况下，可能瞬间就会导师数据库宕机。这时如果运维马上又重启数据库，马上又会有新的流量把数据库打死，这就是缓存雪崩。</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309203618.png" style="zoom:70%;" /></p>
+<h3 id="问题分析">（2）问题分析：</h3>
+<p>存在这种情况的问题所在：</p>
+<ul>
+<li>Redis宕机</li>
+<li>大量缓存采用了相同的过期时间</li>
+</ul>
+<h3 id="解决方案">（3）解决方案：</h3>
+<h4 id="事前">&lt;1&gt; 事前：</h4>
+<ol type="1">
+<li><p>均匀过期：设置不同的过期时间，让缓存失效的时间尽量均匀，避免相同的过期时间导致缓存雪崩，造成大量数据库的访问</p></li>
+<li><p>分级缓存：第一级缓存失效的基础上，访问二级缓存，每一级缓存的失效时间都不相同</p></li>
+<li><p>热点数据永远不过期。</p>
+<blockquote>
+<p>永不过期实际包含两层意思：</p>
+<ul>
+<li>物理不过期：针对热点key不设置过期时间</li>
+<li>逻辑过期：把过期时间存在key对应的value中，如果发现要过期了，通过一个后台的异步线程进行缓存的构建。</li>
+</ul>
+</blockquote></li>
+<li><p>保证Redis缓存的高可用，防止Redis宕机导致缓存雪崩的问题。可以使用
+主从 + 哨兵，Redis集群来避免Redis全盘崩溃的情况</p></li>
+</ol>
+<h4 id="事中">&lt;2&gt; 事中：</h4>
+<ol type="1">
+<li>互斥锁：在缓存失效后，通过互斥锁或者队列来控制读写数据写缓存的线程数量，比如某个key只允许一个线程查询数据和写缓存，其他线程等待。这种方式会阻塞其他线程，此时系统的吞吐量会下降</li>
+<li>使用熔断机制，限流降级。当流量达到一定的阈值，直接返回“系统繁忙”之类的提示，防止过多的请求打在数据库上将数据库击垮，至少能保证一部分用户是可以正常使用，其他用户多刷新几次也能得到结果</li>
+</ol>
+<h4 id="事后">&lt;3&gt; 事后：</h4>
+<p>开启Redis持久化机制，尽快回复缓存数据，一旦重启，就能从磁盘上自动加载数据恢复内存中的数据。</p>
+<h2 id="缓存击穿">2、缓存击穿</h2>
+<h3 id="什么是缓存击穿">（1）什么是缓存击穿</h3>
+<p>​
+缓存击穿跟缓存雪崩有点类似，缓存雪崩是大规模的key失效，而缓存击穿则是某个热点key失效，大规模并发对其进行请求，就会导致大量请求读缓存读取不到数据，从而导致大规模请求直接打到数据库，引起数据库压力剧增，这就是缓存击穿。</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309135734.png" style="zoom:70%;" /></p>
+<h3 id="问题分析-1">（2）问题分析</h3>
+<p>​
+关键在于某个热点key失效了，导致大并发集中打在数据库上。所以要从两个方面解决。第一是否可以考虑热点key不设置过期时间，第二是否可以考虑降低打在数据库上的请求数量</p>
+<h3 id="解决方案-1">（3）解决方案</h3>
+<h4 id="互斥锁或者队列">&lt;1&gt; 互斥锁或者队列</h4>
+<p>​
+在缓存失效后，通过<strong>互斥锁或者队列</strong>来控制读数据写缓存的线程数量</p>
+<h4 id="永不过期">&lt;2&gt; 永不过期</h4>
+<p>​ 热点数据缓存<strong>永不过期</strong></p>
+<h2 id="缓存穿透">3、缓存穿透</h2>
+<h3 id="什么是缓存穿透">（1）什么是缓存穿透</h3>
+<p>​
+缓存穿透是指用户请求的数据在<strong>缓存中不存在</strong>，即读请求时没有命中缓存，同时<strong>数据库也不存在该数据</strong>。导致用户每次请求该数据都要去数据库查询一遍。如果有恶意攻击者不断请求系统中不存在的数据，会导致短时间内大量请求直接打在数据库上，造成数据库压力过大，甚至导致数据库承受不住而宕机崩溃。</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309135630.png" style="zoom:70%;" /></p>
+<h3 id="问题分析-2">（2）问题分析</h3>
+<p>​
+缓存穿透的关键在于在Redis中查不到key值。一般导致缓存穿透主要有两种情况：一个是业务误操作，删除了数据库和redis中的缓存；另外一个是黑客恶意攻击。假如有黑客传进大量的不存在key，那么大量的请求打在数据库上是很致命的问题。所以在日常开发中要对参数做好校验，一些非法参数，不可能存在的key就直接返回错误提示。</p>
+<h3 id="解决方案-2">（3）解决方案</h3>
+<h4 id="非法请求的限制">&lt;1&gt; 非法请求的限制</h4>
+<p>​
+在API入口处判断请求参数是否合理，请求参数是否含有非法值，请求字段是否存在，如果判断出是恶意请求则直接返回错误，避免进一步访问缓存和数据库</p>
+<h4 id="将无效key存放在redis中">&lt;2&gt; 将无效key存放在Redis中</h4>
+<p>​
+当出现Redis查不到数据，数据库也查不到数据的情况，则把这个key保存到Redis中，这是value=“null”，并设置其过期时间极短，后面再出现查询这个key的请求的时候，直接返回null，不再需要查询数据库。但该方法存在一定的问题，假如传进来的不存在的key每次都是随机的，那存入Redis也没有意义</p>
+<h4 id="使用布隆过滤器">&lt;3&gt; 使用布隆过滤器</h4>
+<p>​
+在缓存之前再加一个布隆过滤器，将数据库中的所有key都存储在布隆过滤器中，在查询Redis前先去布隆过滤器查询key是否存在，如果不存在就直接返回，不让其访问数据库，从而避免了对底层存储系统的查询压力。</p>
+<blockquote>
+<p>什么是布隆过滤器？</p>
+<p>布隆过滤器实际上是一个很长的二进制向量和一系列随机映射函数。布隆过滤器可以用于检索一个元素是否在一个集合中。它的优点是空间效率和查询时间都比一般的算法要好得多，缺点是有一定的误识别率和删除困难。</p>
+</blockquote>
+<p>布隆过滤器原理：</p>
+<ul>
+<li>第一步，使用N个哈希函数分贝对数据做哈希计算，得到N个哈希值；</li>
+<li>第二步，将第一步得到的N个哈希值对位图数组的长度取模，得到每个哈希值在位图数组的对应位置；</li>
+<li>第三步，将每个哈希值在位图数组的对应位置的值设置为1。</li>
+</ul>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309203643.png" style="zoom:80%;" /></p>
+<blockquote>
+<p>如何选择：针对一些恶意攻击，攻击带过来的大量key是随机的，若采用缓存空对象方案会缓存大量不存在key的数据，并不合适。所以需要采用布隆过滤器方案，布隆过滤器先过滤掉不存在的key。针对key异常多、请求重复率比较低的数据，优先使用布隆过滤器方案。对于空数据的key有限，重复率比较高的，则优先采用缓存空对象方案</p>
+</blockquote>
+<h2 id="汇总">汇总</h2>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309181748.png" style="zoom:80%;" /></p>
+<h1 id="三数据库缓存保持一致性">三、数据库缓存保持一致性</h1>
+<blockquote>
+<p>先说结论：大多数业务采用的都是【先更新数据库，再删除缓存】的 Cache
+Aside（旁路缓存）策略，同时给缓存设定过期时间，防止在第二步，删除缓存数据失败导致数据不一致的问题。</p>
+<p>若业务对缓存命中率有很高的要求，则可以采用【先更新数据库，再更新缓存】的方案，因为主动更新缓存可以减少缓存未命中的情况</p>
+</blockquote>
+<h2 id="先更新数据库还是先更新缓存">1、先更新数据库还是先更新缓存</h2>
+<p>​
+<strong>都不可行。</strong>无论是【先更新数据库，再更新缓存】，还是【先更新缓存，再更新数据库】，这两个方案都存在并发问题，当两个请求并发更新同一条数据的时候，可能出现数据库和缓存中的数据不一致的情况。常见的缓存更新策略主要有三种：Cache
+Aside（旁路缓存）策略；Read/Write Through（读穿 / 写穿）策略；Write
+Back（写回）策略；</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309190713.png" style="zoom:50%;" /></p>
+<p>但在实际开发中，Redis和MySQL的更新策略用的是Cache
+Aside策略，另外两种主要是用在操作系统中。</p>
+<h2 id="cache-aside旁路缓存策略">2、 Cache Aside（旁路缓存）策略</h2>
+<p>​
+先更新数据库数据，然后不更新缓存，直接删除缓存中的数据。等客户端要读取数据时，发现缓存中没有，再从数据库中读取数据放到缓存中。</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309203658.png" style="zoom:50%;" /></p>
+<h3 id="写策略">（1）写策略</h3>
+<ul>
+<li>更新数据库中的数据</li>
+<li>删除缓存中的数据</li>
+</ul>
+<h3 id="读策略">（2）读策略</h3>
+<ul>
+<li>如果读取的数据命中了缓存，则直接返回数据</li>
+<li>如果读取的数据未命中缓存，则直接读取数据库中的数据，再将数据放入缓存。</li>
+</ul>
+<h2 id="先更新数据库还是先删缓存">2.1 先更新数据库还是先删缓存</h2>
+<p>​
+先说结论，<strong>先更新数据库，再删缓存</strong>。理论上来说，无论是【先更新数据库，再删除缓存】，还是【先删除缓存，再更新数据库】都会导致数据库与缓存数据不一致的问题。但为什么还是推崇【先更新数据库，再删除缓存】呢？</p>
+<p>​
+主要原因还是在【先更新数据库，再更新缓存】出现数据库与缓存数据不一致的情况较少。因为缓存的写入通常要远远快于数据库的写入。具体例子参考：<a
+href="https://xiaolincoding.com/redis/architecture/mysql_redis_consistency.html#%E5%85%88%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE%E5%BA%93-%E8%BF%98%E6%98%AF%E5%85%88%E5%88%A0%E9%99%A4%E7%BC%93%E5%AD%98">小林coding</a></p>
+<h2 id="readwrite-through读穿-写穿策略">3、 Read/Write Through（读穿 /
+写穿）策略</h2>
+<p>​ Read / Write
+Through（读穿/写穿）策略原则是应用程序只和缓存交互，不再和数据库交互，而是有缓存和数据库交互，相当于更新数据库的操作由缓存自己代理了。</p>
+<h3 id="read-through">（1）Read Through</h3>
+<p>​
+先查询缓存中数据是否存在，如果存在则直接返回；如果不存在，则由缓存组件负责从数据库查询数据，并将结果写入到缓存组件，最后缓存组件将数据返回给应用</p>
+<h3 id="write-through">（2）Write Through</h3>
+<p>当有数据更新的时候，先查询要写入的数据在缓存中是否已经存在：</p>
+<ul>
+<li>如果缓存中数据已存在，则更新缓存中的数据，并且由缓存组件同步更新到数据库中，然后缓存组件告知应用程序更新完成。</li>
+<li>如果缓存中数据不存在，则直接更新数据库，然后返回。</li>
+</ul>
+<h2 id="write-back写回策略">4、Write Back（写回）策略</h2>
+<p>​ Write
+Back（写回）策略在更新数据的时候，只更新缓存，同时将缓存数据设置为脏的，然后立马返回，并不会更新数据库。对于数据库的更新，会通过批量异步更新的方式进行。【主要用于操作系统】</p>
+<h2 id="小结">5、小结</h2>
+<h3
+id="使用先删除缓存再更新数据库">（1）使用【先删除缓存，再更新数据库】</h3>
+<p>​ 针对【先删除缓存，再更新数据库】方案在【读 +
+写】并发请求而造成缓存不一致的解决办法是<strong>【延迟双删】</strong>。就是等更新数据库的线程更新完数据库之后先睡眠一段时间，然后再删一次缓存，可以避免由于高并发使缓存中放入脏数据。但是这个睡眠时间需要大于另外一个读取数据的时间（查数据库
++ 将数据放入缓存）。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 删除缓存</span></span><br><span class="line">redis.delKey(X)</span><br><span class="line"><span class="comment"># 更新数据库		</span></span><br><span class="line">db.update(X)</span><br><span class="line"><span class="comment"># 睡眠一段时间</span></span><br><span class="line">thread.sleep(N)</span><br><span class="line"><span class="comment"># 删除缓存</span></span><br><span class="line">redis.delKey(X)</span><br></pre></td></tr></table></figure>
+<h3
+id="保证先更新数据库再删除缓存成功">（2）保证【先更新数据库，再删除缓存】成功</h3>
+<p>为了保证【先更新数据库，再删除缓存】的第二个步骤，也就是删除缓存能成功，可以使用：</p>
+<ul>
+<li>消息队列重试缓存的删除，优点是保证缓存一致性问题，缺点是对业务代码入侵</li>
+<li>订阅MySQL binlog + 消息队列 +
+重试缓存的删除，优点是规避了代码入侵问题，也很好的保证缓存一致性的问题。缺点是引入的组件较多，对团队的运维能力有比较高要求。</li>
+</ul>
+<h1 id="四redis持久化机制">四、Redis持久化机制</h1>
+<p>Redis持久化数据的主要方式有两个，分别是：RDB快照和AOF日志。</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309112643.png" /></p>
+<h2 id="rdb快照">1、 RDB快照</h2>
+<p>记录某一瞬间的内存数据，记录的是实际数据。</p>
+<h2 id="aof日志">2、AOF日志</h2>
+<p>对于Redis的每一次写操作，都会将这次写操作追加到一个文件里。</p>
+<h1 id="五redis实现秒杀">五、Redis实现秒杀</h1>
+<h2 id="全局唯一id">1、 全局唯一id</h2>
+<h3 id="需要具备的特点">（1）需要具备的特点</h3>
 ]]></content>
       <categories>
-        <category>英语</category>
+        <category>Java</category>
       </categories>
       <tags>
-        <tag>英语单词3000个</tag>
-        <tag>积累</tag>
+        <tag>Java</tag>
+        <tag>Redis</tag>
+        <tag>中间件</tag>
       </tags>
   </entry>
 </search>
