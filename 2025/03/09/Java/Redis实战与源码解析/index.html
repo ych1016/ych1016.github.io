@@ -35,8 +35,22 @@
 <meta property="og:image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309181748.png">
 <meta property="og:image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309190713.png">
 <meta property="og:image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309203658.png">
+<meta property="og:image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310094729.png">
+<meta property="og:image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310095101.png">
+<meta property="og:image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310134922.png">
+<meta property="og:image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310141541.png">
+<meta property="og:image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310141854.png">
+<meta property="og:image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310142616.png">
+<meta property="og:image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310143057.png">
+<meta property="og:image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310143251.png">
+<meta property="og:image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310143500.png">
+<meta property="og:image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310144256.png">
+<meta property="og:image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310144414.png">
+<meta property="og:image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310145407.png">
+<meta property="og:image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310151049.png">
+<meta property="og:image" content="c:\Users\28778\AppData\Roaming\Typora\typora-user-images\image-20250310151231363.png">
 <meta property="article:published_time" content="2025-03-09T00:58:55.000Z">
-<meta property="article:modified_time" content="2025-03-09T12:39:29.004Z">
+<meta property="article:modified_time" content="2025-03-10T08:26:27.860Z">
 <meta property="article:author" content="旺仔">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="Redis">
@@ -151,8 +165,11 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E4%BD%BF%E7%94%A8redis%E5%AE%9E%E7%8E%B0%E7%99%BB%E5%BD%95%E6%A0%A1%E9%AA%8C"><span class="nav-text">一、使用Redis实现登录校验</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E7%BC%93%E5%AD%98"><span class="nav-text">二、缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9"><span class="nav-text">1、 缓存雪崩</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9"><span class="nav-text">（1）什么是缓存雪崩？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90"><span class="nav-text">（2）问题分析：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-text">（3）解决方案：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8B%E5%89%8D"><span class="nav-text">&lt;1&gt; 事前：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8B%E4%B8%AD"><span class="nav-text">&lt;2&gt; 事中：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8B%E5%90%8E"><span class="nav-text">&lt;3&gt; 事后：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF"><span class="nav-text">2、缓存击穿</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF"><span class="nav-text">（1）什么是缓存击穿</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90-1"><span class="nav-text">（2）问题分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-1"><span class="nav-text">（3）解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%92%E6%96%A5%E9%94%81%E6%88%96%E8%80%85%E9%98%9F%E5%88%97"><span class="nav-text">&lt;1&gt; 互斥锁或者队列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B0%B8%E4%B8%8D%E8%BF%87%E6%9C%9F"><span class="nav-text">&lt;2&gt; 永不过期</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F"><span class="nav-text">3、缓存穿透</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F"><span class="nav-text">（1）什么是缓存穿透</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90-2"><span class="nav-text">（2）问题分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-2"><span class="nav-text">（3）解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%9E%E6%B3%95%E8%AF%B7%E6%B1%82%E7%9A%84%E9%99%90%E5%88%B6"><span class="nav-text">&lt;1&gt; 非法请求的限制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%86%E6%97%A0%E6%95%88key%E5%AD%98%E6%94%BE%E5%9C%A8redis%E4%B8%AD"><span class="nav-text">&lt;2&gt; 将无效key存放在Redis中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="nav-text">&lt;3&gt; 使用布隆过滤器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B1%87%E6%80%BB"><span class="nav-text">汇总</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BC%93%E5%AD%98%E4%BF%9D%E6%8C%81%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-text">三、数据库缓存保持一致性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%88%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%98%E6%98%AF%E5%85%88%E6%9B%B4%E6%96%B0%E7%BC%93%E5%AD%98"><span class="nav-text">1、先更新数据库还是先更新缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cache-aside%E6%97%81%E8%B7%AF%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5"><span class="nav-text">2、 Cache Aside（旁路缓存）策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%99%E7%AD%96%E7%95%A5"><span class="nav-text">（1）写策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E7%AD%96%E7%95%A5"><span class="nav-text">（2）读策略</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%88%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%98%E6%98%AF%E5%85%88%E5%88%A0%E7%BC%93%E5%AD%98"><span class="nav-text">2.1 先更新数据库还是先删缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#readwrite-through%E8%AF%BB%E7%A9%BF-%E5%86%99%E7%A9%BF%E7%AD%96%E7%95%A5"><span class="nav-text">3、 Read&#x2F;Write Through（读穿 &#x2F;
-写穿）策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#read-through"><span class="nav-text">（1）Read Through</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#write-through"><span class="nav-text">（2）Write Through</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#write-back%E5%86%99%E5%9B%9E%E7%AD%96%E7%95%A5"><span class="nav-text">4、Write Back（写回）策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-text">5、小结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%85%88%E5%88%A0%E9%99%A4%E7%BC%93%E5%AD%98%E5%86%8D%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">（1）使用【先删除缓存，再更新数据库】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%9D%E8%AF%81%E5%85%88%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE%E5%BA%93%E5%86%8D%E5%88%A0%E9%99%A4%E7%BC%93%E5%AD%98%E6%88%90%E5%8A%9F"><span class="nav-text">（2）保证【先更新数据库，再删除缓存】成功</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9Bredis%E6%8C%81%E4%B9%85%E5%8C%96%E6%9C%BA%E5%88%B6"><span class="nav-text">四、Redis持久化机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#rdb%E5%BF%AB%E7%85%A7"><span class="nav-text">1、 RDB快照</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#aof%E6%97%A5%E5%BF%97"><span class="nav-text">2、AOF日志</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94redis%E5%AE%9E%E7%8E%B0%E7%A7%92%E6%9D%80"><span class="nav-text">五、Redis实现秒杀</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E5%94%AF%E4%B8%80id"><span class="nav-text">1、 全局唯一id</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E8%A6%81%E5%85%B7%E5%A4%87%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-text">（1）需要具备的特点</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E4%BD%BF%E7%94%A8redis%E5%AE%9E%E7%8E%B0%E7%99%BB%E5%BD%95%E6%A0%A1%E9%AA%8C"><span class="nav-text">一、使用Redis实现登录校验</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E7%BC%93%E5%AD%98"><span class="nav-text">二、缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9"><span class="nav-text">1、 缓存雪崩</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9"><span class="nav-text">（1）什么是缓存雪崩？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90"><span class="nav-text">（2）问题分析：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-text">（3）解决方案：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8B%E5%89%8D"><span class="nav-text">&lt;1&gt; 事前：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8B%E4%B8%AD"><span class="nav-text">&lt;2&gt; 事中：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8B%E5%90%8E"><span class="nav-text">&lt;3&gt; 事后：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF"><span class="nav-text">2、缓存击穿</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF"><span class="nav-text">（1）什么是缓存击穿</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90-1"><span class="nav-text">（2）问题分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-1"><span class="nav-text">（3）解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%92%E6%96%A5%E9%94%81%E6%88%96%E8%80%85%E9%98%9F%E5%88%97"><span class="nav-text">&lt;1&gt; 互斥锁或者队列</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F"><span class="nav-text">3、缓存穿透</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F"><span class="nav-text">（1）什么是缓存穿透</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90-2"><span class="nav-text">（2）问题分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-2"><span class="nav-text">（3）解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%9E%E6%B3%95%E8%AF%B7%E6%B1%82%E7%9A%84%E9%99%90%E5%88%B6"><span class="nav-text">&lt;1&gt; 非法请求的限制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%86%E6%97%A0%E6%95%88key%E5%AD%98%E6%94%BE%E5%9C%A8redis%E4%B8%AD"><span class="nav-text">&lt;2&gt; 将无效key存放在Redis中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="nav-text">&lt;3&gt; 使用布隆过滤器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B1%87%E6%80%BB"><span class="nav-text">汇总</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E9%A2%84%E7%83%AD"><span class="nav-text">4、缓存预热</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%BC%93%E5%AD%98%E9%A2%84%E7%83%AD"><span class="nav-text">（1）什么是缓存预热</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E9%A2%84%E7%83%AD%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88"><span class="nav-text">（2）缓存预热实现方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E9%99%8D%E7%BA%A7"><span class="nav-text">5、缓存降级</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BC%93%E5%AD%98%E4%BF%9D%E6%8C%81%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-text">三、数据库缓存保持一致性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%88%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%98%E6%98%AF%E5%85%88%E6%9B%B4%E6%96%B0%E7%BC%93%E5%AD%98"><span class="nav-text">1、先更新数据库还是先更新缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cache-aside%E6%97%81%E8%B7%AF%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5"><span class="nav-text">2、 Cache Aside（旁路缓存）策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%99%E7%AD%96%E7%95%A5"><span class="nav-text">（1）写策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E7%AD%96%E7%95%A5"><span class="nav-text">（2）读策略</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%88%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%98%E6%98%AF%E5%85%88%E5%88%A0%E7%BC%93%E5%AD%98"><span class="nav-text">2.1 先更新数据库还是先删缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#readwrite-through%E8%AF%BB%E7%A9%BF-%E5%86%99%E7%A9%BF%E7%AD%96%E7%95%A5"><span class="nav-text">3、 Read&#x2F;Write Through（读穿 &#x2F;
+写穿）策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#read-through"><span class="nav-text">（1）Read Through</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#write-through"><span class="nav-text">（2）Write Through</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#write-back%E5%86%99%E5%9B%9E%E7%AD%96%E7%95%A5"><span class="nav-text">4、Write Back（写回）策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-text">5、小结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%85%88%E5%88%A0%E9%99%A4%E7%BC%93%E5%AD%98%E5%86%8D%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">（1）使用【先删除缓存，再更新数据库】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%9D%E8%AF%81%E5%85%88%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE%E5%BA%93%E5%86%8D%E5%88%A0%E9%99%A4%E7%BC%93%E5%AD%98%E6%88%90%E5%8A%9F"><span class="nav-text">（2）保证【先更新数据库，再删除缓存】成功</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9Bredis%E6%8C%81%E4%B9%85%E5%8C%96%E6%9C%BA%E5%88%B6"><span class="nav-text">四、Redis持久化机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#rdb%E5%BF%AB%E7%85%A7"><span class="nav-text">1、 RDB快照</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#aof%E6%97%A5%E5%BF%97"><span class="nav-text">2、AOF日志</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94redis%E5%AE%9E%E7%8E%B0%E7%A7%92%E6%9D%80"><span class="nav-text">五、Redis实现秒杀</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E5%94%AF%E4%B8%80id"><span class="nav-text">1、 全局唯一id</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E8%A6%81%E5%85%B7%E5%A4%87%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-text">（1）需要具备的特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B6%85%E5%8D%96%E9%97%AE%E9%A2%98"><span class="nav-text">2、超卖问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-text">（1）问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%A7%E7%94%9F%E5%8E%9F%E5%9B%A0"><span class="nav-text">（2）产生原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-3"><span class="nav-text">（3） 解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%82%B2%E8%A7%82%E9%94%81"><span class="nav-text">【1】 悲观锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B9%90%E8%A7%82%E9%94%81"><span class="nav-text">【2】 乐观锁</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%8D%E7%94%9F%E6%94%B9%E8%89%AF"><span class="nav-text">（4）衍生改良</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-text">【1】问题：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3"><span class="nav-text">【2】解决：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%BA%BA%E4%B8%80%E5%8D%95"><span class="nav-text">3、一人一单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-1"><span class="nav-text">（1）问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%A7%E7%94%9F%E5%8E%9F%E5%9B%A0-1"><span class="nav-text">（2）产生原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-4"><span class="nav-text">（3）解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%97%AE%E9%A2%98"><span class="nav-text">（4）分布式问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81"><span class="nav-text">4、分布式锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="nav-text">（1）基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%96%B9%E6%B3%95"><span class="nav-text">（2）基本方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81"><span class="nav-text">（3）实现代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E5%9C%A8%E9%97%AE%E9%A2%98"><span class="nav-text">（4）存在问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E8%AF%AF%E5%88%A0"><span class="nav-text">【1】Redis分布式锁误删</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E5%8E%9F%E5%AD%90%E6%80%A7%E9%97%AE%E9%A2%98"><span class="nav-text">【2】分布式锁原子性问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81--redission"><span class="nav-text">5、分布式锁--Redission</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-text">（1）引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFredission"><span class="nav-text">（2）什么是Redission</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81redisson---%E5%8F%AF%E9%87%8D%E5%85%A5%E9%94%81%E5%8E%9F%E7%90%86"><span class="nav-text">（3）分布式锁Redisson--
+可重入锁原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81ression-%E9%94%81%E9%87%8D%E8%AF%95%E5%92%8Cwatchdog%E6%9C%BA%E5%88%B6"><span class="nav-text">（4）分布式锁Ression ——
+锁重试和WatchDog机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-text">【1】原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90"><span class="nav-text">【2】源码解析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81redission-mutilock%E5%8E%9F%E7%90%86"><span class="nav-text">（5）分布式锁Redission ——
+MutiLock原理</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -241,9 +258,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2025-03-09 08:58:55 / 修改时间：20:39:29" itemprop="dateCreated datePublished" datetime="2025-03-09T08:58:55+08:00">2025-03-09</time>
+      <time title="创建时间：2025-03-09 08:58:55" itemprop="dateCreated datePublished" datetime="2025-03-09T08:58:55+08:00">2025-03-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-03-10 16:26:27" itemprop="dateModified" datetime="2025-03-10T16:26:27+08:00">2025-03-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -269,14 +292,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>3.4k</span>
+      <span>8.7k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>13 分钟</span>
+      <span>31 分钟</span>
     </span>
 </div>
 
@@ -288,19 +311,18 @@
     
     
     <div class="post-body" itemprop="articleBody"><h1 id="一使用redis实现登录校验">一、使用Redis实现登录校验</h1>
-<p>​
-主要验证是校验码验证和密码验证，我觉得可以这样设计，把验证码存入到Redis中，用户信息使用JWT生成对应的token，然后将JWT生成的token存入到Redis中（替代直接将用户信息存入Redis中），这样可以减少Redis的内存负担。具体流程图如下方所示，</p>
-<p>​
-下图的具体做法是将用户的信息采用JWT进行加密保存了，出于安全考虑，我觉得对于前端页面上用户的基本信息可以使用JWT存储，这样在解析的时候也会比去Redis中再获取一次要快。但是对于用户一些常用的敏感信息，我觉得还是有必要放在Redis中的。</p>
-<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309103254.png" style="zoom:50%;" /></p>
+<p> 
+主要验证是校验码验证和密码验证，我觉得可以这样设计，把验证码存入到Redis中，用户信息使用JWT生成对应的token，然后将JWT生成的token存入到Redis中（替代直接将用户信息存入Redis中），这样可以减少Redis的内存负担。具体流程图如下方所示，<br />
+ 
+下图的具体做法是将用户的信息采用JWT进行加密保存了，出于安全考虑，我觉得对于前端页面上用户的基本信息可以使用JWT存储，这样在解析的时候也会比去Redis中再获取一次要快。但是对于用户一些常用的敏感信息，我觉得还是有必要放在Redis中的。
+<img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309103254.png" style="zoom:50%;" /></p>
 <h1 id="二缓存">二、缓存</h1>
-<p>使用缓存主要会存在几种问题：缓存雪崩，缓存击穿，缓存穿透。</p>
-<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309110729.png" style="zoom:50%;" /></p>
+<p>使用缓存主要会存在几种问题：缓存雪崩，缓存击穿，缓存穿透。
+<img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309110729.png" style="zoom:50%;" /></p>
 <h2 id="缓存雪崩">1、 缓存雪崩</h2>
 <h3 id="什么是缓存雪崩">（1）什么是缓存雪崩？</h3>
-<p>​
-如果缓存在某一个时刻出现大规模key失效，那么就会导致大量的请求打在数据库上面，导致数据库压力巨大，如果高并发的情况下，可能瞬间就会导师数据库宕机。这时如果运维马上又重启数据库，马上又会有新的流量把数据库打死，这就是缓存雪崩。</p>
-<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309203618.png" style="zoom:70%;" /></p>
+<p>如果缓存在某一个时刻出现大规模key失效，那么就会导致大量的请求打在数据库上面，导致数据库压力巨大，如果高并发的情况下，可能瞬间就会导师数据库宕机。这时如果运维马上又重启数据库，马上又会有新的流量把数据库打死，这就是缓存雪崩。
+<img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309203618.png" style="zoom:70%;" /></p>
 <h3 id="问题分析">（2）问题分析：</h3>
 <p>存在这种情况的问题所在：</p>
 <ul>
@@ -312,9 +334,9 @@
 <ol type="1">
 <li><p>均匀过期：设置不同的过期时间，让缓存失效的时间尽量均匀，避免相同的过期时间导致缓存雪崩，造成大量数据库的访问</p></li>
 <li><p>分级缓存：第一级缓存失效的基础上，访问二级缓存，每一级缓存的失效时间都不相同</p></li>
-<li><p>热点数据永远不过期。</p>
+<li><p>热点数据永远不过期</p>
 <blockquote>
-<p>永不过期实际包含两层意思：</p>
+永不过期实际包含两层意思：
 <ul>
 <li>物理不过期：针对热点key不设置过期时间</li>
 <li>逻辑过期：把过期时间存在key对应的value中，如果发现要过期了，通过一个后台的异步线程进行缓存的构建。</li>
@@ -329,38 +351,38 @@
 <li>使用熔断机制，限流降级。当流量达到一定的阈值，直接返回“系统繁忙”之类的提示，防止过多的请求打在数据库上将数据库击垮，至少能保证一部分用户是可以正常使用，其他用户多刷新几次也能得到结果</li>
 </ol>
 <h4 id="事后">&lt;3&gt; 事后：</h4>
-<p>开启Redis持久化机制，尽快回复缓存数据，一旦重启，就能从磁盘上自动加载数据恢复内存中的数据。</p>
+<p> 
+开启Redis持久化机制，尽快回复缓存数据，一旦重启，就能从磁盘上自动加载数据恢复内存中的数据。</p>
 <h2 id="缓存击穿">2、缓存击穿</h2>
 <h3 id="什么是缓存击穿">（1）什么是缓存击穿</h3>
-<p>​
+<p> 
 缓存击穿跟缓存雪崩有点类似，缓存雪崩是大规模的key失效，而缓存击穿则是某个热点key失效，大规模并发对其进行请求，就会导致大量请求读缓存读取不到数据，从而导致大规模请求直接打到数据库，引起数据库压力剧增，这就是缓存击穿。</p>
 <p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309135734.png" style="zoom:70%;" /></p>
 <h3 id="问题分析-1">（2）问题分析</h3>
-<p>​
+<p> 
 关键在于某个热点key失效了，导致大并发集中打在数据库上。所以要从两个方面解决。第一是否可以考虑热点key不设置过期时间，第二是否可以考虑降低打在数据库上的请求数量</p>
 <h3 id="解决方案-1">（3）解决方案</h3>
 <h4 id="互斥锁或者队列">&lt;1&gt; 互斥锁或者队列</h4>
-<p>​
-在缓存失效后，通过<strong>互斥锁或者队列</strong>来控制读数据写缓存的线程数量</p>
-<h4 id="永不过期">&lt;2&gt; 永不过期</h4>
-<p>​ 热点数据缓存<strong>永不过期</strong></p>
+<p> 
+在缓存失效后，通过<strong>互斥锁或者队列</strong>来控制读数据写缓存的线程数量
+#### &lt;2&gt; 永不过期   热点数据缓存<strong>永不过期</strong></p>
 <h2 id="缓存穿透">3、缓存穿透</h2>
 <h3 id="什么是缓存穿透">（1）什么是缓存穿透</h3>
-<p>​
+<p> 
 缓存穿透是指用户请求的数据在<strong>缓存中不存在</strong>，即读请求时没有命中缓存，同时<strong>数据库也不存在该数据</strong>。导致用户每次请求该数据都要去数据库查询一遍。如果有恶意攻击者不断请求系统中不存在的数据，会导致短时间内大量请求直接打在数据库上，造成数据库压力过大，甚至导致数据库承受不住而宕机崩溃。</p>
 <p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309135630.png" style="zoom:70%;" /></p>
 <h3 id="问题分析-2">（2）问题分析</h3>
-<p>​
+<p> 
 缓存穿透的关键在于在Redis中查不到key值。一般导致缓存穿透主要有两种情况：一个是业务误操作，删除了数据库和redis中的缓存；另外一个是黑客恶意攻击。假如有黑客传进大量的不存在key，那么大量的请求打在数据库上是很致命的问题。所以在日常开发中要对参数做好校验，一些非法参数，不可能存在的key就直接返回错误提示。</p>
 <h3 id="解决方案-2">（3）解决方案</h3>
 <h4 id="非法请求的限制">&lt;1&gt; 非法请求的限制</h4>
-<p>​
+<p> 
 在API入口处判断请求参数是否合理，请求参数是否含有非法值，请求字段是否存在，如果判断出是恶意请求则直接返回错误，避免进一步访问缓存和数据库</p>
 <h4 id="将无效key存放在redis中">&lt;2&gt; 将无效key存放在Redis中</h4>
-<p>​
+<p> 
 当出现Redis查不到数据，数据库也查不到数据的情况，则把这个key保存到Redis中，这是value=“null”，并设置其过期时间极短，后面再出现查询这个key的请求的时候，直接返回null，不再需要查询数据库。但该方法存在一定的问题，假如传进来的不存在的key每次都是随机的，那存入Redis也没有意义</p>
 <h4 id="使用布隆过滤器">&lt;3&gt; 使用布隆过滤器</h4>
-<p>​
+<p> 
 在缓存之前再加一个布隆过滤器，将数据库中的所有key都存储在布隆过滤器中，在查询Redis前先去布隆过滤器查询key是否存在，如果不存在就直接返回，不让其访问数据库，从而避免了对底层存储系统的查询压力。</p>
 <blockquote>
 <p>什么是布隆过滤器？</p>
@@ -378,6 +400,20 @@
 </blockquote>
 <h2 id="汇总">汇总</h2>
 <p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309181748.png" style="zoom:80%;" /></p>
+<h2 id="缓存预热">4、缓存预热</h2>
+<h3 id="什么是缓存预热">（1）什么是缓存预热</h3>
+<p> 
+缓存预热是指系统上线后，提前将相关的缓存数据加载到缓存系统。避免在用户请求的时候，先查询数据库，再将数据缓存的问题，用户可以直接查询事先被预热的缓存数据。若不进行预热，则Redis初始状态数据为空，系统上线初期，对于高并发的流量，都会访问到数据库中，对数据库造成流量的压力。</p>
+<h3 id="缓存预热实现方案">（2）缓存预热实现方案</h3>
+<ul>
+<li>数据量不大时，工程启动的时候进行加载缓存动作</li>
+<li>数据量大时，设置一个定时任务脚本，进行缓存的刷新</li>
+<li>数据量非常大时，优先保证热点数据进行提前加载到缓存</li>
+</ul>
+<h2 id="缓存降级">5、缓存降级</h2>
+<p> 
+缓存降级指缓存失效或缓存服务器挂掉的情况下，不去访问数据库，直接返回默认数据或访问服务的内存数据。降级一般时有损的操作，所以尽量减少降级对业务的影响程度。
+在项目实战中，通常会将部分热点数据缓存到服务的内存中，这样一旦缓存出现异常，可以直接使用服务的内存数据，从而避免数据库遭受巨大压力。</p>
 <h1 id="三数据库缓存保持一致性">三、数据库缓存保持一致性</h1>
 <blockquote>
 <p>先说结论：大多数业务采用的都是【先更新数据库，再删除缓存】的 Cache
@@ -385,7 +421,7 @@ Aside（旁路缓存）策略，同时给缓存设定过期时间，防止在第
 <p>若业务对缓存命中率有很高的要求，则可以采用【先更新数据库，再更新缓存】的方案，因为主动更新缓存可以减少缓存未命中的情况</p>
 </blockquote>
 <h2 id="先更新数据库还是先更新缓存">1、先更新数据库还是先更新缓存</h2>
-<p>​
+<p> 
 <strong>都不可行。</strong>无论是【先更新数据库，再更新缓存】，还是【先更新缓存，再更新数据库】，这两个方案都存在并发问题，当两个请求并发更新同一条数据的时候，可能出现数据库和缓存中的数据不一致的情况。常见的缓存更新策略主要有三种：Cache
 Aside（旁路缓存）策略；Read/Write Through（读穿 / 写穿）策略；Write
 Back（写回）策略；</p>
@@ -393,7 +429,7 @@ Back（写回）策略；</p>
 <p>但在实际开发中，Redis和MySQL的更新策略用的是Cache
 Aside策略，另外两种主要是用在操作系统中。</p>
 <h2 id="cache-aside旁路缓存策略">2、 Cache Aside（旁路缓存）策略</h2>
-<p>​
+<p> 
 先更新数据库数据，然后不更新缓存，直接删除缓存中的数据。等客户端要读取数据时，发现缓存中没有，再从数据库中读取数据放到缓存中。</p>
 <p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309203658.png" style="zoom:50%;" /></p>
 <h3 id="写策略">（1）写策略</h3>
@@ -407,17 +443,17 @@ Aside策略，另外两种主要是用在操作系统中。</p>
 <li>如果读取的数据未命中缓存，则直接读取数据库中的数据，再将数据放入缓存。</li>
 </ul>
 <h2 id="先更新数据库还是先删缓存">2.1 先更新数据库还是先删缓存</h2>
-<p>​
-先说结论，<strong>先更新数据库，再删缓存</strong>。理论上来说，无论是【先更新数据库，再删除缓存】，还是【先删除缓存，再更新数据库】都会导致数据库与缓存数据不一致的问题。但为什么还是推崇【先更新数据库，再删除缓存】呢？</p>
-<p>​
+<p> 
+先说结论，<strong>先更新数据库，再删缓存</strong>。理论上来说，无论是【先更新数据库，再删除缓存】，还是【先删除缓存，再更新数据库】都会导致数据库与缓存数据不一致的问题。但为什么还是推崇【先更新数据库，再删除缓存】呢？
+ 
 主要原因还是在【先更新数据库，再更新缓存】出现数据库与缓存数据不一致的情况较少。因为缓存的写入通常要远远快于数据库的写入。具体例子参考：<a
 target="_blank" rel="noopener" href="https://xiaolincoding.com/redis/architecture/mysql_redis_consistency.html#%E5%85%88%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE%E5%BA%93-%E8%BF%98%E6%98%AF%E5%85%88%E5%88%A0%E9%99%A4%E7%BC%93%E5%AD%98">小林coding</a></p>
 <h2 id="readwrite-through读穿-写穿策略">3、 Read/Write Through（读穿 /
 写穿）策略</h2>
-<p>​ Read / Write
+<p>  Read / Write
 Through（读穿/写穿）策略原则是应用程序只和缓存交互，不再和数据库交互，而是有缓存和数据库交互，相当于更新数据库的操作由缓存自己代理了。</p>
 <h3 id="read-through">（1）Read Through</h3>
-<p>​
+<p> 
 先查询缓存中数据是否存在，如果存在则直接返回；如果不存在，则由缓存组件负责从数据库查询数据，并将结果写入到缓存组件，最后缓存组件将数据返回给应用</p>
 <h3 id="write-through">（2）Write Through</h3>
 <p>当有数据更新的时候，先查询要写入的数据在缓存中是否已经存在：</p>
@@ -426,12 +462,12 @@ Through（读穿/写穿）策略原则是应用程序只和缓存交互，不再
 <li>如果缓存中数据不存在，则直接更新数据库，然后返回。</li>
 </ul>
 <h2 id="write-back写回策略">4、Write Back（写回）策略</h2>
-<p>​ Write
+<p>  Write
 Back（写回）策略在更新数据的时候，只更新缓存，同时将缓存数据设置为脏的，然后立马返回，并不会更新数据库。对于数据库的更新，会通过批量异步更新的方式进行。【主要用于操作系统】</p>
 <h2 id="小结">5、小结</h2>
 <h3
 id="使用先删除缓存再更新数据库">（1）使用【先删除缓存，再更新数据库】</h3>
-<p>​ 针对【先删除缓存，再更新数据库】方案在【读 +
+<p>  针对【先删除缓存，再更新数据库】方案在【读 +
 写】并发请求而造成缓存不一致的解决办法是<strong>【延迟双删】</strong>。就是等更新数据库的线程更新完数据库之后先睡眠一段时间，然后再删一次缓存，可以避免由于高并发使缓存中放入脏数据。但是这个睡眠时间需要大于另外一个读取数据的时间（查数据库
 + 将数据放入缓存）。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除缓存</span></span><br><span class="line">redis.delKey(X)</span><br><span class="line"><span class="comment"># 更新数据库		</span></span><br><span class="line">db.update(X)</span><br><span class="line"><span class="comment"># 睡眠一段时间</span></span><br><span class="line">thread.sleep(N)</span><br><span class="line"><span class="comment"># 删除缓存</span></span><br><span class="line">redis.delKey(X)</span><br></pre></td></tr></table></figure>
@@ -453,7 +489,174 @@ src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309112643.png" /></p>
 <p>对于Redis的每一次写操作，都会将这次写操作追加到一个文件里。</p>
 <h1 id="五redis实现秒杀">五、Redis实现秒杀</h1>
 <h2 id="全局唯一id">1、 全局唯一id</h2>
+<p>在分布式系统中，生成全局唯一id是一个常见且重要的需求，唯一ID的生成需要满足高并发、全局唯一性和高可用性。</p>
 <h3 id="需要具备的特点">（1）需要具备的特点</h3>
+<ul>
+<li>全局唯一性：生成的ID在整个系统中必须是唯一的，避免冲突。</li>
+<li>高可用性：生成ID的服务必须具备高可用性，确保在高并发场景下不出现性能瓶颈</li>
+<li>有序性：在某些场景下，需要生成的ID有一定的顺序性，以便进行排序和分析</li>
+<li>高性能：生成ID的过程需要高效，能够支持高并发请求</li>
+<li>安全性：生成ID要不容易被摸索出规律，防止网络攻击</li>
+</ul>
+<p>Redis生成全局唯一id，这是用Redis自增的方法，我们还需要拼接上其他东西，比如时间戳之类的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stringRedisTemplate.opsForValue().increment(<span class="string">&quot;icr:&quot;</span> + keyPrefix + <span class="string">&quot;:&quot;</span> + date);	</span><br></pre></td></tr></table></figure>
+<h2 id="超卖问题">2、超卖问题</h2>
+<h3 id="问题描述">（1）问题描述</h3>
+<p> 
+一般电子商务网站都会遇到如团购、秒杀、特价之类的活动，而这样的活动有一个共同的特点就是访问量激增、上千甚至上万人抢购一个商品。然而，作为活动商品，库存肯定是很有限的，如何控制库存不让出现超买，以防止造成不必要的损失是最基本的问题。</p>
+<h3 id="产生原因">（2）产生原因</h3>
+<p> 
+在多个用户同时发起对同一个商品的下单请求时，先查询商品库存，再修改商品库存，会出现资源竞争问题，导致库存的最终结果出现异常。问题：
+当商品A一共有库存15件，用户甲先下单10件，用户乙下单8件，这时候库存只能满足一个人下单成功，如果两个人同时提交，就出现了超卖的问题。</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310094729.png" style="zoom:67%;" /></p>
+<h3 id="解决方案-3">（3） 解决方案</h3>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310095101.png" style="zoom: 60%;"></p>
+<h4 id="悲观锁">【1】 悲观锁</h4>
+<p> 
+悲观锁可以实现对于数据的串行化执行，比如syn，和lock都是悲观锁的代表，同时，悲观锁中又可以再细分为公平锁，非公平锁，可重入锁</p>
+<h4 id="乐观锁">【2】 乐观锁</h4>
+<p> 会有一个版本号，每次操作数据会对版本号+1，再提交回数据时，会去校验是否比之前的版本大1
+，如果大1
+，则进行操作成功，这套机制的核心逻辑在于，如果在操作过程中，版本号只比原来大1
+，那么就意味着操作过程中没有人对他进行过修改，他的操作就是安全的，如果不大1，则数据被修改过，当然乐观锁还有一些变种的处理方式比如cas.</p>
+<p> 乐观锁的典型代表：就是cas，利用cas进行无锁化机制加锁，var5
+是操作前读取的内存值，while中的var1+var2 是预估值，如果预估值 ==
+内存值，则代表中间没有被人修改过，此时就将新值去替换 内存值。 其中do
+while
+是为了在操作失败时，再次进行自旋操作，即把之前的逻辑再操作一次。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> var5;</span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    var5 = <span class="built_in">this</span>.getIntVolatile(var1, var2);</span><br><span class="line">&#125; <span class="keyword">while</span>(!<span class="built_in">this</span>.compareAndSwapInt(var1, var2, var5, var5 + var4));</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> var5;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>CAS一般是Java虚拟机在实现JUC的时候使用的，Java在UnSafe文件中编写了很多直接调用系统底层函数的功能方法，该类中就实现了CAS。</p>
+<p>对于一般的超卖问题，主流方法还是使用乐观锁或者基于Redis的lua脚本进行解决</p>
+</blockquote>
+<h3 id="衍生改良">（4）衍生改良</h3>
+<h4 id="问题">【1】问题：</h4>
+<p> 对于电商的超卖问题，如果只是简单让程序在扣减库存时，判断库存与操作前的数值是否一致，会导致其他大量并发操作失败。比如现在有100个进程打进来，查询到剩余的库存都是1000个，经过一顿操作后，现在要执行扣减库存的操作。此时我们采用了乐观锁进行更新，如下代码所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update table set 库存 = 库存 - 1 where id = 1 and 库存 = 1000</span><br></pre></td></tr></table></figure>
+<p> 如果更新方式如上所述，那么程序在运行时，因为我们的程序并没有像CAS那样子实现自旋操作，所以这打进来的100个进程就只有一个会成功。这对用户的使用体验是非常不好的。</p>
+<h4 id="解决">【2】解决：</h4>
+<p>我们需要改良一下数据库的执行操作，对于库存而言，只要库存大于0，我们就能卖。所以，没必要每个线程更新时都要确保当前库存跟操作前的库存一样，于是可以调整代码成：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update table set 库存 = 库存 - 1 where id = 1 and 库存 &gt; 0</span><br></pre></td></tr></table></figure>
+<h2 id="一人一单">3、一人一单</h2>
+<h3 id="问题描述-1">（1）问题描述</h3>
+<p>  很多时候有些商家要拿出一部分好用且贵重的产品来做促销引流，而将该物品进行低价售出，此时为了防止有人恶意低买高卖以及保证引流的效果，我们要保证一个用户只能买一次，也就一人一单.</p>
+<h3 id="产生原因-1">（2）产生原因</h3>
+<p> 一人一单的实现步骤是在原来下单逻辑的判断库存是否足够之后去查询数据库看是否该用户的是否已经存在订单，如果存在则不能下单成功，如果不存在则继续下单。</p>
+<p> 由于该物品的特殊性，当开始秒杀时的并发量是极高的，这就会产生这样的问题，多个线程查询库存后判断该用户是否存已经存在订单时，此时这些线程都没有查询到订单信息说明该用户未下过单，让这些线程进行后续下单操作，但是在查询后有线程下单成功了，但是其他线程已经判断为未下过单，还在进行后续的下单操作，这就导致一个用户下单好几次</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310134922.png" style="zoom:50%;" /></p>
+<h3 id="解决方案-4">（3）解决方案</h3>
+<p>【1】解决一</p>
+<p> 可以将上述的<strong>查询是否下过单与后续的库存扣减操作进行加锁</strong>。但在加锁时需要控制好锁的粒度。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">synchronized</span> Result <span class="title function_">createVoucherOrder</span><span class="params">(Long voucherId)</span> &#123;</span><br><span class="line">	<span class="comment">// 查询是否已经下单</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 扣减库存</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>【2】问题一</p>
+<p> 如果给方法加锁，对于每一个用户进程，进入程序时都需要进行锁竞争，这样对导致同一时间只有一个用户的进程可以执行操作，直接把并发执行变成了用户排队执行（串行执行）</p>
+<p>【3】解决二</p>
+<p> 一人一单的线程安全问题，其实是单个用户在同一时间触发了多个线程访问的问题，所以我们加锁的粒度可以针对单个用户进行加锁，那么，我们可以获取用户id，对用户id进行加锁。需要注意的时，用户id是一个String的字符串变量，如果我们直接使用userId.toString()
+他拿到的对象实际上是不同的对象，new出来的对象，我们使用锁必须保证锁必须是同一把，所以我们需要使用intern()方法。我们的代码就可以修改成如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactionl</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">createVoucherOrder</span><span class="params">(Long userId)</span> &#123;</span><br><span class="line">    <span class="keyword">synchronized</span>(userId.toString().intern())&#123;</span><br><span class="line">        <span class="comment">// 查询是否已经下单</span></span><br><span class="line"> </span><br><span class="line">        <span class="comment">// 扣减库存</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>【4】问题二</p>
+<p>  上述加锁在很大程度上保证了一人一单的线程安全问题，但是还有一种情况，就是上述我们提到的线程1进行操作后把锁释放了，但是事务还没提交也就是数据库中已下单还没有订单信息，此时线程2获取到了锁，查询数据库中是否存在订单信息时没有查询到，于是又去进行了扣减库存操作，此时该用户一个人又下了多单。</p>
+<p>【5】解决三</p>
+<p>  上述问题产生的原因是，锁释放在事务提交之前。我们需要做的就是保证锁释放在事务提交之后，我们可以将加锁的位置进行修改，在调用该方法的地方进行加锁。修改后的代码如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">(Long userId)</span> &#123;</span><br><span class="line">    <span class="comment">// 查询库存判断是否足够</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment">// 查询是否已下单与扣减库存</span></span><br><span class="line">    <span class="keyword">synchronized</span>(userId.toString().intern())&#123;</span><br><span class="line">        createVoucherOrder</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@Transactionl</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">createVoucherOrder</span><span class="params">(Long userId)</span> &#123;</span><br><span class="line">    <span class="comment">// 查询是否已经下单</span></span><br><span class="line"> </span><br><span class="line">     <span class="comment">// 扣减库存</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="分布式问题">（4）分布式问题</h3>
+<p> 上述悲观锁解决思路可以解决单机环境下的线程安全问题，但是在集群模式下就不行了，在不同的服务器进行部署该服务时，由于不同服务器有着不同的JVM，其线程锁的监视器也不同，所以加锁不能解决集群环境下的安全问题</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310141541.png" style="zoom:50%;" /></p>
+<h2 id="分布式锁">4、分布式锁</h2>
+<h3 id="基本原理">（1）基本原理</h3>
+<p> 分布式锁：满足分布式系统或集群模式下多进程可见并且互斥的锁。分布式锁需要具备多进程可见、互斥、高可用、高性能、安全性等特点。分布式锁的核心思想是让各个服务器使用同一把锁，只要使用的都是同一把锁，就能锁住线程，不让线程执行。</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310141854.png" style="zoom:50%;" /></p>
+<h3 id="基本方法">（2）基本方法</h3>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310142616.png" style="zoom:67%;" /></p>
+<h3 id="实现代码">（3）实现代码</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取锁</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String KEY_PREFIX=<span class="string">&quot;lock:&quot;</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">tryLock</span><span class="params">(<span class="type">long</span> timeoutSec)</span> &#123;</span><br><span class="line">    <span class="comment">// 获取线程标示</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">threadId</span> <span class="operator">=</span> Thread.currentThread().getId()</span><br><span class="line">    <span class="comment">// 获取锁，并设置超时时间，防止死锁</span></span><br><span class="line">    <span class="type">Boolean</span> <span class="variable">success</span> <span class="operator">=</span> stringRedisTemplate.opsForValue()</span><br><span class="line">            .setIfAbsent(KEY_PREFIX + name, threadId + <span class="string">&quot;&quot;</span>, timeoutSec, TimeUnit.SECONDS);</span><br><span class="line">    <span class="keyword">return</span> Boolean.TRUE.equals(success);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 释放锁</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">unlock</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">//通过del删除锁</span></span><br><span class="line">    stringRedisTemplate.delete(KEY_PREFIX + name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="存在问题">（4）存在问题</h3>
+<h4 id="redis分布式锁误删">【1】Redis分布式锁误删</h4>
+<p><strong>问题：</strong>持有锁的线程在锁的内部出现了阻塞，导致他的锁自动释放，这时其他线程，线程2来尝试获得锁，就拿到了这把锁，然后线程2在持有锁执行过程中，线程1反应过来，继续执行，而线程1执行过程中，走到了删除锁逻辑，此时就会把本应该属于线程2的锁进行删除，这就是误删别人锁的情况说明。</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310143057.png" style="zoom:50%;" /></p>
+<p><strong>解决方案：</strong>在每个线程释放锁的时候，去判断一下当前这把锁是否属于自己，如果属于自己，则不进行锁的删除，假设还是上边的情况，线程1卡顿，锁自动释放，线程2进入到锁的内部执行逻辑，此时线程1反应过来，然后删除锁，但是线程1，一看当前这把锁不是属于自己，于是不进行删除锁逻辑，当线程2走到删除锁逻辑时，如果没有卡过自动释放锁的时间点，则判断当前这把锁是属于自己的，于是删除这把锁。</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310143251.png" style="zoom:50%;" /></p>
+<p><strong>实现代码：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加锁</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">ID_PREFIX</span> <span class="operator">=</span> UUID.randomUUID().toString(<span class="literal">true</span>) + <span class="string">&quot;-&quot;</span>;</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">tryLock</span><span class="params">(<span class="type">long</span> timeoutSec)</span> &#123;</span><br><span class="line">   <span class="comment">// 获取线程标示</span></span><br><span class="line">   <span class="type">String</span> <span class="variable">threadId</span> <span class="operator">=</span> ID_PREFIX + Thread.currentThread().getId();</span><br><span class="line">   <span class="comment">// 获取锁</span></span><br><span class="line">   <span class="type">Boolean</span> <span class="variable">success</span> <span class="operator">=</span> stringRedisTemplate.opsForValue()</span><br><span class="line">                .setIfAbsent(KEY_PREFIX + name, threadId, timeoutSec, TimeUnit.SECONDS);</span><br><span class="line">   <span class="keyword">return</span> Boolean.TRUE.equals(success);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 释放锁</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">unlock</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// 获取线程标示</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">threadId</span> <span class="operator">=</span> ID_PREFIX + Thread.currentThread().getId();</span><br><span class="line">    <span class="comment">// 获取锁中的标示</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">id</span> <span class="operator">=</span> stringRedisTemplate.opsForValue().get(KEY_PREFIX + name);</span><br><span class="line">    <span class="comment">// 判断标示是否一致</span></span><br><span class="line">    <span class="keyword">if</span>(threadId.equals(id)) &#123;</span><br><span class="line">        <span class="comment">// 释放锁</span></span><br><span class="line">        stringRedisTemplate.delete(KEY_PREFIX + name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="分布式锁原子性问题">【2】分布式锁原子性问题</h4>
+<p><strong>问题：</strong>线程1现在持有锁之后，在执行业务逻辑过程中，他正准备删除锁，而且已经走到了条件判断的过程中，比如他已经拿到了当前这把锁确实是属于他自己的，正准备删除锁，但是此时他的锁到期了，那么此时线程2进来，但是线程1他会接着往后执行，当他卡顿结束后，他直接就会执行删除锁那行代码，相当于条件判断并没有起到作用，这就是删锁时的原子性问题，之所以有这个问题，是因为线程1的拿锁，比锁，删锁，实际上并不是原子性的，我们要防止刚才的情况发生。</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310143500.png" style="zoom:50%;" /></p>
+<p><strong>解决方案：</strong>那就是使用Redis提供的Lua脚本，把<strong>判断锁和释放锁变成一个原子操作</strong></p>
+<p>实现代码：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- &lt; unlick.lua &gt;</span></span><br><span class="line"><span class="comment">-- 这里的 KEYS[1] 就是锁的key，这里的ARGV[1] 就是当前线程标示</span></span><br><span class="line"><span class="comment">-- 获取锁中的标示，判断是否与当前线程标示一致</span></span><br><span class="line"><span class="keyword">if</span> (redis.call(<span class="string">&#x27;GET&#x27;</span>, KEYS[<span class="number">1</span>]) == ARGV[<span class="number">1</span>]) <span class="keyword">then</span></span><br><span class="line">  <span class="comment">-- 一致，则删除锁</span></span><br><span class="line">  <span class="keyword">return</span> redis.call(<span class="string">&#x27;DEL&#x27;</span>, KEYS[<span class="number">1</span>])</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">-- 不一致，则直接返回</span></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 释放锁</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> DefaultRedisScript&lt;Long&gt; UNLOCK_SCRIPT;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        UNLOCK_SCRIPT = <span class="keyword">new</span> <span class="title class_">DefaultRedisScript</span>&lt;&gt;();</span><br><span class="line">        UNLOCK_SCRIPT.setLocation(<span class="keyword">new</span> <span class="title class_">ClassPathResource</span>(<span class="string">&quot;unlock.lua&quot;</span>));</span><br><span class="line">        UNLOCK_SCRIPT.setResultType(Long.class);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">unlock</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// 调用lua脚本</span></span><br><span class="line">    stringRedisTemplate.execute(</span><br><span class="line">            UNLOCK_SCRIPT,</span><br><span class="line">            Collections.singletonList(KEY_PREFIX + name),</span><br><span class="line">            ID_PREFIX + Thread.currentThread().getId());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="分布式锁--redission">5、分布式锁--Redission</h2>
+<h3 id="引言">（1）引言</h3>
+<p>基于setnx实现的分布式锁存在下面的问题：</p>
+<p><strong>重入问题</strong>：重入问题是指
+获得锁的线程可以再次进入到相同的锁的代码块中，可重入锁的意义在于防止死锁，比如HashTable这样的代码中，他的方法都是使用synchronized修饰的，假如他在一个方法内，调用另一个方法，那么此时如果是不可重入的，不就死锁了吗？所以可重入锁他的主要意义是防止死锁，我们的synchronized和Lock锁都是可重入的。</p>
+<p><strong>不可重试</strong>：是指目前的分布式只能尝试一次，我们认为合理的情况是：当线程在获得锁失败后，他应该能再次尝试获得锁。</p>
+<p><strong>超时释放：</strong>我们在加锁时增加了过期时间，这样的我们可以防止死锁，但是如果卡顿的时间超长，虽然我们采用了lua表达式防止删锁的时候，误删别人的锁，但是毕竟没有锁住，有安全隐患</p>
+<p><strong>主从一致性：</strong>
+如果Redis提供了主从集群，当我们向集群写数据时，主机需要异步的将数据同步给从机，而万一在同步过去之前，主机宕机了，就会出现死锁问题。</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310144256.png" style="zoom:50%;" /></p>
+<h3 id="什么是redission">（2）什么是Redission</h3>
+<p> Redisson是一个在Redis的基础上实现的Java驻内存数据网格（In-Memory
+Data
+Grid）。它不仅提供了一系列的分布式的Java常用对象，还提供了许多分布式服务，其中就包含了各种分布式锁的实现。Redission提供了分布式锁的多种多样的功能</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310144414.png" style="zoom: 80%;" /></p>
+<h3 id="分布式锁redisson---可重入锁原理">（3）分布式锁Redisson--
+可重入锁原理</h3>
+<blockquote>
+<p>ReentrantLock实现可重入锁原理：借助于底层的一个voaltile的一个state变量来记录重入的状态的，比如当前没有人持有这把锁，那么state=0，假如有人持有这把锁，那么state=1，如果持有这把锁的人再次持有这把锁，那么state就会+1
+。</p>
+<p>如果是对于synchronized而言，他在c语言代码中会有一个count，原理和state类似，也是重入一次就加一，释放一次就-1
+，直到减少成0 时，表示当前这把锁没有被人持有。</p>
+</blockquote>
+<p> 其实实现的原理跟ReentrantLock是一样的，都是借助计数变量，记录重入次数，实现可重入。实现原理大致是这样的：采用hash结构用来存储锁，其中大key表示表示这把锁是否存在，用小key表示当前这把锁被哪个线程持有，最终的value记录的就是重入次数。</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310145407.png" style="zoom:50%;" /></p>
+<p><strong>代码实现：</strong>Redission底层实现可重入锁，也是借助了Lua脚本实现的，这样可以保证其执行的原子性。</p>
+<p>——加锁实现代码：</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310151049.png" style="zoom: 67%;" /></p>
+<p>——释放锁实现代码：</p>
+<p><img src="C:\Users\28778\AppData\Roaming\Typora\typora-user-images\image-20250310151231363.png" alt="image-20250310151231363" style="zoom:67%;" /></p>
+<h3 id="分布式锁ression-锁重试和watchdog机制">（4）分布式锁Ression ——
+锁重试和WatchDog机制</h3>
+<blockquote>
+<p>获取锁失败，就会启动【锁重试】机制，不断询问锁是否释放。
+获取锁成功，就会启动【WatchDog机制】，保证当前线程的任务执行完成。</p>
+</blockquote>
+<h4 id="原理">【1】原理</h4>
+<figure>
+<img
+src="C:\Users\28778\AppData\Roaming\Typora\typora-user-images\image-20250310154856560.png"
+alt="image-20250310154856560" />
+<figcaption aria-hidden="true">image-20250310154856560</figcaption>
+</figure>
+<h4 id="源码解析">【2】源码解析</h4>
+<blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="title function_">tryLock</span><span class="params">(<span class="type">long</span> waitTime, <span class="type">long</span> leaseTime, TimeUnit unit)</span></span><br></pre></td></tr></table></figure>
+<p>waitTime –
+获取锁的最大等待时间，<strong>不设置就只尝试获取锁一次，不会重试</strong>
+leaseTime –
+租约时间，约定使用锁时间，到期锁自动释放。不设定则会自动采用看门狗机制，自动续费
+unit – 时间单位</p>
+</blockquote>
+<p>①
+抢锁过程中，获得当前线程，通过tryAcquire进行抢锁，该抢锁逻辑和之前逻辑相同</p>
+<p>1、先判断当前这把锁是否存在，如果不存在，插入一把锁，返回null</p>
+<p>2、判断当前这把锁是否是属于当前线程，如果是，则返回null</p>
+<p>所以如果返回是null，则代表着当前这线程已经抢锁完毕，或者可重入完毕。但是如果以上两个条件都不满足，则进入到第三个条件，返回的是锁的失效时间，可以发现有个while(
+true) 再次进行tryAcquire进行抢锁。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> <span class="variable">threadId</span> <span class="operator">=</span> Thread.currentThread().getId();</span><br><span class="line"><span class="type">Long</span> <span class="variable">ttl</span> <span class="operator">=</span> tryAcquire(waitTime, leaseTime, unit, threadId);</span><br><span class="line"><span class="comment">// lock acquired</span></span><br><span class="line"><span class="keyword">if</span> (ttl == <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>② tryAcquire中有条件分支，如果 leaseTime 为
+-1，则表示不设定租锁时间，也就是这把锁得借到当前进程执行完成后才能释放。那Redission是怎么实现的呢？Redission也是照常会去获取锁，有所区别的是，如果不设定租锁时间(leaseTime)，那么Redission
+会启动看门狗机制，自动延长租锁时间。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> &lt;T&gt; RFuture&lt;Long&gt; <span class="title function_">tryAcquireAsync</span><span class="params">(<span class="type">long</span> waitTime, <span class="type">long</span> leaseTime, TimeUnit unit, <span class="type">long</span> threadId)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (leaseTime != -<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="comment">// 设定了租锁时间，那就将其设置为借锁的时间，到期锁自动释放</span></span><br><span class="line">        <span class="keyword">return</span> tryLockInnerAsync(waitTime, leaseTime, unit, threadId, RedisCommands.EVAL_LONG);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 不设置，就启用看门狗机制</span></span><br><span class="line">    RFuture&lt;Long&gt; ttlRemainingFuture = tryLockInnerAsync(waitTime,</span><br><span class="line">                                                         commandExecutor.getConnectionManager().getCfg().getLockWatchdogTimeout(),</span><br><span class="line">                                                         TimeUnit.MILLISECONDS, threadId, RedisCommands.EVAL_LONG);</span><br><span class="line">    ttlRemainingFuture.onComplete((ttlRemaining, e) -&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span> (e != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// lock acquired</span></span><br><span class="line">        <span class="keyword">if</span> (ttlRemaining == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="comment">// 看门狗机制刷新租锁时间</span></span><br><span class="line">            scheduleExpirationRenewal(threadId);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> ttlRemainingFuture;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>③
+看门狗逻辑：因为【看门狗机制】锁的失效时间是30s，当10s之后，此时这个timeTask
+就触发了，他就去进行续约，把当前这把锁续约成30s，如果操作成功，那么此时就会递归调用自己，再重新设置一个timeTask()，于是再过10s后又再设置一个timerTask，完成不停的续约。那么假设我们的线程出现了宕机他还会续约吗？当然不会，因为没有人再去调用renewExpiration这个方法，所以等到时间之后自然就释放了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">renewExpiration</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">ExpirationEntry</span> <span class="variable">ee</span> <span class="operator">=</span> EXPIRATION_RENEWAL_MAP.get(getEntryName());</span><br><span class="line">    <span class="keyword">if</span> (ee == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="type">Timeout</span> <span class="variable">task</span> <span class="operator">=</span> commandExecutor.getConnectionManager().newTimeout(<span class="keyword">new</span> <span class="title class_">TimerTask</span>() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">(Timeout timeout)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">            <span class="type">ExpirationEntry</span> <span class="variable">ent</span> <span class="operator">=</span> EXPIRATION_RENEWAL_MAP.get(getEntryName());</span><br><span class="line">            <span class="keyword">if</span> (ent == <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">Long</span> <span class="variable">threadId</span> <span class="operator">=</span> ent.getFirstThreadId();</span><br><span class="line">            <span class="keyword">if</span> (threadId == <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            RFuture&lt;Boolean&gt; future = renewExpirationAsync(threadId);</span><br><span class="line">            future.onComplete((res, e) -&gt; &#123;</span><br><span class="line">                <span class="keyword">if</span> (e != <span class="literal">null</span>) &#123;</span><br><span class="line">                    log.error(<span class="string">&quot;Can&#x27;t update lock &quot;</span> + getName() + <span class="string">&quot; expiration&quot;</span>, e);</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">if</span> (res) &#123;</span><br><span class="line">                    <span class="comment">// reschedule itself</span></span><br><span class="line">                    renewExpiration();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, internalLockLeaseTime / <span class="number">3</span>, TimeUnit.MILLISECONDS);</span><br><span class="line">    </span><br><span class="line">    ee.setTimeout(task);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="分布式锁redission-mutilock原理">（5）分布式锁Redission ——
+MutiLock原理</h3>
+<blockquote>
+<p>解决主从一致性问题！</p>
+</blockquote>
 
     </div>
 
@@ -577,14 +780,14 @@ src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309112643.png" /></p>
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">50k</span>
+    <span title="站点总字数">56k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:03</span>
+    <span title="站点阅读时长">3:22</span>
   </span>
 </div>
 <div class="busuanzi-count">
