@@ -1472,10 +1472,41 @@ redis.conf 配置文件中的以下参数：</p>
 <p>由于Redis在写AOF文件时，是以串行的方式进行，所以对当前的写Redis的执行不会阻塞，但是后面在写AOF文件的时候一旦发生阻塞，那下一个写Redis的命令就会有阻塞风险。</p></li>
 </ul>
 <h3 id="三种写回策略">【2】三种写回策略</h3>
-<p>在介绍</p>
+<h4 id="aof写回">（1）AOF写回</h4>
+<p>在介绍AOF写回策略之前，需要先介绍一下Redis将命令写入AOF的过程。如下图所示：</p>
+<p>① Redis执行完写操作命令后，会将命令追加到
+<code>server.aof_buf</code>缓冲区；<br>②
+通过write()系统调用，将<code>aof_buf</code>
+缓冲区的数据写入到AOF文件，此时数据并没有写入到硬盘，而是拷贝到了内核缓冲区<code>page cache</code>，等待内核将数据写入硬盘;
+<br>③ 具体内核缓冲区的数据什么时候写入到硬盘。由内核决定。</p>
+<p><img src="C:\Users\28778\AppData\Roaming\Typora\typora-user-images\image-20250311141509633.png" alt="image-20250311141509633" style="zoom:50%;" /></p>
+<h4 id="三种写回策略-1">（2）三种写回策略</h4>
+<p>Redis主要有三种写回策略，如下图思维导图所示：</p>
 <p><img
 src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250311135343.png" /></p>
-<p>在介绍AOF写回策略前，需要先</p>
+<h4 id="优化局限">（3）优化局限</h4>
+<p>这3种写回策略都无法完美解决【主进程阻塞】和【减少数据丢失】的问题，因为两个问题对立，就像算法题优化时间和空间一样，有得有失。具体原因如下：</p>
+<ul>
+<li>Always
+策略，可以最大程度保证数据不丢失，但是由于它每执行一条写操作命令就同步将
+AOF 内容写回硬盘，所以是不可避免会影响主进程的性能; 【适合高可靠】</li>
+<li>No 策略，是交由操作系统来决定何时将 AOF 日志内容写回硬盘，相比于
+Always 策略性能较好但是操作系统写回硬盘的时机是不可预知的，如果 AOF
+日志内容没有写回硬盘，一旦服务器宕机，就会丢失不定数量的数据。【适合高性能】</li>
+<li>Everysec 策略的话，是折中的一种方式，避免了 Always
+策略的性能开销，也比 No
+策略更能避免数据丢失，当然如果上一秒的写操作命令日志没有写回到硬盘，发生了宕机，这一秒内的数据自然也会丢失。【折中选择】</li>
+</ul>
+<h4 id="实现原理">（4）实现原理</h4>
+<p>在查看源码时，会发现三种策略的实现都是建立在控制<code>fsync()</code>函数的调用时机。若想要应用程序向文件写入数据后，能立马将数据同步到硬盘，就可以调用<code>fsync()</code>函数，这样内核就会将内核缓冲区的数据直接写入到硬盘，等到硬盘写操作完成后，该函数才会返回</p>
+<ul>
+<li>Always策略：每次写入AOF文件数据，都会调用<code>fsync</code>函数</li>
+<li>Everysec策略：创建一个异步任务调用<code>fsync</code>函数</li>
+<li>No策略：永不调用<code>fsync</code>函数</li>
+</ul>
+<h3 id="aof重写机制">【3】AOF重写机制</h3>
+<p>其实就是压缩AOF文件，减少AOF文件中的执行代码。AOF重写机制在重写时，会读取当前Redis中的所有键值对，然后对每一个键值对用一条命令记录到【新的AOF文件】，等全部记录完成，将新的AOF文件替换掉现在的AOF文件。<br>举个栗子：加入现在王五要在redis种记录自己的名字，最开始记录名字为<code>zs</code>，发现记录错了，又改成<code>lisi</code>，结果发现还是错的，又改成<code>wangwu</code>，几番折腾，此时的AOF就需要记录3条写语句，这样很多写操作都是荣冗余的。在经过AOF重写后，AOF文件只需要保存最后一条写操作就可以。</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250311144321.png" style="zoom:67%;" /></p>
 <h1 id="五redis实现秒杀">五、Redis实现秒杀</h1>
 <h2 id="全局唯一id">1、 全局唯一id</h2>
 <p>在分布式系统中，生成全局唯一id是一个常见且重要的需求，唯一ID的生成需要满足高并发、全局唯一性和高可用性。</p>
@@ -1667,7 +1698,7 @@ src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310172219.png" /></p>
 Queue)去，我们(消费者)从快递柜里边去拿东西，这就是一个异步，如果耦合，那么这个快递员相当于直接把快递交给你，这事固然好，但是万一你不在家，那么快递员就会一直等你，这就浪费了快递员的时间，所以这种思想在我们日常开发中，是非常有必要的。</p>
 <p>这种场景在我们秒杀中就变成了：我们下单之后，利用redis去进行校验下单条件，再通过队列把消息发送出去，然后再启动一个线程去消费这个消息，完成解耦，同时也加快我们的响应速度。</p>
 <h2 id="基于list实现消息队列">2、 基于List实现消息队列</h2>
-<h3 id="实现原理">（1）实现原理</h3>
+<h3 id="实现原理-1">（1）实现原理</h3>
 <p>消息队列（Message
 Queue），字面意思就是存放消息的队列。而Redis的list数据结构是一个双向链表，很容易模拟出队列效果。</p>
 <p>队列是入口和出口不在一边，因此我们可以利用：LPUSH 结合 RPOP、或者
@@ -1680,7 +1711,7 @@ src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310213814.png" /></p>
 基于Redis的持久化机制，数据安全性有保证； ③ 可以满足消息有序性</p>
 <p>缺点：① 无法避免消息丢失； ②只支持单消费者</p>
 <h2 id="基于pubsub的消息队列">3、基于PubSub的消息队列</h2>
-<h3 id="实现原理-1">（1）实现原理</h3>
+<h3 id="实现原理-2">（1）实现原理</h3>
 <p>PubSub（发布订阅）是Redis2.0版本引入的消息传递模型。顾名思义，消费者可以订阅一个或多个channel，生产者向对应channel发送消息后，所有订阅者都能收到相关消息。</p>
 <p>SUBSCRIBE channel [channel] ：订阅一个或多个频道 PUBLISH channel msg
 ：向一个频道发送消息 PSUBSCRIBE pattern[pattern]
@@ -1814,7 +1845,7 @@ src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250311092658.png" /></p>
 <li>BITOP ：将多个BitMap的结果做位运算（与 、或、异或）</li>
 <li>BITPOS ：查找bit数组中指定范围内第一个0或1出现的位置</li>
 </ul>
-<h2 id="实现原理-2">2、实现原理</h2>
+<h2 id="实现原理-3">2、实现原理</h2>
 <p> 我们按月来统计用户签到信息，签到记录为1，未签到则记录为0。把每一个bit位对应当月的每一天，形成了映射关系。用0和1标示业务状态，这种思路就称为位图（BitMap）。这样我们就用极小的空间，来实现了大量数据的表示。Redis中是利用string类型数据结构实现BitMap，因此最大上限是512M，转换为bit则是
 2^32个bit位。</p>
 <p><img
@@ -1853,8 +1884,8 @@ href="https://juejin.cn/post/6844903785744056333#heading-0">参考文章</a></p>
         <category>Java</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>Redis</tag>
+        <tag>Java</tag>
         <tag>中间件</tag>
       </tags>
   </entry>
@@ -2507,8 +2538,8 @@ src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309203233.png" /></p>
         <category>Java</category>
       </categories>
       <tags>
-        <tag>JUC</tag>
         <tag>Java</tag>
+        <tag>JUC</tag>
         <tag>并发编程</tag>
       </tags>
   </entry>
