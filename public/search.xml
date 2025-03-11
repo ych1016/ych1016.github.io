@@ -1449,10 +1449,29 @@ id="保证先更新数据库再删除缓存成功">（2）保证【先更新数�
 <p><img
 src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309112643.png" /></p>
 <h2 id="rdb快照">1、 RDB快照</h2>
-<p>记录某一瞬间的内存数据，记录的是实际数据。</p>
-<h2 id="aof日志">2、AOF日志</h2>
 <h3 id="相关概念">【1】相关概念</h3>
 <h4 id="概念和启用">（1）概念和启用</h4>
+<p>记录某一瞬间的内存数据【全量快照】，记录的是实际全部数据。所以相比于AOF文件记录命令操作日志，RDB恢复数据的效率要高很多，因为直接将RDB文件读入内存即可。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># bgsave指令</span></span><br><span class="line">save <span class="number">900</span> <span class="number">1</span>     <span class="comment"># 900秒之内，对数据库进行了至少1次修改</span></span><br><span class="line">save <span class="number">300</span> <span class="number">10</span>		<span class="comment"># 300秒之内，对数据库进行了至少10次修改</span></span><br><span class="line">save <span class="number">60</span> <span class="number">10000</span>	<span class="comment"># 60秒之内，对数据库进行了至少10000次修改</span></span><br></pre></td></tr></table></figure>
+<p>只要满足上面条件的任意一个，就会执行bgsave。</p>
+<h4 id="使用指令">（2）使用指令</h4>
+<ul>
+<li><code>save</code>指令，使用主线程。若写入RDB文件的时间太长，会阻塞主线程</li>
+<li><code>bgsave</code>指令，使用子线程。可以避免主线程的阻塞</li>
+</ul>
+<h3 id="执行快照时数据能被修改吗">【2】执行快照时，数据能被修改吗</h3>
+<p>（1）save指令。不行，当执行save指令时，使用的是主线程生成快照，所以此时的主线程会被阻塞，然后去执行快照操作</p>
+<p>（2）bgsave指令。
+可以，bgsave使用的是子线程，主线程基本不会被阻塞。</p>
+<h3
+id="子线程如何拥有主线程相同的数据副本">【3】子线程如何拥有主线程相同的数据副本</h3>
+<p><strong>写时复制。</strong>主进程通过<code>fork</code>系统调用生成子进程。同时，操作系统会把主进程的【页表】复制一份给子进程，这个页面记录着虚拟地址和物理地址的映射关系，而不会复制物理内存，即两者的虚拟空间不同，但指向的都是同一块物理空间。当父进程或子进程在向这块物理内存发起写操作时，由于这块内存父子进程只有只读共享权限，所以CPU会触发写保护中断，然后操作系统会在【写保护中断处理函数】里进行物理内存的复制（需要注意的是这里只会复制主进程修改的物理内存数据，没修改的物理内存数据还是和子进程共享的）</p>
+<h3
+id="能否保证快照和数据库数据一致性">【4】能否保证快照和数据库数据一致性</h3>
+<p><strong>不能</strong>，快照只能保存快照执行那一刻的Redis所有数据。</p>
+<h2 id="aof日志">2、AOF日志</h2>
+<h3 id="相关概念-1">【1】相关概念</h3>
+<h4 id="概念和启用-1">（1）概念和启用</h4>
 <p>对于Redis的每一次<strong>写操作</strong>，都会将这次写操作追加到一个文件里。在Redis中AOF持久化功能默认是不开启的，需要我们修改
 redis.conf 配置文件中的以下参数：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// redis.conf</span><br><span class="line">appendonly       yes   // 表示是否开启AOF持久化（默认no，关闭）</span><br><span class="line">appendfilename   &quot;appendonly.aof&quot;   // AOF持久化文件的名称</span><br></pre></td></tr></table></figure>
@@ -1505,8 +1524,39 @@ Always 策略性能较好但是操作系统写回硬盘的时机是不可预知�
 <li>No策略：永不调用<code>fsync</code>函数</li>
 </ul>
 <h3 id="aof重写机制">【3】AOF重写机制</h3>
-<p>其实就是压缩AOF文件，减少AOF文件中的执行代码。AOF重写机制在重写时，会读取当前Redis中的所有键值对，然后对每一个键值对用一条命令记录到【新的AOF文件】，等全部记录完成，将新的AOF文件替换掉现在的AOF文件。<br>举个栗子：加入现在王五要在redis种记录自己的名字，最开始记录名字为<code>zs</code>，发现记录错了，又改成<code>lisi</code>，结果发现还是错的，又改成<code>wangwu</code>，几番折腾，此时的AOF就需要记录3条写语句，这样很多写操作都是荣冗余的。在经过AOF重写后，AOF文件只需要保存最后一条写操作就可以。</p>
+<p> 其实就是压缩AOF文件，减少AOF文件中的执行代码。AOF重写机制在重写时，会读取当前Redis中的所有键值对，然后对每一个键值s生成一条命令记录到【新的AOF文件】，等全部记录完成，将新的AOF文件替换掉现在的AOF文件。</p>
+<p> 举个栗子：假如现在王五要在redis种记录自己的名字，最开始记录名字为<code>zs</code>，发现记录错了，又改成<code>lisi</code>，结果发现还是错的，又改成<code>wangwu</code>，几番折腾，此时的AOF就需要记录3条写语句，这样很多写操作都是荣冗余的。在经过AOF重写后，AOF文件只需要保存最后一条写操作就可以。</p>
 <p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250311144321.png" style="zoom:67%;" /></p>
+<h3 id="aof-后台重写">【4】AOF 后台重写</h3>
+<h4 id="为什么是后台完成重写">（1）为什么是后台完成重写</h4>
+<p> 为什么是后台重写呢？在上文我们可以看到，Redis在写AOF的时候，都是使用了主进程，（即写Redis操作和写AOF操作都是主进程在执行）。那为什么AOF的重写需要后台执行呢？因为AOF重写，是需要从Redis中读取所有键值对，然后对再为每一个键值对生成对应的Redis写指令，写进新的AOF文件中，再替换原来的AOF文件，这个过程非常耗时，所以需要系统在后台进行，不然很容易就阻塞了实际的写Redis操作。所以Redis在进行重写的时候是<strong>由后台子进程bgrewriteaof来完成</strong>。</p>
+<h4 id="为什么是子进程">（2）为什么是子进程</h4>
+<p> 进程才是操作系统的资源分配最小单位。如果使用线程，那么多线程之间会共享内存，那么在修改共享内存数据时，需要通过加锁来保证数据的安全，这样会降低性能。而使用子进程，创建子进程时，父子进程是以<strong>只读</strong>的方式共享内存数据的。当父子进程任意一方修改了该共享内存，就会发生【写时复制】（复制的也只是要写入或者修改的部分），于是父子进程就有了独立的数据副本，而不用加锁来保证数据安全。</p>
+<h4
+id="子进程如何拥有主进程相同的数据副本">（3）子进程如何拥有主进程相同的数据副本</h4>
+<p><strong>整个过程：</strong></p>
+<p>① 主进程通过<code>fork</code>系统调用生成bgrewriteaof子进程。</p>
+<p>②
+同时，操作系统会把主进程的【页表】复制一份给子进程，这个页面记录着虚拟地址和物理地址的映射关系，而不会复制物理内存，即两者的虚拟空间不同，但指向的都是同一块物理空间。</p>
+<p>③
+当父进程或子进程在向这块物理内存发起写操作时，由于这块内存父子进程只有只读共享权限，所以CPU会触发写保护中断，然后操作系统会在【写保护中断处理函数】里进行物理内存的复制（需要注意的是这里只会复制主进程修改的物理内存数据，没修改的物理内存数据还是和子进程共享的）<br>
+同时，由于此时子进程还处于重写AOF状态，读取的是还是之前的Redis中的数据，所以当主进程完成写操作时，会导致子进程读取的Redis数据与最新的数据不一致，也就是有“脏读”的现象。对于这种现象，Redis也有应对措施。那就是将AOF重写期间，主进程执行的所有写指令，都写进<strong>AOF重写缓冲区</strong>。另外，Redi也会写一份在<strong>AOF缓冲区</strong>（这个是为了防止子进程宕机，原来的AOF也不会少在AOF重写时候的写指令）</p>
+<p>④ 等子进程重写完成时，主进程会将 AOF
+重写缓冲区的指令，追加到新的AOF文件中，然后用新的AOF文件替换原来的AOF文件，这样也就保证了AOF文件和Redis的数据一致性。</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250311201538.png" style="zoom:60%;" /></p>
+<p><strong>问题：</strong></p>
+<p>整个过程会有风险吗？有。整个过程期间会有两个阶段会导致阻塞父进程：</p>
+<ul>
+<li>创建子进程期间，由于要复制父今晨更多页表等数据结构，阻塞时间跟页表的大小有关，页表越大，阻塞时间越长</li>
+<li>创建子进程后，若子进程或者父进程修改了共享数据，就会发生写时复制，这期间会拷贝物理内存，若内存越大（会有大Key问题），自然阻塞的时间越长。</li>
+</ul>
+<h2 id="rdb和aof合体">3、RDB和AOF合体</h2>
+<h3 id="相关概念-2">【1】相关概念</h3>
+<p>即将RDB和AOF合体使用，该方法也叫做<strong>混合使用AOF日志和内存快照</strong>，也叫<strong>混合持久化</strong>。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">aof-use-rdb-preamble yes	</span><br></pre></td></tr></table></figure>
+<h3 id="过程">【2】过程</h3>
+<p>缓和持久化工作在<strong>AOF日志重写过程</strong>。<br>当开启了混合持久化，在AOF重写日志时，<code>fork</code>出来的重写子进程会先将与主线程共享的内存数据以RDB方式写入到AOF文件，然后主线程的操作命令会被记录在重写缓冲区里，重写缓冲区里的增量命令会以AOF方式写入到AOF文件，写入完成后通知主进程将新的含有RDB格式和AOF格式的AOF文件替换旧的AOF文件。</p>
+<p>换句话说，使用了混合持久化，AOF文件的前半部分时RDB格式的全量数据，后半部分时AOF格式的增量数据。</p>
 <h1 id="五redis实现秒杀">五、Redis实现秒杀</h1>
 <h2 id="全局唯一id">1、 全局唯一id</h2>
 <p>在分布式系统中，生成全局唯一id是一个常见且重要的需求，唯一ID的生成需要满足高并发、全局唯一性和高可用性。</p>
@@ -1884,8 +1934,8 @@ href="https://juejin.cn/post/6844903785744056333#heading-0">参考文章</a></p>
         <category>Java</category>
       </categories>
       <tags>
-        <tag>Redis</tag>
         <tag>Java</tag>
+        <tag>Redis</tag>
         <tag>中间件</tag>
       </tags>
   </entry>
@@ -2762,8 +2812,8 @@ File（追加文件）。Redis处理的每一个写命令都会记录在AOF文�
 data-cites="Transactional">@Transactional</span> 注解失效</h2>
 ]]></content>
       <tags>
-        <tag>Java</tag>
         <tag>后端面试</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
