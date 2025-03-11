@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"ych1016.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.21.1","exturl":false,"sidebar":{"position":"left","width_expanded":300,"width_dual_column":200,"display":"always","padding":20,"offset":200},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":7,"unescape":true,"preload":true}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="记录旺仔学习 Redis 实战与应用的笔记">
+    <meta name="description" content="记录旺仔学习 Redis 应用 笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redis实战与源码解析">
-<meta property="og:url" content="https://ych1016.github.io/2025/03/09/Java/Redis%E5%AE%9E%E6%88%98%E4%B8%8E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:title" content="Redis应用">
+<meta property="og:url" content="https://ych1016.github.io/2025/03/09/Java/Redis%E5%AE%9E%E6%88%98/index.html">
 <meta property="og:site_name" content="攻城狮-旺仔">
-<meta property="og:description" content="记录旺仔学习 Redis 实战与应用的笔记">
+<meta property="og:description" content="记录旺仔学习 Redis 应用 笔记">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309103254.png">
 <meta property="og:image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309110729.png">
@@ -48,9 +48,14 @@
 <meta property="og:image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310144414.png">
 <meta property="og:image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310145407.png">
 <meta property="og:image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310151049.png">
-<meta property="og:image" content="c:\Users\28778\AppData\Roaming\Typora\typora-user-images\image-20250310151231363.png">
+<meta property="og:image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250311140348.png">
+<meta property="og:image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310165123.png">
+<meta property="og:image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310163322.png">
+<meta property="og:image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310163403.png">
+<meta property="og:image" content="c:\Users\28778\AppData\Roaming\Typora\typora-user-images\image-20250311092621147.png">
+<meta property="og:image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250311105501.png">
 <meta property="article:published_time" content="2025-03-09T00:58:55.000Z">
-<meta property="article:modified_time" content="2025-03-10T08:26:27.860Z">
+<meta property="article:modified_time" content="2025-03-11T06:04:12.405Z">
 <meta property="article:author" content="旺仔">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="Redis">
@@ -59,13 +64,13 @@
 <meta name="twitter:image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309103254.png">
 
 
-<link rel="canonical" href="https://ych1016.github.io/2025/03/09/Java/Redis%E5%AE%9E%E6%88%98%E4%B8%8E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">
+<link rel="canonical" href="https://ych1016.github.io/2025/03/09/Java/Redis%E5%AE%9E%E6%88%98/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ych1016.github.io/2025/03/09/Java/Redis%E5%AE%9E%E6%88%98%E4%B8%8E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/","path":"2025/03/09/Java/Redis实战与源码解析/","title":"Redis实战与源码解析"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ych1016.github.io/2025/03/09/Java/Redis%E5%AE%9E%E6%88%98/","path":"2025/03/09/Java/Redis实战/","title":"Redis应用"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Redis实战与源码解析 | 攻城狮-旺仔</title>
+<title>Redis应用 | 攻城狮-旺仔</title>
   
 
 
@@ -166,10 +171,10 @@
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E4%BD%BF%E7%94%A8redis%E5%AE%9E%E7%8E%B0%E7%99%BB%E5%BD%95%E6%A0%A1%E9%AA%8C"><span class="nav-text">一、使用Redis实现登录校验</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E7%BC%93%E5%AD%98"><span class="nav-text">二、缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9"><span class="nav-text">1、 缓存雪崩</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9"><span class="nav-text">（1）什么是缓存雪崩？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90"><span class="nav-text">（2）问题分析：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-text">（3）解决方案：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8B%E5%89%8D"><span class="nav-text">&lt;1&gt; 事前：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8B%E4%B8%AD"><span class="nav-text">&lt;2&gt; 事中：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8B%E5%90%8E"><span class="nav-text">&lt;3&gt; 事后：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF"><span class="nav-text">2、缓存击穿</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF"><span class="nav-text">（1）什么是缓存击穿</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90-1"><span class="nav-text">（2）问题分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-1"><span class="nav-text">（3）解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%92%E6%96%A5%E9%94%81%E6%88%96%E8%80%85%E9%98%9F%E5%88%97"><span class="nav-text">&lt;1&gt; 互斥锁或者队列</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F"><span class="nav-text">3、缓存穿透</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F"><span class="nav-text">（1）什么是缓存穿透</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90-2"><span class="nav-text">（2）问题分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-2"><span class="nav-text">（3）解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%9E%E6%B3%95%E8%AF%B7%E6%B1%82%E7%9A%84%E9%99%90%E5%88%B6"><span class="nav-text">&lt;1&gt; 非法请求的限制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%86%E6%97%A0%E6%95%88key%E5%AD%98%E6%94%BE%E5%9C%A8redis%E4%B8%AD"><span class="nav-text">&lt;2&gt; 将无效key存放在Redis中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="nav-text">&lt;3&gt; 使用布隆过滤器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B1%87%E6%80%BB"><span class="nav-text">汇总</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E9%A2%84%E7%83%AD"><span class="nav-text">4、缓存预热</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%BC%93%E5%AD%98%E9%A2%84%E7%83%AD"><span class="nav-text">（1）什么是缓存预热</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E9%A2%84%E7%83%AD%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88"><span class="nav-text">（2）缓存预热实现方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E9%99%8D%E7%BA%A7"><span class="nav-text">5、缓存降级</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BC%93%E5%AD%98%E4%BF%9D%E6%8C%81%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-text">三、数据库缓存保持一致性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%88%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%98%E6%98%AF%E5%85%88%E6%9B%B4%E6%96%B0%E7%BC%93%E5%AD%98"><span class="nav-text">1、先更新数据库还是先更新缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cache-aside%E6%97%81%E8%B7%AF%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5"><span class="nav-text">2、 Cache Aside（旁路缓存）策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%99%E7%AD%96%E7%95%A5"><span class="nav-text">（1）写策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E7%AD%96%E7%95%A5"><span class="nav-text">（2）读策略</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%88%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%98%E6%98%AF%E5%85%88%E5%88%A0%E7%BC%93%E5%AD%98"><span class="nav-text">2.1 先更新数据库还是先删缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#readwrite-through%E8%AF%BB%E7%A9%BF-%E5%86%99%E7%A9%BF%E7%AD%96%E7%95%A5"><span class="nav-text">3、 Read&#x2F;Write Through（读穿 &#x2F;
-写穿）策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#read-through"><span class="nav-text">（1）Read Through</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#write-through"><span class="nav-text">（2）Write Through</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#write-back%E5%86%99%E5%9B%9E%E7%AD%96%E7%95%A5"><span class="nav-text">4、Write Back（写回）策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-text">5、小结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%85%88%E5%88%A0%E9%99%A4%E7%BC%93%E5%AD%98%E5%86%8D%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">（1）使用【先删除缓存，再更新数据库】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%9D%E8%AF%81%E5%85%88%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE%E5%BA%93%E5%86%8D%E5%88%A0%E9%99%A4%E7%BC%93%E5%AD%98%E6%88%90%E5%8A%9F"><span class="nav-text">（2）保证【先更新数据库，再删除缓存】成功</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9Bredis%E6%8C%81%E4%B9%85%E5%8C%96%E6%9C%BA%E5%88%B6"><span class="nav-text">四、Redis持久化机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#rdb%E5%BF%AB%E7%85%A7"><span class="nav-text">1、 RDB快照</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#aof%E6%97%A5%E5%BF%97"><span class="nav-text">2、AOF日志</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94redis%E5%AE%9E%E7%8E%B0%E7%A7%92%E6%9D%80"><span class="nav-text">五、Redis实现秒杀</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E5%94%AF%E4%B8%80id"><span class="nav-text">1、 全局唯一id</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E8%A6%81%E5%85%B7%E5%A4%87%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-text">（1）需要具备的特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B6%85%E5%8D%96%E9%97%AE%E9%A2%98"><span class="nav-text">2、超卖问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-text">（1）问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%A7%E7%94%9F%E5%8E%9F%E5%9B%A0"><span class="nav-text">（2）产生原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-3"><span class="nav-text">（3） 解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%82%B2%E8%A7%82%E9%94%81"><span class="nav-text">【1】 悲观锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B9%90%E8%A7%82%E9%94%81"><span class="nav-text">【2】 乐观锁</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%8D%E7%94%9F%E6%94%B9%E8%89%AF"><span class="nav-text">（4）衍生改良</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-text">【1】问题：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3"><span class="nav-text">【2】解决：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%BA%BA%E4%B8%80%E5%8D%95"><span class="nav-text">3、一人一单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-1"><span class="nav-text">（1）问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%A7%E7%94%9F%E5%8E%9F%E5%9B%A0-1"><span class="nav-text">（2）产生原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-4"><span class="nav-text">（3）解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%97%AE%E9%A2%98"><span class="nav-text">（4）分布式问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81"><span class="nav-text">4、分布式锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="nav-text">（1）基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%96%B9%E6%B3%95"><span class="nav-text">（2）基本方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81"><span class="nav-text">（3）实现代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E5%9C%A8%E9%97%AE%E9%A2%98"><span class="nav-text">（4）存在问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E8%AF%AF%E5%88%A0"><span class="nav-text">【1】Redis分布式锁误删</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E5%8E%9F%E5%AD%90%E6%80%A7%E9%97%AE%E9%A2%98"><span class="nav-text">【2】分布式锁原子性问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81--redission"><span class="nav-text">5、分布式锁--Redission</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-text">（1）引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFredission"><span class="nav-text">（2）什么是Redission</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81redisson---%E5%8F%AF%E9%87%8D%E5%85%A5%E9%94%81%E5%8E%9F%E7%90%86"><span class="nav-text">（3）分布式锁Redisson--
+写穿）策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#read-through"><span class="nav-text">（1）Read Through</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#write-through"><span class="nav-text">（2）Write Through</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#write-back%E5%86%99%E5%9B%9E%E7%AD%96%E7%95%A5"><span class="nav-text">4、Write Back（写回）策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-text">5、小结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%85%88%E5%88%A0%E9%99%A4%E7%BC%93%E5%AD%98%E5%86%8D%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">（1）使用【先删除缓存，再更新数据库】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%9D%E8%AF%81%E5%85%88%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE%E5%BA%93%E5%86%8D%E5%88%A0%E9%99%A4%E7%BC%93%E5%AD%98%E6%88%90%E5%8A%9F"><span class="nav-text">（2）保证【先更新数据库，再删除缓存】成功</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9Bredis%E6%8C%81%E4%B9%85%E5%8C%96%E6%9C%BA%E5%88%B6"><span class="nav-text">四、Redis持久化机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#rdb%E5%BF%AB%E7%85%A7"><span class="nav-text">1、 RDB快照</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#aof%E6%97%A5%E5%BF%97"><span class="nav-text">2、AOF日志</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5"><span class="nav-text">【1】相关概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5%E5%92%8C%E5%90%AF%E7%94%A8"><span class="nav-text">（1）概念和启用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%88%E5%86%99%E5%90%8E%E8%AE%B0%E5%BD%95"><span class="nav-text">（2）先写后记录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BD%9C%E5%9C%A8%E9%A3%8E%E9%99%A9"><span class="nav-text">（3）潜在风险</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E7%A7%8D%E5%86%99%E5%9B%9E%E7%AD%96%E7%95%A5"><span class="nav-text">【2】三种写回策略</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94redis%E5%AE%9E%E7%8E%B0%E7%A7%92%E6%9D%80"><span class="nav-text">五、Redis实现秒杀</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E5%94%AF%E4%B8%80id"><span class="nav-text">1、 全局唯一id</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E8%A6%81%E5%85%B7%E5%A4%87%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-text">（1）需要具备的特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B6%85%E5%8D%96%E9%97%AE%E9%A2%98"><span class="nav-text">2、超卖问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-text">（1）问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%A7%E7%94%9F%E5%8E%9F%E5%9B%A0"><span class="nav-text">（2）产生原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-3"><span class="nav-text">（3） 解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%82%B2%E8%A7%82%E9%94%81"><span class="nav-text">【1】 悲观锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B9%90%E8%A7%82%E9%94%81"><span class="nav-text">【2】 乐观锁</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%8D%E7%94%9F%E6%94%B9%E8%89%AF"><span class="nav-text">（4）衍生改良</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-text">【1】问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3"><span class="nav-text">【2】解决</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%BA%BA%E4%B8%80%E5%8D%95"><span class="nav-text">3、一人一单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-1"><span class="nav-text">（1）问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%A7%E7%94%9F%E5%8E%9F%E5%9B%A0-1"><span class="nav-text">（2）产生原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-4"><span class="nav-text">（3）解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%97%AE%E9%A2%98"><span class="nav-text">（4）分布式问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81"><span class="nav-text">4、分布式锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="nav-text">（1）基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%96%B9%E6%B3%95"><span class="nav-text">（2）基本方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81"><span class="nav-text">（3）实现代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E5%9C%A8%E9%97%AE%E9%A2%98"><span class="nav-text">（4）存在问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E8%AF%AF%E5%88%A0"><span class="nav-text">【1】Redis分布式锁误删</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E5%8E%9F%E5%AD%90%E6%80%A7%E9%97%AE%E9%A2%98"><span class="nav-text">【2】分布式锁原子性问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81--redission"><span class="nav-text">5、分布式锁--Redission</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-text">（1）引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFredission"><span class="nav-text">（2）什么是Redission</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81redisson---%E5%8F%AF%E9%87%8D%E5%85%A5%E9%94%81%E5%8E%9F%E7%90%86"><span class="nav-text">（3）分布式锁Redisson--
 可重入锁原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81ression-%E9%94%81%E9%87%8D%E8%AF%95%E5%92%8Cwatchdog%E6%9C%BA%E5%88%B6"><span class="nav-text">（4）分布式锁Ression ——
 锁重试和WatchDog机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-text">【1】原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90"><span class="nav-text">【2】源码解析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81redission-mutilock%E5%8E%9F%E7%90%86"><span class="nav-text">（5）分布式锁Redission ——
-MutiLock原理</span></a></li></ol></li></ol></li></ol></div>
+MutiLock原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E7%90%86-1"><span class="nav-text">【1】原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-1"><span class="nav-text">【2】源码解析</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%ADredis%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="nav-text">六、Redis消息队列</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A4%E8%AF%86%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="nav-text">1、 认识消息队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8Elist%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="nav-text">2、 基于List实现消息队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="nav-text">（1）实现原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-text">（2）优缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8Epubsub%E7%9A%84%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="nav-text">3、基于PubSub的消息队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86-1"><span class="nav-text">（1）实现原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9-1"><span class="nav-text">（2）优缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8Estream%E7%9A%84%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="nav-text">4、基于Stream的消息队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8Estream%E7%9A%84%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84"><span class="nav-text">5、基于Stream的消息队列—消费者组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E6%AF%94"><span class="nav-text">6、对比</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%83%E7%82%B9%E8%B5%9E%E6%94%B6%E8%97%8F%E5%92%8C%E5%85%B3%E6%B3%A8"><span class="nav-text">七、点赞、收藏和关注</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%ABgeo%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%AE%A1%E7%AE%97%E8%B7%9D%E7%A6%BB"><span class="nav-text">八、GEO数据结构计算距离</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#geo%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="nav-text">1、 GEO数据结构基本用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%98%E5%85%A5redis%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9A%E4%B9%89"><span class="nav-text">2、存入Redis中的数据结构定义</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B9%9Dredis%E5%AE%9E%E7%8E%B0%E7%AD%BE%E5%88%B0%E5%8A%9F%E8%83%BD"><span class="nav-text">九、Redis实现签到功能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#bitmap%E6%95%B0%E6%8D%AE%E6%9C%BA%E6%9E%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="nav-text">1、BitMap数据机构基本用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86-2"><span class="nav-text">2、实现原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E7%82%B9%E5%AE%9E%E7%8E%B0"><span class="nav-text">3、功能点实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E4%BD%BF%E7%94%A8bitmap%E6%9D%A5%E8%A7%A3%E5%86%B3%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E7%9A%84%E6%96%B9%E6%A1%88"><span class="nav-text">4、关于使用BitMap来解决缓存穿透的方案</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%81uv%E7%BB%9F%E8%AE%A1"><span class="nav-text">十、UV统计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#uv%E5%92%8Cpv"><span class="nav-text">1、UV和PV</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hyperloglog-%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86"><span class="nav-text">2、HyperLogLog 算法原理</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -230,7 +235,7 @@ MutiLock原理</span></a></li></ol></li></ol></li></ol></div>
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ych1016.github.io/2025/03/09/Java/Redis%E5%AE%9E%E6%88%98%E4%B8%8E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">
+    <link itemprop="mainEntityOfPage" href="https://ych1016.github.io/2025/03/09/Java/Redis%E5%AE%9E%E6%88%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/11zon_cropped.png">
@@ -243,12 +248,12 @@ MutiLock原理</span></a></li></ol></li></ol></li></ol></div>
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Redis实战与源码解析 | 攻城狮-旺仔">
-      <meta itemprop="description" content="记录旺仔学习 Redis 实战与应用的笔记">
+      <meta itemprop="name" content="Redis应用 | 攻城狮-旺仔">
+      <meta itemprop="description" content="记录旺仔学习 Redis 应用 笔记">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Redis实战与源码解析
+          Redis应用
         </h1>
 
         <div class="post-meta-container">
@@ -266,7 +271,7 @@ MutiLock原理</span></a></li></ol></li></ol></li></ol></div>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-10 16:26:27" itemprop="dateModified" datetime="2025-03-10T16:26:27+08:00">2025-03-10</time>
+      <time title="修改时间：2025-03-11 14:04:12" itemprop="dateModified" datetime="2025-03-11T14:04:12+08:00">2025-03-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -292,18 +297,18 @@ MutiLock原理</span></a></li></ol></li></ol></li></ol></div>
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>8.7k</span>
+      <span>13k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>31 分钟</span>
+      <span>46 分钟</span>
     </span>
 </div>
 
-            <div class="post-description">记录旺仔学习 Redis 实战与应用的笔记</div>
+            <div class="post-description">记录旺仔学习 Redis 应用 笔记</div>
         </div>
       </header>
 
@@ -416,7 +421,8 @@ MutiLock原理</span></a></li></ol></li></ol></li></ol></div>
 在项目实战中，通常会将部分热点数据缓存到服务的内存中，这样一旦缓存出现异常，可以直接使用服务的内存数据，从而避免数据库遭受巨大压力。</p>
 <h1 id="三数据库缓存保持一致性">三、数据库缓存保持一致性</h1>
 <blockquote>
-<p>先说结论：大多数业务采用的都是【先更新数据库，再删除缓存】的 Cache
+<p>先说结论：大多数业务采用的都是<strong>【先更新数据库，再删除缓存】</strong>的
+Cache
 Aside（旁路缓存）策略，同时给缓存设定过期时间，防止在第二步，删除缓存数据失败导致数据不一致的问题。</p>
 <p>若业务对缓存命中率有很高的要求，则可以采用【先更新数据库，再更新缓存】的方案，因为主动更新缓存可以减少缓存未命中的情况</p>
 </blockquote>
@@ -486,7 +492,31 @@ src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309112643.png" /></p>
 <h2 id="rdb快照">1、 RDB快照</h2>
 <p>记录某一瞬间的内存数据，记录的是实际数据。</p>
 <h2 id="aof日志">2、AOF日志</h2>
-<p>对于Redis的每一次写操作，都会将这次写操作追加到一个文件里。</p>
+<h3 id="相关概念">【1】相关概念</h3>
+<h4 id="概念和启用">（1）概念和启用</h4>
+<p>对于Redis的每一次<strong>写操作</strong>，都会将这次写操作追加到一个文件里。在Redis中AOF持久化功能默认是不开启的，需要我们修改
+redis.conf 配置文件中的以下参数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// redis.conf</span><br><span class="line">appendonly       yes   // 表示是否开启AOF持久化（默认no，关闭）</span><br><span class="line">appendfilename   &quot;appendonly.aof&quot;   // AOF持久化文件的名称</span><br></pre></td></tr></table></figure>
+<h4 id="先写后记录">（2）先写后记录</h4>
+<p>Redis只先执行了相关的写操作指令后，才将该指令写入到aof文件中的，这样子有多个好处：</p>
+<ul>
+<li><p>避免额外的检查开销</p>
+<p>先执行，再写。执行不通过就不写。语法有问题，或者逻辑有问题，在运行的时候就能检测出来，减少了写进aof文件前的检查时间</p></li>
+<li><p>不会阻塞当前写操作命令的执行</p>
+<p>当前写操作指令执行成功后，才会将命令记录到AOF日志中。</p></li>
+</ul>
+<h4 id="潜在风险">（3）潜在风险</h4>
+<ul>
+<li><p>丢失风险</p>
+<p>执行写操作命令和记录日志是两个过程，并不是原子操作。若Redis在还没来得及将命令写入硬盘时，服务器宕机，这个数据就会有丢失的风险</p></li>
+<li><p>可能会给【下一个】命令带来阻塞风险</p>
+<p>由于Redis在写AOF文件时，是以串行的方式进行，所以对当前的写Redis的执行不会阻塞，但是后面在写AOF文件的时候一旦发生阻塞，那下一个写Redis的命令就会有阻塞风险。</p></li>
+</ul>
+<h3 id="三种写回策略">【2】三种写回策略</h3>
+<p>在介绍</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250311135343.png" /></p>
+<p>在介绍AOF写回策略前，需要先</p>
 <h1 id="五redis实现秒杀">五、Redis实现秒杀</h1>
 <h2 id="全局唯一id">1、 全局唯一id</h2>
 <p>在分布式系统中，生成全局唯一id是一个常见且重要的需求，唯一ID的生成需要满足高并发、全局唯一性和高可用性。</p>
@@ -530,11 +560,11 @@ while
 <p>对于一般的超卖问题，主流方法还是使用乐观锁或者基于Redis的lua脚本进行解决</p>
 </blockquote>
 <h3 id="衍生改良">（4）衍生改良</h3>
-<h4 id="问题">【1】问题：</h4>
+<h4 id="问题">【1】问题</h4>
 <p> 对于电商的超卖问题，如果只是简单让程序在扣减库存时，判断库存与操作前的数值是否一致，会导致其他大量并发操作失败。比如现在有100个进程打进来，查询到剩余的库存都是1000个，经过一顿操作后，现在要执行扣减库存的操作。此时我们采用了乐观锁进行更新，如下代码所示：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update table set 库存 = 库存 - 1 where id = 1 and 库存 = 1000</span><br></pre></td></tr></table></figure>
 <p> 如果更新方式如上所述，那么程序在运行时，因为我们的程序并没有像CAS那样子实现自旋操作，所以这打进来的100个进程就只有一个会成功。这对用户的使用体验是非常不好的。</p>
-<h4 id="解决">【2】解决：</h4>
+<h4 id="解决">【2】解决</h4>
 <p>我们需要改良一下数据库的执行操作，对于库存而言，只要库存大于0，我们就能卖。所以，没必要每个线程更新时都要确保当前库存跟操作前的库存一样，于是可以调整代码成：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update table set 库存 = 库存 - 1 where id = 1 and 库存 &gt; 0</span><br></pre></td></tr></table></figure>
 <h2 id="一人一单">3、一人一单</h2>
@@ -614,7 +644,7 @@ Grid）。它不仅提供了一系列的分布式的Java常用对象，还提供
 <p>——加锁实现代码：</p>
 <p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310151049.png" style="zoom: 67%;" /></p>
 <p>——释放锁实现代码：</p>
-<p><img src="C:\Users\28778\AppData\Roaming\Typora\typora-user-images\image-20250310151231363.png" alt="image-20250310151231363" style="zoom:67%;" /></p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250311140348.png" style="zoom:67%;" /></p>
 <h3 id="分布式锁ression-锁重试和watchdog机制">（4）分布式锁Ression ——
 锁重试和WatchDog机制</h3>
 <blockquote>
@@ -622,12 +652,7 @@ Grid）。它不仅提供了一系列的分布式的Java常用对象，还提供
 获取锁成功，就会启动【WatchDog机制】，保证当前线程的任务执行完成。</p>
 </blockquote>
 <h4 id="原理">【1】原理</h4>
-<figure>
-<img
-src="C:\Users\28778\AppData\Roaming\Typora\typora-user-images\image-20250310154856560.png"
-alt="image-20250310154856560" />
-<figcaption aria-hidden="true">image-20250310154856560</figcaption>
-</figure>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310165123.png" style="zoom:67%;" /></p>
 <h4 id="源码解析">【2】源码解析</h4>
 <blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="title function_">tryLock</span><span class="params">(<span class="type">long</span> waitTime, <span class="type">long</span> leaseTime, TimeUnit unit)</span></span><br></pre></td></tr></table></figure>
@@ -657,6 +682,213 @@ MutiLock原理</h3>
 <blockquote>
 <p>解决主从一致性问题！</p>
 </blockquote>
+<h4 id="原理-1">【1】原理</h4>
+<p> 为了提高redis的可用性，我们会搭建集群或者主从，现在以主从为例。此时我们去写命令，写在主机上，
+主机会将数据同步给从机，但是假设在主机还没有来得及把数据写入到从机去的时候，此时主机宕机，哨兵会发现主机宕机，并且选举一个slave变成master，而此时新的master中实际上并没有锁信息，此时锁信息就已经丢掉了。</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310163322.png" style="zoom:50%;" /></p>
+<p> 为了解决这个问题，redission提出来了MutiLock锁，使用这把锁咱们就不使用主从了，每个节点的地位都是一样的，
+这把锁加锁的逻辑需要写入到每一个主丛节点上，只有所有的服务器都写入成功，此时才是加锁成功，假设现在某个节点挂了，那么他去获得锁的时候，只要有一个节点拿不到，都不能算是加锁成功，就保证了加锁的可靠性。</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310163403.png" style="zoom:40%;" /></p>
+<h4 id="源码解析-1">【2】源码解析</h4>
+<p>① 创建联锁 multilock，就是将传入的lock用一个数组去存。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> List&lt;RLock&gt; locks = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="title function_">RedissonMultiLock</span><span class="params">(RLock... locks)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (locks.length == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;Lock objects are not defined&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">this</span>.locks.addAll(Arrays.asList(locks));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>② 获取锁时，会挨个访问每个节点，对每个节点，都获取一遍锁</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (ListIterator&lt;RLock&gt; iterator = locks.listIterator(); iterator.hasNext();) &#123;</span><br><span class="line">    <span class="type">RLock</span> <span class="variable">lock</span> <span class="operator">=</span> iterator.next();</span><br><span class="line">    <span class="comment">// 若获取锁失败，则会释放掉已经获取的那些节点的锁</span></span><br><span class="line">    <span class="keyword">if</span> (remainTime != -<span class="number">1</span>) &#123;</span><br><span class="line">        remainTime -= System.currentTimeMillis() - time;</span><br><span class="line">        time = System.currentTimeMillis();</span><br><span class="line">        <span class="keyword">if</span> (remainTime &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">            unlockInner(acquiredLocks);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 设置了重试机制</span></span><br><span class="line">    <span class="keyword">if</span> (failedLocksLimit == <span class="number">0</span>) &#123;</span><br><span class="line">        unlockInner(acquiredLocks);</span><br><span class="line">        <span class="keyword">if</span> (waitTime == -<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="comment">// 没有设置等待获取锁时间，表示只想获取一次，则获取失败的话直接退出</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 这是了等待时间</span></span><br><span class="line">        failedLocksLimit = failedLocksLimit();</span><br><span class="line">        acquiredLocks.clear();</span><br><span class="line">        <span class="comment">// reset iterator</span></span><br><span class="line">        <span class="comment">// 重试的时候重新开始</span></span><br><span class="line">        <span class="keyword">while</span> (iterator.hasPrevious()) &#123;</span><br><span class="line">            iterator.previous();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        failedLocksLimit--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 获取锁成功</span></span><br><span class="line"><span class="comment">// 若设置了租锁时间，会对每一个节点上的锁，设置一个锁的有效时间</span></span><br><span class="line"><span class="keyword">if</span> (leaseTime != -<span class="number">1</span>) &#123;</span><br><span class="line">    List&lt;RFuture&lt;Boolean&gt;&gt; futures = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(acquiredLocks.size());</span><br><span class="line">    <span class="keyword">for</span> (RLock rLock : acquiredLocks) &#123;</span><br><span class="line">        RFuture&lt;Boolean&gt; future = ((RedissonLock) rLock).expireAsync(unit.toMillis(leaseTime), TimeUnit.MILLISECONDS);</span><br><span class="line">        futures.add(future);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (RFuture&lt;Boolean&gt; rFuture : futures) &#123;</span><br><span class="line">        rFuture.syncUninterruptibly();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+<h1 id="六redis消息队列">六、Redis消息队列</h1>
+<h2 id="认识消息队列">1、 认识消息队列</h2>
+<p>即存放消息的队列。最简单的消息队列模型包括3个角色：</p>
+<ul>
+<li>消息队列：存储和管理消息，也被称为消息代理（Message Broker）</li>
+<li>生产者：发送消息到消息队列</li>
+<li>消费者：从消息队列获取消息并处理消息</li>
+</ul>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310172219.png" /></p>
+<p>使用队列的好处在于<strong>解耦</strong>：所谓解耦，举一个生活中的例子就是：快递员(生产者)把快递放到快递柜里边(Message
+Queue)去，我们(消费者)从快递柜里边去拿东西，这就是一个异步，如果耦合，那么这个快递员相当于直接把快递交给你，这事固然好，但是万一你不在家，那么快递员就会一直等你，这就浪费了快递员的时间，所以这种思想在我们日常开发中，是非常有必要的。</p>
+<p>这种场景在我们秒杀中就变成了：我们下单之后，利用redis去进行校验下单条件，再通过队列把消息发送出去，然后再启动一个线程去消费这个消息，完成解耦，同时也加快我们的响应速度。</p>
+<h2 id="基于list实现消息队列">2、 基于List实现消息队列</h2>
+<h3 id="实现原理">（1）实现原理</h3>
+<p>消息队列（Message
+Queue），字面意思就是存放消息的队列。而Redis的list数据结构是一个双向链表，很容易模拟出队列效果。</p>
+<p>队列是入口和出口不在一边，因此我们可以利用：LPUSH 结合 RPOP、或者
+RPUSH 结合
+LPOP来实现。不过要注意的是，当队列中没有消息时RPOP或LPOP操作会返回null，并不像JVM的阻塞队列那样会阻塞并等待消息。因此这里应该使用BRPOP或者BLPOP来实现阻塞效果。</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310213814.png" /></p>
+<h3 id="优缺点">（2）优缺点</h3>
+<p>优点：① 利用Redis存储，不受限于JVM内存上限； ②
+基于Redis的持久化机制，数据安全性有保证； ③ 可以满足消息有序性</p>
+<p>缺点：① 无法避免消息丢失； ②只支持单消费者</p>
+<h2 id="基于pubsub的消息队列">3、基于PubSub的消息队列</h2>
+<h3 id="实现原理-1">（1）实现原理</h3>
+<p>PubSub（发布订阅）是Redis2.0版本引入的消息传递模型。顾名思义，消费者可以订阅一个或多个channel，生产者向对应channel发送消息后，所有订阅者都能收到相关消息。</p>
+<p>SUBSCRIBE channel [channel] ：订阅一个或多个频道 PUBLISH channel msg
+：向一个频道发送消息 PSUBSCRIBE pattern[pattern]
+：订阅与pattern格式匹配的所有频道</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250310213954.png" /></p>
+<h3 id="优缺点-1">（2）优缺点</h3>
+<p>优点：采用发布订阅模型，支持多生产、多消费</p>
+<p>缺点：① 不支持数据持久化； ② 无法避免消息丢失； ③
+消息堆积有上限，超出时数据丢失</p>
+<h2 id="基于stream的消息队列">4、基于Stream的消息队列</h2>
+<p>Stream 是 Redis 5.0
+引入的一种新数据类型，可以实现一个功能非常完善的消息队列。</p>
+<p>发送消息的命令：</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250311084806.png" /></p>
+<p>例如</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250311085207.png" /></p>
+<p>读取消息的方式之一：XREAD</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250311085146.png" /></p>
+<p>例如，使用XREAD读取第一个消息：</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250311085241.png" /></p>
+<p>XREAD阻塞方式，读取最新的消息：</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250311085304.png" /></p>
+<p>在业务开发中，我们可以循环的调用XREAD阻塞方式来查询最新消息，从而实现持续监听队列的效果，伪代码如下</p>
+<figure>
+<img
+src="C:\Users\28778\AppData\Roaming\Typora\typora-user-images\image-20250311085324492.png"
+alt="image-20250311085324492" />
+<figcaption aria-hidden="true">image-20250311085324492</figcaption>
+</figure>
+<p>注意：当我们指定起始ID为$时，代表读取最新的消息，如果我们处理一条消息的过程中，又有超过1条以上的消息到达队列，则下次获取时也只能获取到最新的一条，会出现漏读消息的问题</p>
+<p>STREAM类型消息队列的XREAD命令特点：</p>
+<ul>
+<li>消息可回溯</li>
+<li>一个消息可以被多个消费者读取</li>
+<li>可以阻塞读取</li>
+<li>有消息漏读的风险</li>
+</ul>
+<h2
+id="基于stream的消息队列消费者组">5、基于Stream的消息队列—消费者组</h2>
+<p>消费者组（Consumer
+Group）：将多个消费者划分到一个组中，监听同一个队列。具备下列特点：</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250311091741.png" /></p>
+<p>创建消费者组：</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250311091835.png" /></p>
+<ul>
+<li>key：队列名称</li>
+<li>groupName：消费者组名称</li>
+<li>ID：起始ID标示，$代表队列中最后一个消息，0则代表队列中第一个消息</li>
+<li>MKSTREAM：队列不存在时自动创建队列</li>
+</ul>
+<p>其他命令：</p>
+<p><strong>删除指定的消费者组</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XGROUP DESTORY key groupName</span><br></pre></td></tr></table></figure>
+<p><strong>给指定的消费者组添加消费者</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XGROUP CREATECONSUMER key groupname consumername</span><br></pre></td></tr></table></figure>
+<p><strong>删除消费者组中的指定消费者</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XGROUP DELCONSUMER key groupname consumername</span><br></pre></td></tr></table></figure>
+<p>从消费者组读取消息：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XREADGROUP GROUP group consumer [COUNT count] [BLOCK milliseconds] [NOACK] STREAMS key [key ...] ID [ID ...]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>group：消费组名称</li>
+<li>consumer：消费者名称，如果消费者不存在，会自动创建一个消费者</li>
+<li>count：本次查询的最大数量</li>
+<li>BLOCK milliseconds：当没有消息时最长等待时间</li>
+<li>NOACK：无需手动ACK，获取到消息后自动确认</li>
+<li>STREAMS key：指定队列名称</li>
+<li>ID：获取消息的起始ID：
+<ul>
+<li>"&gt;"：从下一个未消费的消息开始</li>
+<li>其它：根据指定id从pending-list中获取已消费但未确认的消息，例如0，是从pending-list中的第一个消息开始</li>
+</ul></li>
+</ul>
+<p>消费者监听消息的基本思路：</p>
+<p><img src="C:\Users\28778\AppData\Roaming\Typora\typora-user-images\image-20250311092621147.png" alt="image-20250311092621147" style="zoom:50%;" /></p>
+<p>列的XREADGROUP命令特点：</p>
+<ul>
+<li>消息可回溯</li>
+<li>可以多消费者争抢消息，加快消费速度</li>
+<li>可以阻塞读取</li>
+<li>没有消息漏读的风险</li>
+<li>有消息确认机制，保证消息至少被消费一次</li>
+</ul>
+<h2 id="对比">6、对比</h2>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250311092658.png" /></p>
+<h1 id="七点赞收藏和关注">七、点赞、收藏和关注</h1>
+<p>实现方式比较简单，都是通过利用Redis的set集合判断是否已经点赞、或者已经收藏、或者已经关注</p>
+<p>这里贴一个demo代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 关注实现</span></span><br><span class="line"><span class="keyword">public</span> Boolean <span class="title function_">followUser</span><span class="params">(FollowAddVO addVO)</span> &#123;</span><br><span class="line">    <span class="type">Integer</span> <span class="variable">channel</span> <span class="operator">=</span> addVO.getChannel();</span><br><span class="line">    <span class="comment">// 构造redis的key</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">currentId</span> <span class="operator">=</span> ThreadLocalUtil.getCurrentId();</span><br><span class="line">    <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> FollowConstant.followKey + addVO.getUid();</span><br><span class="line">    <span class="type">Double</span> <span class="variable">zScore</span> <span class="operator">=</span> redisUtils.zScore(key, currentId);</span><br><span class="line">    <span class="comment">// 先判断能不能关注</span></span><br><span class="line">    <span class="keyword">if</span> ((Objects.nonNull(zScore) &amp;&amp; CollectionConstant.OperateEnum.ON_COLL.getCode().equals(channel))</span><br><span class="line">        || (Objects.isNull(zScore) &amp;&amp; CollectionConstant.OperateEnum.DOWN_COLL.getCode().equals(addVO.getChannel()))) &#123;</span><br><span class="line">        <span class="keyword">return</span> Boolean.FALSE;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (CollectionConstant.OperateEnum.ON_COLL.getCode().equals(channel)) &#123;</span><br><span class="line">        <span class="comment">// 实现关注逻辑，并将关注的关系加入到redis中</span></span><br><span class="line">        <span class="keyword">return</span> redisUtils.zAdd(key, currentId, System.currentTimeMillis());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 取消关注</span></span><br><span class="line">    <span class="keyword">if</span> (CollectionConstant.OperateEnum.DOWN_COLL.getCode().equals(addVO.getChannel())) &#123;</span><br><span class="line">        <span class="comment">// 实现取消关注的数据库逻辑，并将redis中的关注关系删除</span></span><br><span class="line">        <span class="keyword">return</span> redisUtils.zRemove(key, currentId) &gt; <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Boolean.FALSE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="八geo数据结构计算距离">八、GEO数据结构计算距离</h1>
+<blockquote>
+<p>使用Redis的GEO数据机构进行统计</p>
+</blockquote>
+<h2 id="geo数据结构基本用法">1、 GEO数据结构基本用法</h2>
+<p>GEO就是Geolocation的简写形式，代表地理坐标。Redis在3.2版本中加入了对GEO的支持，允许存储地理坐标信息，帮助我们根据经纬度来检索数据。常见的命令有：</p>
+<ul>
+<li>GEOADD：添加一个地理空间信息，包含：经度（longitude）、纬度（latitude）、值（member）</li>
+<li>GEODIST：计算指定的两个点之间的距离并返回</li>
+<li>GEOHASH：将指定member的坐标转为hash字符串形式并返回</li>
+<li>GEOPOS：返回指定member的坐标</li>
+<li>GEORADIUS：指定圆心、半径，找到该圆内包含的所有member，并按照与圆心之间的距离排序后返回。6.以后已废弃</li>
+<li>GEOSEARCH：在指定范围内搜索member，并按照与指定点之间的距离排序后返回。范围可以是圆形或矩形。6.2.新功能</li>
+<li>GEOSEARCHSTORE：与GEOSEARCH功能一致，不过可以把结果存储到一个指定的key。
+6.2.新功能</li>
+</ul>
+<h2 id="存入redis中的数据结构定义">2、存入Redis中的数据结构定义</h2>
+<p> GEO在redis中就一个menber和一个经纬度，我们把x和y轴传入到redis做的经纬度位置去，但我们不能把所有的数据都放入到menber中去，毕竟作为redis是一个内存级数据库，如果存海量数据，redis还是力不从心，所以我们在这个地方存储他的id即可。</p>
+<p> 但是这个时候还有一个问题，就是在redis中并没有存储type，所以我们无法根据type来对数据进行筛选，所以我们可以按照商户类型做分组，类型相同的商户作为同一组，以typeId为key存入同一个GEO集合中即可</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250311105501.png" style="zoom:50%;" /></p>
+<h1 id="九redis实现签到功能">九、Redis实现签到功能</h1>
+<blockquote>
+<p>使用Redis的BitMap实现</p>
+</blockquote>
+<h2 id="bitmap数据机构基本用法">1、BitMap数据机构基本用法</h2>
+<p>BitMap的操作命令有：</p>
+<ul>
+<li>SETBIT：向指定位置（offset）存入一个0或1</li>
+<li>GETBIT ：获取指定位置（offset）的bit值</li>
+<li>BITCOUNT ：统计BitMap中值为1的bit位的数量</li>
+<li>BITFIELD
+：操作（查询、修改、自增）BitMap中bit数组中的指定位置（offset）的值</li>
+<li>BITFIELD_RO ：获取BitMap中bit数组，并以十进制形式返回</li>
+<li>BITOP ：将多个BitMap的结果做位运算（与 、或、异或）</li>
+<li>BITPOS ：查找bit数组中指定范围内第一个0或1出现的位置</li>
+</ul>
+<h2 id="实现原理-2">2、实现原理</h2>
+<p> 我们按月来统计用户签到信息，签到记录为1，未签到则记录为0。把每一个bit位对应当月的每一天，形成了映射关系。用0和1标示业务状态，这种思路就称为位图（BitMap）。这样我们就用极小的空间，来实现了大量数据的表示。Redis中是利用string类型数据结构实现BitMap，因此最大上限是512M，转换为bit则是
+2^32个bit位。</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250311105928.png" /></p>
+<h2 id="功能点实现">3、功能点实现</h2>
+<p><strong>问题1：</strong>什么叫做连续签到天数？
+从最后一次签到开始向前统计，直到遇到第一次未签到为止，计算总的签到次数，就是连续签到天数。</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250311110039.png" /></p>
+<p>Java逻辑代码：获得当前这个月的最后一次签到数据，定义一个计数器，然后不停的向前统计，直到获得第一个非0的数字即可，每得到一个非0的数字计数器+1，直到遍历完所有的数据，就可以获得当前月的签到总天数了</p>
+<p><strong>问题2：</strong>如何得到本月到今天为止的所有签到数据？</p>
+<p>BITFIELD key GET u[dayOfMonth] 0</p>
+<p>假设今天是10号，那么我们就可以从当前月的第一天开始，获得到当前这一天的位数，是10号，那么就是10位，去拿这段时间的数据，就能拿到所有的数据了，那么这10天里边签到了多少次呢？统计有多少个1即可。</p>
+<p><strong>问题3：如何从后向前遍历每个bit位？</strong></p>
+<p>注意：bitMap返回的数据是10进制，哪假如说返回一个数字8，那么我哪儿知道到底哪些是0，哪些是1呢？我们只需要让得到的10进制数字和1做与运算就可以了，因为1只有遇见1
+才是1，其他数字都是0
+，我们把签到结果和1进行与操作，每与一次，就把签到结果向右移动一位，依次内推，我们就能完成逐个遍历的效果了。</p>
+<p>需求：实现下面接口，统计当前用户截止当前时间在本月的连续签到天数</p>
+<p>有用户有时间我们就可以组织出对应的key，此时就能找到这个用户截止这天的所有签到记录，再根据这套算法，就能统计出来他连续签到的次数了</p>
+<h2
+id="关于使用bitmap来解决缓存穿透的方案">4、关于使用BitMap来解决缓存穿透的方案</h2>
+<p>实现原理跟布隆过滤器是基本一样的，都是通过Hash，将物料的主键id映射成位图能够记录的idx，然后在位图中标识出来。等要判断是当前查询主键id是否存在时，再将当前主键id进行Hash，看是否在位图中被标注。若被标注，则可以访问，若没有，则拒绝访问。布隆过滤器的区别主要是，可能布隆过滤器会多用几个Hash函数。</p>
+<h1 id="十uv统计">十、UV统计</h1>
+<h2 id="uv和pv">1、UV和PV</h2>
+<ul>
+<li>UV：全称Unique
+Visitor，也叫独立访客量，是指通过互联网访问、浏览这个网页的自然人。1天内同一个用户多次访问该网站，只记录1次。</li>
+<li>PV：全称Page
+View，也叫页面访问量或点击量，用户每访问网站的一个页面，记录1次PV，用户多次打开页面，则记录多次PV。往往用来衡量网站的流量。</li>
+</ul>
+<h2 id="hyperloglog-算法原理">2、HyperLogLog 算法原理</h2>
+<p><a
+target="_blank" rel="noopener" href="https://juejin.cn/post/6844903785744056333#heading-0">参考文章</a></p>
 
     </div>
 
@@ -674,7 +906,7 @@ MutiLock原理</h3>
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://ych1016.github.io/2025/03/09/Java/Redis%E5%AE%9E%E6%88%98%E4%B8%8E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="Redis实战与源码解析">https://ych1016.github.io/2025/03/09/Java/Redis实战与源码解析/</a>
+      <a href="https://ych1016.github.io/2025/03/09/Java/Redis%E5%AE%9E%E6%88%98/" title="Redis应用">https://ych1016.github.io/2025/03/09/Java/Redis实战/</a>
   </li>
   <li class="post-copyright-license">
       <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -780,14 +1012,14 @@ MutiLock原理</h3>
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">56k</span>
+    <span title="站点总字数">60k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:22</span>
+    <span title="站点阅读时长">3:37</span>
   </span>
 </div>
 <div class="busuanzi-count">
