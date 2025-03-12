@@ -1272,6 +1272,125 @@ href="https://leetcode.cn/problems/maximal-square/description/?envType=study-pla
       </tags>
   </entry>
   <entry>
+    <title>设计模式</title>
+    <url>/2025/03/12/Java/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[<blockquote>
+<p>🚩 学如逆水行舟，不进则退。 —— 《增广贤文》</p>
+</blockquote>
+<h1 id="一设计模式总述">一、设计模式总述</h1>
+<h2 id="什么是设计模式">1、什么是设计模式</h2>
+<p>  
+设计模式是一套经过反复使用的代码设计经验，目的是为了重用代码、让代码更容易被他人理解、保证代码可靠性。<br>
+  项目中合理的运用设计模式可以完美的解决很多问题，每种模式在现实中都有相对应的原理与之对应，每种模式描述了一个在我们周围不断重复发生的问题，以及该问题的核心解决方案。<br>
+  总体而言，设计模式分为三大类：<br>
+<img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250312144024.png" style="zoom:60%;" /></p>
+<h2 id="设计模式的六大原则">2、设计模式的六大原则</h2>
+<p>设计模式主要有六大设计原则，分别是：单一职责原则、开闭原则、里氏替换原则、依赖倒置原则、接口隔离原则、迪米特原则。<br>
+<img src="C:\Users\28778\AppData\Roaming\Typora\typora-user-images\image-20250312103602350.png" alt="image-20250312103602350" style="zoom:70%;" /></p>
+<h3
+id="单一职责原则single-responsibility-principle">（1）单一职责原则（Single
+Responsibility Principle）</h3>
+<ol type="1">
+<li>定义：一个接口或者类只有一个原因引起变化。</li>
+<li>定义解释：即一个接口或者一个类只有一个职责，负责一件事情。（此原则同样适用于方法）</li>
+<li>好处：① 复杂性降低 ② 可读性提高 ③可维护性提高 ④变更风险降低</li>
+</ol>
+<h3 id="开闭原则-open-close-principle">（2）开闭原则 <strong>(Open Close
+Principle)</strong></h3>
+<ol type="1">
+<li>定义：软件实体对扩展开放，对修改关闭。</li>
+<li>定义解释：也就是应该通过扩展来实现业务需求和变化，而不是通过修改已有的代码来实现变化。</li>
+<li>好处：① 强系统的稳定性和可扩展性 ②减少对现有代码的影响</li>
+</ol>
+<h3 id="里氏替换原则-liskov-substitution-principle">（3）里氏替换原则
+<strong>(Liskov Substitution Principle)</strong></h3>
+<ol type="1">
+<li>定义：任何基类可以出现的地方，子类一定可以出现。</li>
+<li>定义解释：
+<ul>
+<li>子类必须完全实现弗雷的方法</li>
+<li>子类可以有自己的个性</li>
+<li>覆盖或者实现父类方法时，输入参数可以被放大</li>
+<li>覆盖或者实现父类方法时，输出结果可以被缩小</li>
+</ul></li>
+<li>好处：① 提升代码的可靠性和复用性 ②减少继承带来的问题</li>
+</ol>
+<h3 id="依赖倒置原则-dependence-inversion-principle">（4）依赖倒置原则
+<strong>(Dependence Inversion Principle)</strong></h3>
+<ol type="1">
+<li>定义：高层模块不应依赖低层模块，两者都应依赖抽象；抽象不应依赖细节，细节应依赖抽象。</li>
+<li>定义解释：简单点来说，就是面向接口编程。模块间的依赖通过抽象发生，实现类之间不发生直接的依赖关系，其依赖关系时通过接口或者抽象类产生。</li>
+<li>好处：① 降低模块间的耦合 ②提升系统的可扩展性和可维护性</li>
+</ol>
+<h3 id="接口隔离原则-interface-segregation-principle">（5）接口隔离原则
+<strong>(Interface Segregation Principle)</strong></h3>
+<ol type="1">
+<li>定义：建立单一接口，不要建立庞大臃肿的接口，尽量细化接口，接口中的方法尽量少。</li>
+<li>定义解释：应该为各个类建立专用的接口，而不要试图去建立一个很庞大的接口供所有依赖它的类去调用。</li>
+<li>好处：① 提高系统的灵活性和可维护性 ② 减少接口间的耦合。</li>
+</ol>
+<h3 id="迪米特原则-demeter-principle">（6）迪米特原则 <strong>(Demeter
+Principle)</strong></h3>
+<ol type="1">
+<li>定义：<strong>只与直接的朋友通信。</strong>一个类应该对其他类保持最少的了解</li>
+<li>定义解释：也就是说一个类对自己依赖的类知道的越少越好。即对于被依赖的类，无论逻辑多复杂，都尽量地讲逻辑封装在类的内部，对外除了提供的public方法，不对外泄露任何信息。</li>
+<li>好处：① 提高模块的独立性 ② 减少依赖 ③
+增强系统的可维护性和可复用性。</li>
+</ol>
+<h1 id="二工厂模式">二、工厂模式</h1>
+<h2 id="引言">1、引言</h2>
+<p>  在面向对象编程中，创建对象实例最常用的方式就是通过 new
+操作符构造一个对象实例，但在某些情况下，new
+操作符直接生成对象会存在一些问题。举例来说，对象的创建需要一系列的步骤：可能需要计算或取得对象的初始位置、选择生成哪个子对象实例、或在生成之前必须先生成一些辅助对象。
+在这些情况，新对象的建立就是一个
+“过程”，而不仅仅是一个操作，就像一部大机器中的一个齿轮传动。<br>  针对上面这种情况，我们如何轻松方便地构造对象实例，而不必关心构造对象示例的细节和复杂过程？解决方案就是使用一个<strong>工厂类来创建对象</strong>。</p>
+<h2 id="什么是工厂模式">2、什么是工厂模式</h2>
+<p>  工厂模式的主要目的是将创建对象的具体过程屏蔽隔离起来，从而达到更高的灵活性。工厂模式可以分为三类：</p>
+<ul>
+<li>简单工厂模式（Simple Factory）</li>
+<li>工厂方法模式（Factory Method）</li>
+<li>抽象工厂模式（Abstract Factory）</li>
+</ul>
+<p>举个栗子区别一下这几个工厂模式：</p>
+<p>（1）在没有工厂的时代，一个用户</p>
+<h2 id="简单工厂模式">3、简单工厂模式</h2>
+<h2 id="工厂方法模式">4、 工厂方法模式</h2>
+<h2 id="抽象工厂模式">5、 抽象工厂模式</h2>
+<h2 id="总结">6、总结</h2>
+<p>  无论是简单工厂模式，工厂方法模式，还是抽象工厂模式，他们都属于工厂模式，在形式和特点上也是极为相似的，他们的最终目的都是为了解耦。在使用时，我们不必去在意这个模式到底工厂方法模式还是抽象工厂模式，因为他们之间的演变常常是令人琢磨不透的。经常你会发现，明明使用的工厂方法模式，当新需求来临，稍加修改，加入了一个新方法后，由于类中的产品构成了不同等级结构中的产品族，它就变成抽象工厂模式了；而对于抽象工厂模式，当减少一个方法使的提供的产品不再构成产品族之后，它就演变成了工厂方法模式。<br>  所以，在使用工厂模式时，只需要关心降低耦合度的目的是否达到即可。</p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo基本指令</title>
+    <url>/2025/03/12/Hexo/hexo%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/</url>
+    <content><![CDATA[<p>  如果只是满足平时写写博客，推送到GitHub方便在各处访问的话，其实这下面这几个命令就够了。但是这篇博文会一直更新，博主有用到别的指令会及时来这里更新。</p>
+<ol type="1">
+<li><p>首先是创建一个新的页面的指令，在终端敲击。由于博主使用的是WebStorm，所以是在应用里的终端界面敲击的。
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">hexo new <span class="string">&quot;page_name&quot;</span>    <span class="comment"># 创建新的页面</span></span><br></pre></td></tr></table></figure> <img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250312090453.png" /></p></li>
+<li><p>其次是准备部署线上环境需要使用到的指令，三个命令行同时运行，就能将新写的博文推送到GitHub啦，当然部署也需要时间，只要指令运行不报错，就耐心等待一下啦
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">hexo clean   <span class="comment"># 清除之前生成的渲染文件</span></span><br><span class="line"></span><br><span class="line">hexo g   <span class="comment"># 生成新的渲染文件</span></span><br><span class="line"></span><br><span class="line">hexo d   <span class="comment"># 推送到GitHub进行自动部署</span></span><br><span class="line"> </span><br></pre></td></tr></table></figure></p></li>
+<li><p>在本地查看渲染效果，运行该指令之后直接访问
+<code>http://localhost:4000/</code>, 就可以看到渲染后的最新博客
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">hexo s     <span class="comment"># hexo start 的意思，就是开启项目 </span></span><br></pre></td></tr></table></figure></p></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>教程</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Redis应用</title>
     <url>/2025/03/09/Java/Redis%E5%AE%9E%E6%88%98/</url>
     <content><![CDATA[<h1 id="一使用redis实现登录校验">一、使用Redis实现登录校验</h1>
