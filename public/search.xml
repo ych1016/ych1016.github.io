@@ -1272,21 +1272,118 @@ href="https://leetcode.cn/problems/maximal-square/description/?envType=study-pla
       </tags>
   </entry>
   <entry>
+    <title>单一职责原则</title>
+    <url>/2025/03/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99/</url>
+    <content><![CDATA[
+]]></content>
+      <categories>
+        <category>设计模式</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>设计模式</tag>
+        <tag>单一职责原则</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>工厂模式</title>
+    <url>/2025/03/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[<blockquote>
+<p>🚩 学如逆水行舟，不进则退。 —— 《增广贤文》</p>
+</blockquote>
+<h1 id="工厂模式">工厂模式</h1>
+<h2 id="引言">1、引言</h2>
+<p>  在面向对象编程中，创建对象实例最常用的方式就是通过 new
+操作符构造一个对象实例，但在某些情况下，new
+操作符直接生成对象会存在一些问题。举例来说，对象的创建需要一系列的步骤：可能需要计算或取得对象的初始位置、选择生成哪个子对象实例、或在生成之前必须先生成一些辅助对象。
+在这些情况，新对象的建立就是一个
+“过程”，而不仅仅是一个操作，就像一部大机器中的一个齿轮传动。</p>
+<p>  针对上面这种情况，我们如何轻松方便地构造对象实例，而不必关心构造对象示例的细节和复杂过程？解决方案就是使用一个<strong>工厂类来创建对象</strong>。</p>
+<h2 id="什么是工厂模式">2、什么是工厂模式</h2>
+<p>  工厂模式的主要目的是将创建对象的具体过程屏蔽隔离起来，从而达到更高的灵活性。工厂模式可以分为三类：</p>
+<ul>
+<li><strong>简单工厂模式（Simple
+Factory）：</strong>只有唯一工厂（简单工厂），一个产品接口/抽象类，根据简单工厂中的静态方法来创建具体产品对象。适用于产品较少，几乎不扩展的情景</li>
+<li><strong>工厂方法模式（Factory
+Method）：</strong>有多个工厂（抽象工厂+多个具体工厂），一个产品接口/抽象类，根据继承抽象工厂中的方法来多态创建具体产品对象。适用于一个类型的多个产品</li>
+<li><strong>抽象工厂模式（Abstract
+Factory）：</strong>有多个工厂（抽象工厂+多个具体工厂），多个产品接口/抽象类，对产品子类进行分组，根据继承抽象工厂中的方法多态创建同组的不同具体产品对象。适用于多个类型的多个产品</li>
+</ul>
+<p>举个生产电脑的栗子介绍一下这几个工厂模式：</p>
+<p>（1）在没有工厂的时代，如果客户需要一款MBP电脑，那么就需要客户去创建一款MBP电脑，然后拿来用。</p>
+<p>（2）简单工厂模式：后来出现了工厂，用户不再需要去创建MBP电脑，由工厂进行创建，想要什么MBP电脑，直接通过工厂创建就可以了。比如想要M3系列的MBP电脑，工厂就创建这个系列的电脑。</p>
+<p>（3）工厂方法模式：为了满足客户，MBP系列越来越多，如M3、M4等等系列，一个工厂无法创建所有的MBP系列，于是又单独分出来多个具体的工厂，每个具体工厂创建一种系列，即具体工厂类只能创建一个具体产品。但是MBP电脑工厂还是个抽象，你需要指定某个具体的工厂才能生产电脑出来。</p>
+<p>（4）抽象工厂模式：随着客户要求越来越高，MBP电脑车必须配置鼠标，于是这个工厂开始生产MBP电脑和需要的鼠标。最终是客户只要对宝马的销售员说：我要M3的带有鼠标的MBP电脑，销售员就直接给他M3的带有鼠标的MBP电脑了。而不用自己去创建M3的带有鼠标的MBP电脑。</p>
+<h2 id="无工厂模式实现">3、无工厂模式实现</h2>
+<p>  如果没有工厂模式，那么用户要获得MBP电脑就得自己去创建，想要什么型号，就得找到对应的型号去new。以下是对应类图以及实现。</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250312203232.png" style="zoom: 33%;" /></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Customer</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Customer</span> <span class="variable">customer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Customer</span>();</span><br><span class="line">        customer.createMBPM3();</span><br><span class="line">        customer.createMBPM4();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> MBPM3 <span class="title function_">createMBPM3</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MBPM3</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> MBPM4 <span class="title function_">createMBPM4</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MBPM4</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MBPM3</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MBPM3</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;生产---&gt; MBPM3电脑&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MBPM4</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MBPM4</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;生产MBPM4电脑&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="简单工厂模式">4、简单工厂模式</h2>
+<p>  简单工厂模式有叫做静态工厂方法模式（static Factory Method
+pattern），它时通过使用静态方法接受不同的参数来返回不同的实例对象。简单工厂模式的核心是定义一个创建对象的接口，将对象的创建和本身的业务逻辑分离，降低系统的耦合度，使得以后需要改变时，只需要修改工厂类即可。</p>
+<h3 id="简单工厂实现原理及uml图">（1）简单工厂实现原理及UML图</h3>
+<p>  其实实现的主要原理还是利用到了多态的概念，可以用父类去接子类的对象，这就非常方便我们将创建对象的方法进行抽象，我们只需要定义一个公共的MBP父类，用不同型号的子类去继承它。对于创建子类对象的过程交给工厂完成，最后用父类去接创建出来的子类对象即可。</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250312205351.png" style="zoom:50%;" /></p>
+<h3 id="实现代码">（2）实现代码</h3>
+<p>产品类：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MBP</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MBP</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MBPM3</span> <span class="keyword">extends</span> <span class="title class_">MBP</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MBPM3</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;生产M-----&gt;MBP3&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MBPM4</span> <span class="keyword">extends</span> <span class="title class_">MBP</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MBPM4</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;生产M-----&gt;MBP4&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>工厂类：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Factory</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> MBP <span class="title function_">createMBP</span><span class="params">(String type)</span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (type)&#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;M3&quot;</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MBPM3</span>();</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;M4&quot;</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MBPM4</span>();</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 静态工厂</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">public</span> MBP <span class="title function_">createMBPStatic</span><span class="params">(String type)</span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (type)&#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;M3&quot;</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MBPM3</span>();</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;M4&quot;</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MBPM4</span>();</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>用户类：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Customer</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Factory</span> <span class="variable">factory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Factory</span>();</span><br><span class="line">        <span class="type">MBP</span> <span class="variable">m3</span> <span class="operator">=</span> factory.createMBP(<span class="string">&quot;M3&quot;</span>);</span><br><span class="line">        <span class="type">MBP</span> <span class="variable">m4</span> <span class="operator">=</span> factory.createMBP(<span class="string">&quot;M4&quot;</span>);</span><br><span class="line">		<span class="comment">// 静态工厂</span></span><br><span class="line">        <span class="type">MBP</span> <span class="variable">m31</span> <span class="operator">=</span> Factory.createMBPStatic(<span class="string">&quot;M3&quot;</span>);</span><br><span class="line">        <span class="type">MBP</span> <span class="variable">m41</span> <span class="operator">=</span> Factory.createMBPStatic(<span class="string">&quot;M4&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="优缺点">（3）优缺点</h3>
+<ul>
+<li>优点：简单工厂可以使客户端免除直接创建对象的职责，能够根据需要创建出对应的产品。实现客户端可产品类的代码分离。此外，可以通过配置文件来实现不修改客户端代码的情况下添加新的具体产品类</li>
+<li>缺点：<strong>违背了开闭原则</strong>，如果需要新增其他产品类，就必须在工厂类中新增类似<code>if-else</code>的条件判断（上面的演示代码用了<code>switch</code>），虽然可以用配置文件来改进，但是整体上而言，系统扩展相对于其他工厂模式要困难很多。
+<ul>
+<li>关于如何使用配置文件改进简单工厂，在这里描述一下：其实就是将创建工厂的条件，上述代码中的<code>String type</code>，改成是根据类路径来创建对象。再详细点就是，将类路径写在配置文件中，然后工厂在创建对象的时候，根据获取到的类路径，用反射创建出对象。这样，即使有了新的产品，我们也只需要在新建产品类并继承产品父类，然后在配置文件中添加新建产品类的类路径。</li>
+</ul></li>
+</ul>
+<h3 id="简单工厂和静态工厂">（4）简单工厂和静态工厂</h3>
+<p>可以看到上面用户类中使用了两种方法创建实例对象，一种是类方法，一种是类的静态方法。那使用类的静态方法有什么好处呢？</p>
+<ul>
+<li>使用静态方法可以不需要使用<code>new</code>的方法创建对象，方便调用</li>
+<li>控制实例的创建，如缓存实例，延迟初始化</li>
+<li>减少客户端对具体类的依赖</li>
+</ul>
+<h3 id="简单工厂在实际中的应用">（5）简单工厂在实际中的应用</h3>
+<p>【1】如<code>DataFormat</code>中这个方法就使用了简单工厂</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250312212636.png" style="zoom: 67%;" /></p>
+<p>【2】对于数据库连接池，如业务需要连接数据库时，需要支持不同的数据库，如<code>dbcp</code>、<code>c3p0</code>、<code>druid</code>等等，这个时候数据库连接方式有限，而且比较固定不容易更改，所以可以尝试采用简单工厂模式来进行管理数据库连接对象。</p>
+<p>【3】在<code>spring</code>源码中以Factory为后缀的方法或者类都用到工厂模式</p>
+<h2 id="工厂方法模式">5、 工厂方法模式</h2>
+<p>  工厂方法模式将工厂抽象化，并定义一个创建对象的接口。每增加新产品，只需增加该产品以及对应的具体实现工厂类，由具体工厂类决定要实例化的产品是哪个？将对象的创建与实例化延迟到子类，这样工厂的设计就符合”开闭原则“了，扩展时不必去修改原来的代码。</p>
+<h3
+id="工厂方法模式实现原理及uml图">（1）工厂方法模式实现原理及UML图</h3>
+<p>其实也很好理解，就是在简单工厂模式中，会存在判断语句的情况，相当于在工厂类中，一个生产类的方法</p>
+<h2 id="抽象工厂模式">6、 抽象工厂模式</h2>
+<h2 id="总结">7、总结</h2>
+<p>  无论是简单工厂模式，工厂方法模式，还是抽象工厂模式，他们都属于工厂模式，在形式和特点上也是极为相似的，他们的最终目的都是为了解耦。在使用时，我们不必去在意这个模式到底工厂方法模式还是抽象工厂模式，因为他们之间的演变常常是令人琢磨不透的。经常你会发现，明明使用的工厂方法模式，当新需求来临，稍加修改，加入了一个新方法后，由于类中的产品构成了不同等级结构中的产品族，它就变成抽象工厂模式了；而对于抽象工厂模式，当减少一个方法使的提供的产品不再构成产品族之后，它就演变成了工厂方法模式。</p>
+<p>  所以，在使用工厂模式时，只需要关心降低耦合度的目的是否达到即可。</p>
+]]></content>
+      <categories>
+        <category>设计模式</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>设计模式</title>
-    <url>/2025/03/12/Java/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</url>
+    <url>/2025/03/12/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</url>
     <content><![CDATA[<blockquote>
 <p>🚩 学如逆水行舟，不进则退。 —— 《增广贤文》</p>
 </blockquote>
 <h1 id="一设计模式总述">一、设计模式总述</h1>
 <h2 id="什么是设计模式">1、什么是设计模式</h2>
 <p>  
-设计模式是一套经过反复使用的代码设计经验，目的是为了重用代码、让代码更容易被他人理解、保证代码可靠性。<br>
-  项目中合理的运用设计模式可以完美的解决很多问题，每种模式在现实中都有相对应的原理与之对应，每种模式描述了一个在我们周围不断重复发生的问题，以及该问题的核心解决方案。<br>
-  总体而言，设计模式分为三大类：<br>
-<img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250312144024.png" style="zoom:60%;" /></p>
+设计模式是一套经过反复使用的代码设计经验，目的是为了重用代码、让代码更容易被他人理解、保证代码可靠性。</p>
+<p>  项目中合理的运用设计模式可以完美的解决很多问题，每种模式在现实中都有相对应的原理与之对应，每种模式描述了一个在我们周围不断重复发生的问题，以及该问题的核心解决方案。</p>
+<p>  总体而言，设计模式分为三大类：</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250312144024.png" style="zoom:60%;" /></p>
 <h2 id="设计模式的六大原则">2、设计模式的六大原则</h2>
-<p>设计模式主要有六大设计原则，分别是：单一职责原则、开闭原则、里氏替换原则、依赖倒置原则、接口隔离原则、迪米特原则。<br>
-<img src="C:\Users\28778\AppData\Roaming\Typora\typora-user-images\image-20250312103602350.png" alt="image-20250312103602350" style="zoom:70%;" /></p>
+<p>设计模式主要有六大设计原则，分别是：单一职责原则、开闭原则、里氏替换原则、依赖倒置原则、接口隔离原则、迪米特原则。<br><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250312193040.png" style="zoom:67%;" /></p>
 <h3
 id="单一职责原则single-responsibility-principle">（1）单一职责原则（Single
 Responsibility Principle）</h3>
@@ -1337,27 +1434,6 @@ Principle)</strong></h3>
 <li>好处：① 提高模块的独立性 ② 减少依赖 ③
 增强系统的可维护性和可复用性。</li>
 </ol>
-<h1 id="二工厂模式">二、工厂模式</h1>
-<h2 id="引言">1、引言</h2>
-<p>  在面向对象编程中，创建对象实例最常用的方式就是通过 new
-操作符构造一个对象实例，但在某些情况下，new
-操作符直接生成对象会存在一些问题。举例来说，对象的创建需要一系列的步骤：可能需要计算或取得对象的初始位置、选择生成哪个子对象实例、或在生成之前必须先生成一些辅助对象。
-在这些情况，新对象的建立就是一个
-“过程”，而不仅仅是一个操作，就像一部大机器中的一个齿轮传动。<br>  针对上面这种情况，我们如何轻松方便地构造对象实例，而不必关心构造对象示例的细节和复杂过程？解决方案就是使用一个<strong>工厂类来创建对象</strong>。</p>
-<h2 id="什么是工厂模式">2、什么是工厂模式</h2>
-<p>  工厂模式的主要目的是将创建对象的具体过程屏蔽隔离起来，从而达到更高的灵活性。工厂模式可以分为三类：</p>
-<ul>
-<li>简单工厂模式（Simple Factory）</li>
-<li>工厂方法模式（Factory Method）</li>
-<li>抽象工厂模式（Abstract Factory）</li>
-</ul>
-<p>举个栗子区别一下这几个工厂模式：</p>
-<p>（1）在没有工厂的时代，一个用户</p>
-<h2 id="简单工厂模式">3、简单工厂模式</h2>
-<h2 id="工厂方法模式">4、 工厂方法模式</h2>
-<h2 id="抽象工厂模式">5、 抽象工厂模式</h2>
-<h2 id="总结">6、总结</h2>
-<p>  无论是简单工厂模式，工厂方法模式，还是抽象工厂模式，他们都属于工厂模式，在形式和特点上也是极为相似的，他们的最终目的都是为了解耦。在使用时，我们不必去在意这个模式到底工厂方法模式还是抽象工厂模式，因为他们之间的演变常常是令人琢磨不透的。经常你会发现，明明使用的工厂方法模式，当新需求来临，稍加修改，加入了一个新方法后，由于类中的产品构成了不同等级结构中的产品族，它就变成抽象工厂模式了；而对于抽象工厂模式，当减少一个方法使的提供的产品不再构成产品族之后，它就演变成了工厂方法模式。<br>  所以，在使用工厂模式时，只需要关心降低耦合度的目的是否达到即可。</p>
 ]]></content>
       <categories>
         <category>Java</category>
