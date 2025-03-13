@@ -22,23 +22,23 @@
     <meta name="description" content="主要是记录开闭原则定义，以及相关实现demo代码">
 <meta property="og:type" content="article">
 <meta property="og:title" content="开闭原则">
-<meta property="og:url" content="https://ych1016.github.io/2025/03/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/index.html">
+<meta property="og:url" content="https://ych1016.github.io/2025/03/13/DesignPattern/%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/index.html">
 <meta property="og:site_name" content="攻城狮-旺仔">
 <meta property="og:description" content="主要是记录开闭原则定义，以及相关实现demo代码">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-03-13T01:41:26.000Z">
-<meta property="article:modified_time" content="2025-03-13T02:31:13.614Z">
+<meta property="article:modified_time" content="2025-03-13T13:13:43.457Z">
 <meta property="article:author" content="旺仔">
+<meta property="article:tag" content="DesignPattern">
 <meta property="article:tag" content="Java">
-<meta property="article:tag" content="设计模式">
 <meta property="article:tag" content="开闭原则">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://ych1016.github.io/2025/03/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/">
+<link rel="canonical" href="https://ych1016.github.io/2025/03/13/DesignPattern/%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ych1016.github.io/2025/03/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/","path":"2025/03/13/设计模式/开闭原则/","title":"开闭原则"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ych1016.github.io/2025/03/13/DesignPattern/%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/","path":"2025/03/13/DesignPattern/开闭原则/","title":"开闭原则"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>开闭原则 | 攻城狮-旺仔</title>
@@ -156,18 +156,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">19</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -202,7 +202,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ych1016.github.io/2025/03/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/">
+    <link itemprop="mainEntityOfPage" href="https://ych1016.github.io/2025/03/13/DesignPattern/%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/11zon_cropped.png">
@@ -232,7 +232,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2025-03-13 09:41:26 / 修改时间：10:31:13" itemprop="dateCreated datePublished" datetime="2025-03-13T09:41:26+08:00">2025-03-13</time>
+      <time title="创建时间：2025-03-13 09:41:26 / 修改时间：21:13:43" itemprop="dateCreated datePublished" datetime="2025-03-13T09:41:26+08:00">2025-03-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -240,7 +240,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
+          <a href="/categories/DesignPattern/" itemprop="url" rel="index"><span itemprop="name">DesignPattern</span></a>
         </span>
     </span>
 
@@ -318,7 +318,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://ych1016.github.io/2025/03/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/" title="开闭原则">https://ych1016.github.io/2025/03/13/设计模式/开闭原则/</a>
+      <a href="https://ych1016.github.io/2025/03/13/DesignPattern/%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/" title="开闭原则">https://ych1016.github.io/2025/03/13/DesignPattern/开闭原则/</a>
   </li>
   <li class="post-copyright-license">
       <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -376,8 +376,8 @@
 </div>
 
           <div class="post-tags">
+              <a href="/tags/DesignPattern/" rel="tag"># DesignPattern</a>
               <a href="/tags/Java/" rel="tag"># Java</a>
-              <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag"># 设计模式</a>
               <a href="/tags/%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/" rel="tag"># 开闭原则</a>
           </div>
 
@@ -385,12 +385,12 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2025/03/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99/" rel="prev" title="单一职责原则">
+                <a href="/2025/03/13/DesignPattern/%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99/" rel="prev" title="单一职责原则">
                   <i class="fa fa-angle-left"></i> 单一职责原则
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2025/03/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" rel="next" title="单例模式">
+                <a href="/2025/03/13/DesignPattern/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" rel="next" title="单例模式">
                   单例模式 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
@@ -427,14 +427,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">74k</span>
+    <span title="站点总字数">80k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">4:28</span>
+    <span title="站点阅读时长">4:52</span>
   </span>
 </div>
 <div class="busuanzi-count">

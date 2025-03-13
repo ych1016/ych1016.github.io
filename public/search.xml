@@ -1,6 +1,321 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>单一职责原则</title>
+    <url>/2025/03/13/DesignPattern/%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99/</url>
+    <content><![CDATA[<blockquote>
+<p>🚩 学如逆水行舟，不进则退。 —— 《增广贤文》</p>
+</blockquote>
+<h1 id="单一职责原则">单一职责原则</h1>
+<h2 id="一定义">一、定义</h2>
+<p>一个接口或者类只有一个原因引起变化。
+也就是说一个接口或者一个类只有一个职责，只负责意见事情。（此原则同样适用于方法）</p>
+<h2 id="二问题由来">二、问题由来</h2>
+<p>类T负责两个不同的职责：职责P1、职责P2.当由于职责P1需求发生改变而需要求改类T时，有可能会导致原本运行正常的职责P2功能发生故障</p>
+<h2 id="三解决方案">三、解决方案：</h2>
+<p>遵循单一职责原则，分别建立两个类T1、T2，使T1完成P1功能，T2完成P2功能。这样，当修改类T1时，不会使职责P2发生故障风险；同理，当修改T2时，也不会使职责P1发生故障风险</p>
+<h2 id="四代码demo">四、代码demo：</h2>
+<h3 id="类单一原则">1、类单一原则</h3>
+<h4 id="错误示范">(1) 错误示范</h4>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据名称判断吃什么，可以看到类中的方法存在 if-else，也就是这个类需要负责两个不一样的功能，违背了单一原则</span></span><br><span class="line"><span class="comment">     * 改进：</span></span><br><span class="line"><span class="comment">     * 1. 可以抽离类，将这个类抽成两个类，各自负责自己的那部分</span></span><br><span class="line"><span class="comment">     * 2. 可以抽离方法，把if的内容写成一个方法，把else写成一个方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eating</span><span class="params">(String name)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">&quot;羊&quot;</span>.equals(name))&#123;</span><br><span class="line">            System.out.println(name + <span class="string">&quot;吃草&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(name + <span class="string">&quot;吃肉&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">KindDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Animal</span> <span class="variable">animal</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Animal</span>();</span><br><span class="line">        animal.eating(<span class="string">&quot;羊&quot;</span>);</span><br><span class="line">        animal.eating(<span class="string">&quot;牛&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="修正">(2) 修正</h4>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 修正   用装饰器模式，将动物类抽象成父类</span></span><br><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">AnimalFather</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">eating</span><span class="params">(String name)</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MeatAnimal</span> <span class="keyword">extends</span> <span class="title class_">AnimalFather</span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eating</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        System.out.println(name + <span class="string">&quot;吃肉&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">GrassAnimal</span> <span class="keyword">extends</span> <span class="title class_">AnimalFather</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eating</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        System.out.println(name + <span class="string">&quot;吃草&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">KindDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">MeatAnimal</span> <span class="variable">meatAnimal</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MeatAnimal</span>();</span><br><span class="line">        meatAnimal.eating(<span class="string">&quot;狼&quot;</span>);</span><br><span class="line">        <span class="type">GrassAnimal</span> <span class="variable">grassAnimal</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">GrassAnimal</span>();</span><br><span class="line">        grassAnimal.eating(<span class="string">&quot;草&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="方法的单一原则">2、方法的单一原则</h3>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FunctionDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 错误示范</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 当前方法需要完成两个动作，一个是设置用户名称，另外一个是获取用户年龄并返回</span></span><br><span class="line"><span class="comment">     * 不符合方法的单一原则</span></span><br><span class="line"><span class="comment">     * 解决：</span></span><br><span class="line"><span class="comment">     * 拆分方法，将功能模块化</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> Integer <span class="title function_">setNameAndGetAge</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="comment">// 1. 设置用户名</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2. 获取用户年龄</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 修正</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">User2</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="comment">// 设置用户名</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Integer <span class="title function_">getAge</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 获取年龄</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="接口的单一原则">3、接口的单一原则</h3>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InterfaceDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 错误示例</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">IGood</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 可以看到，IGood接口中负责了太多功能，不仅要负责</span></span><br><span class="line"><span class="comment">     * 1. 商品信息管理：获取商品名称 + 获取商品价格</span></span><br><span class="line"><span class="comment">     * 2. 商品售卖管理：购买商品 + 退款</span></span><br><span class="line"><span class="comment">     * 不符合接口的单一原则</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="comment">// 获取商品名称</span></span><br><span class="line">    String <span class="title function_">getName</span><span class="params">()</span>;</span><br><span class="line">    <span class="comment">// 获取商品价格</span></span><br><span class="line">    Double <span class="title function_">getPrice</span><span class="params">()</span>;</span><br><span class="line">    <span class="comment">// 购买商品</span></span><br><span class="line">    Boolean <span class="title function_">buyGood</span><span class="params">()</span>;</span><br><span class="line">    <span class="comment">// 退款</span></span><br><span class="line">    Boolean <span class="title function_">refund</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 改正</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">IGoodInfo</span> &#123;</span><br><span class="line">    <span class="comment">// 获取商品名称</span></span><br><span class="line">    String <span class="title function_">getName</span><span class="params">()</span>;</span><br><span class="line">    <span class="comment">// 获取商品价格</span></span><br><span class="line">    Double <span class="title function_">getPrice</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">IGoodManage</span>&#123;</span><br><span class="line">    <span class="comment">// 购买商品</span></span><br><span class="line">    Boolean <span class="title function_">buyGood</span><span class="params">()</span>;</span><br><span class="line">    <span class="comment">// 退款</span></span><br><span class="line">    Boolean <span class="title function_">refund</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">GoodImpl</span> <span class="keyword">implements</span> <span class="title class_">IGoodInfo</span>, IGoodManage &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Double <span class="title function_">getPrice</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Boolean <span class="title function_">buyGood</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Boolean <span class="title function_">refund</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="五优点">五、优点</h2>
+<ul>
+<li>可以降低类的复杂度，一个类只负责一项职责，其逻辑肯定要比负责多项职责简单的多；</li>
+<li>提高类的可读性，提高系统的可维护性；</li>
+<li>变更引起的风险降低，变更是必然的，如果单一职责原则遵守的好，当修改一个功能时，可以显著降低对其他功能的影响。</li>
+</ul>
+<h2 id="六实际应用">六、实际应用</h2>
+<p>虽然单一原则简单，并且被认为是常识，但在实际开发中还是会存在违背这一原则的存在。为什么呢？因为有职责扩散。所谓职责扩散，就是因为某种原因，职责P被分化为粒度更细的职责P1和P2。</p>
+<p>举个栗子：
+类T只负责一个职责P，这样设计是符合单一职责原则的。后来由于某种原因，也许是需求变更了，也许是程序的设计者境界提高了，需要将职责P细分为粒度更细的职责P1，P2。
+这时如果要使程序遵循单一职责原则，需要将类T也分解为两个类T1和T2，分别负责P1、P2两个职责。
+但是在程序已经写好的情况下，这样做简直太费时间了。
+所以，简单的修改类T，用它来负责两个职责是一个比较不错的选择，虽然这样做有悖于单一职责原则。
+（这样做的风险在于职责扩散的不确定性，因为我们不会想到这个职责P，在未来可能会扩散为P1，P2，P3，P4……Pn。所以记住，在职责扩散到我们无法控制的程度之前，立刻对代码进行重构。）</p>
+<p>就如同上面第四部分的<code>类的单一原则</code>的代码演示，我们为了遵循单一原则，我们把那个动物类抽象成了抽象类，然后再分别新建了吃草动物类和吃肉动物类，理论上满足了单一原则，但实际上的花销很大，如果需求短时间内需要交付，我们可以采取另外的改进措施。
+我们看一下下面这段代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animal2</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eatMeat</span><span class="params">(String name)</span>&#123;</span><br><span class="line">        System.out.println(name + <span class="string">&quot;吃肉&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eatGrass</span><span class="params">(String name)</span>&#123;</span><br><span class="line">        System.out.println(name + <span class="string">&quot;吃草&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面这段代码可以看出，我并没有去新建吃草动物类和吃肉动物类，而是在动物类上将<code>eating</code>方法修改成两个方法，这样虽然也违背了类的单一职责原则，但在方法级别上却是符合单一职责原则的。所以在实际业务开发中，选择遵循哪一种原则还是需要根据实际情况确定。</p>
+]]></content>
+      <categories>
+        <category>DesignPattern</category>
+      </categories>
+      <tags>
+        <tag>DesignPattern</tag>
+        <tag>Java</tag>
+        <tag>单一职责原则</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>开闭原则</title>
+    <url>/2025/03/13/DesignPattern/%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/</url>
+    <content><![CDATA[<blockquote>
+<p>🚩 学如逆水行舟，不进则退。 —— 《增广贤文》</p>
+</blockquote>
+<h1 id="开闭原则">开闭原则</h1>
+<h2 id="一定义">一、定义</h2>
+<p>软件实体对扩展开放，对修改关闭。也就是说，在实际业务开发中，应该通过扩展来实现业务需求和变化，而不是修改已有代码来实现变化。</p>
+<h2 id="二问题由来">二、问题由来</h2>
+<p>在软件的生命周期内，因为变化、升级和维护等原因需要对软件原有代码进行修改时，可能会给旧代码中引入错误，也可能会使我们不得不对整个功能进行重构，并且需要原有代码经过重新测试。</p>
+<h2 id="三解决方案">三、解决方案：</h2>
+<p>当软件需要变化时，尽量通过扩展软件实体的行为来实现变化，而不是通过修改已有的代码来实现变化</p>
+<blockquote>
+<p>举个栗子：
+假如现在有一个普通商品类，继承了商品的接口，然后实现了一些普通商品方法。这时候业务提出新的需求，需要为商品打折扣，但是折扣不是每个商品都会有。我们现在要实现这个业务需求，应该怎么完成？<br>
+1. 在商品接口添加折扣功能<br> 2.
+新建折扣商品类，继承普通商品类，再新建折扣方法。<br>
+毫无疑问，肯定选择第二种方案。为什么？因为如果使用了第一种方案，那么所有继承了商品接口的类都得实现新增的折扣功能，这就需要修改原来的代码，这是非常不妥的。
+而第二种，我们只需要在新定义的折扣方法上接收折扣力度的参数，就能实现折扣商品具备获得原始价格和折扣价格的能力</p>
+</blockquote>
+<h2 id="四代码demo">四、代码demo：</h2>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 商品接口</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">IGood</span> &#123;</span><br><span class="line">    String <span class="title function_">getId</span><span class="params">()</span>;</span><br><span class="line">    String <span class="title function_">getName</span><span class="params">()</span>;</span><br><span class="line">    Double <span class="title function_">getPrice</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 普通商品类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">NormalGood</span> <span class="keyword">implements</span> <span class="title class_">IGood</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Double price;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">NormalGood</span><span class="params">(String id, String name, Double price)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.id = id;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.price = price;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getId</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Double <span class="title function_">getPrice</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.price;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 折扣商品类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">DiscountGood</span> <span class="keyword">extends</span> <span class="title class_">NormalGood</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">DiscountGood</span><span class="params">(String id, String name, Double price)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(id, name, price);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 获得商品折扣价格</span></span><br><span class="line">    <span class="keyword">public</span> Double <span class="title function_">getDisCountPrice</span><span class="params">(Double discount)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>.getPrice() * discount;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="五优点">五、优点</h2>
+<p>提高软件系统的可复用性及可维护性;</p>
+<h2 id="六实际应用">六、实际应用</h2>
+<p>开闭原则是面向对象设计中，最基础的设计原则，开闭原则的核心思想是面向抽象编程，而不是面向实现编程。换句话说，开闭原则无非想表达的是：<strong>用抽象构建框架，用实现扩展细节</strong>。
+因为抽象灵活性好，适应性广，只要抽象的合理，可以基本保持软件架构的稳定。而软件中易变的细节，我们用从抽象派生的实现类来进行扩展，当软件需要发生变化时，我们只需要根据需求重新派生一个实现类来扩展就可以了。当然前提是我们的抽象要合理，要对需求的变更有前瞻性和预见性才行。</p>
+]]></content>
+      <categories>
+        <category>DesignPattern</category>
+      </categories>
+      <tags>
+        <tag>DesignPattern</tag>
+        <tag>Java</tag>
+        <tag>开闭原则</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>DesignPattern</title>
+    <url>/2025/03/12/DesignPattern/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[<blockquote>
+<p>🚩 学如逆水行舟，不进则退。 —— 《增广贤文》</p>
+</blockquote>
+<h1 id="一设计模式总述">一、设计模式总述</h1>
+<h2 id="什么是设计模式">1、什么是设计模式</h2>
+<p>  
+设计模式是一套经过反复使用的代码设计经验，目的是为了重用代码、让代码更容易被他人理解、保证代码可靠性。</p>
+<p>  项目中合理的运用设计模式可以完美的解决很多问题，每种模式在现实中都有相对应的原理与之对应，每种模式描述了一个在我们周围不断重复发生的问题，以及该问题的核心解决方案。</p>
+<p>  总体而言，设计模式分为三大类：</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250312144024.png" style="zoom:60%;" /></p>
+<h2 id="设计模式的六大原则">2、设计模式的六大原则</h2>
+<p>设计模式主要有六大设计原则，分别是：单一职责原则、开闭原则、里氏替换原则、依赖倒置原则、接口隔离原则、迪米特原则。<br><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250312193040.png" style="zoom:67%;" /></p>
+<h3
+id="单一职责原则single-responsibility-principle">（1）单一职责原则（Single
+Responsibility Principle）</h3>
+<ol type="1">
+<li>定义：一个接口或者类只有一个原因引起变化。</li>
+<li>定义解释：即一个接口或者一个类只有一个职责，负责一件事情。（此原则同样适用于方法）</li>
+<li>好处：① 复杂性降低 ② 可读性提高 ③可维护性提高 ④变更风险降低</li>
+</ol>
+<p><strong>详细描述和代码demo:</strong> <a href="/2025/03/13/DesignPattern/%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99/" title="单一职责原则">[单一职责原则]</a></p>
+<h3 id="开闭原则-open-close-principle">（2）开闭原则 <strong>(Open Close
+Principle)</strong></h3>
+<ol type="1">
+<li>定义：软件实体对扩展开放，对修改关闭。</li>
+<li>定义解释：也就是应该通过扩展来实现业务需求和变化，而不是通过修改已有的代码来实现变化。</li>
+<li>好处：① 强系统的稳定性和可扩展性 ②减少对现有代码的影响</li>
+</ol>
+<p><strong>详细描述和代码demo:</strong> <a href="/2025/03/13/DesignPattern/%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/" title="开闭原则">[开闭原则]</a></p>
+<h3 id="里氏替换原则-liskov-substitution-principle">（3）里氏替换原则
+<strong>(Liskov Substitution Principle)</strong></h3>
+<ol type="1">
+<li>定义：任何基类可以出现的地方，子类一定可以出现。</li>
+<li>定义解释：
+<ul>
+<li>子类必须完全实现弗雷的方法</li>
+<li>子类可以有自己的个性</li>
+<li>覆盖或者实现父类方法时，输入参数可以被放大</li>
+<li>覆盖或者实现父类方法时，输出结果可以被缩小</li>
+</ul></li>
+<li>好处：① 提升代码的可靠性和复用性 ②减少继承带来的问题</li>
+</ol>
+<h3 id="依赖倒置原则-dependence-inversion-principle">（4）依赖倒置原则
+<strong>(Dependence Inversion Principle)</strong></h3>
+<ol type="1">
+<li>定义：高层模块不应依赖低层模块，两者都应依赖抽象；抽象不应依赖细节，细节应依赖抽象。</li>
+<li>定义解释：简单点来说，就是面向接口编程。模块间的依赖通过抽象发生，实现类之间不发生直接的依赖关系，其依赖关系时通过接口或者抽象类产生。</li>
+<li>好处：① 降低模块间的耦合 ②提升系统的可扩展性和可维护性</li>
+</ol>
+<h3 id="接口隔离原则-interface-segregation-principle">（5）接口隔离原则
+<strong>(Interface Segregation Principle)</strong></h3>
+<ol type="1">
+<li>定义：建立单一接口，不要建立庞大臃肿的接口，尽量细化接口，接口中的方法尽量少。</li>
+<li>定义解释：应该为各个类建立专用的接口，而不要试图去建立一个很庞大的接口供所有依赖它的类去调用。</li>
+<li>好处：① 提高系统的灵活性和可维护性 ② 减少接口间的耦合。</li>
+</ol>
+<h3 id="迪米特原则-demeter-principle">（6）迪米特原则 <strong>(Demeter
+Principle)</strong></h3>
+<ol type="1">
+<li>定义：<strong>只与直接的朋友通信。</strong>一个类应该对其他类保持最少的了解</li>
+<li>定义解释：也就是说一个类对自己依赖的类知道的越少越好。即对于被依赖的类，无论逻辑多复杂，都尽量地讲逻辑封装在类的内部，对外除了提供的public方法，不对外泄露任何信息。</li>
+<li>好处：① 提高模块的独立性 ② 减少依赖 ③
+增强系统的可维护性和可复用性。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>DesignPattern</tag>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>单例模式</title>
+    <url>/2025/03/13/DesignPattern/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[<blockquote>
+<p>🚩 学如逆水行舟，不进则退。 —— 《增广贤文》</p>
+</blockquote>
+<h1 id="一引言">一、引言</h1>
+<p>  在计算机系统中，线程池、缓存、日志对象、对话框、打印机、显卡的驱动程序对象常被设计成单例，这些应用都或多或少具有资源管理器的功能。
+每台计算机可以有若干个打印机，但只能有一个Printer
+Spooler，以避免两个打印作业同时输出到打印机中。每台计算机可以有若干通信端口，系统应当集中管理这些通信端口，以避免一个通信端口同时被两个请求同时调用。
+总之，选择单例模式就是为了避免不一致状态，避免政出多头。</p>
+<h1 id="二什么是单例模式">二、什么是单例模式？</h1>
+<p>  单例模式可以确保系统中某个类只有一个实例，该类自行实例化并向整个系统提供这个实例的公共访问点，除了该公共访问点，不能通过其他途径访问该实例。</p>
+<blockquote>
+<p>延续我们之前的栗子，还是生产MBP电脑的问题，假如现在MBP工厂只有一台光刻机可以生产芯片，那么，此时我们在创建这台光刻机的时候，就应该将它设置为单例模式。
+也就是整个工厂中有且只有一台，整个程序中也有且只有一个这样的对象。</p>
+<p>但是问题来了，MBPM3要用这台光刻机，MBPM4也要用这台光刻机。那我们该如何保证系统只有一个光刻机对象呢？如果现在都要用，那又该怎么解决呢？</p>
+<p>第一个问题，我们下文分析；第二个问题其实现在就可以回答，答案就是等。想象一下，你去打印店打印东西的时候，如果打印店只有一台打印机，那一定是排在你前面的同学先打完才能轮到你打印。</p>
+</blockquote>
+<p>  那我们就得引入以下单例的几种创建模式了，包括懒汉单例、饿汉单例以及登记式单例</p>
+<h1 id="三编写单例的注意事项">三、编写单例的注意事项</h1>
+<h2 id="三个必要条件">（1） 三个必要条件</h2>
+<p>单例模式的实现需要三个必要的条件：</p>
+<ol type="1">
+<li>单例类的构造函数必须是私有的，才能将类的创建权控制在类的内部，从而使得类的外部不能创建类的实例。</li>
+<li>单例通过一个私有的静态变量来存储其唯一实例。</li>
+<li>单例类通过提供一个公开的静态方法，使得外部使用者可以访问类的唯一实例。</li>
+</ol>
+<h2 id="考虑三个问题">（2）考虑三个问题</h2>
+<p>实现单例类时，还需要考虑三个问题：</p>
+<ul>
+<li>创建单例对象时，是否线程安全。</li>
+<li>单例对象的创建，是否延时加载。</li>
+<li>获取单例对象时，是否需要加锁（锁会导致低性能）</li>
+</ul>
+<h1 id="四单例模式优缺点">四、单例模式优缺点</h1>
+<p><strong>（1）优点：</strong></p>
+<ol type="1">
+<li>可以确保所有的对象都访问同一个实例</li>
+<li>可以节约系统资源，避免了频繁创建和销毁的对象</li>
+<li>避免对共享资源的多重占用</li>
+</ol>
+<p><strong>（2）缺点：</strong></p>
+<ol type="1">
+<li>不适合变化的对象，如果同一类型的对象总是要在不同场景发生变化，单例就会造成数据错误</li>
+<li>职责过重，一定程度上违背了”单一职责原则“</li>
+<li>如果实例化的对象长时间不被利用，系统可能会认为是垃圾而被挥手</li>
+</ol>
+<h1 id="五懒汉单例">五、懒汉单例</h1>
+<h2 id="定义">（1）定义</h2>
+<p>  
+所谓懒汉单例，其实跟字面意思一样，就是“懒”，得等到需要的时候才回去创建，项目启动不会主动去创建对象，等程序运行到需要这个对象的时候才去创建。</p>
+<blockquote>
+<p>贴合我们的栗子：最开始生产电脑的时候，MBPM3和MBPM4都不知道没有制造芯片的光刻机，然后各自去生产各自的显示器、键盘等，等到要用的时候才发现该去买了，那要怎么保证不会买重复呢？</p>
+</blockquote>
+<h2 id="代码demo">（2）代码demo</h2>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;我是懒汉，恭喜你启动我的创建功能&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">Singleton</span> <span class="variable">singleton</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="comment">// 静态工厂方法，提供唯一公共访问点</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title function_">getInstance</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(Objects.isNull(singleton))&#123;</span><br><span class="line">            singleton = <span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="新的问题">（3）新的问题</h2>
+<p>  
+假如现在在一个高并发的场景下，线程1和线程2都需要这个单例对象，此时恰好系统对这个对象的创建使用了懒汉单例，那么就会存在如下图的问题。
+<img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313191948.png" style="zoom: 67%;">
+线程1调用了获取单例对象的静态方法，线程2也调用了获取单例的方法，如果线程1和线程2在同一时刻判断单例是否存在，那给它们的回答必然都会是不存在，那么就会导致线程1走创建单例的代码，线程2也会走创建单例的代码。
+这样一下子就创建了两个对象，不符合单例的定义。并且现在的考虑是在两个线程下，要是现在是100个线程，那很有可能会创建出100个对象，这是非常危险的。</p>
+<p>  
+那可以怎么改进呢？线程存在高并发问题，第一时间想到了锁，可以把获取单例对象的方法锁起来，每次只允许一个线程进入。于是有了如下的代码：</p>
+<h3 id="线程同步机制">【1】线程同步机制</h3>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 添加同步机制</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SingletonV2</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">SingletonV2</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;我是懒汉，恭喜你启动我的创建功能&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">SingletonV2</span> <span class="variable">singletonV2</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="comment">// 静态工厂方法，提供唯一公共访问点</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> SingletonV2 <span class="title function_">getInstance</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (Objects.isNull(singletonV2)) &#123;</span><br><span class="line">            singletonV2 = <span class="keyword">new</span> <span class="title class_">SingletonV2</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> singletonV2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  
+但是现在又存在一个问题，所有线程每次获取这个单例对象，就得同步（被加锁，排队获取）。说明我们锁的粒度太大了，应该把锁的粒度延迟到创建对象的时候，于是我们有了第三版的代码。</p>
+<h3 id="双重判断">【2】双重判断</h3>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 双重判断</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SingletonV3</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">SingletonV3</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;我是懒汉，恭喜你启动我的创建功能&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="type">SingletonV3</span> <span class="variable">singletonV3</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="comment">// 静态工厂方法，提供唯一公共访问点</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> SingletonV3 <span class="title function_">getInstance</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (Objects.isNull(singletonV3)) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (SingletonV3.class) &#123;</span><br><span class="line">                <span class="keyword">if</span> (Objects.isNull(singletonV3)) &#123;</span><br><span class="line">                    singletonV3 = <span class="keyword">new</span> <span class="title class_">SingletonV3</span>();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> singletonV3;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>（1）为什么 getInstance() 方法需要使用两个 if
+(Objects.isNull(singletonV3)) 进行判断?</p>
+<p>不加的代码如下： <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> SingletonV3 <span class="title function_">getInstance</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (Objects.isNull(singletonV3)) &#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (SingletonV3.class) &#123;</span><br><span class="line">            singletonV3 = <span class="keyword">new</span> <span class="title class_">SingletonV3</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> singletonV3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>   
+假设高并发下，线程1和线程2都通过了第一个if条件。若线程1先抢到了锁，new了一个对象，释放锁。在这个时候，线程2也抢到了锁，现在没有做第二个if判断，那么线程2就会再new出一个对象。这样便不符合单例的定义。
+所以使用两个if判断，确保只有第一次调用单例的时候才会做同步，这样也是线程安全的，同时避免了每次都同步的性能损耗。</p>
+<p>（2）volatile关键字的作用是什么？</p>
+<p>   volatile的作用主要是禁止指令重排序。假设在不使用 volatile
+的情况下，两个线程1、2，都是第一次调用该单例方法，线程1先执行 singleton
+= new Singleton()，
+但由于构造方法不是一个原子操作，编译后会生成多条字节码指令，由于 JAVA的
+指令重排序，可能会先执行 singleton
+的赋值操作，该操作实际只是在内存中开辟一片存储对象的区域后直接返回内存的引用，
+之后 singleton
+便不为空了，但是实际的初始化操作却还没有执行。如果此时线程2进入，就会拿到一个不为空的但是没有完成初始化的singleton
+对象，
+所以需要加入volatile关键字，禁止指令重排序优化，从而安全的实现单例。</p>
+<h3 id="静态内部类">【3】 静态内部类</h3>
+<p>  
+前面的两种都是靠加锁才实现了单例创建的唯一性。对于高并发的系统来说，加锁会对系统的效率产生很大影响，那有没有一种方法能不加锁实现单例的创建呢？</p>
+<p>  
+在讲解之前，我们需要明白关于静态内部类的一个点，那就是：<strong>在Java中，外部类被加载时，静态内部类不会被初始化，只有首次访问静态内部类时（如创建实例，访问静态成员等），才会触发初始化。</strong></p>
+<p>  
+这不就是我们懒汉单例所需要的吗，不访问不初始化，访问了才创建。那么我们就可以很快的想出，在单例类中定义一个静态内部类，静态内部类定义单例对象作为静态成员，
+然后在 getInstance() 方法中，返回静态内部类中静态成员。代码如下：
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 静态内部类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SingletonV4</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">SingletonV4</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;我是懒汉，恭喜你启动我的创建功能&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">LayHolder</span> &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">SingletonV4</span> <span class="variable">INSTANCE</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SingletonV4</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 静态工厂方法，提供唯一公共访问点</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> SingletonV4 <span class="title function_">getInstance</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> LayHolder.INSTANCE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="六饿汉单例">六、饿汉单例</h1>
+<h2 id="定义-1">（1）定义</h2>
+<p>  
+所谓饿汉单例，就是预防饥饿，即在项目启动时，就把所定义的单例对象创建好，这样就不用考虑多线程高并发问题。</p>
+<blockquote>
+<p>贴合我们的栗子：最开始生产电脑的时候，MBP公司就先买好了光刻机，MBPM3和MBPM4要使用的话，就直接排队使用，不用考虑是谁去买的问题。</p>
+</blockquote>
+<h2 id="实现代码">（2）实现代码：</h2>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Single</span> &#123;</span><br><span class="line">    Single() &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;我是饿汉，不用调用我，我也会帮你创建好&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="type">Single</span> <span class="variable">single</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Single</span>();</span><br><span class="line">    <span class="comment">// 静态工厂方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Single <span class="title function_">getInstance</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> single;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="七懒汉单例和饿汉单例对比">七、懒汉单例和饿汉单例对比</h1>
+<p><strong>1、 初始化和首次调用</strong> -
+饿汉式是在类加载时，就将单例初始化完成，保证获取实例的时候，单例是已经存在的了。所以在第一次调用时速度也会更快，因为其资源已经初始化完成。
+-
+懒汉式会延迟加载，只有在首次调用时才会实例化单例，如果初始化所需要的工作比较多，那么首次访问性能上会有些延迟，不过之后就和饿汉式一样了。</p>
+<p><strong>2、线程安全方面</strong> -
+饿汉式天生就是线程安全的，可以直接用于多线程而不会出现问题； -
+懒汉式本身是非线程安全的，需要通过额外的机制保证线程安全。</p>
+<h1 id="五登记式单例">五、登记式单例</h1>
+<h2 id="定义-2">（1）定义</h2>
+<p>  登记式单例又称注册式单例，就是将每一个实例都登记到某一个地方，使用唯一的标识获取实例。
+注册单例有两种：① 枚举登记； ② 容器缓存（Spring源码常用）</p>
+<h2 id="枚举登记">（2）枚举登记</h2>
+<h3 id="引言">【1】 引言</h3>
+<p>在Java中，除了可以使用 new 和 工厂
+方式创建对象外，还可以使用克隆、反序列化和反射创建对象，但这些方式在创建对象时有可能导致单例对象的不唯一性，如何解决呢？</p>
+<p>（1）为了防止客户端使用克隆方法创建对象，单例类不能使用 Cloneable
+接口，即不能支持 clone() 方法</p>
+<p>（2）由于反射可以获取到类的构造函数，包括私有构造函数，因此反射可以生成新的对象，这个除了枚举基本没法避开</p>
+<p>（3）在原型模式中，我们可以通过反序列化实现克隆，反序列化也会生成新的对象。具体操作是：每次调用
+readObject()
+方法，都将会返回一个新建的实例对象，这个实例对象不同于类在初始化时创建的实例对象。</p>
+<blockquote>
+<p>那反序列化如何避免？<br> ① 单例类不能实现
+Serializable接口，即不允许该类支持序列化；<br> ② 枚举</p>
+</blockquote>
+<p>因为Java虚拟机会保证枚举对象的唯一性，因此每一个枚举类型和定义的枚举变量在JVM中都是唯一的。并且通过枚举实现的单例，既可以避免多线程同步问题；还可以防止通过反射和反序列化来重新创建新的对象。</p>
+<h3 id="实现代码-1">【2】实现代码：</h3>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="title class_">EnumSingleton</span> &#123;</span><br><span class="line">    INSTANCE</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="容器缓存">（3）容器缓存</h2>
+<h3 id="实现原理">【1】实现原理</h3>
+<p>登记式单例实际上维护了一组单例类的实例，将这些实例存放在一个Map（登记薄）中，对于已经登记过的实例，则从Map直接返回，对于没有登记的，则先登记，然后返回。</p>
+<h3 id="代码实现">【2】 代码实现</h3>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 登记型单例</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CashSingleton</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">CashSingleton</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;我是登记型单例，我已经帮你登记好了&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Map&lt;String, CashSingleton&gt; singletonMap = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">    <span class="comment">// 在类加载时执行，且只能执行一次</span></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="type">CashSingleton</span> <span class="variable">cashSingleton</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CashSingleton</span>();</span><br><span class="line">        singletonMap.put(cashSingleton.getClass().getName(), cashSingleton);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 静态工厂，返回此类唯一实例</span></span><br><span class="line">    <span class="keyword">public</span> CashSingleton <span class="title function_">getInstance</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (Objects.isNull(name)) &#123;</span><br><span class="line">            name = CashSingleton.class.getName();</span><br><span class="line">            System.out.println(<span class="string">&quot; name == null &quot;</span> + <span class="string">&quot;----&gt;name=&quot;</span> + name);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (Objects.isNull(singletonMap.get(name))) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                singletonMap.put(name, (CashSingleton) Class.forName(name).newInstance());</span><br><span class="line">            &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InstantiationException e) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> singletonMap.get(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>DesignPattern</category>
+      </categories>
+      <tags>
+        <tag>DesignPattern</tag>
+        <tag>Java</tag>
+        <tag>单例模式</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Acwing基础算法板子</title>
     <url>/2024/12/14/Algorithm/Acwing%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E6%9D%BF%E5%AD%90/</url>
     <content><![CDATA[<h1 id="第一讲-基础算法">第一讲 基础算法</h1>
@@ -157,6 +472,183 @@ href="https://www.acwing.com/problem/content/843/">字符串哈希</a></h3>
       <tags>
         <tag>力扣</tag>
         <tag>热题100</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>工厂模式</title>
+    <url>/2025/03/13/DesignPattern/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[<blockquote>
+<p>🚩 学如逆水行舟，不进则退。 —— 《增广贤文》</p>
+</blockquote>
+<h1 id="工厂模式">工厂模式</h1>
+<h2 id="引言">1、引言</h2>
+<p>  在面向对象编程中，创建对象实例最常用的方式就是通过 new
+操作符构造一个对象实例，但在某些情况下，new
+操作符直接生成对象会存在一些问题。举例来说，对象的创建需要一系列的步骤：可能需要计算或取得对象的初始位置、选择生成哪个子对象实例、或在生成之前必须先生成一些辅助对象。
+在这些情况，新对象的建立就是一个
+“过程”，而不仅仅是一个操作，就像一部大机器中的一个齿轮传动。</p>
+<p>  针对上面这种情况，我们如何轻松方便地构造对象实例，而不必关心构造对象示例的细节和复杂过程？解决方案就是使用一个<strong>工厂类来创建对象</strong>。</p>
+<h2 id="什么是工厂模式">2、什么是工厂模式</h2>
+<p>  工厂模式的主要目的是将创建对象的具体过程屏蔽隔离起来，从而达到更高的灵活性。工厂模式可以分为三类：</p>
+<ul>
+<li><strong>简单工厂模式（Simple
+Factory）：</strong>只有唯一工厂（简单工厂），一个产品接口/抽象类，根据简单工厂中的静态方法来创建具体产品对象。适用于产品较少，几乎不扩展的情景</li>
+<li><strong>工厂方法模式（Factory
+Method）：</strong>有多个工厂（抽象工厂+多个具体工厂），一个产品接口/抽象类，根据继承抽象工厂中的方法来多态创建具体产品对象。适用于一个类型的多个产品</li>
+<li><strong>抽象工厂模式（Abstract
+Factory）：</strong>有多个工厂（抽象工厂+多个具体工厂），多个产品接口/抽象类，对产品子类进行分组，根据继承抽象工厂中的方法多态创建同组的不同具体产品对象。适用于多个类型的多个产品</li>
+</ul>
+<p>举个生产电脑的栗子介绍一下这几个工厂模式：</p>
+<p>（1）在没有工厂的时代，如果客户需要一款MBP电脑，那么就需要客户去创建一款MBP电脑，然后拿来用。</p>
+<p>（2）简单工厂模式：后来出现了工厂，用户不再需要去创建MBP电脑，由工厂进行创建，想要什么MBP电脑，直接通过工厂创建就可以了。比如想要M3系列的MBP电脑，工厂就创建这个系列的电脑。</p>
+<p>（3）工厂方法模式：为了满足客户，MBP系列越来越多，如M3、M4等等系列，一个工厂无法创建所有的MBP系列，于是又单独分出来多个具体的工厂，每个具体工厂创建一种系列，即具体工厂类只能创建一个具体产品。但是MBP电脑工厂还是个抽象，你需要指定某个具体的工厂才能生产电脑出来。</p>
+<p>（4）抽象工厂模式：随着客户要求越来越高，MBP电脑车必须配置鼠标，于是这个工厂开始生产MBP电脑和需要的鼠标。最终是客户只要对宝马的销售员说：我要M3的带有鼠标的MBP电脑，销售员就直接给他M3的带有鼠标的MBP电脑了。而不用自己去创建M3的带有鼠标的MBP电脑。</p>
+<h2 id="无工厂模式实现">3、无工厂模式实现</h2>
+<p>  如果没有工厂模式，那么用户要获得MBP电脑就得自己去创建，想要什么型号，就得找到对应的型号去new。以下是对应类图以及实现。</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250312203232.png" style="zoom: 33%;" /></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Customer</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Customer</span> <span class="variable">customer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Customer</span>();</span><br><span class="line">        customer.createMBPM3();</span><br><span class="line">        customer.createMBPM4();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> MBPM3 <span class="title function_">createMBPM3</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MBPM3</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> MBPM4 <span class="title function_">createMBPM4</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MBPM4</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MBPM3</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MBPM3</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;生产---&gt; MBPM3电脑&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MBPM4</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MBPM4</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;生产MBPM4电脑&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="简单工厂模式">4、简单工厂模式</h2>
+<p>  简单工厂模式有叫做静态工厂方法模式（static Factory Method
+pattern），它时通过使用静态方法接受不同的参数来返回不同的实例对象。简单工厂模式的核心是定义一个创建对象的接口，将对象的创建和本身的业务逻辑分离，降低系统的耦合度，使得以后需要改变时，只需要修改工厂类即可。</p>
+<h3 id="简单工厂实现原理及uml图">（1）简单工厂实现原理及UML图</h3>
+<p>  其实实现的主要原理还是利用到了多态的概念，可以用父类去接子类的对象，这就非常方便我们将创建对象的方法进行抽象，我们只需要定义一个公共的MBP父类，用不同型号的子类去继承它。对于创建子类对象的过程交给工厂完成，最后用父类去接创建出来的子类对象即可。</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250312205351.png" style="zoom:50%;" /></p>
+<h3 id="实现代码">（2）实现代码</h3>
+<p>产品类：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MBP</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MBP</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MBPM3</span> <span class="keyword">extends</span> <span class="title class_">MBP</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MBPM3</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;生产M-----&gt;MBP3&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MBPM4</span> <span class="keyword">extends</span> <span class="title class_">MBP</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MBPM4</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;生产M-----&gt;MBP4&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>工厂类：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Factory</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> MBP <span class="title function_">createMBP</span><span class="params">(String type)</span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (type)&#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;M3&quot;</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MBPM3</span>();</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;M4&quot;</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MBPM4</span>();</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 静态工厂</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">public</span> MBP <span class="title function_">createMBPStatic</span><span class="params">(String type)</span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (type)&#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;M3&quot;</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MBPM3</span>();</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;M4&quot;</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MBPM4</span>();</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>用户类：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Customer</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Factory</span> <span class="variable">factory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Factory</span>();</span><br><span class="line">        <span class="type">MBP</span> <span class="variable">m3</span> <span class="operator">=</span> factory.createMBP(<span class="string">&quot;M3&quot;</span>);</span><br><span class="line">        <span class="type">MBP</span> <span class="variable">m4</span> <span class="operator">=</span> factory.createMBP(<span class="string">&quot;M4&quot;</span>);</span><br><span class="line">		<span class="comment">// 静态工厂</span></span><br><span class="line">        <span class="type">MBP</span> <span class="variable">m31</span> <span class="operator">=</span> Factory.createMBPStatic(<span class="string">&quot;M3&quot;</span>);</span><br><span class="line">        <span class="type">MBP</span> <span class="variable">m41</span> <span class="operator">=</span> Factory.createMBPStatic(<span class="string">&quot;M4&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="优缺点">（3）优缺点</h3>
+<ul>
+<li>优点：简单工厂可以使客户端免除直接创建对象的职责，能够根据需要创建出对应的产品。实现客户端可产品类的代码分离。此外，可以通过配置文件来实现不修改客户端代码的情况下添加新的具体产品类</li>
+<li>缺点：<strong>违背了开闭原则</strong>，如果需要新增其他产品类，就必须在工厂类中新增类似<code>if-else</code>的条件判断（上面的演示代码用了<code>switch</code>），虽然可以用配置文件来改进，但是整体上而言，系统扩展相对于其他工厂模式要困难很多。
+<ul>
+<li>关于如何使用配置文件改进简单工厂，在这里描述一下：其实就是将创建工厂的条件，上述代码中的<code>String type</code>，改成是根据类路径来创建对象。再详细点就是，将类路径写在配置文件中，然后工厂在创建对象的时候，根据获取到的类路径，用反射创建出对象。这样，即使有了新的产品，我们也只需要在新建产品类并继承产品父类，然后在配置文件中添加新建产品类的类路径。</li>
+</ul></li>
+</ul>
+<h3 id="简单工厂和静态工厂">（4）简单工厂和静态工厂</h3>
+<p>可以看到上面用户类中使用了两种方法创建实例对象，一种是类方法，一种是类的静态方法。那使用类的静态方法有什么好处呢？</p>
+<ul>
+<li>使用静态方法可以不需要使用<code>new</code>的方法创建对象，方便调用</li>
+<li>控制实例的创建，如缓存实例，延迟初始化</li>
+<li>减少客户端对具体类的依赖</li>
+</ul>
+<h3 id="简单工厂在实际中的应用">（5）简单工厂在实际中的应用</h3>
+<p>【1】如<code>DataFormat</code>中这个方法就使用了简单工厂</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250312212636.png" style="zoom: 67%;" /></p>
+<p>【2】对于数据库连接池，如业务需要连接数据库时，需要支持不同的数据库，如<code>dbcp</code>、<code>c3p0</code>、<code>druid</code>等等，这个时候数据库连接方式有限，而且比较固定不容易更改，所以可以尝试采用简单工厂模式来进行管理数据库连接对象。</p>
+<p>【3】在<code>spring</code>源码中以Factory为后缀的方法或者类都用到工厂模式</p>
+<h2 id="工厂方法模式">5、 工厂方法模式</h2>
+<p>  工厂方法模式将工厂抽象化，并定义一个创建对象的接口。每增加新产品，只需增加该产品以及对应的具体实现工厂类，由具体工厂类决定要实例化的产品是哪个？将对象的创建与实例化延迟到子类，这样工厂的设计就符合”开闭原则“了，扩展时不必去修改原来的代码。</p>
+<h3
+id="工厂方法模式实现原理及uml图">（1）工厂方法模式实现原理及UML图</h3>
+<p>  其实也很好理解，就是在简单工厂模式中，会存在判断语句（<code>if-else</code>或<code>switch</code>）的情况，相当于在工厂类中，一个生产类的方法实现了多个不同的功能，不符合类的单一职责原则；另外，如果现在产品出了M5系列的MBP电脑，那就需要再修改工厂的代码，不符合开闭原则。</p>
+<p>  所以我们的解决方法也就呼之欲出。首先是想到把判断语句修改成功能函数，但对于一个工厂而言，即使把我的生产功能模块化，我还是需要知道，我应该生产哪个种类的产品，需要提示。</p>
+<p>  所以我们进一步改造，将原来的工厂抽象成接口，然后为每一个系列构建各自的工厂子类，继承该接口。将对象的创建与实例化延迟到各自的工厂子类。</p>
+<p>  最后，在使用时，我们可以利用多态的特性，用同一的工厂接口接收不同系列的工厂子类，然后用同一的接口方法创建出不同的系列。</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313105034.png" style="zoom: 67%;" /></p>
+<h3 id="实现代码demo">（2）实现代码demo：</h3>
+<p>产品类： <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MBP</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MBP</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MBPM3</span> <span class="keyword">extends</span> <span class="title class_">MBP</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MBPM3</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;生产 ----- &gt; MBPM3&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MBPM4</span> <span class="keyword">extends</span> <span class="title class_">MBP</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MBPM4</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;生产 ----- &gt; MBPM4&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 工厂类： <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">Factory</span> &#123;</span><br><span class="line">    MBP <span class="title function_">createMBP</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MBPM3Factory</span> <span class="keyword">implements</span> <span class="title class_">Factory</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> MBP <span class="title function_">createMBP</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MBPM3</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MBPM4Factory</span> <span class="keyword">implements</span> <span class="title class_">Factory</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> MBP <span class="title function_">createMBP</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MBPM4</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 用户类：
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FactoryFunctionCustomer</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Factory</span> <span class="variable">factory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MBPM3Factory</span>();</span><br><span class="line">        <span class="type">MBP</span> <span class="variable">m3</span> <span class="operator">=</span> factory.createMBP();</span><br><span class="line">        factory = <span class="keyword">new</span> <span class="title class_">MBPM4Factory</span>();</span><br><span class="line">        <span class="type">MBP</span> <span class="variable">m4</span> <span class="operator">=</span> factory.createMBP();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="优缺点-1">（3）优缺点</h3>
+<p>其中，最主要的是 <code>Factory</code>
+接口，以及接口中的<code>createMBP</code>抽象方法，通过这个方法来创建具体产品，这也是为什么叫工厂方法的原因。和简单工厂的静态方法不同，这里使用的非静态调用方式。而且可以发现没有简单工厂的条件判断逻辑。扩展性相对较好</p>
+<ul>
+<li>优点：完全实现开闭原则和类的单一职责原则，实现了可扩展和更复杂的层次接口。明确了职责，具有多态性，适用于任何实体类</li>
+<li>缺点：如果业务增加，会使得系统中的类的个数成倍增加，提高了代码的复杂度。</li>
+</ul>
+<h3 id="工厂方法在实际中的应用">（4）工厂方法在实际中的应用</h3>
+<p>【1】如<code>Slf4j</code>中这个方法就使用了工厂方法模式 （1）Slf4j
+的产品类 定义了一个抽象产品Logger： <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Logger</span> &#123;</span><br><span class="line">    ... ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+SubstituteLogger就是一种具体的产品
+<img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313131210.png" style="zoom: 67%;" /></p>
+<p>（2）Slf4j定义一个抽象工厂ILoggerFactory <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">ILoggerFactory</span> &#123;</span><br><span class="line">    Logger <span class="title function_">getLogger</span><span class="params">(String var1)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+（3）具体工厂有很多，都实现了抽象工厂，这里展示其中一个SubstituteLoggerFactory
+<img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313130552.png" style="zoom: 67%;" /></p>
+<p>（4）SubstituteLoggerFactory工厂在生产SubstituteLogger具体产品时，做了一定的处理。而真正使用时，只需要通过getLogger方法就可以得到具体产品，这就是工厂方法模式的魅力。</p>
+<h2 id="抽象工厂模式">6、 抽象工厂模式</h2>
+<p>  在工厂方法模式中，我们使用一个工厂创建一个产品，一个具体工厂对应一个具体产品，但有时候我们需要一个工厂能有提供多个产品对象，而不是单一的对象，这个时候我们就需要使用抽象工厂模式。</p>
+<blockquote>
+<p>  代入到我们上面的栗子可以很好理解：现在的场景就是MBPM3它有自己的显示器和键盘、MBPM4它也有自己的显示器和键盘，但是我们之前的工厂方法，只给出了生产电脑的细节，但是生产电脑组件的细节却没给出。</p>
+<p>  所以我们要优化我们的代码，让它拥有生产电脑组件的细节。怎么优化呢？其实我们会发现，MBPM3和MBPM4都需要显示器和键盘，只是型号不一样，
+那按照工厂方法的角度来看，我们就可以把显示器和键盘先抽象成产品接口，
+然后再创建对应产品类型。</p>
+<p>  对于具体工厂而言，我们也只需要将原本生产电脑的接口，改成生产显示器和生产键盘。</p>
+</blockquote>
+<p>但在讲解抽象工厂模式之前，我们还需要先认识几个概念：</p>
+<p>（1）产品等级结构：产品等级结构指的是产品的继承机构。例如一个空调抽象类，它有海尔空调、格力空调、美的空调等一系列的子类，那么这个空调抽象类和他的子类就构成了一个产品等级结构。
+&gt; 放到上面的栗子，可以看成是
+一个键盘抽象类，它有MBPM3键盘、MBPM4键盘等一系列子类，那么这个键盘抽象类和它的子类就构成了一个产品等级结构。</p>
+<p>（2）产品族：产品族是指由同一个工厂生产的，位于不同产品等级结构中的一组产品。比如，海尔工厂生产海尔空调、海尔冰箱，那么海尔空调则位于海尔产品族中。
+&gt; 放到上面的栗子，可以看成 MBPM3工厂能生产
+MBPM3键盘、MBPM3显示器，那么 MBPM3键盘和MBPM3显示器就位于 MBPM3
+的产品族中。</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313134033.png" style="zoom: 67%;" /></p>
+<h3 id="抽象工厂模式实现原理及uml图">（1）
+抽象工厂模式实现原理及UML图</h3>
+<p>  抽象工厂模式主要用于创建相关对象的家族。当一个产品族中需要被设计在一起工作时，通过抽象工厂模式，能够保证客户端始终只使用同一个产品族中的对象；
+并且通过隔离具体类的生成，使得客户端不需要明确指定具体生成类；所有具体工厂都实现了抽象工厂中定义的公共接口，因此只需要改变具体工厂的实例，就可以在某种程度上改变整个软件系统的行为。</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313163859.png" style="zoom: 67%;" /></p>
+<h3 id="实现代码demo-1">（2）实现代码demo</h3>
+<p>产品类： <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 键盘</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">KeyBoard</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// MBPM3键盘</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MBPM3KB</span> <span class="keyword">implements</span> <span class="title class_">KeyBoard</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MBPM3KB</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;生产 ---------&gt; MBPM3键盘&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// MBPM4键盘</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MBPM4KB</span> <span class="keyword">implements</span> <span class="title class_">KeyBoard</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MBPM4KB</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;生产 ---------&gt; MBPM4键盘&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 显示器</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Monitor</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// MBPM3显示器</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MBPM3MT</span> <span class="keyword">implements</span> <span class="title class_">Monitor</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MBPM3MT</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;生产 ---------&gt;  MBPM3显示器&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// MBPM4显示器</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MBPM4MT</span> <span class="keyword">implements</span> <span class="title class_">Monitor</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MBPM4MT</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;生产 ---------&gt;  MBPM4显示器&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>工厂类： <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">Factory</span>&#123;</span><br><span class="line">    Monitor <span class="title function_">createMonitor</span><span class="params">()</span>;</span><br><span class="line">    KeyBoard <span class="title function_">createKeyBoard</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MBPM3Factory</span> <span class="keyword">implements</span> <span class="title class_">Factory</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Monitor <span class="title function_">createMonitor</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MBPM3MT</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> KeyBoard <span class="title function_">createKeyBoard</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MBPM3KB</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MBPM4Factory</span> <span class="keyword">implements</span> <span class="title class_">Factory</span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Monitor <span class="title function_">createMonitor</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MBPM4MT</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> KeyBoard <span class="title function_">createKeyBoard</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MBPM4KB</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>客户端： <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AbstractFactoryCustomer</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Factory</span> <span class="variable">m3Factory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MBPM3Factory</span>();</span><br><span class="line">        m3Factory.createKeyBoard();</span><br><span class="line">        m3Factory.createMonitor();</span><br><span class="line"></span><br><span class="line">        <span class="type">Factory</span> <span class="variable">m4Factory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MBPM4Factory</span>();</span><br><span class="line">        m4Factory.createMonitor();</span><br><span class="line">        m4Factory.createKeyBoard();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="抽象工厂和工厂方法">（3）抽象工厂和工厂方法</h3>
+<p>【1】
+工厂方法只有一个抽象产品类和一个抽象工厂类，但是可以派生出多个具体产品类和具体工厂类，每个具体工厂类只能创建一个具体产品类的实例。</p>
+<p>【2】抽象工厂模式拥有多个抽象产品类（产品族）和一个抽象工厂类，每个抽象产品类可以派生出多个具体产品类；抽象工厂类也可以派生出多个具体工厂类，同时每个具体工厂类可以创建多个具体产品类的实例。</p>
+<h3 id="优缺点-2">（4）优缺点</h3>
+<ul>
+<li>增加分组比较容易，并且能大大减少工厂类的数量</li>
+<li>因为分组，所有分组中的产品扩展比较困难，比如新增鼠标，那么需要动的类就有
+<code>Factory</code>、<code>MBPM3Factory</code>、<code>MBPM4Factory</code>，几乎所有工厂类</li>
+</ul>
+<h3 id="抽象工厂在实际中的应用">（5）抽象工厂在实际中的应用</h3>
+<p>  抽象工厂在 <code>spring</code> 中的应用，我们查看
+<code>spring</code> 源码可以看到，BeanFactory 是用于管理 Bean
+的一个工厂，所有工厂都是 BeanFactory 的子类。 这样我们可以通过 IOC
+容器来管理访问 Bean，根据不同的策略调用 getBean()
+方法，从而获得具体对象。</p>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313163510.png" style="zoom: 67%;" /></p>
+<p>   BeanFactory 的子类主要有
+ClassPathXmlApplicationContext、XmlWebApplicationContext、StaticWebApplicationContext、StaticApplicationContext。在
+Spring 中，DefaultListableBeanFactory 实现了所有工厂的公共逻辑。</p>
+<h2 id="总结">7、总结</h2>
+<p>  无论是简单工厂模式，工厂方法模式，还是抽象工厂模式，他们都属于工厂模式，在形式和特点上也是极为相似的，他们的最终目的都是为了解耦。在使用时，我们不必去在意这个模式到底工厂方法模式还是抽象工厂模式，因为他们之间的演变常常是令人琢磨不透的。经常你会发现，明明使用的工厂方法模式，当新需求来临，稍加修改，加入了一个新方法后，由于类中的产品构成了不同等级结构中的产品族，它就变成抽象工厂模式了；而对于抽象工厂模式，当减少一个方法使的提供的产品不再构成产品族之后，它就演变成了工厂方法模式。</p>
+<p>  所以，在使用工厂模式时，只需要关心降低耦合度的目的是否达到即可。</p>
+]]></content>
+      <categories>
+        <category>DesignPattern</category>
+      </categories>
+      <tags>
+        <tag>DesignPattern</tag>
+        <tag>Java</tag>
+        <tag>工厂模式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>实习坑点</title>
+    <url>/2025/01/04/Java/%E5%AE%9E%E4%B9%A0%E5%9D%91%E7%82%B9/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="39f6fc65c56b885e0fadb17bc2a8eeb1a64c28db461f500933fdcec77f7e0e02">1f6bb8509d126916afe1b073331b8b303e8fc819b81490765ad837df7dc1353814a72d845b5617ce1fc01ae8d2343ee9e00ca198754762b83bc34dc85adcadb9565ade93116558bad147e024d233f6fd50676540c5cfc12ef02bdb9408ec77a9cd0fd45cd751c067d00a32d02564a9ded5e79fab6af90cb1efe5602c3a23dbe85bc00b055b02a7731ad71244f3df0a0e4b22e405093904fdb426d271773c3cd945f10cef61240550fe1fc4511c9ce05e4299e86b95d3c2629b712259f3645574d5450c3915182a5b63f52fd1b9a987470d809318389bf47264abc009d75e63699fe01e548d0ccd5c5a5393bac04d96ba61630da33c84987a274094cae6c6fb00be8a457b5703d7bf2dc1e6825e0314e1bd96e928fc5384ab593e02b2028ac65117828b0a7171311817a002c4804b5e87d6b862a31cfee9328e8793a5763a6f7998bee9741e2163ad1fdc40b65842374a933ac726a26b96e1d1f09fa850a77136af875dadf227595bae3174aaead10bf6be33ad53fe0b55a65c627c7361b07e6b00e8e9b0c51cddcc2d99bb5247a33dea91e5f30f48ae20d72e65e22f909fe3ba4ed66a3344b608738ad3eab169b50d6fe0097944f2e1f4af6ef793a37a5cf3ab8c7d027451039abc4a88d9ce6ee052c506c77959dd1e471e137ff984b576d9011611a60632198f2bb59b7330544a51958a13b094b5a1b39cf8f1c817e57e0ba87f2ae06d347bd39c25953b40c518d8167f0beef5cc0e7982735fd0fffc1c699dd9923e1f4570d5255f0f985dabcc890e004b6fbc9faf80cd66cee28b03be73b0b2a3edf2da7fcaa9bf50059da89ae9be</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>实习</category>
+      </categories>
+      <tags>
+        <tag>实习</tag>
+        <tag>记录</tag>
       </tags>
   </entry>
   <entry>
@@ -377,21 +869,8 @@ File（追加文件）。Redis处理的每一个写命令都会记录在AOF文�
 data-cites="Transactional">@Transactional</span> 注解失效</h2>
 ]]></content>
       <tags>
-        <tag>后端面试</tag>
         <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>英文单词</title>
-    <url>/2024/12/04/Life/%E8%8B%B1%E6%96%87%E5%8D%95%E8%AF%8D/</url>
-    <content><![CDATA[
-]]></content>
-      <categories>
-        <category>英语</category>
-      </categories>
-      <tags>
-        <tag>英语单词3000个</tag>
-        <tag>积累</tag>
+        <tag>后端面试</tag>
       </tags>
   </entry>
   <entry>
@@ -1033,49 +1512,16 @@ src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309203233.png" /></p>
       </tags>
   </entry>
   <entry>
-    <title>实习坑点</title>
-    <url>/2025/01/04/Java/%E5%AE%9E%E4%B9%A0%E5%9D%91%E7%82%B9/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="39f6fc65c56b885e0fadb17bc2a8eeb1a64c28db461f500933fdcec77f7e0e02">1f6bb8509d126916afe1b073331b8b303e8fc819b81490765ad837df7dc1353814a72d845b5617ce1fc01ae8d2343ee9e00ca198754762b83bc34dc85adcadb9565ade93116558bad147e024d233f6fd50676540c5cfc12ef02bdb9408ec77a9cd0fd45cd751c067d00a32d02564a9ded5e79fab6af90cb1efe5602c3a23dbe85bc00b055b02a7731ad71244f3df0a0e4b22e405093904fdb426d271773c3cd945f10cef61240550fe1fc4511c9ce05e4299e86b95d3c2629b712259f3645574d5450c3915182a5b63f52fd1b9a987470d809318389bf47264abc009d75e63699fe01e548d0ccd5c5a5393bac04d96ba61630da33c84987a274094cae6c6fb00be8a457b5703d7bf2dc1e6825e0314e1bd96e928fc5384ab593e02b2028ac65117828b0a7171311817a002c4804b5e87d6b862a31cfee9328e8793a5763a6f7998bee9741e2163ad1fdc40b65842374a933ac726a26b96e1d1f09fa850a77136af875dadf227595bae3174aaead10bf6be33ad53fe0b55a65c627c7361b07e6b00e8e9b0c51cddcc2d99bb5247a33dea91e5f30f48ae20d72e65e22f909fe3ba4ed66a3344b608738ad3eab169b50d6fe0097944f2e1f4af6ef793a37a5cf3ab8c7d027451039abc4a88d9ce6ee052c506c77959dd1e471e137ff984b576d9011611a60632198f2bb59b7330544a51958a13b094b5a1b39cf8f1c817e57e0ba87f2ae06d347bd39c25953b40c518d8167f0beef5cc0e7982735fd0fffc1c699dd9923e1f4570d5255f0f985dabcc890e004b6fbc9faf80cd66cee28b03be73b0b2a3edf2da7fcaa9bf50059da89ae9be</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      <categories>
-        <category>实习</category>
-      </categories>
-      <tags>
-        <tag>实习</tag>
-        <tag>记录</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo基本指令</title>
-    <url>/2025/03/12/Hexo/hexo%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/</url>
-    <content><![CDATA[<p>  如果只是满足平时写写博客，推送到GitHub方便在各处访问的话，其实这下面这几个命令就够了。但是这篇博文会一直更新，博主有用到别的指令会及时来这里更新。</p>
-<ol type="1">
-<li><p>首先是创建一个新的页面的指令，在终端敲击。由于博主使用的是WebStorm，所以是在应用里的终端界面敲击的。
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">hexo new <span class="string">&quot;page_name&quot;</span>    <span class="comment"># 创建新的页面</span></span><br></pre></td></tr></table></figure> <img
-src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250312090453.png" /></p></li>
-<li><p>其次是准备部署线上环境需要使用到的指令，三个命令行同时运行，就能将新写的博文推送到GitHub啦，当然部署也需要时间，只要指令运行不报错，就耐心等待一下啦
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">hexo clean   <span class="comment"># 清除之前生成的渲染文件</span></span><br><span class="line"></span><br><span class="line">hexo g   <span class="comment"># 生成新的渲染文件</span></span><br><span class="line"></span><br><span class="line">hexo d   <span class="comment"># 推送到GitHub进行自动部署</span></span><br><span class="line"> </span><br></pre></td></tr></table></figure></p></li>
-<li><p>在本地查看渲染效果，运行该指令之后直接访问
-<code>http://localhost:4000/</code>, 就可以看到渲染后的最新博客
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">hexo s     <span class="comment"># hexo start 的意思，就是开启项目 </span></span><br></pre></td></tr></table></figure></p></li>
-</ol>
+    <title>英文单词</title>
+    <url>/2024/12/04/Life/%E8%8B%B1%E6%96%87%E5%8D%95%E8%AF%8D/</url>
+    <content><![CDATA[
 ]]></content>
       <categories>
-        <category>Hexo</category>
+        <category>英语</category>
       </categories>
       <tags>
-        <tag>Hexo</tag>
-        <tag>教程</tag>
+        <tag>英语单词3000个</tag>
+        <tag>积累</tag>
       </tags>
   </entry>
   <entry>
@@ -1237,8 +1683,8 @@ src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250312090453.png" /></p></
 </blockquote>
 <p><br></p>
 <blockquote>
-<p><font face="楷体"> 我一定会幸福，为此，我现在要做必须做的事。
-——上野千鹤子 </font></p>
+<p><font face="楷体"> 这世界有时很糟糕，我用我自己的方式寻找自由
+——莱昂纳德·科恩 </font></p>
 </blockquote>
 ]]></content>
       <categories>
@@ -1250,209 +1696,26 @@ src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250312090453.png" /></p></
       </tags>
   </entry>
   <entry>
-    <title>单一职责原则</title>
-    <url>/2025/03/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99/</url>
-    <content><![CDATA[<blockquote>
-<p>🚩 学如逆水行舟，不进则退。 —— 《增广贤文》</p>
-</blockquote>
-<h1 id="单一职责原则">单一职责原则</h1>
-<h2 id="一定义">一、定义</h2>
-<p>一个接口或者类只有一个原因引起变化。
-也就是说一个接口或者一个类只有一个职责，只负责意见事情。（此原则同样适用于方法）</p>
-<h2 id="二问题由来">二、问题由来</h2>
-<p>类T负责两个不同的职责：职责P1、职责P2.当由于职责P1需求发生改变而需要求改类T时，有可能会导致原本运行正常的职责P2功能发生故障</p>
-<h2 id="三解决方案">三、解决方案：</h2>
-<p>遵循单一职责原则，分别建立两个类T1、T2，使T1完成P1功能，T2完成P2功能。这样，当修改类T1时，不会使职责P2发生故障风险；同理，当修改T2时，也不会使职责P1发生故障风险</p>
-<h2 id="四代码demo">四、代码demo：</h2>
-<h3 id="类单一原则">1、类单一原则</h3>
-<h4 id="错误示范">(1) 错误示范</h4>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据名称判断吃什么，可以看到类中的方法存在 if-else，也就是这个类需要负责两个不一样的功能，违背了单一原则</span></span><br><span class="line"><span class="comment">     * 改进：</span></span><br><span class="line"><span class="comment">     * 1. 可以抽离类，将这个类抽成两个类，各自负责自己的那部分</span></span><br><span class="line"><span class="comment">     * 2. 可以抽离方法，把if的内容写成一个方法，把else写成一个方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eating</span><span class="params">(String name)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">&quot;羊&quot;</span>.equals(name))&#123;</span><br><span class="line">            System.out.println(name + <span class="string">&quot;吃草&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(name + <span class="string">&quot;吃肉&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">KindDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Animal</span> <span class="variable">animal</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Animal</span>();</span><br><span class="line">        animal.eating(<span class="string">&quot;羊&quot;</span>);</span><br><span class="line">        animal.eating(<span class="string">&quot;牛&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="修正">(2) 修正</h4>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 修正   用装饰器模式，将动物类抽象成父类</span></span><br><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">AnimalFather</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">eating</span><span class="params">(String name)</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MeatAnimal</span> <span class="keyword">extends</span> <span class="title class_">AnimalFather</span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eating</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        System.out.println(name + <span class="string">&quot;吃肉&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">GrassAnimal</span> <span class="keyword">extends</span> <span class="title class_">AnimalFather</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eating</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        System.out.println(name + <span class="string">&quot;吃草&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">KindDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">MeatAnimal</span> <span class="variable">meatAnimal</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MeatAnimal</span>();</span><br><span class="line">        meatAnimal.eating(<span class="string">&quot;狼&quot;</span>);</span><br><span class="line">        <span class="type">GrassAnimal</span> <span class="variable">grassAnimal</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">GrassAnimal</span>();</span><br><span class="line">        grassAnimal.eating(<span class="string">&quot;草&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="方法的单一原则">2、方法的单一原则</h3>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FunctionDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 错误示范</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 当前方法需要完成两个动作，一个是设置用户名称，另外一个是获取用户年龄并返回</span></span><br><span class="line"><span class="comment">     * 不符合方法的单一原则</span></span><br><span class="line"><span class="comment">     * 解决：</span></span><br><span class="line"><span class="comment">     * 拆分方法，将功能模块化</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> Integer <span class="title function_">setNameAndGetAge</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="comment">// 1. 设置用户名</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2. 获取用户年龄</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 修正</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">User2</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="comment">// 设置用户名</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Integer <span class="title function_">getAge</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 获取年龄</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="接口的单一原则">3、接口的单一原则</h3>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InterfaceDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 错误示例</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">IGood</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 可以看到，IGood接口中负责了太多功能，不仅要负责</span></span><br><span class="line"><span class="comment">     * 1. 商品信息管理：获取商品名称 + 获取商品价格</span></span><br><span class="line"><span class="comment">     * 2. 商品售卖管理：购买商品 + 退款</span></span><br><span class="line"><span class="comment">     * 不符合接口的单一原则</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="comment">// 获取商品名称</span></span><br><span class="line">    String <span class="title function_">getName</span><span class="params">()</span>;</span><br><span class="line">    <span class="comment">// 获取商品价格</span></span><br><span class="line">    Double <span class="title function_">getPrice</span><span class="params">()</span>;</span><br><span class="line">    <span class="comment">// 购买商品</span></span><br><span class="line">    Boolean <span class="title function_">buyGood</span><span class="params">()</span>;</span><br><span class="line">    <span class="comment">// 退款</span></span><br><span class="line">    Boolean <span class="title function_">refund</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 改正</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">IGoodInfo</span> &#123;</span><br><span class="line">    <span class="comment">// 获取商品名称</span></span><br><span class="line">    String <span class="title function_">getName</span><span class="params">()</span>;</span><br><span class="line">    <span class="comment">// 获取商品价格</span></span><br><span class="line">    Double <span class="title function_">getPrice</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">IGoodManage</span>&#123;</span><br><span class="line">    <span class="comment">// 购买商品</span></span><br><span class="line">    Boolean <span class="title function_">buyGood</span><span class="params">()</span>;</span><br><span class="line">    <span class="comment">// 退款</span></span><br><span class="line">    Boolean <span class="title function_">refund</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">GoodImpl</span> <span class="keyword">implements</span> <span class="title class_">IGoodInfo</span>, IGoodManage &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Double <span class="title function_">getPrice</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Boolean <span class="title function_">buyGood</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Boolean <span class="title function_">refund</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="五优点">五、优点</h2>
-<ul>
-<li>可以降低类的复杂度，一个类只负责一项职责，其逻辑肯定要比负责多项职责简单的多；</li>
-<li>提高类的可读性，提高系统的可维护性；</li>
-<li>变更引起的风险降低，变更是必然的，如果单一职责原则遵守的好，当修改一个功能时，可以显著降低对其他功能的影响。</li>
-</ul>
-<h2 id="六实际应用">六、实际应用</h2>
-<p>虽然单一原则简单，并且被认为是常识，但在实际开发中还是会存在违背这一原则的存在。为什么呢？因为有职责扩散。所谓职责扩散，就是因为某种原因，职责P被分化为粒度更细的职责P1和P2。</p>
-<p>举个栗子：
-类T只负责一个职责P，这样设计是符合单一职责原则的。后来由于某种原因，也许是需求变更了，也许是程序的设计者境界提高了，需要将职责P细分为粒度更细的职责P1，P2。
-这时如果要使程序遵循单一职责原则，需要将类T也分解为两个类T1和T2，分别负责P1、P2两个职责。
-但是在程序已经写好的情况下，这样做简直太费时间了。
-所以，简单的修改类T，用它来负责两个职责是一个比较不错的选择，虽然这样做有悖于单一职责原则。
-（这样做的风险在于职责扩散的不确定性，因为我们不会想到这个职责P，在未来可能会扩散为P1，P2，P3，P4……Pn。所以记住，在职责扩散到我们无法控制的程度之前，立刻对代码进行重构。）</p>
-<p>就如同上面第四部分的<code>类的单一原则</code>的代码演示，我们为了遵循单一原则，我们把那个动物类抽象成了抽象类，然后再分别新建了吃草动物类和吃肉动物类，理论上满足了单一原则，但实际上的花销很大，如果需求短时间内需要交付，我们可以采取另外的改进措施。
-我们看一下下面这段代码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animal2</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eatMeat</span><span class="params">(String name)</span>&#123;</span><br><span class="line">        System.out.println(name + <span class="string">&quot;吃肉&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eatGrass</span><span class="params">(String name)</span>&#123;</span><br><span class="line">        System.out.println(name + <span class="string">&quot;吃草&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面这段代码可以看出，我并没有去新建吃草动物类和吃肉动物类，而是在动物类上将<code>eating</code>方法修改成两个方法，这样虽然也违背了类的单一职责原则，但在方法级别上却是符合单一职责原则的。所以在实际业务开发中，选择遵循哪一种原则还是需要根据实际情况确定。</p>
+    <title>hexo基本指令</title>
+    <url>/2025/03/12/Hexo/hexo%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/</url>
+    <content><![CDATA[<p>  如果只是满足平时写写博客，推送到GitHub方便在各处访问的话，其实这下面这几个命令就够了。但是这篇博文会一直更新，博主有用到别的指令会及时来这里更新。</p>
+<ol type="1">
+<li><p>首先是创建一个新的页面的指令，在终端敲击。由于博主使用的是WebStorm，所以是在应用里的终端界面敲击的。
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">hexo new <span class="string">&quot;page_name&quot;</span>    <span class="comment"># 创建新的页面</span></span><br></pre></td></tr></table></figure> <img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250312090453.png" /></p></li>
+<li><p>其次是准备部署线上环境需要使用到的指令，三个命令行同时运行，就能将新写的博文推送到GitHub啦，当然部署也需要时间，只要指令运行不报错，就耐心等待一下啦
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">hexo clean   <span class="comment"># 清除之前生成的渲染文件</span></span><br><span class="line"></span><br><span class="line">hexo g   <span class="comment"># 生成新的渲染文件</span></span><br><span class="line"></span><br><span class="line">hexo d   <span class="comment"># 推送到GitHub进行自动部署</span></span><br><span class="line"> </span><br></pre></td></tr></table></figure></p></li>
+<li><p>在本地查看渲染效果，运行该指令之后直接访问
+<code>http://localhost:4000/</code>, 就可以看到渲染后的最新博客
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">hexo s     <span class="comment"># hexo start 的意思，就是开启项目 </span></span><br></pre></td></tr></table></figure></p></li>
+</ol>
 ]]></content>
       <categories>
-        <category>设计模式</category>
+        <category>Hexo</category>
       </categories>
       <tags>
-        <tag>Java</tag>
-        <tag>设计模式</tag>
-        <tag>单一职责原则</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>工厂模式</title>
-    <url>/2025/03/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</url>
-    <content><![CDATA[<blockquote>
-<p>🚩 学如逆水行舟，不进则退。 —— 《增广贤文》</p>
-</blockquote>
-<h1 id="工厂模式">工厂模式</h1>
-<h2 id="引言">1、引言</h2>
-<p>  在面向对象编程中，创建对象实例最常用的方式就是通过 new
-操作符构造一个对象实例，但在某些情况下，new
-操作符直接生成对象会存在一些问题。举例来说，对象的创建需要一系列的步骤：可能需要计算或取得对象的初始位置、选择生成哪个子对象实例、或在生成之前必须先生成一些辅助对象。
-在这些情况，新对象的建立就是一个
-“过程”，而不仅仅是一个操作，就像一部大机器中的一个齿轮传动。</p>
-<p>  针对上面这种情况，我们如何轻松方便地构造对象实例，而不必关心构造对象示例的细节和复杂过程？解决方案就是使用一个<strong>工厂类来创建对象</strong>。</p>
-<h2 id="什么是工厂模式">2、什么是工厂模式</h2>
-<p>  工厂模式的主要目的是将创建对象的具体过程屏蔽隔离起来，从而达到更高的灵活性。工厂模式可以分为三类：</p>
-<ul>
-<li><strong>简单工厂模式（Simple
-Factory）：</strong>只有唯一工厂（简单工厂），一个产品接口/抽象类，根据简单工厂中的静态方法来创建具体产品对象。适用于产品较少，几乎不扩展的情景</li>
-<li><strong>工厂方法模式（Factory
-Method）：</strong>有多个工厂（抽象工厂+多个具体工厂），一个产品接口/抽象类，根据继承抽象工厂中的方法来多态创建具体产品对象。适用于一个类型的多个产品</li>
-<li><strong>抽象工厂模式（Abstract
-Factory）：</strong>有多个工厂（抽象工厂+多个具体工厂），多个产品接口/抽象类，对产品子类进行分组，根据继承抽象工厂中的方法多态创建同组的不同具体产品对象。适用于多个类型的多个产品</li>
-</ul>
-<p>举个生产电脑的栗子介绍一下这几个工厂模式：</p>
-<p>（1）在没有工厂的时代，如果客户需要一款MBP电脑，那么就需要客户去创建一款MBP电脑，然后拿来用。</p>
-<p>（2）简单工厂模式：后来出现了工厂，用户不再需要去创建MBP电脑，由工厂进行创建，想要什么MBP电脑，直接通过工厂创建就可以了。比如想要M3系列的MBP电脑，工厂就创建这个系列的电脑。</p>
-<p>（3）工厂方法模式：为了满足客户，MBP系列越来越多，如M3、M4等等系列，一个工厂无法创建所有的MBP系列，于是又单独分出来多个具体的工厂，每个具体工厂创建一种系列，即具体工厂类只能创建一个具体产品。但是MBP电脑工厂还是个抽象，你需要指定某个具体的工厂才能生产电脑出来。</p>
-<p>（4）抽象工厂模式：随着客户要求越来越高，MBP电脑车必须配置鼠标，于是这个工厂开始生产MBP电脑和需要的鼠标。最终是客户只要对宝马的销售员说：我要M3的带有鼠标的MBP电脑，销售员就直接给他M3的带有鼠标的MBP电脑了。而不用自己去创建M3的带有鼠标的MBP电脑。</p>
-<h2 id="无工厂模式实现">3、无工厂模式实现</h2>
-<p>  如果没有工厂模式，那么用户要获得MBP电脑就得自己去创建，想要什么型号，就得找到对应的型号去new。以下是对应类图以及实现。</p>
-<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250312203232.png" style="zoom: 33%;" /></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Customer</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Customer</span> <span class="variable">customer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Customer</span>();</span><br><span class="line">        customer.createMBPM3();</span><br><span class="line">        customer.createMBPM4();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> MBPM3 <span class="title function_">createMBPM3</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MBPM3</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> MBPM4 <span class="title function_">createMBPM4</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MBPM4</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MBPM3</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MBPM3</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;生产---&gt; MBPM3电脑&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MBPM4</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MBPM4</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;生产MBPM4电脑&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="简单工厂模式">4、简单工厂模式</h2>
-<p>  简单工厂模式有叫做静态工厂方法模式（static Factory Method
-pattern），它时通过使用静态方法接受不同的参数来返回不同的实例对象。简单工厂模式的核心是定义一个创建对象的接口，将对象的创建和本身的业务逻辑分离，降低系统的耦合度，使得以后需要改变时，只需要修改工厂类即可。</p>
-<h3 id="简单工厂实现原理及uml图">（1）简单工厂实现原理及UML图</h3>
-<p>  其实实现的主要原理还是利用到了多态的概念，可以用父类去接子类的对象，这就非常方便我们将创建对象的方法进行抽象，我们只需要定义一个公共的MBP父类，用不同型号的子类去继承它。对于创建子类对象的过程交给工厂完成，最后用父类去接创建出来的子类对象即可。</p>
-<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250312205351.png" style="zoom:50%;" /></p>
-<h3 id="实现代码">（2）实现代码</h3>
-<p>产品类：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MBP</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MBP</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MBPM3</span> <span class="keyword">extends</span> <span class="title class_">MBP</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MBPM3</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;生产M-----&gt;MBP3&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MBPM4</span> <span class="keyword">extends</span> <span class="title class_">MBP</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MBPM4</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;生产M-----&gt;MBP4&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>工厂类：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Factory</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> MBP <span class="title function_">createMBP</span><span class="params">(String type)</span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (type)&#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;M3&quot;</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MBPM3</span>();</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;M4&quot;</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MBPM4</span>();</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 静态工厂</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">public</span> MBP <span class="title function_">createMBPStatic</span><span class="params">(String type)</span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (type)&#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;M3&quot;</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MBPM3</span>();</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;M4&quot;</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MBPM4</span>();</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>用户类：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Customer</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Factory</span> <span class="variable">factory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Factory</span>();</span><br><span class="line">        <span class="type">MBP</span> <span class="variable">m3</span> <span class="operator">=</span> factory.createMBP(<span class="string">&quot;M3&quot;</span>);</span><br><span class="line">        <span class="type">MBP</span> <span class="variable">m4</span> <span class="operator">=</span> factory.createMBP(<span class="string">&quot;M4&quot;</span>);</span><br><span class="line">		<span class="comment">// 静态工厂</span></span><br><span class="line">        <span class="type">MBP</span> <span class="variable">m31</span> <span class="operator">=</span> Factory.createMBPStatic(<span class="string">&quot;M3&quot;</span>);</span><br><span class="line">        <span class="type">MBP</span> <span class="variable">m41</span> <span class="operator">=</span> Factory.createMBPStatic(<span class="string">&quot;M4&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="优缺点">（3）优缺点</h3>
-<ul>
-<li>优点：简单工厂可以使客户端免除直接创建对象的职责，能够根据需要创建出对应的产品。实现客户端可产品类的代码分离。此外，可以通过配置文件来实现不修改客户端代码的情况下添加新的具体产品类</li>
-<li>缺点：<strong>违背了开闭原则</strong>，如果需要新增其他产品类，就必须在工厂类中新增类似<code>if-else</code>的条件判断（上面的演示代码用了<code>switch</code>），虽然可以用配置文件来改进，但是整体上而言，系统扩展相对于其他工厂模式要困难很多。
-<ul>
-<li>关于如何使用配置文件改进简单工厂，在这里描述一下：其实就是将创建工厂的条件，上述代码中的<code>String type</code>，改成是根据类路径来创建对象。再详细点就是，将类路径写在配置文件中，然后工厂在创建对象的时候，根据获取到的类路径，用反射创建出对象。这样，即使有了新的产品，我们也只需要在新建产品类并继承产品父类，然后在配置文件中添加新建产品类的类路径。</li>
-</ul></li>
-</ul>
-<h3 id="简单工厂和静态工厂">（4）简单工厂和静态工厂</h3>
-<p>可以看到上面用户类中使用了两种方法创建实例对象，一种是类方法，一种是类的静态方法。那使用类的静态方法有什么好处呢？</p>
-<ul>
-<li>使用静态方法可以不需要使用<code>new</code>的方法创建对象，方便调用</li>
-<li>控制实例的创建，如缓存实例，延迟初始化</li>
-<li>减少客户端对具体类的依赖</li>
-</ul>
-<h3 id="简单工厂在实际中的应用">（5）简单工厂在实际中的应用</h3>
-<p>【1】如<code>DataFormat</code>中这个方法就使用了简单工厂</p>
-<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250312212636.png" style="zoom: 67%;" /></p>
-<p>【2】对于数据库连接池，如业务需要连接数据库时，需要支持不同的数据库，如<code>dbcp</code>、<code>c3p0</code>、<code>druid</code>等等，这个时候数据库连接方式有限，而且比较固定不容易更改，所以可以尝试采用简单工厂模式来进行管理数据库连接对象。</p>
-<p>【3】在<code>spring</code>源码中以Factory为后缀的方法或者类都用到工厂模式</p>
-<h2 id="工厂方法模式">5、 工厂方法模式</h2>
-<p>  工厂方法模式将工厂抽象化，并定义一个创建对象的接口。每增加新产品，只需增加该产品以及对应的具体实现工厂类，由具体工厂类决定要实例化的产品是哪个？将对象的创建与实例化延迟到子类，这样工厂的设计就符合”开闭原则“了，扩展时不必去修改原来的代码。</p>
-<h3
-id="工厂方法模式实现原理及uml图">（1）工厂方法模式实现原理及UML图</h3>
-<p>  其实也很好理解，就是在简单工厂模式中，会存在判断语句（<code>if-else</code>或<code>switch</code>）的情况，相当于在工厂类中，一个生产类的方法实现了多个不同的功能，不符合类的单一职责原则；另外，如果现在产品出了M5系列的MBP电脑，那就需要再修改工厂的代码，不符合开闭原则。</p>
-<p>  所以我们的解决方法也就呼之欲出。首先是想到把判断语句修改成功能函数，但对于一个工厂而言，即使把我的生产功能模块化，我还是需要知道，我应该生产哪个种类的产品，需要提示。</p>
-<p>  所以我们进一步改造，将原来的工厂抽象成接口，然后为每一个系列构建各自的工厂子类，继承该接口。将对象的创建与实例化延迟到各自的工厂子类。</p>
-<p>  最后，在使用时，我们可以利用多态的特性，用同一的工厂接口接收不同系列的工厂子类，然后用同一的接口方法创建出不同的系列。</p>
-<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313105034.png" style="zoom: 67%;" /></p>
-<h3 id="实现代码demo">（2）实现代码demo：</h3>
-<p>产品类： <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MBP</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MBP</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MBPM3</span> <span class="keyword">extends</span> <span class="title class_">MBP</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MBPM3</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;生产 ----- &gt; MBPM3&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MBPM4</span> <span class="keyword">extends</span> <span class="title class_">MBP</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MBPM4</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;生产 ----- &gt; MBPM4&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 工厂类： <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">Factory</span> &#123;</span><br><span class="line">    MBP <span class="title function_">createMBP</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MBPM3Factory</span> <span class="keyword">implements</span> <span class="title class_">Factory</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> MBP <span class="title function_">createMBP</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MBPM3</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MBPM4Factory</span> <span class="keyword">implements</span> <span class="title class_">Factory</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> MBP <span class="title function_">createMBP</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MBPM4</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 用户类：
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FactoryFunctionCustomer</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Factory</span> <span class="variable">factory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MBPM3Factory</span>();</span><br><span class="line">        <span class="type">MBP</span> <span class="variable">m3</span> <span class="operator">=</span> factory.createMBP();</span><br><span class="line">        factory = <span class="keyword">new</span> <span class="title class_">MBPM4Factory</span>();</span><br><span class="line">        <span class="type">MBP</span> <span class="variable">m4</span> <span class="operator">=</span> factory.createMBP();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="优缺点-1">（3）优缺点</h3>
-<p>其中，最主要的是 <code>Factory</code>
-接口，以及接口中的<code>createMBP</code>抽象方法，通过这个方法来创建具体产品，这也是为什么叫工厂方法的原因。和简单工厂的静态方法不同，这里使用的非静态调用方式。而且可以发现没有简单工厂的条件判断逻辑。扩展性相对较好</p>
-<ul>
-<li>优点：完全实现开闭原则和类的单一职责原则，实现了可扩展和更复杂的层次接口。明确了职责，具有多态性，适用于任何实体类</li>
-<li>缺点：如果业务增加，会使得系统中的类的个数成倍增加，提高了代码的复杂度。</li>
-</ul>
-<h3 id="工厂方法在实际中的应用">（4）工厂方法在实际中的应用</h3>
-<p>【1】如<code>Slf4j</code>中这个方法就使用了工厂方法模式 （1）Slf4j
-的产品类 定义了一个抽象产品Logger： <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Logger</span> &#123;</span><br><span class="line">    ... ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-SubstituteLogger就是一种具体的产品
-<img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313131210.png" style="zoom: 67%;" /></p>
-<p>（2）Slf4j定义一个抽象工厂ILoggerFactory <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">ILoggerFactory</span> &#123;</span><br><span class="line">    Logger <span class="title function_">getLogger</span><span class="params">(String var1)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-（3）具体工厂有很多，都实现了抽象工厂，这里展示其中一个SubstituteLoggerFactory
-<img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313130552.png" style="zoom: 67%;" /></p>
-<p>（4）SubstituteLoggerFactory工厂在生产SubstituteLogger具体产品时，做了一定的处理。而真正使用时，只需要通过getLogger方法就可以得到具体产品，这就是工厂方法模式的魅力。</p>
-<h2 id="抽象工厂模式">6、 抽象工厂模式</h2>
-<p>  在工厂方法模式中，我们使用一个工厂创建一个产品，一个具体工厂对应一个具体产品，但有时候我们需要一个工厂能有提供多个产品对象，而不是单一的对象，这个时候我们就需要使用抽象工厂模式。</p>
-<blockquote>
-<p>  代入到我们上面的栗子可以很好理解：现在的场景就是MBPM3它有自己的显示器和键盘、MBPM4它也有自己的显示器和键盘，但是我们之前的工厂方法，只给出了生产电脑的细节，但是生产电脑组件的细节却没给出。</p>
-<p>  所以我们要优化我们的代码，让它拥有生产电脑组件的细节。怎么优化呢？其实我们会发现，MBPM3和MBPM4都需要显示器和键盘，只是型号不一样，
-那按照工厂方法的角度来看，我们就可以把显示器和键盘先抽象成产品接口，
-然后再创建对应产品类型。</p>
-<p>  对于具体工厂而言，我们也只需要将原本生产电脑的接口，改成生产显示器和生产键盘。</p>
-</blockquote>
-<p>但在讲解抽象工厂模式之前，我们还需要先认识几个概念：</p>
-<p>（1）产品等级结构：产品等级结构指的是产品的继承机构。例如一个空调抽象类，它有海尔空调、格力空调、美的空调等一系列的子类，那么这个空调抽象类和他的子类就构成了一个产品等级结构。
-&gt; 放到上面的栗子，可以看成是
-一个键盘抽象类，它有MBPM3键盘、MBPM4键盘等一系列子类，那么这个键盘抽象类和它的子类就构成了一个产品等级结构。</p>
-<p>（2）产品族：产品族是指由同一个工厂生产的，位于不同产品等级结构中的一组产品。比如，海尔工厂生产海尔空调、海尔冰箱，那么海尔空调则位于海尔产品族中。
-&gt; 放到上面的栗子，可以看成 MBPM3工厂能生产
-MBPM3键盘、MBPM3显示器，那么 MBPM3键盘和MBPM3显示器就位于 MBPM3
-的产品族中。</p>
-<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313134033.png" style="zoom: 67%;" /></p>
-<h3 id="抽象工厂模式实现原理及uml图">（1）
-抽象工厂模式实现原理及UML图</h3>
-<p>  抽象工厂模式主要用于创建相关对象的家族。当一个产品族中需要被设计在一起工作时，通过抽象工厂模式，能够保证客户端始终只使用同一个产品族中的对象；
-并且通过隔离具体类的生成，使得客户端不需要明确指定具体生成类；所有具体工厂都实现了抽象工厂中定义的公共接口，因此只需要改变具体工厂的实例，就可以在某种程度上改变整个软件系统的行为。</p>
-<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313163859.png" style="zoom: 67%;" /></p>
-<h3 id="实现代码demo-1">（2）实现代码demo</h3>
-<p>产品类： <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 键盘</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">KeyBoard</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// MBPM3键盘</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MBPM3KB</span> <span class="keyword">implements</span> <span class="title class_">KeyBoard</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MBPM3KB</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;生产 ---------&gt; MBPM3键盘&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// MBPM4键盘</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MBPM4KB</span> <span class="keyword">implements</span> <span class="title class_">KeyBoard</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MBPM4KB</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;生产 ---------&gt; MBPM4键盘&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 显示器</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Monitor</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// MBPM3显示器</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MBPM3MT</span> <span class="keyword">implements</span> <span class="title class_">Monitor</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MBPM3MT</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;生产 ---------&gt;  MBPM3显示器&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// MBPM4显示器</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MBPM4MT</span> <span class="keyword">implements</span> <span class="title class_">Monitor</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MBPM4MT</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;生产 ---------&gt;  MBPM4显示器&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>工厂类： <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">Factory</span>&#123;</span><br><span class="line">    Monitor <span class="title function_">createMonitor</span><span class="params">()</span>;</span><br><span class="line">    KeyBoard <span class="title function_">createKeyBoard</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MBPM3Factory</span> <span class="keyword">implements</span> <span class="title class_">Factory</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Monitor <span class="title function_">createMonitor</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MBPM3MT</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> KeyBoard <span class="title function_">createKeyBoard</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MBPM3KB</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MBPM4Factory</span> <span class="keyword">implements</span> <span class="title class_">Factory</span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Monitor <span class="title function_">createMonitor</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MBPM4MT</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> KeyBoard <span class="title function_">createKeyBoard</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MBPM4KB</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>客户端： <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AbstractFactoryCustomer</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Factory</span> <span class="variable">m3Factory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MBPM3Factory</span>();</span><br><span class="line">        m3Factory.createKeyBoard();</span><br><span class="line">        m3Factory.createMonitor();</span><br><span class="line"></span><br><span class="line">        <span class="type">Factory</span> <span class="variable">m4Factory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MBPM4Factory</span>();</span><br><span class="line">        m4Factory.createMonitor();</span><br><span class="line">        m4Factory.createKeyBoard();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="抽象工厂和工厂方法">（3）抽象工厂和工厂方法</h3>
-<p>【1】
-工厂方法只有一个抽象产品类和一个抽象工厂类，但是可以派生出多个具体产品类和具体工厂类，每个具体工厂类只能创建一个具体产品类的实例。</p>
-<p>【2】抽象工厂模式拥有多个抽象产品类（产品族）和一个抽象工厂类，每个抽象产品类可以派生出多个具体产品类；抽象工厂类也可以派生出多个具体工厂类，同时每个具体工厂类可以创建多个具体产品类的实例。</p>
-<h3 id="优缺点-2">（4）优缺点</h3>
-<ul>
-<li>增加分组比较容易，并且能大大减少工厂类的数量</li>
-<li>因为分组，所有分组中的产品扩展比较困难，比如新增鼠标，那么需要动的类就有
-<code>Factory</code>、<code>MBPM3Factory</code>、<code>MBPM4Factory</code>，几乎所有工厂类</li>
-</ul>
-<h3 id="抽象工厂在实际中的应用">（5）抽象工厂在实际中的应用</h3>
-<p>  抽象工厂在 <code>spring</code> 中的应用，我们查看
-<code>spring</code> 源码可以看到，BeanFactory 是用于管理 Bean
-的一个工厂，所有工厂都是 BeanFactory 的子类。 这样我们可以通过 IOC
-容器来管理访问 Bean，根据不同的策略调用 getBean()
-方法，从而获得具体对象。</p>
-<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313163510.png" style="zoom: 67%;" /></p>
-<p>   BeanFactory 的子类主要有
-ClassPathXmlApplicationContext、XmlWebApplicationContext、StaticWebApplicationContext、StaticApplicationContext。在
-Spring 中，DefaultListableBeanFactory 实现了所有工厂的公共逻辑。</p>
-<h2 id="总结">7、总结</h2>
-<p>  无论是简单工厂模式，工厂方法模式，还是抽象工厂模式，他们都属于工厂模式，在形式和特点上也是极为相似的，他们的最终目的都是为了解耦。在使用时，我们不必去在意这个模式到底工厂方法模式还是抽象工厂模式，因为他们之间的演变常常是令人琢磨不透的。经常你会发现，明明使用的工厂方法模式，当新需求来临，稍加修改，加入了一个新方法后，由于类中的产品构成了不同等级结构中的产品族，它就变成抽象工厂模式了；而对于抽象工厂模式，当减少一个方法使的提供的产品不再构成产品族之后，它就演变成了工厂方法模式。</p>
-<p>  所以，在使用工厂模式时，只需要关心降低耦合度的目的是否达到即可。</p>
-]]></content>
-      <categories>
-        <category>设计模式</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>设计模式</tag>
-        <tag>工厂模式</tag>
+        <tag>Hexo</tag>
+        <tag>教程</tag>
       </tags>
   </entry>
   <entry>
@@ -2121,72 +2384,6 @@ href="https://juejin.cn/post/6844903785744056333#heading-0">参考文章</a></p>
         <tag>Java</tag>
         <tag>Redis</tag>
         <tag>中间件</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>设置hexo首页只显示部分摘要（不显示全文）</title>
-    <url>/2024/12/03/Hexo/%E8%AE%BE%E7%BD%AEhexo%E9%A6%96%E9%A1%B5%E5%8F%AA%E6%98%BE%E7%A4%BA%E9%83%A8%E5%88%86%E6%91%98%E8%A6%81/</url>
-    <content><![CDATA[<p>❗本文针对hexo的Next主题的设置有效，其他主题可以看看有没有相同字段
-Next默认是会在首页显示全文的，看起来冗长不简洁。要想首页仅展示文章标题或者摘要，请按照以下步骤进行：</p>
-<h3 id="修改配置">修改配置</h3>
-<p>首先需要在Next主题的<code>_config.yml</code>中把设置打开(默认安装时就打开了):
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">excerpt_description:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="设置展示的内容">设置展示的内容</h3>
-<h4 id="方法一写概述">方法一：写概述</h4>
-<p>在文章的<code>front-matter</code>中添加<code>description</code>，其中<code>descriptio</code>n中的内容就会被显示在首页上，其余一律不显示。
-<img
-src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/Snipaste_2024-12-04_00-04-00.png" /></p>
-<p>PS:
-这种方法主要是要自己对文章内容进行简单总结，有时候不喜欢写总结介绍的话，可以用下面第二种方法</p>
-<h4 id="方法二文章截断">方法二：文章截断</h4>
-<p>在需要截断的地方加入： <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--more--&gt;</span></span><br></pre></td></tr></table></figure>
-首页就会显示这条以上的所有内容，隐藏接下来的所有内容。</p>
-<p>这个明显会方便很多，但当然有利有弊，我一般喜欢用方法一，也希望自己写的<code>description</code>能够给读者快速了解文章内容的效果</p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>教程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>开闭原则</title>
-    <url>/2025/03/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/</url>
-    <content><![CDATA[<blockquote>
-<p>🚩 学如逆水行舟，不进则退。 —— 《增广贤文》</p>
-</blockquote>
-<h1 id="开闭原则">开闭原则</h1>
-<h2 id="一定义">一、定义</h2>
-<p>软件实体对扩展开放，对修改关闭。也就是说，在实际业务开发中，应该通过扩展来实现业务需求和变化，而不是修改已有代码来实现变化。</p>
-<h2 id="二问题由来">二、问题由来</h2>
-<p>在软件的生命周期内，因为变化、升级和维护等原因需要对软件原有代码进行修改时，可能会给旧代码中引入错误，也可能会使我们不得不对整个功能进行重构，并且需要原有代码经过重新测试。</p>
-<h2 id="三解决方案">三、解决方案：</h2>
-<p>当软件需要变化时，尽量通过扩展软件实体的行为来实现变化，而不是通过修改已有的代码来实现变化</p>
-<blockquote>
-<p>举个栗子：
-假如现在有一个普通商品类，继承了商品的接口，然后实现了一些普通商品方法。这时候业务提出新的需求，需要为商品打折扣，但是折扣不是每个商品都会有。我们现在要实现这个业务需求，应该怎么完成？<br>
-1. 在商品接口添加折扣功能<br> 2.
-新建折扣商品类，继承普通商品类，再新建折扣方法。<br>
-毫无疑问，肯定选择第二种方案。为什么？因为如果使用了第一种方案，那么所有继承了商品接口的类都得实现新增的折扣功能，这就需要修改原来的代码，这是非常不妥的。
-而第二种，我们只需要在新定义的折扣方法上接收折扣力度的参数，就能实现折扣商品具备获得原始价格和折扣价格的能力</p>
-</blockquote>
-<h2 id="四代码demo">四、代码demo：</h2>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 商品接口</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">IGood</span> &#123;</span><br><span class="line">    String <span class="title function_">getId</span><span class="params">()</span>;</span><br><span class="line">    String <span class="title function_">getName</span><span class="params">()</span>;</span><br><span class="line">    Double <span class="title function_">getPrice</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 普通商品类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">NormalGood</span> <span class="keyword">implements</span> <span class="title class_">IGood</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Double price;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">NormalGood</span><span class="params">(String id, String name, Double price)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.id = id;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.price = price;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getId</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Double <span class="title function_">getPrice</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.price;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 折扣商品类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">DiscountGood</span> <span class="keyword">extends</span> <span class="title class_">NormalGood</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">DiscountGood</span><span class="params">(String id, String name, Double price)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(id, name, price);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 获得商品折扣价格</span></span><br><span class="line">    <span class="keyword">public</span> Double <span class="title function_">getDisCountPrice</span><span class="params">(Double discount)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>.getPrice() * discount;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="五优点">五、优点</h2>
-<p>提高软件系统的可复用性及可维护性;</p>
-<h2 id="六实际应用">六、实际应用</h2>
-<p>开闭原则是面向对象设计中，最基础的设计原则，开闭原则的核心思想是面向抽象编程，而不是面向实现编程。换句话说，开闭原则无非想表达的是：<strong>用抽象构建框架，用实现扩展细节</strong>。
-因为抽象灵活性好，适应性广，只要抽象的合理，可以基本保持软件架构的稳定。而软件中易变的细节，我们用从抽象派生的实现类来进行扩展，当软件需要发生变化时，我们只需要根据需求重新派生一个实现类来扩展就可以了。当然前提是我们的抽象要合理，要对需求的变更有前瞻性和预见性才行。</p>
-]]></content>
-      <categories>
-        <category>设计模式</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>设计模式</tag>
-        <tag>开闭原则</tag>
       </tags>
   </entry>
   <entry>
@@ -3461,226 +3658,880 @@ href="https://leetcode.cn/problems/maximal-square/description/?envType=study-pla
       </tags>
   </entry>
   <entry>
-    <title>设计模式</title>
-    <url>/2025/03/12/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</url>
-    <content><![CDATA[<blockquote>
-<p>🚩 学如逆水行舟，不进则退。 —— 《增广贤文》</p>
-</blockquote>
-<h1 id="一设计模式总述">一、设计模式总述</h1>
-<h2 id="什么是设计模式">1、什么是设计模式</h2>
-<p>  
-设计模式是一套经过反复使用的代码设计经验，目的是为了重用代码、让代码更容易被他人理解、保证代码可靠性。</p>
-<p>  项目中合理的运用设计模式可以完美的解决很多问题，每种模式在现实中都有相对应的原理与之对应，每种模式描述了一个在我们周围不断重复发生的问题，以及该问题的核心解决方案。</p>
-<p>  总体而言，设计模式分为三大类：</p>
-<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250312144024.png" style="zoom:60%;" /></p>
-<h2 id="设计模式的六大原则">2、设计模式的六大原则</h2>
-<p>设计模式主要有六大设计原则，分别是：单一职责原则、开闭原则、里氏替换原则、依赖倒置原则、接口隔离原则、迪米特原则。<br><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250312193040.png" style="zoom:67%;" /></p>
-<h3
-id="单一职责原则single-responsibility-principle">（1）单一职责原则（Single
-Responsibility Principle）</h3>
-<ol type="1">
-<li>定义：一个接口或者类只有一个原因引起变化。</li>
-<li>定义解释：即一个接口或者一个类只有一个职责，负责一件事情。（此原则同样适用于方法）</li>
-<li>好处：① 复杂性降低 ② 可读性提高 ③可维护性提高 ④变更风险降低</li>
-</ol>
-<p><strong>详细描述和代码demo:</strong> <a href="/2025/03/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99/" title="单一职责原则">[单一职责原则]</a></p>
-<h3 id="开闭原则-open-close-principle">（2）开闭原则 <strong>(Open Close
-Principle)</strong></h3>
-<ol type="1">
-<li>定义：软件实体对扩展开放，对修改关闭。</li>
-<li>定义解释：也就是应该通过扩展来实现业务需求和变化，而不是通过修改已有的代码来实现变化。</li>
-<li>好处：① 强系统的稳定性和可扩展性 ②减少对现有代码的影响</li>
-</ol>
-<p><strong>详细描述和代码demo:</strong> <a href="/2025/03/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/" title="开闭原则">[开闭原则]</a></p>
-<h3 id="里氏替换原则-liskov-substitution-principle">（3）里氏替换原则
-<strong>(Liskov Substitution Principle)</strong></h3>
-<ol type="1">
-<li>定义：任何基类可以出现的地方，子类一定可以出现。</li>
-<li>定义解释：
-<ul>
-<li>子类必须完全实现弗雷的方法</li>
-<li>子类可以有自己的个性</li>
-<li>覆盖或者实现父类方法时，输入参数可以被放大</li>
-<li>覆盖或者实现父类方法时，输出结果可以被缩小</li>
-</ul></li>
-<li>好处：① 提升代码的可靠性和复用性 ②减少继承带来的问题</li>
-</ol>
-<h3 id="依赖倒置原则-dependence-inversion-principle">（4）依赖倒置原则
-<strong>(Dependence Inversion Principle)</strong></h3>
-<ol type="1">
-<li>定义：高层模块不应依赖低层模块，两者都应依赖抽象；抽象不应依赖细节，细节应依赖抽象。</li>
-<li>定义解释：简单点来说，就是面向接口编程。模块间的依赖通过抽象发生，实现类之间不发生直接的依赖关系，其依赖关系时通过接口或者抽象类产生。</li>
-<li>好处：① 降低模块间的耦合 ②提升系统的可扩展性和可维护性</li>
-</ol>
-<h3 id="接口隔离原则-interface-segregation-principle">（5）接口隔离原则
-<strong>(Interface Segregation Principle)</strong></h3>
-<ol type="1">
-<li>定义：建立单一接口，不要建立庞大臃肿的接口，尽量细化接口，接口中的方法尽量少。</li>
-<li>定义解释：应该为各个类建立专用的接口，而不要试图去建立一个很庞大的接口供所有依赖它的类去调用。</li>
-<li>好处：① 提高系统的灵活性和可维护性 ② 减少接口间的耦合。</li>
-</ol>
-<h3 id="迪米特原则-demeter-principle">（6）迪米特原则 <strong>(Demeter
-Principle)</strong></h3>
-<ol type="1">
-<li>定义：<strong>只与直接的朋友通信。</strong>一个类应该对其他类保持最少的了解</li>
-<li>定义解释：也就是说一个类对自己依赖的类知道的越少越好。即对于被依赖的类，无论逻辑多复杂，都尽量地讲逻辑封装在类的内部，对外除了提供的public方法，不对外泄露任何信息。</li>
-<li>好处：① 提高模块的独立性 ② 减少依赖 ③
-增强系统的可维护性和可复用性。</li>
-</ol>
+    <title>设置hexo首页只显示部分摘要（不显示全文）</title>
+    <url>/2024/12/03/Hexo/%E8%AE%BE%E7%BD%AEhexo%E9%A6%96%E9%A1%B5%E5%8F%AA%E6%98%BE%E7%A4%BA%E9%83%A8%E5%88%86%E6%91%98%E8%A6%81/</url>
+    <content><![CDATA[<p>❗本文针对hexo的Next主题的设置有效，其他主题可以看看有没有相同字段
+Next默认是会在首页显示全文的，看起来冗长不简洁。要想首页仅展示文章标题或者摘要，请按照以下步骤进行：</p>
+<h3 id="修改配置">修改配置</h3>
+<p>首先需要在Next主题的<code>_config.yml</code>中把设置打开(默认安装时就打开了):
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">excerpt_description:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="设置展示的内容">设置展示的内容</h3>
+<h4 id="方法一写概述">方法一：写概述</h4>
+<p>在文章的<code>front-matter</code>中添加<code>description</code>，其中<code>descriptio</code>n中的内容就会被显示在首页上，其余一律不显示。
+<img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/Snipaste_2024-12-04_00-04-00.png" /></p>
+<p>PS:
+这种方法主要是要自己对文章内容进行简单总结，有时候不喜欢写总结介绍的话，可以用下面第二种方法</p>
+<h4 id="方法二文章截断">方法二：文章截断</h4>
+<p>在需要截断的地方加入： <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--more--&gt;</span></span><br></pre></td></tr></table></figure>
+首页就会显示这条以上的所有内容，隐藏接下来的所有内容。</p>
+<p>这个明显会方便很多，但当然有利有弊，我一般喜欢用方法一，也希望自己写的<code>description</code>能够给读者快速了解文章内容的效果</p>
 ]]></content>
       <categories>
-        <category>Java</category>
+        <category>Hexo</category>
       </categories>
       <tags>
-        <tag>Java</tag>
-        <tag>设计模式</tag>
+        <tag>Hexo</tag>
+        <tag>教程</tag>
       </tags>
   </entry>
   <entry>
-    <title>单例模式</title>
-    <url>/2025/03/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</url>
-    <content><![CDATA[<blockquote>
-<p>🚩 学如逆水行舟，不进则退。 —— 《增广贤文》</p>
-</blockquote>
-<h1 id="一引言">一、引言</h1>
-<p>  在计算机系统中，线程池、缓存、日志对象、对话框、打印机、显卡的驱动程序对象常被设计成单例，这些应用都或多或少具有资源管理器的功能。
-每台计算机可以有若干个打印机，但只能有一个Printer
-Spooler，以避免两个打印作业同时输出到打印机中。每台计算机可以有若干通信端口，系统应当集中管理这些通信端口，以避免一个通信端口同时被两个请求同时调用。
-总之，选择单例模式就是为了避免不一致状态，避免政出多头。</p>
-<h1 id="二什么是单例模式">二、什么是单例模式？</h1>
-<p>  单例模式可以确保系统中某个类只有一个实例，该类自行实例化并向整个系统提供这个实例的公共访问点，除了该公共访问点，不能通过其他途径访问该实例。</p>
-<blockquote>
-<p>延续我们之前的栗子，还是生产MBP电脑的问题，假如现在MBP工厂只有一台光刻机可以生产芯片，那么，此时我们在创建这台光刻机的时候，就应该将它设置为单例模式。
-也就是整个工厂中有且只有一台，整个程序中也有且只有一个这样的对象。</p>
-<p>但是问题来了，MBPM3要用这台光刻机，MBPM4也要用这台光刻机。那我们该如何保证系统只有一个光刻机对象呢？如果现在都要用，那又该怎么解决呢？</p>
-<p>第一个问题，我们下文分析；第二个问题其实现在就可以回答，答案就是等。想象一下，你去打印店打印东西的时候，如果打印店只有一台打印机，那一定是排在你前面的同学先打完才能轮到你打印。</p>
-</blockquote>
-<p>  那我们就得引入以下单例的几种创建模式了，包括懒汉单例、饿汉单例以及登记式单例</p>
-<h1 id="三编写单例的注意事项">三、编写单例的注意事项</h1>
-<h2 id="三个必要条件">（1） 三个必要条件</h2>
-<p>单例模式的实现需要三个必要的条件：</p>
-<ol type="1">
-<li>单例类的构造函数必须是私有的，才能将类的创建权控制在类的内部，从而使得类的外部不能创建类的实例。</li>
-<li>单例通过一个私有的静态变量来存储其唯一实例。</li>
-<li>单例类通过提供一个公开的静态方法，使得外部使用者可以访问类的唯一实例。</li>
-</ol>
-<h2 id="考虑三个问题">（2）考虑三个问题</h2>
-<p>实现单例类时，还需要考虑三个问题：</p>
-<ul>
-<li>创建单例对象时，是否线程安全。</li>
-<li>单例对象的创建，是否延时加载。</li>
-<li>获取单例对象时，是否需要加锁（锁会导致低性能）</li>
-</ul>
-<h1 id="四单例模式优缺点">四、单例模式优缺点</h1>
-<p><strong>（1）优点：</strong></p>
-<ol type="1">
-<li>可以确保所有的对象都访问同一个实例</li>
-<li>可以节约系统资源，避免了频繁创建和销毁的对象</li>
-<li>避免对共享资源的多重占用</li>
-</ol>
-<p><strong>（2）缺点：</strong></p>
-<ol type="1">
-<li>不适合变化的对象，如果同一类型的对象总是要在不同场景发生变化，单例就会造成数据错误</li>
-<li>职责过重，一定程度上违背了”单一职责原则“</li>
-<li>如果实例化的对象长时间不被利用，系统可能会认为是垃圾而被挥手</li>
-</ol>
-<h1 id="五懒汉单例">五、懒汉单例</h1>
-<h2 id="定义">（1）定义</h2>
-<p>  
-所谓懒汉单例，其实跟字面意思一样，就是“懒”，得等到需要的时候才回去创建，项目启动不会主动去创建对象，等程序运行到需要这个对象的时候才去创建。</p>
-<blockquote>
-<p>贴合我们的栗子：最开始生产电脑的时候，MBPM3和MBPM4都不知道没有制造芯片的光刻机，然后各自去生产各自的显示器、键盘等，等到要用的时候才发现该去买了，那要怎么保证不会买重复呢？</p>
-</blockquote>
-<h2 id="代码demo">（2）代码demo</h2>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;我是懒汉，恭喜你启动我的创建功能&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">Singleton</span> <span class="variable">singleton</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="comment">// 静态工厂方法，提供唯一公共访问点</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title function_">getInstance</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(Objects.isNull(singleton))&#123;</span><br><span class="line">            singleton = <span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="新的问题">（3）新的问题</h2>
-<p>  
-假如现在在一个高并发的场景下，线程1和线程2都需要这个单例对象，此时恰好系统对这个对象的创建使用了懒汉单例，那么就会存在如下图的问题。
-<img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313191948.png" style="zoom: 67%;">
-线程1调用了获取单例对象的静态方法，线程2也调用了获取单例的方法，如果线程1和线程2在同一时刻判断单例是否存在，那给它们的回答必然都会是不存在，那么就会导致线程1走创建单例的代码，线程2也会走创建单例的代码。
-这样一下子就创建了两个对象，不符合单例的定义。并且现在的考虑是在两个线程下，要是现在是100个线程，那很有可能会创建出100个对象，这是非常危险的。</p>
-<p>  
-那可以怎么改进呢？线程存在高并发问题，第一时间想到了锁，可以把获取单例对象的方法锁起来，每次只允许一个线程进入。于是有了如下的代码：</p>
-<h4 id="线程同步机制">【1】线程同步机制</h4>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 添加同步机制</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SingletonV2</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">SingletonV2</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;我是懒汉，恭喜你启动我的创建功能&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">SingletonV2</span> <span class="variable">singletonV2</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="comment">// 静态工厂方法，提供唯一公共访问点</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> SingletonV2 <span class="title function_">getInstance</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (Objects.isNull(singletonV2)) &#123;</span><br><span class="line">            singletonV2 = <span class="keyword">new</span> <span class="title class_">SingletonV2</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> singletonV2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>  
-但是现在又存在一个问题，所有线程每次获取这个单例对象，就得同步（被加锁，排队获取）。说明我们锁的粒度太大了，应该把锁的粒度延迟到创建对象的时候，于是我们有了第三版的代码。</p>
-<h4 id="双重判断">【2】双重判断</h4>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 双重判断</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SingletonV3</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">SingletonV3</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;我是懒汉，恭喜你启动我的创建功能&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="type">SingletonV3</span> <span class="variable">singletonV3</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="comment">// 静态工厂方法，提供唯一公共访问点</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> SingletonV3 <span class="title function_">getInstance</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (Objects.isNull(singletonV3)) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (SingletonV3.class) &#123;</span><br><span class="line">                <span class="keyword">if</span> (Objects.isNull(singletonV3)) &#123;</span><br><span class="line">                    singletonV3 = <span class="keyword">new</span> <span class="title class_">SingletonV3</span>();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> singletonV3;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>（1）为什么 getInstance() 方法需要使用两个 if
-(Objects.isNull(singletonV3)) 进行判断?</p>
-<p>不加的代码如下： <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> SingletonV3 <span class="title function_">getInstance</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (Objects.isNull(singletonV3)) &#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (SingletonV3.class) &#123;</span><br><span class="line">            singletonV3 = <span class="keyword">new</span> <span class="title class_">SingletonV3</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> singletonV3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>   
-假设高并发下，线程1和线程2都通过了第一个if条件。若线程1先抢到了锁，new了一个对象，释放锁。在这个时候，线程2也抢到了锁，现在没有做第二个if判断，那么线程2就会再new出一个对象。这样便不符合单例的定义。
-所以使用两个if判断，确保只有第一次调用单例的时候才会做同步，这样也是线程安全的，同时避免了每次都同步的性能损耗。</p>
-<p>（2）volatile关键字的作用是什么？</p>
-<p>   volatile的作用主要是禁止指令重排序。假设在不使用 volatile
-的情况下，两个线程1、2，都是第一次调用该单例方法，线程1先执行 singleton
-= new Singleton()，
-但由于构造方法不是一个原子操作，编译后会生成多条字节码指令，由于 JAVA的
-指令重排序，可能会先执行 singleton
-的赋值操作，该操作实际只是在内存中开辟一片存储对象的区域后直接返回内存的引用，
-之后 singleton
-便不为空了，但是实际的初始化操作却还没有执行。如果此时线程2进入，就会拿到一个不为空的但是没有完成初始化的singleton
-对象，
-所以需要加入volatile关键字，禁止指令重排序优化，从而安全的实现单例。</p>
-<h4 id="静态内部类">【3】 静态内部类</h4>
-<p>  
-前面的两种都是靠加锁才实现了单例创建的唯一性。对于高并发的系统来说，加锁会对系统的效率产生很大影响，那有没有一种方法能不加锁实现单例的创建呢？</p>
-<p>  
-在讲解之前，我们需要明白关于静态内部类的一个点，那就是：<strong>在Java中，外部类被加载时，静态内部类不会被初始化，只有首次访问静态内部类时（如创建实例，访问静态成员等），才会触发初始化。</strong></p>
-<p>  
-这不就是我们懒汉单例所需要的吗，不访问不初始化，访问了才创建。那么我们就可以很快的想出，在单例类中定义一个静态内部类，静态内部类定义单例对象作为静态成员，
-然后在 getInstance() 方法中，返回静态内部类中静态成员。代码如下：
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 静态内部类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SingletonV4</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">SingletonV4</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;我是懒汉，恭喜你启动我的创建功能&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">LayHolder</span> &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">SingletonV4</span> <span class="variable">INSTANCE</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SingletonV4</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 静态工厂方法，提供唯一公共访问点</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> SingletonV4 <span class="title function_">getInstance</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> LayHolder.INSTANCE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h1 id="六饿汉单例">六、饿汉单例</h1>
-<h2 id="定义-1">（1）定义</h2>
-<p>  
-所谓饿汉单例，就是预防饥饿，即在项目启动时，就把所定义的单例对象创建好，这样就不用考虑多线程高并发问题。</p>
-<blockquote>
-<p>贴合我们的栗子：最开始生产电脑的时候，MBP公司就先买好了光刻机，MBPM3和MBPM4要使用的话，就直接排队使用，不用考虑是谁去买的问题。</p>
-</blockquote>
-<h2 id="实现代码">（2）实现代码：</h2>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Single</span> &#123;</span><br><span class="line">    Single() &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;我是饿汉，不用调用我，我也会帮你创建好&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="type">Single</span> <span class="variable">single</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Single</span>();</span><br><span class="line">    <span class="comment">// 静态工厂方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Single <span class="title function_">getInstance</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> single;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="七懒汉单例和饿汉单例对比">七、懒汉单例和饿汉单例对比</h1>
-<p><strong>1、 初始化和首次调用</strong> -
-饿汉式是在类加载时，就将单例初始化完成，保证获取实例的时候，单例是已经存在的了。所以在第一次调用时速度也会更快，因为其资源已经初始化完成。
--
-懒汉式会延迟加载，只有在首次调用时才会实例化单例，如果初始化所需要的工作比较多，那么首次访问性能上会有些延迟，不过之后就和饿汉式一样了。</p>
-<p><strong>2、线程安全方面</strong> -
-饿汉式天生就是线程安全的，可以直接用于多线程而不会出现问题； -
-懒汉式本身是非线程安全的，需要通过额外的机制保证线程安全。</p>
-<h1 id="五登记式单例">五、登记式单例</h1>
-<h2 id="定义-2">（1）定义</h2>
-<p>  登记式单例又称注册式单例，就是将每一个实例都登记到某一个地方，使用唯一的标识获取实例。
-注册单例有两种：① 枚举登记； ② 容器缓存（Spring源码常用）</p>
-<h2 id="枚举登记">（2）枚举登记</h2>
-<h3 id="引言">【1】 引言</h3>
-<p>在Java中，除了可以使用 new 和 工厂
-方式创建对象外，还可以使用克隆、反序列化和反射创建对象，但这些方式在创建对象时有可能导致单例对象的不唯一性，如何解决呢？</p>
-<p>（1）为了防止客户端使用克隆方法创建对象，单例类不能使用 Cloneable
-接口，即不能支持 clone() 方法</p>
-<p>（2）由于反射可以获取到类的构造函数，包括私有构造函数，因此反射可以生成新的对象，这个除了枚举基本没法避开</p>
-<p>（3）在原型模式中，我们可以通过反序列化实现克隆，反序列化也会生成新的对象。具体操作是：每次调用
-readObject()
-方法，都将会返回一个新建的实例对象，这个实例对象不同于类在初始化时创建的实例对象。
-&gt; 那反序列化如何避免？<br> &gt; ① 单例类不能实现
-Serializable接口，即不允许该类支持序列化；<br> &gt; ② 枚举</p>
-<p>因为Java虚拟机会保证枚举对象的唯一性，因此每一个枚举类型和定义的枚举变量在JVM中都是唯一的。并且通过枚举实现的单例，既可以避免多线程同步问题；还可以防止通过反射和反序列化来重新创建新的对象。</p>
-<h3 id="实现代码-1">【2】实现代码：</h3>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="title class_">EnumSingleton</span> &#123;</span><br><span class="line">    INSTANCE</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="容器缓存">（3）容器缓存</h2>
-<h3 id="实现原理">【1】实现原理</h3>
-<p>登记式单例实际上维护了一组单例类的实例，将这些实例存放在一个Map（登记薄）中，对于已经登记过的实例，则从Map直接返回，对于没有登记的，则先登记，然后返回。</p>
-<h3 id="代码实现">【2】 代码实现</h3>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 登记型单例</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CashSingleton</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">CashSingleton</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;我是登记型单例，我已经帮你登记好了&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Map&lt;String, CashSingleton&gt; singletonMap = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">    <span class="comment">// 在类加载时执行，且只能执行一次</span></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="type">CashSingleton</span> <span class="variable">cashSingleton</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CashSingleton</span>();</span><br><span class="line">        singletonMap.put(cashSingleton.getClass().getName(), cashSingleton);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 静态工厂，返回此类唯一实例</span></span><br><span class="line">    <span class="keyword">public</span> CashSingleton <span class="title function_">getInstance</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (Objects.isNull(name)) &#123;</span><br><span class="line">            name = CashSingleton.class.getName();</span><br><span class="line">            System.out.println(<span class="string">&quot; name == null &quot;</span> + <span class="string">&quot;----&gt;name=&quot;</span> + name);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (Objects.isNull(singletonMap.get(name))) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                singletonMap.put(name, (CashSingleton) Class.forName(name).newInstance());</span><br><span class="line">            &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InstantiationException e) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> singletonMap.get(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <title>互联网大厂推荐算法学习笔记</title>
+    <url>/2025/03/13/Recommend/%E4%BA%92%E8%81%94%E7%BD%91%E5%A4%A7%E5%8E%82%E6%8E%A8%E8%8D%90%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[
 ]]></content>
       <categories>
-        <category>设计模式</category>
+        <category>推荐系统</category>
       </categories>
       <tags>
-        <tag>Java</tag>
-        <tag>设计模式</tag>
-        <tag>单例模式</tag>
+        <tag>推荐系统</tag>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>推荐系统基础知识</title>
+    <url>/2025/03/13/Recommend/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
+    <content><![CDATA[<p>说明：</p>
+<ul>
+<li>带星号，说明是有效的做法</li>
+</ul>
+<h2 id="一基本概念">一、基本概念</h2>
+<h4 id="消费指标">1、消费指标</h4>
+<ul>
+<li>点击率 = 点击次数 / 曝光次数</li>
+<li>点赞数 = 点赞次数 / 点击次数</li>
+<li>收藏率 = 收藏次数/ 点击次数</li>
+<li>转发率 = 转发次数 / 点击次数</li>
+<li>阅读完成率 = 滑动到底次数 / 点击次数*f（笔记长度）</li>
+</ul>
+<h4 id="北极星指标最重要的指标">2、北极星指标（最重要的指标）</h4>
+<ul>
+<li>用户规模：
+<ul>
+<li>日活用户数（DAU）、月活用户数（MAU）</li>
+</ul></li>
+<li>消费
+<ul>
+<li>人均使用推荐的时长、人均阅读笔记的数量</li>
+</ul></li>
+<li>发布
+<ul>
+<li>发布渗透率、人均发布量</li>
+</ul></li>
+</ul>
+<h4 id="推荐系统链路">3、推荐系统链路</h4>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211447.png" /></p>
+<h5 id="召回通道">（1）召回通道</h5>
+<p>协同过滤、双塔模型、关注的作者等等</p>
+<h5 id="重排">（4）重排</h5>
+<ul>
+<li>做多样性抽样（比如MMR、DPP），从几百篇中选出几十篇</li>
+<li>用规则打散相似笔记</li>
+<li>插入广告和运营推广内容，根据生态要求调整排序</li>
+</ul>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211457.png" /></p>
+<h4 id="ab测试">4、A/B测试</h4>
+<h4 id="分层实验">5、分层实验</h4>
+<p>同层互斥，不同层正交</p>
+<h4 id="holdout机制">6、Holdout机制</h4>
+<ul>
+<li>每个实验（召回、粗排、精排、重排）独立汇报对业绩指标的提升</li>
+<li>公司考察一个部门在一段时间内对业绩指标总体的提升</li>
+<li>取10%的用户作为holdout桶，推荐系统使用剩余的90%作为实验，两者互斥</li>
+<li>10%的houldout桶和90%实验桶的diff，为整个部门的业务指标收益</li>
+</ul>
+<h4 id="实验推全">7、实验推全</h4>
+<p>新建一个推全层，与其他层正交</p>
+<h4 id="反转实验">8、反转实验</h4>
+<p>在新的推全层上，保留一个小的反转桶，使用旧策略。长期观察新旧策略的diff</p>
+<h2 id="二召回">二、召回</h2>
+<h3 id="一普通做法召回">（一）普通做法召回</h3>
+<h4 id="基于物品的协同过滤itemcf">1、基于物品的协同过滤（itemCF）</h4>
+<h4 id="原理">（1）原理</h4>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211506.png" /></p>
+<h4 id="预估用户对候选物品的兴趣">（2）预估用户对候选物品的兴趣</h4>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211513.png" style="zoom:80%;" /></p>
+<h4 id="计算物品相似度">（3）计算物品相似度</h4>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211521.png" style="zoom:80%;" /></p>
+<h4 id="itemcf用于召回的完整流程">（4）itemCF用于召回的完整流程</h4>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211540.png" /></p>
+<h4 id="swing模型">2、Swing模型</h4>
+<p>主要是多考虑了物品相似度计算过程中重合的用户是否来自同一个圈子</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211548.png" /></p>
+<h4 id="基于用户的协同过滤usercf">3、基于用户的协同过滤（UserCF）</h4>
+<h5 id="原理-1">（1）原理</h5>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211556.png" /></p>
+<h5 id="用户的相似度">（2）用户的相似度</h5>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211605.png" /></p>
+<h5 id="usercf用于召回的完成流程">（3）UserCF用于召回的完成流程</h5>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211612.png" />=</p>
+<h3 id="二向量召回">（二）向量召回</h3>
+<h4 id="离散特征处理">1、离散特征处理</h4>
+<h5 id="主要流程">（1）主要流程</h5>
+<ol type="1">
+<li>建立字典：把类别映射成序号
+<ul>
+<li>中国 ➡ 1</li>
+<li>美国 ➡ 2</li>
+</ul></li>
+<li>向量化：把序号映射成向量
+<ul>
+<li>One-hot编码：把序号映射成高维稀疏向量</li>
+<li>Embedding：把序号映射成低维稠密向量</li>
+</ul></li>
+</ol>
+<h5 id="one-hot编码">（2）One-hot编码</h5>
+<p>类别数量太大的话，一般不用One-hot编码</p>
+<h5 id="embedding">（3）Embedding</h5>
+<p>就是拿One-hot编码乘以一个矩阵，降低One-hot编码的向量维度</p>
+<h4 id="矩阵补充">2、矩阵补充</h4>
+<h5 id="概念">（1）概念</h5>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211620.png" /></p>
+<p>​
+我们需要构建模型，预测出灰色位置的数值。也就是需要预测出没有曝光给用户的物品，用户可能对该物品的兴趣分数，得到这个分数之后再选择进行推荐与否</p>
+<h5 id="模型训练">（2）<strong>模型训练</strong>：</h5>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211626.png" /></p>
+<h5 id="缺点">（3）<strong>缺点</strong>：</h5>
+<ul>
+<li>仅用了ID embedding，没有利用物品、用户属性</li>
+<li>负样本的选取方式不对</li>
+<li>做训练的方法不好
+<ul>
+<li>内积不如余弦相似度</li>
+<li>用平方损失（回归）不如用交叉熵损失（分类）</li>
+</ul></li>
+</ul>
+<h5 id="注意">（4）<strong>注意</strong>：</h5>
+<ul>
+<li>通常，对于用户数量和物品数量很大的平台，对应的学习矩阵A和B的维度会非常大，这时候对参数的存储需要做改进。通常，对于用户的学习矩阵A，采用key-value的方式，进行存储，key为用户id，value为对应的矩阵列</li>
+</ul>
+<h5 id="线上服务">（5）线上服务</h5>
+<p>从这里可以看出，用户学习矩阵和物品学习矩阵的行数应该是一样的，因为它们要进行内积</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211633.png" /></p>
+<h5 id="近似最近邻查找">（6）近似最近邻查找</h5>
+<h4 id="双塔模型">3、双塔模型</h4>
+<h5 id="用户和物品的embedding">（1）用户和物品的embedding</h5>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211640.png" /></p>
+<h5 id="计算用户的对物品的兴趣">（2）计算用户的对物品的兴趣</h5>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211649.png" /></p>
+<h5 id="双塔模型的训练">（3）双塔模型的训练</h5>
+<ul>
+<li>Pointwise：独立看待每个正样本和负样本，做简单的二元分类</li>
+<li>Pairwise：每次取出一个正样本、一个负样本</li>
+<li>Listwise：每次取出一个正样本、几个负样本</li>
+</ul>
+<h5 id="pointwise训练">（4）Pointwise训练</h5>
+<ul>
+<li>把召回看做二元分类任务</li>
+<li>对于正样本，鼓励cos(a,b) 接近+1</li>
+<li>对于负样本，鼓励cos(a,b) 接近-1</li>
+<li>控制正负样本数量为 1:2 或者 1:3</li>
+</ul>
+<h5 id="pairwise训练">（5）Pairwise训练</h5>
+<p>基本想法：鼓励cos(a,b+)大于cos(a,b-)</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211657.png" /></p>
+<p>损失函数：</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211704.png" /></p>
+<h5 id="listwise训练">（6）Listwise训练</h5>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211713.png" /></p>
+<h5 id="正负样本">（7）正负样本</h5>
+<p>【1】正样本</p>
+<ul>
+<li>类型：曝光而且有点击的用户—物品二元组</li>
+<li>问题：少部分物品占据大部分点击，导致正样本大多是热门物品。</li>
+<li>解决方案：过采样冷门物品，或降采样热门物品</li>
+</ul>
+<p>【2】负样本</p>
+<ul>
+<li>简单负样本：未被召回的物品（全体抽样），Batch负样本</li>
+<li>困难负样本：被粗排淘汰的物品（比较困难）、精排分数靠后的物品（非常困难）</li>
+<li><训练数据>：混合几种负样本，50%的负样本是简单负样本、50%的负样本的困难负样本</li>
+</ul>
+<p>注意：曝光但是没有点击的物品，不能成为负样本，因为很有可能是曝光后，用户没看到。这种负样本给训练排序的模型使用会更加合适</p>
+<h4 id="双塔模型线上服务模型更新">4、双塔模型——线上服务、模型更新</h4>
+<h5 id="双塔模型的召回">（1）双塔模型的召回</h5>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211720.png" /></p>
+<h5 id="模型更新">（2）模型更新</h5>
+<ul>
+<li>全量更新：今天凌晨，用昨天全天的数据训练模型。在昨天模型参数的基础上训练模型，不是重新初始化参数</li>
+<li>增量更新：做online learning更新模型参数，增量更新ID
+embedding参数</li>
+</ul>
+<h4 id="改进双塔模型方法自监督学习">5、改进双塔模型方法—自监督学习</h4>
+<p>​
+自监督的目的是为了把物品塔的参数训练得更好。自监督训练的原理就是，经过不同变换的物品在由物品塔进行embedding后要尽量的相似，不同物品之间embedding后要尽量不相似。其实感觉这种自监督的学习方法很相似。都是在已知数据条件的情况下，通过变动原有数据，使得经过模型变化后，变换前和变换后的物品依然相似。Bert也是同样的道理</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211727.png" /></p>
+<h5 id="特征变化">（1）特征变化</h5>
+<ul>
+<li><p>Random
+Mask：随机选一些离散特征，（比如类目），把它们遮住</p></li>
+<li><p>Dropout（仅对多值离散特征生效）：Dropout是随机丢弃特征中50%的值</p></li>
+<li><p>互补特征：把物品的特征随机分成两组，然后变换左右，左是随机mask
+50%的特征，右则是随机mask 另外50%的特征</p></li>
+<li><p>Mask一组关联的特征</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211734.png" /></p></li>
+</ul>
+<h4 id="deep-retrieval">6、Deep Retrieval</h4>
+<p>把物品表征为路径，在线上查找用户最匹配的路径</p>
+<h5 id="索引">（1）索引</h5>
+<ul>
+<li>路径 ➡ List<物品></li>
+<li>物品 ➡ List<路径></li>
+</ul>
+<h5 id="预估模型">（2）预估模型</h5>
+<p>神经网络预估用户对路径的兴趣</p>
+<h5 id="线上召回">（3）线上召回</h5>
+<p>用户➡路径➡物品</p>
+<h5 id="训练">（4）训练</h5>
+<ul>
+<li>学习神经网络参数</li>
+<li>学习物品表征（物品➡路径）</li>
+</ul>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211747.png" /></p>
+<h5 id="总结">（5）总结</h5>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211754.png" /></p>
+<h4 id="tdm">7、TDM</h4>
+<p><a
+href="https://github.com/alibaba/x-deeplearning/wiki/%E6%B7%B1%E5%BA%A6%E6%A0%91%E5%8C%B9%E9%85%8D%E6%A8%A1%E5%9E%8B(TDM)">TDM</a></p>
+<h4 id="其他召回通道">8、其他召回通道</h4>
+<h5 id="地理位置召回通道-geohash">（1）地理位置召回通道 GeoHash</h5>
+<ul>
+<li>用户可能对附近发生的事感兴趣</li>
+<li>GeoHash：对经纬度的编码，地图上一个长方形区域</li>
+<li>索引：GeoHash ➡ 优质笔记列表（时间倒排）</li>
+<li>这条召回通道没有个性化</li>
+</ul>
+<h5 id="同城召回通道">（2）同城召回通道</h5>
+<ul>
+<li>用户可能对同城发生的事感兴趣</li>
+<li>索引：同城➡ 优质笔记列表（时间倒排）</li>
+<li>这条召回通道没有个性化</li>
+</ul>
+<h5 id="作者召回">（3）作者召回</h5>
+<ul>
+<li>用户对关注的作者发布的笔记感兴趣</li>
+<li>索引：
+<ul>
+<li>用户 ➡ 关注的作者</li>
+<li>作者 ➡ 发布的笔记</li>
+</ul></li>
+<li>召回：用户 ➡ 关注的作者 ➡ 最新的笔记</li>
+</ul>
+<h5 id="有交互的作者召回">（4）有交互的作者召回</h5>
+<ul>
+<li>如果用户对某笔记感兴趣，那么该用户可能对该作者的其他笔记也感兴趣</li>
+<li>索引：用户 ➡ 有交互的作者</li>
+<li>召回：用户 ➡ 有交互的作者 ➡ 最新的笔记</li>
+</ul>
+<h5 id="相似作者召回">（5）相似作者召回</h5>
+<ul>
+<li>如果用户喜欢某个作者，那么用户也会喜欢相似的作者</li>
+<li>索引：作者 ➡ 相似作者</li>
+<li>召回：用户 ➡ 感兴趣的作者 ➡ 相似的作者 ➡ 最新的笔记</li>
+</ul>
+<h5 id="缓存召回">（6）缓存召回</h5>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211836.png" /></p>
+<h4 id="曝光过滤-bloom-filter">9、曝光过滤 &amp; Bloom Filter</h4>
+<h5 id="曝光过滤">（1）曝光过滤</h5>
+<p>​ 其实就是，如果物品对用户曝光过，就不再推荐这个物品给用户</p>
+<h5 id="bloom-filter">（2）Bloom Filter</h5>
+<ul>
+<li>判断一个物品ID是否在已曝光的物品集合中</li>
+<li>如果判断为no，则说明一定不在已曝光的物品中</li>
+<li>如果为yes，则很有可能在已曝光的物品中，但也有可能是误判
+【因为原理用的hash，可能映射到同一位置】</li>
+<li>算法实现：【Hash原理】
+<ul>
+<li>Bloom Filter 把物品集合表征为一个m维二进制向量</li>
+<li>每个用户有一个曝光物品的集合，表征为一个向量，需要 m bit的存储</li>
+<li>Bloom filter有k个哈希函数，每个哈希函数把物品ID映射成介于 0 和 m -
+1之间的整数</li>
+</ul></li>
+</ul>
+<h3 id="三排序">三、排序</h3>
+<h4 id="多目标模型">1、多目标模型</h4>
+<h5 id="模型原理图">（1）模型原理图</h5>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211844.png" /></p>
+<h5 id="模型训练-1">（2）模型训练</h5>
+<ul>
+<li><p>损失函数：交叉熵损失函数，就是一个分类拟合问题</p></li>
+<li><p>困难：</p>
+<ul>
+<li>问题：会存在样本不平衡的情况，正样本会比负样本少</li>
+<li>解决：负样本降采样（down
+sample）。就是减少负样本，同时也可以减少计算量</li>
+</ul></li>
+<li><p>预估值校准</p></li>
+</ul>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211852.png" /></p>
+<h4 id="多任务学习模型mmoe">2、多任务学习模型（MMOE）</h4>
+<h5 id="模型原理图-1">（1）模型原理图</h5>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211859.png" /></p>
+<p><img src="C:\Users\28778\AppData\Roaming\Typora\typora-user-images\image-20241114212021361.png" alt="image-20241114212021361" style="zoom:33%;" /></p>
+<h5 id="极化现象">（2）极化现象</h5>
+<ul>
+<li>本质：就是softmax在输出的时候，会偏向于输出的某个数值过大，也就会导致忽视了其他神经网络的输出</li>
+<li>解决：在实际中，可以使用dropout对softmax的输出做调整
+<ul>
+<li>softmax输出的n个数值被mask的概率都是10%，也就是每个专家被忽视的概率都为10%</li>
+</ul></li>
+</ul>
+<h4 id="预估分数的融合">3、预估分数的融合</h4>
+<p>（1）简单的加权融合</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211908.png" /></p>
+<p>国外某短视频</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211914.png" /></p>
+<p>快手：</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211920.png" /></p>
+<p>国内某电商</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211927.png" /></p>
+<h4 id="视频播放建模">4、视频播放建模</h4>
+<h5 id="播放时长">（1）播放时长</h5>
+<p>实际上，我们会用exp(z)，作为最终的视频预估播放时长</p>
+<p>​ <img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211934.png" /></p>
+<h5 id="完播率">（2）完播率</h5>
+<ul>
+<li>回归：一个视频播放了70%，那它作为真实数据的标签就是0.7，然后用一个交叉熵作为神经网络的损失函数，就能实现拟合的效果</li>
+<li>二元分类：先定义好完播指标，然后根据视频的完播率将视频标记为正样本或者负样本，正负样本构成二元分类任务</li>
+</ul>
+<p>注意：不能直接把预估的完播率用到融合公式中，因为视频越长，完播率越低。用
+P(finish) = 预估完播率 / f(视频长度)</p>
+<h4 id="排序模型的特征">5、排序模型的特征</h4>
+<p>也就是要输入到排序模型的数据，包括以下几个特征：</p>
+<h5 id="用户画像">（1）用户画像</h5>
+<ul>
+<li>用户ID</li>
+<li>人口统计学属性：年龄、性别</li>
+<li>账号信息：新老、活跃度</li>
+<li>感兴趣类目：关键词</li>
+</ul>
+<h5 id="物品画像">（2）物品画像</h5>
+<ul>
+<li>物品ID</li>
+<li>发布时间</li>
+<li>GeoHash、所在城市</li>
+<li>标题、类目、关键词、品牌</li>
+<li>字数、图片数、视频清晰度、标签数</li>
+</ul>
+<h5 id="用户统计特征">（3）用户统计特征</h5>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211943.png" /></p>
+<h5 id="笔记统计特征">（4）笔记统计特征</h5>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211951.png" /></p>
+<h5 id="场景特征">（5）场景特征</h5>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313211957.png" /></p>
+<h4 id="特征处理">6、特征处理</h4>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313212005.png" /></p>
+<h4 id="粗排">7、粗排</h4>
+<p>前期融合模型用于精排，后期融合模型用于粗排</p>
+<h5 id="粗排的三塔模型">（1）粗排的三塔模型</h5>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313212012.png" /></p>
+<h3 id="四特征交叉">四、特征交叉</h3>
+<h4 id="factorized-machinefm">1、Factorized Machine（FM）</h4>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313212018.png" /></p>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>线性模型的替代品，能用线性回归和逻辑回归的场景，都可以用FM</li>
+<li>使用二级交叉特征，表达能力比线性模型更强</li>
+<li>降低了二级交叉特征的数量</li>
+</ul>
+<p>【扩展】</p>
+<ul>
+<li>特征交叉，两个特征不仅能相加，还能相乘。这样可以提升模型的表达能力。能更好的反应物品的</li>
+</ul>
+<h4 id="深度交叉网络dcndeep-cross-network">2、深度交叉网络（DCN）【Deep
+&amp; Cross NetWork】</h4>
+<p>可以用于排序，也可以用于召回。有点像ResNet</p>
+<h5 id="交叉层">（1）交叉层</h5>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313212026.png" /></p>
+<figure>
+<img
+src="C:\Users\28778\AppData\Roaming\Typora\typora-user-images\image-20241117192612728.png"
+alt="image-20241117192612728" />
+<figcaption aria-hidden="true">image-20241117192612728</figcaption>
+</figure>
+<h5 id="dcn模型">（2）DCN模型</h5>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313212034.png" /></p>
+<h4 id="lhuc网络结构">3、LHUC网络结构</h4>
+<p>只能用于精排，也就是前期融合。起源于语音识别模型</p>
+<h5 id="用于语音识别的lhuc网络">（1）用于语音识别的LHUC网络</h5>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313212041.png" /></p>
+<h5
+id="推荐系统排序模型中的lhuc模型1">（2）推荐系统排序模型中的LHUC模型1</h5>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313212047.png" /></p>
+<h4 id="senet">4、SENet</h4>
+<h5 id="使用senet对-field-做离散特征加权">（1）使用SENet对 Field
+做离散特征加权</h5>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313212053.png" /></p>
+<ul>
+<li>其实就是对离散特征做 filed-wise 加权</li>
+<li>Field</li>
+</ul>
+<h5 id="field-间特征交叉">（2）Field 间特征交叉</h5>
+<ul>
+<li>内积</li>
+<li>哈达玛乘积</li>
+<li>Bilinear Cross （内积）</li>
+<li>Bilinear Cross （哈达玛乘积）</li>
+</ul>
+<h3 id="五行为序列">五、行为序列</h3>
+<h4 id="用户行为序列建模-lastn特征">1、用户行为序列建模 lastN特征</h4>
+<ul>
+<li>用户最近的n次交互（点击、点赞等）的物品ID</li>
+<li>对lastN物品做embedding，得到n个向量</li>
+<li>把n个向量取平均，作为用户的一个特征</li>
+<li>适用于召回的双塔模型、粗排三塔模型、精排模型</li>
+</ul>
+<h4 id="din模型">2、DIN模型</h4>
+<ul>
+<li>DIN用加权平均代替平均，即注意力机制</li>
+<li>权重：候选物品与用户LastN物品相似度</li>
+</ul>
+<p>模型整体流程：</p>
+<ul>
+<li>对于某候选物品，计算它与用户LastN物品的相似度</li>
+<li>以相似度为权重，求用户LastN物品向量的加权和，结果是一个向量</li>
+<li>把这个向量作为一种用户特征，输入排序模型，预估（用户、候选物品）的点击率、点赞率等指标</li>
+<li>本质是注意力机制</li>
+</ul>
+<h4 id="sim模型">3、SIM模型</h4>
+<ul>
+<li>保留用户长期行为记录，n的大小可以是几千</li>
+<li>对于每个候选物品，在用户LastN记录中做快速查找，找到k个相似物品</li>
+<li>把LastN变成TopK，然后输入到注意力层</li>
+<li>SIM减少了计算量（从n降到k）</li>
+</ul>
+<p><strong>SIM模型具体步骤：</strong></p>
+<h5 id="第一步查找">（1）第一步：查找</h5>
+<ul>
+<li>方法一：Hard Search
+<ul>
+<li>根据候选物品的类目，保留LastN物品中类目相同的</li>
+<li>简单、快速、无需训练</li>
+</ul></li>
+<li>方法二：Soft Search
+<ul>
+<li>把物品做embedding，变成向量</li>
+<li>把候选物品向量作为query，做k近邻查找，保留LastN物品中最接近的k个</li>
+<li>效果更好，编程实现更复杂</li>
+</ul></li>
+</ul>
+<h5 id="第二步注意力机制">（2）第二步：注意力机制</h5>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313212101.png" /></p>
+<p><strong>小Trick：</strong>使用时间信息</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313212107.png" /></p>
+<h3 id="六重排">六、重排</h3>
+<p>【我感觉重排就是在保证原来物品符合用户爱好的同时，尽可能的保留物品的多样性。为什么叫重排呢？因为重排，重新排序，本来只需要根据用户和物品特征，预测物品对用户的吸引力指标，择优推荐就可以。但是现在需要对这些东西进行重新排序，使得不会导致给用户推荐那些虽然吸引力指标很高，但是它们之间过于相似的物品】</p>
+<h4 id="推荐系统中的多样性">1、推荐系统中的多样性</h4>
+<p>​
+其实可以简单理解为物品需要更符合用户的口味的同时，还要更多样，这样不会导致频繁的给用户推荐单一的物品，这样会导致用户“审美疲劳”</p>
+<h5 id="物品相似度的度量">（1）物品相似度的度量</h5>
+<ul>
+<li>基于物品属性标签</li>
+<li>基于物品向量表征</li>
+</ul>
+<h5 id="提升多样性的方法">（2）提升多样性的方法</h5>
+<h4
+id="mmr多样性算法maximal-marginal-relevance">2、MMR多样性算法（Maximal
+Marginal Relevance）</h4>
+<h5 id="原理-2">（1）原理</h5>
+<p>​
+其实原理就是，将已选中的物品，跟未选中的物品做一个相似度计算，然后根据计算结果抑制为选中物品，相似度越大，就越要抑制。因为这个物品还没被选中推荐，与它相似的物品就已经被选中推荐给用户了，再推荐这个物品就极有可能对用户起不了吸引作用。</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313212115.png" /></p>
+<h5 id="流程">（2）流程</h5>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313212123.png" /></p>
+<h5 id="滑动窗口">（3）滑动窗口</h5>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313212129.png" /></p>
+<h4 id="重排的规则">3、重排的规则</h4>
+<h5 id="最多连续出现k篇某种笔记">（1）最多连续出现k篇某种笔记</h5>
+<h5
+id="每k篇笔记最多出现一篇某种笔记">（2）每k篇笔记，最多出现一篇某种笔记</h5>
+<h5
+id="前t篇笔记最多出现k篇某种笔记">（3）前t篇笔记最多出现k篇某种笔记</h5>
+<h4 id="dpp-行列式点过程">4、DPP （行列式点过程）</h4>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313212136.png" /></p>
+<p>​
+工业上精确求解DPP是不太可能，实际上会使用贪心算法，使得添加的物品要使得推荐系数更大，也不能跟已有的物品过于相似</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313212142.png" /></p>
+<p>​
+如果单纯要用暴力算法，来算出这个这个推荐过程，那么所需要消耗的时间是非常恐怖的，工业上不会采用这种做法，而是采用一种叫Hulu的快速算法，其实就是矩阵分解的思路。</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313212148.png" /></p>
+<h5 id="dpp扩展">DPP扩展</h5>
+<ul>
+<li>添加滑动窗口</li>
+<li>添加规则约束</li>
+</ul>
+<h3 id="七物品冷启动">七、物品冷启动</h3>
+<p>冷启动的意思，是对新发布的物品进行推荐。</p>
+<p><strong>优化冷启的目标：</strong></p>
+<ul>
+<li>精准推荐</li>
+<li>激励发布</li>
+<li>挖掘高潜</li>
+</ul>
+<p><strong>冷启动的优化点：</strong></p>
+<ul>
+<li>优化全链路（包括召回和排序）</li>
+<li>流量调控（流量怎么在新物品和老物品中分配）</li>
+</ul>
+<h4 id="冷启动的评价指标">1、冷启动的评价指标</h4>
+<ul>
+<li>作者侧指标：
+<ul>
+<li>发布渗透率、人均发布量</li>
+</ul></li>
+<li>用户侧指标：
+<ul>
+<li>新笔记指标：新笔记的点击率、交互率</li>
+<li>大盘指标：消费时长、日活、月活</li>
+</ul></li>
+<li>内容侧指标：
+<ul>
+<li>高热笔记占比</li>
+</ul></li>
+</ul>
+<h4
+id="简单的召回通道基于笔记向量或者标签做推荐">2、简单的召回通道（基于笔记向量或者标签做推荐）</h4>
+<h5 id="双塔模型-1">（1）双塔模型</h5>
+<ul>
+<li>新笔记使用 default embedding</li>
+<li>利用相似物品的 embedding 向量</li>
+</ul>
+<h5 id="类目召回通道">（2）类目召回通道</h5>
+<ul>
+<li>用户画像</li>
+</ul>
+<h5 id="基于关键词的召回">（3）基于关键词的召回</h5>
+<p>注：类目召回和关键词召回，都存在明显的缺点：</p>
+<ol type="1">
+<li>只对刚刚发布的新笔记有效
+<ul>
+<li>因为它们的索引列表中的数据，是根据发布时间倒序排序的，所以在很大程度上会造成比较早发布的作品，被忽视</li>
+</ul></li>
+<li>弱个性化，不够精准</li>
+</ol>
+<h4
+id="聚类召回基于笔记的图文内容做推荐">3、聚类召回***（基于笔记的图文内容做推荐）</h4>
+<h5 id="召回原理">（1）召回原理</h5>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313212156.png" /></p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313212203.png" /></p>
+<h5 id="内容相似度模型">（2）内容相似度模型</h5>
+<p>​
+这里需要调用一个神经网络，需要把笔记的图文内容，转换成对应的向量，然后还需要在头部添加两个向量之间的余弦相似度计算进行后处理。模型的训练易懂，就是分为正样本笔记、种子笔记、负样本笔记，我们只需要使得种子笔记跟正样本笔记的余弦相似度更大，与负样本的余弦相似度更小就可以。那么怎么选择正样本和负样本呢？</p>
+<h5 id="训练数据">（3）训练数据</h5>
+<ul>
+<li><p>&lt;种子笔记，正样本&gt;</p>
+<ul>
+<li>方法一：人工标注二元组的相似度</li>
+<li>算法自动选取正样本</li>
+</ul></li>
+<li><p>&lt;种子笔记，负样本&gt;</p>
+<p>从全体笔记中随机选出满足条件的</p>
+<ul>
+<li>字数较多（神经网络提取的文本信息有效）</li>
+<li>笔记质量较高，避免图文无关</li>
+</ul></li>
+</ul>
+<h4 id="look-alike人群扩散召回">4、Look-Alike人群扩散召回</h4>
+<p>小红书用于新笔记召回</p>
+<p><strong>原理大概是这样的</strong>：新笔记发布之后，会有部分用户对该笔记感兴趣，会对该笔记进行点赞，转发等操作。我们把这一类用户称为种子用户，然后计算种子用户的embedding，可以是复用双塔模型的用户embedding，然后对这些用户的embedding求平均，可以得到唯一一个向量，这个向量作为新笔记的表征，存入向量数据库中。当其他用户刷新软件时，我们会将用户的embedding和向量数据库中的新笔记的表征计算相似度，取出相似度靠前的笔记作为召回数据。</p>
+<h4 id="流量调控">5、流量调控</h4>
+<h5 id="流量调控技术的发展">（1）流量调控技术的发展</h5>
+<ol type="1">
+<li>在推荐结果中强插新笔记</li>
+<li>对新笔记的排序分数做提权（boost），也就是加权，提高新笔记的权重或者得分</li>
+<li>【高级】保量。（比如保证每一篇新笔记在近24小时都有近100次的曝光）其实就是保证新笔记的曝光量。通过提权来实现</li>
+<li>【更高级】 差异化保量。根据内容质量，确定保量的大小</li>
+</ol>
+<h5 id="新笔记提权">（2）新笔记提权</h5>
+<h5 id="新笔记保量">（3）新笔记保量</h5>
+<p>差异化保量。</p>
+<ul>
+<li>内容质量：用模型评价内容质量高低，基于额外保量目标，再设定一个上限</li>
+<li>作者质量：根据作者历史上的笔记质量，给予额外保量目标</li>
+</ul>
+<h4 id="ab测试-1">6、AB测试</h4>
+<h3 id="七涨指标的方法">七、涨指标的方法</h3>
+<h4 id="概述">1、概述</h4>
+<ol type="1">
+<li>改进召回模型，或者添加新的召回模型</li>
+<li>改进粗排和精排模型</li>
+<li>提升召回、粗排、精排中的多样性</li>
+<li>特殊对待新用户、低活用户等特殊人群</li>
+<li>利用关注、转发、评论这三种交互行为</li>
+</ol>
+<h4 id="召回">2、召回</h4>
+<ul>
+<li>双塔模型和 item-to-item
+是最重要的两类召回模型，占据召回的大部分配额</li>
+<li>可以适当添加小众的召回模型，虽然占据配额很少，但是提升核心指标会相对比较明显</li>
+<li>添加内容池，对召回也有很大的帮助</li>
+</ul>
+<h5 id="改进双塔模型">（1）改进双塔模型</h5>
+<ul>
+<li>方向1：优化正样本、负样本</li>
+<li>方向2：改进神经网络结构
+<ul>
+<li>Baseline：</li>
+<li>用户塔、物品塔分别使用DCN代替全连接网络</li>
+<li>在用户塔中使用用户行为序列（last-n）</li>
+<li>使用多向量模型代替单向量模型</li>
+</ul></li>
+<li>方向3：改进训练方法
+<ul>
+<li>Baseline：做二分类，让模型快速学习分辨正负样本</li>
+<li>结合二分类，batch内负采样</li>
+<li>使用自监督学习，让冷门物品的embedding学得更好</li>
+</ul></li>
+</ul>
+<h5 id="item-to-item">（2）Item-to-Item</h5>
+<ul>
+<li>最常见的用法就是：U2I2I</li>
+<li>计算物品相似度
+<ul>
+<li>方法1：ItemCF及其变体</li>
+<li>方法2：基于物品向量表征，计算向量相似度</li>
+</ul></li>
+</ul>
+<h5 id="小众的模型">（3）小众的模型</h5>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313212215.png" /></p>
+<h5 id="总结-1">总结：<img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313212222.png" /></h5>
+<h4 id="排序模型">3、排序模型</h4>
+<p><strong>【精排】</strong></p>
+<h5 id="精排模型基座">（1）精排模型：基座</h5>
+<ul>
+<li>基座的输入包括离散特征和连续特征，输出一个向量，作为多目标预估的输入</li>
+<li>改进1：基座加宽加深，计算量更大，预测更准确</li>
+<li>改进2：做自动的特征交叉，比如 bilinear 和 LHUC</li>
+<li>改进3：特征工程，比如添加统计特征、多模态内容特征等</li>
+</ul>
+<h5 id="精排模型多目标预估">（2）精排模型：多目标预估</h5>
+<ul>
+<li>基于基座模型输出的向量，同时预估点击率等多个目标</li>
+<li>改进1：增加新的预估目标，并把预估结果加入融合公式中</li>
+<li>改进2：MMoE、PLE等结构可能有效，但<strong>往往无效</strong></li>
+<li>改进3：纠正position bias，可能有效，也可能无效</li>
+</ul>
+<p><strong>【粗排】</strong></p>
+<h5 id="粗精排一致性建模">（3）粗精排一致性建模</h5>
+<ul>
+<li>蒸馏精排训练粗排，让粗排与精排更一致</li>
+<li>方法1：pointwise蒸馏
+<ul>
+<li>设y是用户真实行为，设p是精排的预估</li>
+<li>用 (y+p)/2 作为粗排拟合的目标</li>
+</ul></li>
+<li>方法2：pariwise 或 listwise 蒸馏
+<ul>
+<li>给定 k 个候选物品，按照精排预估做排序</li>
+<li>做 learning to rank (LTR)，让粗排拟合物品的序</li>
+</ul></li>
+<li>优点：粗精排一致性建模可以提升核心指标</li>
+<li>缺点：如果精排出 bug，精排预估值p有偏，会污染粗排训练数据</li>
+</ul>
+<h5 id="用户行为序列建模">（4）用户行为序列建模</h5>
+<p>基础建模方法：</p>
+<figure>
+<img
+src="C:\Users\28778\AppData\Roaming\Typora\typora-user-images\image-20241118212155513.png"
+alt="image-20241118212155513" />
+<figcaption aria-hidden="true">image-20241118212155513</figcaption>
+</figure>
+<ul>
+<li>改进1：增加序列长度，让预测更准确，但是会增加计算成本和推理成本。</li>
+<li>改进2：筛选，目的是降低序列长度。筛选方法，比如用类目、物品向量表征聚类</li>
+<li>改进3：对用户行为序列中的物品，使用除ID以外的一些特征</li>
+</ul>
+<h5 id="在线学习增量更新">（5）在线学习【增量更新】</h5>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313212237.png" /></p>
+<h5 id="老汤模型">（6）老汤模型</h5>
+<ul>
+<li>问题一：如何判断新模型结构优于老模型
+<ul>
+<li>对于新老模型结构，都随机初始化全连接层</li>
+<li>Embedding层可以是随机初始化的，也可以是复用老模型训练好的参数</li>
+<li>用 n 天的数据训练新老模型。（从旧到新，训练一个epoch）</li>
+<li>如果新模型显著优于老模型，新模型很可能更优</li>
+</ul></li>
+<li>问题二：如何快速追平线上老模型
+<ul>
+<li>方法1：尽可能复用老模型训练好的embedding层，避免随机初始化embedding层</li>
+<li>方法2：用老模型做teacher，蒸馏新模型。（用户真实行为是y，老模型的预测是p，用(y+p)/2
+作为训练新模型的目标）</li>
+</ul></li>
+</ul>
+<h4 id="提升多样性">4、提升多样性</h4>
+<h5 id="精排多样性">（1）精排多样性</h5>
+<ul>
+<li><p>精排阶段，结合兴趣分数和多样性分数对物品i排序</p>
+<ul>
+<li><p>si：兴趣分数，即融合点击率等多个预估目标</p></li>
+<li><p>di：多样性分数，即物品i与已经选中的物品的差异</p></li>
+<li><p>用si+di对物品做排序</p></li>
+</ul></li>
+<li><p>常用
+MMR、DPP等方法计算多样性分数，精排使用滑动窗口，粗排不使用滑动窗口</p>
+<ul>
+<li>精排决定最终的曝光，曝光页面上邻近的物品相似度应该小</li>
+<li>粗排要考虑整体多样性，而非一个滑动窗口中的多样性</li>
+</ul></li>
+<li><p>除了多样性分数，精排还是用打散策略增加多样性</p>
+<ul>
+<li>就是限制前几个推荐位置不允许出现重复的类目</li>
+</ul></li>
+</ul>
+<h5 id="粗排多样性">（2）粗排多样性</h5>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313212245.png" /></p>
+<h5 id="召回多样性">（3）召回多样性</h5>
+<ul>
+<li><p>双塔模型：添加噪声</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313212251.png" /></p></li>
+<li><p>双塔模型：抽样用户行为序列</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313212301.png" /></p></li>
+<li><p>U2I2I：抽样用户行为序列</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313212308.png" /></p></li>
+</ul>
+<h5 id="探索流量">（4）探索流量</h5>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313212317.png" /></p>
+<h4 id="特殊对待特殊人群">5、特殊对待特殊人群</h4>
+<h5 id="主流方法">（1）主流方法：</h5>
+<ol type="1">
+<li>构造特殊内容池，用于特殊用户人群的召回</li>
+<li>使用特殊的排序策略，保护特殊的用户</li>
+<li>使用特殊的排序模型，消除模型预估的偏差</li>
+</ol>
+<h5 id="构造特殊内容池">（2）构造特殊内容池</h5>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313212325.png" /></p>
+<figure>
+<img
+src="C:\Users\28778\AppData\Roaming\Typora\typora-user-images\image-20241118233109781.png"
+alt="image-20241118233109781" />
+<figcaption aria-hidden="true">image-20241118233109781</figcaption>
+</figure>
+<h5 id="特殊的排序策略">（3）特殊的排序策略</h5>
+<ul>
+<li>排除低质量物品</li>
+<li>差异化的融分公式</li>
+</ul>
+<h5 id="特殊的排序模型">（4）特殊的排序模型</h5>
+<ul>
+<li>差异化的排序模型
+<ul>
+<li>方法1：大模型 + 小模型</li>
+<li>方法2：融合多个 experts，类似MMoE</li>
+<li>方法3：大模型预估之后，用小模型做校准</li>
+</ul></li>
+</ul>
+<h4 id="交互行为">6、交互行为</h4>
+<h5 id="关注">（1）关注</h5>
+<ul>
+<li><p>关注量对留存的价值</p></li>
+<li><p>构造促关内容池和召回通道</p>
+<ul>
+<li>就是构造递减函数，关注作者数作为自变量。为关注率新增一项权值，调整关注率的数值</li>
+</ul></li>
+<li><p>粉丝数对促发布的价值</p>
+<ul>
+<li>也是构造递减函数，粉丝数作为自变量。为被关注率新增一项权值，调整被关注率的数值</li>
+</ul></li>
+<li><p>隐式关注关系</p>
+<ul>
+<li>隐式关注关系：用户u喜欢看作者a发布的物品，但是u没关注a</li>
+</ul></li>
+</ul>
+<h5 id="转发分享">（2）转发（分享）</h5>
+<ul>
+<li>KOL（Key Opinion Leader）建模
+<ul>
+<li>其他平台的KOL的转发可以吸引大量站外流量</li>
+<li>判断用户是否为其他平台的KOL？看用户历史转发，平均能带来多少站外流量</li>
+</ul></li>
+</ul>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250313212334.png" /></p>
+<figure>
+<img
+src="C:\Users\28778\AppData\Roaming\Typora\typora-user-images\image-20241119204438577.png"
+alt="image-20241119204438577" />
+<figcaption aria-hidden="true">image-20241119204438577</figcaption>
+</figure>
+<h5 id="评论">（3）评论</h5>
+]]></content>
+      <categories>
+        <category>推荐系统</category>
+      </categories>
+      <tags>
+        <tag>推荐系统</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
 </search>
