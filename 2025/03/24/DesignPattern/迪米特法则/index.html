@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ych1016.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.21.1","exturl":false,"sidebar":{"position":"left","width_expanded":300,"width_dual_column":200,"display":"always","padding":20,"offset":200},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":7,"unescape":true,"preload":true}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="主要是记录迪米特法则定义，以及相关实现demo代码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="迪米特法则">
+<meta property="og:url" content="https://ych1016.github.io/2025/03/24/DesignPattern/%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99/index.html">
+<meta property="og:site_name" content="攻城狮-旺仔">
+<meta property="og:description" content="主要是记录迪米特法则定义，以及相关实现demo代码">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-03-24T02:59:30.000Z">
+<meta property="article:modified_time" content="2025-03-24T08:19:02.826Z">
+<meta property="article:author" content="旺仔">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="设计模式">
+<meta property="article:tag" content="迪米特法则">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://ych1016.github.io/2025/03/24/DesignPattern/%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ych1016.github.io/2025/03/24/DesignPattern/%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99/","path":"2025/03/24/DesignPattern/迪米特法则/","title":"迪米特法则"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>迪米特法则 | 攻城狮-旺仔</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">攻城狮-旺仔</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">本站为攻城狮旺仔个人博客，仅记录日常编程笔记使用，欢迎各位大佬共同交流</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-首页"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-标签"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-分类"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-日程"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程</a></li><li class="menu-item menu-item-成就"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>成就</a></li><li class="menu-item menu-item-关于"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99"><span class="nav-text">迪米特法则</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E5%AE%9A%E4%B9%89"><span class="nav-text">一、定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E9%97%AE%E9%A2%98%E7%94%B1%E6%9D%A5"><span class="nav-text">二、问题由来</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-text">三、解决方案：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E4%BB%A3%E7%A0%81demo"><span class="nav-text">四、代码demo：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%AE%9A%E4%B9%89"><span class="nav-text">（1）基础类定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E7%A4%BA%E8%8C%83"><span class="nav-text">（2）错误示范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%9E%90%E5%92%8C%E4%BF%AE%E6%AD%A3"><span class="nav-text">（3） 分析和修正</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E6%80%BB%E7%BB%93"><span class="nav-text">六、总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="nav-text">七、参考文章</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="旺仔"
+      src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/11zon_cropped.png">
+  <p class="site-author-name" itemprop="name">旺仔</p>
+  <div class="site-description" itemprop="description"><font color="#FFFFFF"; size=5px> 允许一切发生！</font></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ych1016" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ych1016" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2877816340@qq.com" title="E-Mail → mailto:2877816340@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ych1016.github.io/2025/03/24/DesignPattern/%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/11zon_cropped.png">
+      <meta itemprop="name" content="旺仔">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="攻城狮-旺仔">
+      <meta itemprop="description" content="<font color="#FFFFFF"; size=5px> 允许一切发生！</font>">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="迪米特法则 | 攻城狮-旺仔">
+      <meta itemprop="description" content="主要是记录迪米特法则定义，以及相关实现demo代码">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          迪米特法则
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-03-24 10:59:30 / 修改时间：16:19:02" itemprop="dateCreated datePublished" datetime="2025-03-24T10:59:30+08:00">2025-03-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">主要是记录迪米特法则定义，以及相关实现demo代码</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>🚩 学如逆水行舟，不进则退。 —— 《增广贤文》</p>
+</blockquote>
+<h1 id="迪米特法则">迪米特法则</h1>
+<h2 id="一定义">一、定义</h2>
+<p>  只与直接朋友通信，一个类应该对其他类保持最少的依赖。
+更通俗点来说，就是陌生的类，最好不要作为局部变量的形式出现在类的内部。</p>
+<blockquote>
+<p>什么是朋友？
+每一个对象都会与其他对象有耦合关系，只要两个对象之间的有耦合关系，就称这两个对象是朋友关系。耦合的方式很多，依赖、关联、组合、聚合等。</p>
+<p>什么是直接朋友？
+我们称出现成员变量、方法参数、方法返回值中的类为直接朋友</p>
+<p>什么是非直接朋友？ 出现在局部变量中的类，则不是直接朋友。</p>
+</blockquote>
+<h2 id="二问题由来">二、问题由来</h2>
+<p>  
+类B中有一个对象t列表，现在类A有一个方法需要打印类B中列表的所有对象。
+那么类A就需要定义一个方法，将类B作为参数传入进去，然后通过类B获取到类B中的对象t列表，再循环打印列表中的对象t。
+再这里就会存在这样一个问题，类A的方法中出现了类B中的对象t列表，即对象t是以局部参数的形式出现在了类A中，这大大增加了类A和类B的耦合程度。</p>
+<h2 id="三解决方案">三、解决方案：</h2>
+<p>  
+在类B中新开一个方法，实现打印类B中对象t列表的所有对象t，然后在类A需要打印类B列表中所有对象的方法中直接调用该方法。</p>
+<h2 id="四代码demo">四、代码demo：</h2>
+<p>  
+有一个集团公司，下属单位有分公司和直属部门，先要求打印所有下属单位的员工ID。</p>
+<h3 id="基础类定义">（1）基础类定义</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 总公司员工</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Employee</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String id;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 分公司员工</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SubEmployee</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="错误示范">（2）错误示范</h3>
+<p>  
+在总公司管理类CompanyManager的printAllEmployee方法中，传入分公司管理层类SubCompanyManager，
+通过分公司管理层类获取分公司员工列表subEmployees，再循环打印分公司员工SubEmployee
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SubCompanyManager</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> List&lt;SubEmployee&gt; subEmployees;</span><br><span class="line">    <span class="keyword">private</span> Integer cnt;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">SubCompanyManager</span><span class="params">(Integer cnt)</span> &#123;</span><br><span class="line">        subEmployees = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; cnt; i++) &#123;</span><br><span class="line">            <span class="type">SubEmployee</span> <span class="variable">subEmployee</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SubEmployee</span>();</span><br><span class="line">            subEmployee.setId(<span class="string">&quot;分公司员工&quot;</span> + i);</span><br><span class="line">            subEmployees.add(subEmployee);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CompanyManager</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> List&lt;Employee&gt; employees;</span><br><span class="line">    <span class="keyword">private</span> Integer cnt;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">CompanyManager</span><span class="params">(<span class="type">int</span> cnt)</span> &#123;</span><br><span class="line">        employees = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; cnt; i++) &#123;</span><br><span class="line">            <span class="type">Employee</span> <span class="variable">employee</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Employee</span>();</span><br><span class="line">            employee.setId(<span class="string">&quot;总公司员工&quot;</span> + i);</span><br><span class="line">            <span class="built_in">this</span>.employees.add(employee);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">printEmployee</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (Employee employee : <span class="built_in">this</span>.employees) &#123;</span><br><span class="line">            System.out.println(employee);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 错误栗子</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">printAllEmployee</span><span class="params">(SubCompanyManager subCompanyManager)</span> &#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 1. 先打印分公司员工</span></span><br><span class="line"><span class="comment">         * 2. 再打印总公司员工</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="comment">// 这里就存在问题了，因为SubEmployee是 SubCompanyManager中的私有变量，通过这种方式引入到CompanyManager中，耦合度变高了</span></span><br><span class="line">        List&lt;SubEmployee&gt; subEmployeeList = subCompanyManager.getSubEmployees();</span><br><span class="line">        <span class="keyword">for</span> (SubEmployee subEmployee : subEmployeeList) &#123;</span><br><span class="line">            System.out.println(subEmployee);</span><br><span class="line">        &#125;</span><br><span class="line">        printEmployee();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="分析和修正">（3） 分析和修正</h3>
+<p>   总公司管理类CompanyManager
+和分公司管理类SubCompanyManager形成了高耦合，因为SubCompanyManager中的变量SubEmployee，
+在总公司管理类中以局部变量的形式出现了。</p>
+<p>   解决：
+在分公司管理类中提供打印分公司员工列表所有员工的方法，在总公司管理类的方法中直接调用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SubCompanyManager</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> List&lt;SubEmployee&gt; subEmployees;</span><br><span class="line">    <span class="keyword">private</span> Integer cnt;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">SubCompanyManager</span><span class="params">(Integer cnt)</span> &#123;</span><br><span class="line">        subEmployees = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; cnt; i++) &#123;</span><br><span class="line">            <span class="type">SubEmployee</span> <span class="variable">subEmployee</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SubEmployee</span>();</span><br><span class="line">            subEmployee.setId(<span class="string">&quot;分公司员工&quot;</span> + i);</span><br><span class="line">            subEmployees.add(subEmployee);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 提供打印所有员工的方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">printEmployeeList</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (SubEmployee subEmployee : <span class="built_in">this</span>.subEmployees) &#123;</span><br><span class="line">            System.out.println(subEmployee);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CompanyManager</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> List&lt;Employee&gt; employees;</span><br><span class="line">    <span class="keyword">private</span> Integer cnt;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">CompanyManager</span><span class="params">(<span class="type">int</span> cnt)</span> &#123;</span><br><span class="line">        employees = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; cnt; i++) &#123;</span><br><span class="line">            <span class="type">Employee</span> <span class="variable">employee</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Employee</span>();</span><br><span class="line">            employee.setId(<span class="string">&quot;总公司员工&quot;</span> + i);</span><br><span class="line">            <span class="built_in">this</span>.employees.add(employee);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">printEmployee</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (Employee employee : <span class="built_in">this</span>.employees) &#123;</span><br><span class="line">            System.out.println(employee);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">printAllEmployeeCorrect</span><span class="params">(SubCompanyManager subCompanyManager)</span> &#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 1. 先打印分公司员工</span></span><br><span class="line"><span class="comment">         * 2. 再打印总公司员工</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        subCompanyManager.printEmployeeList();</span><br><span class="line">        printEmployee();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="六总结">六、总结</h2>
+<p>  
+在实际编写代码时，需要做到只和直接的朋友交流和减少对朋友的了解。对于依赖类而言，其实迪米特法则更表达的意思是：“自己的事情自己完成”。
+对于自己内部变量的操作，应该由自己提供对应的方法，并把自己内部的变量隐藏起来，不要让其他类随意获取。</p>
+<p>   当然，在编写迪米特法则时，我们需要注意几个点：</p>
+<ul>
+<li>第一，在类的划分上，应当创建弱耦合的类，类与类之间的耦合越弱，就越有利于实现可复用的目标。</li>
+<li>第二，在类的结构设计上，每个类都应该降低成员的访问权限</li>
+<li>第三，在类的设计上，只要有可能，一个类应当设计成不变的类</li>
+<li>第四，在对其他类的引用上，一个对象对其他类的对象的引用应该降到最低</li>
+<li>第五，尽量限制局部变量的有效范围，降低类的访问权限</li>
+</ul>
+<h2 id="七参考文章">七、参考文章</h2>
+<ol type="1">
+<li>https://blog.csdn.net/zhengzhb/article/details/7296930</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>旺仔
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://ych1016.github.io/2025/03/24/DesignPattern/%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99/" title="迪米特法则">https://ych1016.github.io/2025/03/24/DesignPattern/迪米特法则/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/username">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/channel_name">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.png">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag"># 设计模式</a>
+              <a href="/tags/%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99/" rel="tag"># 迪米特法则</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/03/24/DesignPattern/%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB%E5%8E%9F%E5%88%99/" rel="prev" title="接口隔离原则">
+                  <i class="fa fa-angle-left"></i> 接口隔离原则
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/03/24/DesignPattern/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" rel="next" title="原型模式">
+                  原型模式 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">旺仔</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">92k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">5:36</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.min.js","integrity":"sha256-G8ouPAnw4zzMbnAenHnVz6h9XpKbNdOkrqTh7AadyHs="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right"},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2}});</script></body>
+</html>
