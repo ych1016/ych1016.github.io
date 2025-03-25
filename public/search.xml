@@ -768,8 +768,8 @@ href="https://github.com/ych1016/DesignPattern">设计模式</a>】</p>
         <category>Java</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>设计模式</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -2044,9 +2044,140 @@ href="https://leetcode.cn/problems/maximal-square/description/?envType=study-pla
       </tags>
   </entry>
   <entry>
+    <title>局部性原理</title>
+    <url>/2025/03/24/OperatingSystem/%E5%B1%80%E9%83%A8%E6%80%A7%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<h1 id="一引言">一、引言</h1>
+<p>  旺仔在学习SQL优化时，发现MySQL在查询数据时，会像操作系统执行指令一样，从硬盘中获取页表放入内存，然后再由CPU将对应的数据返回给用户。
+其中MySQL在提高查询效率时，就用到了局部性原理，所以旺仔特此写篇博文解释一下什么是局部性原理。</p>
+<h1 id="二什么是局部性">二、什么是局部性</h1>
+<p>  这是一个常用的计算机术语，是指处理器在访问某些数据时短时间内存在重复访问，某些数据或者位置访问的概率极大，大多数时间只访问局部的数据。</p>
+<h1 id="三局部性原理的两个方面">三、局部性原理的两个方面</h1>
+<ol type="1">
+<li><p><strong>时间局部性</strong>
+：如果程序中的某条指令一旦执行，不久以后该指令可能再次执行；如果某数据被访问过，不久以后该数据可能再次被访问。产生时间局部性的典型原因，是由于在程序中存在着大量的循环操作。</p></li>
+<li><p><strong>空间局部性</strong>
+：一旦程序访问了某个存储单元，在不久之后，其附近的存储单元也将被访问，即程序在一段时间内所访问的地址，可能集中在一定的范围之内，这是因为指令通常是顺序存放、顺序执行的，数据也一般是以向量、数组、表等形式簇聚存储的。</p></li>
+</ol>
+<h1 id="四总结">四、总结</h1>
+<p>  时间局部性是通过将近来使用的指令和数据保存到高速缓存存储器中，并使用高速缓存的层次结构实现。
+空间局部性通常是使用较大的高速缓存，并将预取机制集成到高速缓存控制逻辑中实现。虚拟内存技术实际上就是建立了
+“内存一外存” 的两级存储器的结构，利用局部性原理实现髙速缓存。</p>
+<h1 id="五mysql与局部性原理">五、MySQL与局部性原理</h1>
+<p>  MySQL指令在执行时也会被翻译成机器所能识别的计算机指令，所以在运行上，跟计算机的指令本质上没有差别。
+所以MySQL指令的运行也遵从局部性原理，即当计算机访问一个地址的数据的时候，与其相邻的数据也很快会被访问到，所以在获取数据到内存时，一般会把其相邻的数据也一并放入内存。</p>
+]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+      <tags>
+        <tag>OS</tag>
+        <tag>局部性原理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MySQL索引原理</title>
+    <url>/2025/03/24/MySQL/MySQL%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<h1 id="一索引的本质和目的">一、索引的本质和目的</h1>
+<p>  索引的目的在于提高查询的效率，其本质是一种排好序的数据结构。</p>
+<h1 id="二索引的分类">二、索引的分类</h1>
+<p>  在数据库中，其实索引是分为很多类的，不同的索引可以应付不同的场合。
+那为什么在耳边听到的都是基于B+树索引呢？因为我们在开发过程中，用到最多的数据库是MySQL，MySQL底层所以就是基于B+树实现的，所以才经常听到基于B+树的索引
+## 1、Hash索引   
+Hash索引是一种常见的索引，它的单条查询效率很高，时间复杂度能优化到O（1）级别。
+但是它却不是数据库常用索引的类型，尤其是MySQL
+Innodb引擎就是不支持Hash索引的。主要原因还是因为Hash索引适合精确查找，但却不适合范围查找。</p>
+<p>  
+因为存储引擎都会为每一行计算一个hash码，hash码都是比较小的，并且不同键值行的hash码通常是不一样的，hash索引中存储的就是Hash码，hash
+码彼此之间是没有规律的， 且 Hash
+操作并不能保证顺序性，所以值相近的两个数据，Hash值相差很远，被分到不同的桶中。这就是为什么hash索引只能进行全职匹配的查询，因为只有这样，hash码才能够匹配到数据。</p>
+<h2 id="b树索引">2、B+树索引</h2>
+<h3 id="什么是b树">（1）什么是B+树</h3>
+<p>  
+B+树是一种多叉树，叶子节点才存放数据，非叶子节点只存放索引，而且每个节点里的数据都是按照主键顺序存放。
+每一层父节点的索引值都会出现在下层节点的索引值中，因此在叶子节点中，包括了所有的索引值信息。
+在InnoDB实现的B+树中，数据页之间通过双向链表连接，叶子节点中数据通过单向链表连接。</p>
+<h3 id="b树结构介绍">（2）B+树结构介绍</h3>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250325110110.png" />
+  如上图，具有背景色的矩形方框（标有页码），我们称之为一个磁盘块。可以看到每个磁盘块包含了几个数据项（白色背景矩形方框）和指针（白色背景椭圆形）。
+如在页1中包含数据项1、18、35，包含指针p1、p2、p3。其中p1记录了大于1小于18的数据存储的页地址，p2记录了大于18小于35的数据存储的页地址，p3记录了大于等于35的数据存储的页地址。
+但在这些非叶子节点存储的数据项中，存储的都不是真是数据，而是指引搜索方向的键值。</p>
+<h3 id="b树查找过程">（3）B+树查找过程</h3>
+<p>  
+如上图所示，要想查找到索引值为25的数据项，那么首先会把页1由磁盘加载到内存，此时发生了一次IO；
+在内存中用二分查找确定25在18和35之间，
+锁定页1的p2指针，通过页1的p2指针的磁盘地址把页3从磁盘加载到内存，发生第二次IO；
+在内存中用二分查找去顶25在24和31之间，锁定页3的p2指针，通过页3的p2指针的磁盘地址把最终的数据项由磁盘加载到内存，发生第三次IO；
+由于叶子节点内部数据由单链表进行顺序连接，所以遍历单链表即可查找到索引值为25的数据。结束查找，总计三次IO。</p>
+<p>  
+真是的情况是，3层的B+树可以表示上百万的数据，如果上百万的数据查找只需要三次IO，性能提高将是巨大的，如果没有索引，每个数据项都要发生一次IO，那么总共需要百万次IO，这种时间成本将会非常高。</p>
+<p>  
+由上面的流程可知，操作系统在读取数据加载到内存的IO操作中，每次读取的也是一个页面的数据（B+树一个节点的数据）。
+所以在执行一次查找中，用越少的步骤到达叶子节点的性能就会越好，也就是说，B+树越浅，系统做的IO次数越小。</p>
+<p>  
+如何让B+树越浅？思路很简单，就是往非叶子节点中，塞入更多的索引信息。可是非叶子节点的存储空间是有限的，如何优化？
+这也正是B+树与B树的区别之一，B+树非叶子节点上是不存储数据的，仅存储键值，而B树节点中不仅存储键值，也会存储数据。之所以这么做是因为在数据库中页的大小是固定的，InnoDB
+中页的默认大小是 16KB。
+如果不存储数据，那么就会存储更多的键值，相应的树的阶数（节点的子节点树）就会更大，树就会更矮更胖，如此一来我们查找数据进行磁盘的
+IO 次数又会再次减少，数据查询的效率也会更快。<br>    另外，B+
+树的阶数是等于键值的数量的，如果我们的 B+ 树一个节点可以存储 1000
+个键值，那么 3 层 B+ 树可以存储 1000×1000×1000=10 亿个数据。
+一般根节点是常驻内存的，所以一般我们查找 10 亿数据，只需要 2 次磁盘
+IO。</p>
+<h2 id="full-text索引">3、Full-text索引</h2>
+<h3 id="引言">（1）引言</h3>
+]]></content>
+      <categories>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>后端</tag>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MySQL数据库：SQL优化和索引优化</title>
+    <url>/2025/03/24/MySQL/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%9ASQL%E4%BC%98%E5%8C%96%E5%92%8C%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96/</url>
+    <content><![CDATA[<h1 id="一慢查询优化基本步骤">一、慢查询优化基本步骤</h1>
+<ol type="1">
+<li><p>先运行看看是否真的很慢，注意设置SQL_NO_CACHE</p></li>
+<li><p>where条件单表查，锁定最小返回记录表。这句话的意思是把查询语句的where都应用到表中返回的记录最小的表开始查起（即确定驱动表），单表每个字段分别查询，看哪个字段的区分度最高</p></li>
+<li><p>explain查看执行计划。是否与1预期一致（从锁定记录较少的表开始查询）</p></li>
+<li><p>order by limit 形式的sql语句让排序的表优先查</p></li>
+<li><p>了解业务方使用场景</p></li>
+<li><p>加索引时参照建索引的几大原则</p></li>
+<li><p>观察结果，不符合预期继续从0开始分析</p></li>
+</ol>
+<h1 id="二基础sql优化">二、基础SQL优化</h1>
+<h1 id="三高级sql优化">三、高级SQL优化</h1>
+<h1 id="四索引优化">四、索引优化</h1>
+<h2 id="section">1、</h2>
+]]></content>
+      <categories>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>后端</tag>
+        <tag>MySQL</tag>
+        <tag>索引</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>适配器模式</title>
+    <url>/2025/03/24/DesignPattern/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[
+]]></content>
+  </entry>
+  <entry>
     <title>Java new对象过程</title>
     <url>/2025/03/24/Java/Java-new%E5%AF%B9%E8%B1%A1%E8%BF%87%E7%A8%8B/</url>
-    <content><![CDATA[
+    <content><![CDATA[<h1 id="一引言">一、引言</h1>
+<p>  旺仔在学习设计模式的原型模式时，看了很多博文，都在讲 clone
+方法实现的对象的创建比 new 实现的对象创建效率快很多。 旺仔知道 clone
+方法是 Object
+的本地方法，所以在方法执行的时候是直接在内存中执行，效率快能理解，但是new方法的创建过程又是怎么样，旺仔没了解过，于是有了这篇博文。</p>
+<h1 id="二总体流程">二、总体流程</h1>
 ]]></content>
       <categories>
         <category>Java</category>
@@ -2060,58 +2191,59 @@ href="https://leetcode.cn/problems/maximal-square/description/?envType=study-pla
     <title>Java深拷贝与浅拷贝</title>
     <url>/2025/03/24/Java/Java%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/</url>
     <content><![CDATA[<h1 id="一引言">一、引言</h1>
-<p>在Java中存在这个接口
+<p>  在Java中存在这个接口
 Cloneable。实现该接口的类都会具备被拷贝的能力，同时拷贝是在内存中进行的，在性能方面比直接通过new生成的对象快，特别是在大对象的生成上，使得性能的提升非常明显。</p>
-<p>代码实现主要是让类继承 Cloneable，然后重写 clone 方法，在重写 clone
+<p>  代码实现主要是让类继承 Cloneable，然后重写 clone 方法，在重写 clone
 方法时，需要注意，如果对象里面出了基本数据类型变量外，
 还有其他引用类型变量，那么如果要实现深拷贝，就需要其他引用类型的类也继承
 Cloneable 接口，并实现 clone 函数，然后再该类的 clone 方法中调用其他类的
 clone 函数。</p>
-<p>在进行拷贝时，如果需要对引用变量进行深拷贝的话，则需要调用其 clone
+<p>  在进行拷贝时，如果需要对引用变量进行深拷贝的话，则需要调用其 clone
 方法。</p>
 <h1 id="二深拷贝与浅拷贝的区别">二、深拷贝与浅拷贝的区别</h1>
-<p>浅拷贝：对基本数据类型进行值传递，对引用数据类型进行引用的拷贝，实际就是拷贝指向实际内存的引用，并不会对实际内存的值进行拷贝。</p>
+<p>  浅拷贝：对基本数据类型进行值传递，对引用数据类型进行引用的拷贝，实际就是拷贝指向实际内存的引用，并不会对实际内存的值进行拷贝。</p>
 <blockquote>
 <p>只是增加了一个指针指向已存在的内存地址</p>
 </blockquote>
-<p>深拷贝：对基本数据类型进行值传递，对引用数据类型，会创建一个新的对象，并复制原有对象的实际值。</p>
+<p>  深拷贝：对基本数据类型进行值传递，对引用数据类型，会创建一个新的对象，并复制原有对象的实际值。</p>
 <blockquote>
 <p>增加了一个指针并且申请了一个新的内存，使这个增加的指针指向这个新的内存。</p>
 </blockquote>
 <p><img
 src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250324142018.png" /></p>
-<p>深拷贝与浅拷贝最根本的区别在于：是否真正获取一个对象的复制实体，而不是引用。</p>
+<p>  深拷贝与浅拷贝最根本的区别在于：是否真正获取一个对象的复制实体，而不是引用。</p>
 <p><img
 src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/dba7de2b0a2fd623728fe960094992a3.png" /></p>
 <h1 id="三代码实现">三、代码实现</h1>
 <h2 id="拷贝引入">1、拷贝引入</h2>
 <h3 id="引用拷贝">（1）引用拷贝</h3>
-<p>实际上的操作是：Java虚拟机会创建一个指向对象的引用变量的拷贝
+<p>  实际上的操作是：Java虚拟机会创建一个指向对象的引用变量的拷贝
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">QuoteCopy</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Teacher01</span> <span class="variable">teacher01</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Teacher01</span>(<span class="string">&quot;张三&quot;</span>,<span class="number">29</span>);</span><br><span class="line">        <span class="type">Teacher01</span> <span class="variable">teacher01_1</span> <span class="operator">=</span> teacher01;</span><br><span class="line">        System.out.println(teacher01);</span><br><span class="line">        System.out.println(teacher01_1);</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 输出</span></span><br><span class="line"><span class="comment">         * com.wangzai.study.create.prototype.copy.Teacher01@7699a589</span></span><br><span class="line"><span class="comment">         * com.wangzai.study.create.prototype.copy.Teacher01@7699a589</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Teacher01</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Teacher01</span><span class="params">(String name, Integer age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="对象拷贝">（2）对象拷贝</h3>
-<p>实际上的操作是，会创建对象本身的一个副本 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ObjectCopy</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> CloneNotSupportedException &#123;</span><br><span class="line">        <span class="type">Teacher02</span> <span class="variable">teacher02</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Teacher02</span>(<span class="string">&quot;李四&quot;</span>,<span class="number">29</span>);</span><br><span class="line">        <span class="type">Teacher02</span> <span class="variable">teacher02_1</span> <span class="operator">=</span> teacher02.clone();</span><br><span class="line">        System.out.println(teacher02);</span><br><span class="line">        System.out.println(teacher02_1);</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 输出</span></span><br><span class="line"><span class="comment">         * com.wangzai.study.create.prototype.copy.Teacher02@7699a589</span></span><br><span class="line"><span class="comment">         * com.wangzai.study.create.prototype.copy.Teacher02@58372a00</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Teacher02</span> <span class="keyword">implements</span> <span class="title class_">Cloneable</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Teacher02</span><span class="params">(String name, Integer age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> Teacher02 <span class="title function_">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException &#123;</span><br><span class="line">        <span class="keyword">return</span> (Teacher02) <span class="built_in">super</span>.clone();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>  实际上的操作是，会创建对象本身的一个副本 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ObjectCopy</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> CloneNotSupportedException &#123;</span><br><span class="line">        <span class="type">Teacher02</span> <span class="variable">teacher02</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Teacher02</span>(<span class="string">&quot;李四&quot;</span>,<span class="number">29</span>);</span><br><span class="line">        <span class="type">Teacher02</span> <span class="variable">teacher02_1</span> <span class="operator">=</span> teacher02.clone();</span><br><span class="line">        System.out.println(teacher02);</span><br><span class="line">        System.out.println(teacher02_1);</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 输出</span></span><br><span class="line"><span class="comment">         * com.wangzai.study.create.prototype.copy.Teacher02@7699a589</span></span><br><span class="line"><span class="comment">         * com.wangzai.study.create.prototype.copy.Teacher02@58372a00</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Teacher02</span> <span class="keyword">implements</span> <span class="title class_">Cloneable</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Teacher02</span><span class="params">(String name, Integer age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> Teacher02 <span class="title function_">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException &#123;</span><br><span class="line">        <span class="keyword">return</span> (Teacher02) <span class="built_in">super</span>.clone();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="浅拷贝">（3）浅拷贝</h3>
-<p>在拷贝时，对于调用了 clone 方法的类，实行深拷贝，对于直接赋值 （使用
-= ），则实行浅拷贝。在这个栗子中，学生类有重写 clone 方法。但是 clone
+<p>  在拷贝时，对于调用了 clone 方法的类，实行深拷贝，对于直接赋值
+（使用 = ），则实行浅拷贝。在这个栗子中，学生类有重写 clone 方法。但是
+clone
 方法里却没有对其内部的teacher引用实行深拷贝（即调用teacher的clone方法），
 所以会导致学生类进行深拷贝了，teacher对象只是简单的浅拷贝。
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ShallowCopy</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> CloneNotSupportedException &#123;</span><br><span class="line">        <span class="type">Teacher03</span> <span class="variable">teacher</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Teacher03</span>(<span class="string">&quot;王老师&quot;</span>, <span class="number">43</span>);</span><br><span class="line">        <span class="type">Student03</span> <span class="variable">xiaoming</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student03</span>(<span class="string">&quot;小明&quot;</span>, teacher);</span><br><span class="line">        <span class="type">Student03</span> <span class="variable">zhangsan</span> <span class="operator">=</span> xiaoming.clone();</span><br><span class="line">        System.out.println(<span class="string">&quot;==============拷贝后===============&quot;</span>);</span><br><span class="line">        System.out.println(xiaoming);</span><br><span class="line">        System.out.println(zhangsan);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;==============修改老师信息后===============&quot;</span>);</span><br><span class="line">        teacher.setName(<span class="string">&quot;刘老师&quot;</span>);</span><br><span class="line">        teacher.setAge(<span class="number">53</span>);</span><br><span class="line">        System.out.println(xiaoming);</span><br><span class="line">        System.out.println(zhangsan);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 输出</span></span><br><span class="line"><span class="comment">         * ==============拷贝后===============</span></span><br><span class="line"><span class="comment">         * Student03(name=小明, teacher=Teacher03(name=王老师, age=43))</span></span><br><span class="line"><span class="comment">         * Student03(name=小明, teacher=Teacher03(name=王老师, age=43))</span></span><br><span class="line"><span class="comment">         * ==============修改老师信息后===============</span></span><br><span class="line"><span class="comment">         * Student03(name=小明, teacher=Teacher03(name=刘老师, age=53))</span></span><br><span class="line"><span class="comment">         * Student03(name=小明, teacher=Teacher03(name=刘老师, age=53))</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Teacher03</span> <span class="keyword">implements</span> <span class="title class_">Cloneable</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Teacher03</span><span class="params">(String name, Integer age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Teacher03 <span class="title function_">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException &#123;</span><br><span class="line">        <span class="keyword">return</span> (Teacher03) <span class="built_in">super</span>.clone();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Student03</span> <span class="keyword">implements</span> <span class="title class_">Cloneable</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Teacher03 teacher;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Student03</span><span class="params">(String name, Teacher03 teacher)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.teacher = teacher;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Student03 <span class="title function_">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException &#123;</span><br><span class="line">        <span class="type">Student03</span> <span class="variable">student</span> <span class="operator">=</span> (Student03) <span class="built_in">super</span>.clone();</span><br><span class="line">        <span class="keyword">return</span> student;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
 <h3 id="深拷贝">（3）深拷贝</h3>
-<p>深拷贝是一个整个独立的对象拷贝，深拷贝会拷贝所有的属性,并拷贝属性指向的动态分配的内存。当对象和它所引用的对象一起拷贝时即发生深拷贝。深拷贝相比于浅拷贝速度较慢并且花销较大。
+<p>  深拷贝是一个整个独立的对象拷贝，深拷贝会拷贝所有的属性,并拷贝属性指向的动态分配的内存。当对象和它所引用的对象一起拷贝时即发生深拷贝。深拷贝相比于浅拷贝速度较慢并且花销较大。
 简而言之，深拷贝把要复制的对象所引用的对象都复制了一遍。</p>
-<p>在下面的这个栗子中，由于学生类在实现clone方法时，也调用了teacher的clone方法，所以其内部对应的teacher也会进行深拷贝</p>
+<p>  在下面的这个栗子中，由于学生类在实现clone方法时，也调用了teacher的clone方法，所以其内部对应的teacher也会进行深拷贝</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DeepCopy</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> CloneNotSupportedException &#123;</span><br><span class="line">        <span class="type">Teacher04</span> <span class="variable">teacher</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Teacher04</span>(<span class="string">&quot;杨老师&quot;</span>,<span class="number">54</span>);</span><br><span class="line">        <span class="type">Student04</span> <span class="variable">zhangsan</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student04</span>(<span class="string">&quot;张三&quot;</span>,teacher);</span><br><span class="line">        <span class="type">Student04</span> <span class="variable">lisi</span> <span class="operator">=</span> zhangsan.clone();</span><br><span class="line">        System.out.println(<span class="string">&quot;==============拷贝后===============&quot;</span>);</span><br><span class="line">        System.out.println(zhangsan);</span><br><span class="line">        System.out.println(lisi);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;==============修改老师信息后===============&quot;</span>);</span><br><span class="line">        teacher.setName(<span class="string">&quot;刘老师&quot;</span>);</span><br><span class="line">        teacher.setAge(<span class="number">53</span>);</span><br><span class="line">        System.out.println(zhangsan);</span><br><span class="line">        System.out.println(lisi);</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 输出</span></span><br><span class="line"><span class="comment">         * ==============拷贝后===============</span></span><br><span class="line"><span class="comment">         * Student04(name=张三, teacher=Teacher04(name=杨老师, age=54))</span></span><br><span class="line"><span class="comment">         * Student04(name=张三, teacher=Teacher04(name=杨老师, age=54))</span></span><br><span class="line"><span class="comment">         * ==============修改老师信息后===============</span></span><br><span class="line"><span class="comment">         * Student04(name=张三, teacher=Teacher04(name=刘老师, age=53))</span></span><br><span class="line"><span class="comment">         * Student04(name=张三, teacher=Teacher04(name=杨老师, age=54))</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Teacher04</span> <span class="keyword">implements</span> <span class="title class_">Cloneable</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Teacher04</span><span class="params">(String name, Integer age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Teacher04 <span class="title function_">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException &#123;</span><br><span class="line">        <span class="keyword">return</span> (Teacher04) <span class="built_in">super</span>.clone();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Student04</span> <span class="keyword">implements</span> <span class="title class_">Cloneable</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Teacher04 teacher;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Student04</span><span class="params">(String name, Teacher04 teacher)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.teacher = teacher;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Student04 <span class="title function_">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException &#123;</span><br><span class="line">        <span class="type">Student04</span> <span class="variable">student</span> <span class="operator">=</span> (Student04) <span class="built_in">super</span>.clone();</span><br><span class="line">        student.setTeacher(student.getTeacher().clone());</span><br><span class="line">        <span class="keyword">return</span> student;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="四序列化深拷贝">四、序列化深拷贝</h1>
 <h2 id="引言">1、引言</h2>
-<p>若系统中存在大量的对象都是通过拷贝生成的，如果每一个类都写一个
+<p>  若系统中存在大量的对象都是通过拷贝生成的，如果每一个类都写一个
 clone()
 方法，并将还需要进行深拷贝，新建大量的对象。这个工程是非常巨大的，这里可以采用序列化的方式来实现对象的拷贝。</p>
 <h2 id="定义">2、定义</h2>
-<p>利用序列化来做深复制,把对象写到流里的过程是序列化（Serilization）过程，而把对象从流中读出来的过程则叫做反序列化（Deserialization）过程。
+<p>  利用序列化来做深复制,把对象写到流里的过程是序列化（Serilization）过程，而把对象从流中读出来的过程则叫做反序列化（Deserialization）过程。
 应当指出的是，写在流里的是对象的一个拷贝，而原对象仍然存在于JVM里面。
 利用这个特性，可以做深拷贝
 。并且该新对象与母对象之间并不存在引用共享的问题，真正实现对象的深拷贝。</p>
-<p>同时，需要注意的是，要想使用序列化进行深拷贝，则对应的对象必须要实现Serializable接口，否则是没有办法实现克隆的。</p>
+<p>  同时，需要注意的是，要想使用序列化进行深拷贝，则对应的对象必须要实现Serializable接口，否则是没有办法实现克隆的。</p>
 <h2 id="代码实现">3、代码实现</h2>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CloneUtils</span> &#123;</span><br><span class="line">    <span class="meta">@SuppressWarnings(&quot;unchecked&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T <span class="keyword">extends</span> <span class="title class_">Serializable</span>&gt; T <span class="title function_">clone</span><span class="params">(T obj)</span>&#123;</span><br><span class="line">        <span class="type">T</span> <span class="variable">cloneObj</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//写入字节流，将该对象序列化成流,因为写在流里的是对象的一个拷贝，而原对象仍然存在于JVM里面。所以利用这个特性可以实现对象的深拷贝</span></span><br><span class="line">            <span class="type">ByteArrayOutputStream</span> <span class="variable">out</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ByteArrayOutputStream</span>();</span><br><span class="line">            <span class="type">ObjectOutputStream</span> <span class="variable">obs</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectOutputStream</span>(out);</span><br><span class="line">            obs.writeObject(obj);</span><br><span class="line">            obs.close();</span><br><span class="line">            </span><br><span class="line">            <span class="comment">//分配内存，写入原始对象，生成新对象</span></span><br><span class="line">            <span class="type">ByteArrayInputStream</span> <span class="variable">ios</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ByteArrayInputStream</span>(out.toByteArray());</span><br><span class="line">            <span class="type">ObjectInputStream</span> <span class="variable">ois</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectInputStream</span>(ios);</span><br><span class="line">            <span class="comment">//返回生成的新对象</span></span><br><span class="line">            cloneObj = (T) ois.readObject();</span><br><span class="line">            ois.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cloneObj;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
@@ -2131,7 +2263,7 @@ clone()
 </blockquote>
 <h1 id="一引言">一、引言</h1>
 <p>  
-看了前面几种创建型设计模式，主包觉得它们有一个根本的共同特征，就是在创建对象的时候，都是以new的方式进行创建。
+看了前面几种创建型设计模式，旺仔觉得它们有一个根本的共同特征，就是在创建对象的时候，都是以new的方式进行创建。
 但是我们知道new创建对象的时候，运行步骤非常繁琐，耗时比较旧。对于大型程序，需要创建很多对象的项目来说，启动会非常缓慢。于是针对创建型设计模式，就有了原型模式的概念。
 原型模式利用了Java的对象拷贝，直接在内存中操作，大大提高了创建对象的效率。另外，还可以使用序列化的方式，使创建的效率更快。</p>
 <h1 id="二什么是原型模式">二、什么是原型模式？</h1>
@@ -2165,7 +2297,7 @@ Object类的clone方法只会拷贝对象中的基本数据类型，对于数组
 <li>简化对象的创建。原型模式使得创建对象就像我们在编辑文档时的复制粘贴一样简单。</li>
 </ul>
 <p><strong>（2）适用场景</strong>
-在需要重复地创建相似对象时可以考虑使用原型模式。比如需要在一个循环体内创建对象，假如对象创建过程比较复杂或者循环次数很多的话，使用原型模式不但可以简化创建过程，而且可以使系统的整体性能提高很多。</p>
+  在需要重复地创建相似对象时可以考虑使用原型模式。比如需要在一个循环体内创建对象，假如对象创建过程比较复杂或者循环次数很多的话，使用原型模式不但可以简化创建过程，而且可以使系统的整体性能提高很多。</p>
 <h1 id="五实现代码">五、实现代码</h1>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PrototypePatternDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> CloneNotSupportedException &#123;</span><br><span class="line">        <span class="type">ShallowClone</span> <span class="variable">shallowClone</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ShallowClone</span>();</span><br><span class="line">        <span class="type">ShallowClone</span> <span class="variable">shallowCloneCp</span> <span class="operator">=</span> (ShallowClone) shallowClone.clone();</span><br><span class="line">        shallowCloneCp.show();</span><br><span class="line">        System.out.println(shallowClone.list == shallowCloneCp.list);</span><br><span class="line"></span><br><span class="line">        <span class="type">DeepClone</span> <span class="variable">deepClone</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DeepClone</span>();</span><br><span class="line">        <span class="type">DeepClone</span> <span class="variable">deepCloneCp</span> <span class="operator">=</span> (DeepClone) deepClone.clone();</span><br><span class="line">        deepCloneCp.show();</span><br><span class="line">        System.out.println(deepCloneCp.list == deepClone.list);</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 输出</span></span><br><span class="line"><span class="comment">         * 浅拷贝</span></span><br><span class="line"><span class="comment">         * true</span></span><br><span class="line"><span class="comment">         * 深拷贝</span></span><br><span class="line"><span class="comment">         * false</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Prototype</span> <span class="keyword">implements</span> <span class="title class_">Cloneable</span> &#123;</span><br><span class="line">    <span class="keyword">protected</span> ArrayList&lt;String&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Prototype <span class="title function_">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException &#123;</span><br><span class="line">        <span class="keyword">return</span> (Prototype) <span class="built_in">super</span>.clone();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 潜拷贝</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ShallowClone</span> <span class="keyword">extends</span> <span class="title class_">Prototype</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Prototype <span class="title function_">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>.clone();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;浅拷贝&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 深拷贝</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">DeepClone</span> <span class="keyword">extends</span> <span class="title class_">Prototype</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Prototype <span class="title function_">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException &#123;</span><br><span class="line">        <span class="type">Prototype</span> <span class="variable">prototype</span> <span class="operator">=</span>  <span class="built_in">super</span>.clone();</span><br><span class="line">        prototype.list = (ArrayList&lt;String&gt;) <span class="built_in">this</span>.list.clone();</span><br><span class="line">        <span class="keyword">return</span> prototype;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;深拷贝&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="参考文章">参考文章：</h1>
@@ -2175,8 +2307,8 @@ Object类的clone方法只会拷贝对象中的基本数据类型，对于数组
         <category>设计模式</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>设计模式</tag>
+        <tag>Java</tag>
         <tag>原型模式</tag>
       </tags>
   </entry>
@@ -2243,8 +2375,8 @@ Object类的clone方法只会拷贝对象中的基本数据类型，对于数组
         <category>设计模式</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>设计模式</tag>
+        <tag>Java</tag>
         <tag>迪米特法则</tag>
       </tags>
   </entry>
@@ -2305,8 +2437,8 @@ Mybatis-plus生成代码的时候，对于每个数据库都会生成对应的IS
         <category>设计模式</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>设计模式</tag>
+        <tag>Java</tag>
         <tag>接口隔离</tag>
       </tags>
   </entry>
@@ -2456,8 +2588,8 @@ Principle，简称DIP）是指将两个模块之间的依赖关系倒置为依�
         <category>设计模式</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>设计模式</tag>
+        <tag>Java</tag>
         <tag>依赖倒置</tag>
       </tags>
   </entry>
@@ -2547,8 +2679,8 @@ src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250314134934.png" /></p>
         <category>Java</category>
       </categories>
       <tags>
-        <tag>JUC</tag>
         <tag>Java</tag>
+        <tag>JUC</tag>
         <tag>并发编程</tag>
       </tags>
   </entry>
@@ -2628,8 +2760,8 @@ id="五建造者模式和工厂模式的区别">五、建造者模式和工厂�
         <category>设计模式</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>设计模式</tag>
+        <tag>Java</tag>
         <tag>单例模式</tag>
       </tags>
   </entry>
@@ -2700,8 +2832,8 @@ src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250314094515.png" /></p>
         <category>设计模式</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>设计模式</tag>
+        <tag>Java</tag>
         <tag>里氏替换</tag>
       </tags>
   </entry>
@@ -3688,8 +3820,8 @@ Serializable接口，即不允许该类支持序列化；<br> ② 枚举</p>
         <category>设计模式</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>设计模式</tag>
+        <tag>Java</tag>
         <tag>单例模式</tag>
       </tags>
   </entry>
@@ -3726,8 +3858,8 @@ Serializable接口，即不允许该类支持序列化；<br> ② 枚举</p>
         <category>设计模式</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>设计模式</tag>
+        <tag>Java</tag>
         <tag>开闭原则</tag>
       </tags>
   </entry>
@@ -3778,8 +3910,8 @@ Serializable接口，即不允许该类支持序列化；<br> ② 枚举</p>
         <category>设计模式</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>设计模式</tag>
+        <tag>Java</tag>
         <tag>单一职责原则</tag>
       </tags>
   </entry>
@@ -3935,8 +4067,8 @@ Spring 中，DefaultListableBeanFactory 实现了所有工厂的公共逻辑。<
         <category>设计模式</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>设计模式</tag>
+        <tag>Java</tag>
         <tag>工厂模式</tag>
       </tags>
   </entry>
@@ -4612,8 +4744,8 @@ src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250309203233.png" /></p>
         <category>Java</category>
       </categories>
       <tags>
-        <tag>JUC</tag>
         <tag>Java</tag>
+        <tag>JUC</tag>
         <tag>并发编程</tag>
       </tags>
   </entry>
