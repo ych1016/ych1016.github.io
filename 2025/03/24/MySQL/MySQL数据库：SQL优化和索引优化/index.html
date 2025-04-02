@@ -26,13 +26,17 @@
 <meta property="og:site_name" content="攻城狮-旺仔">
 <meta property="og:description" content="记录一些日常开发所用到的SQL查询优化">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250402094317.png">
+<meta property="og:image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250402094412.png">
+<meta property="og:image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250402094644.png">
 <meta property="article:published_time" content="2025-03-24T08:50:15.000Z">
-<meta property="article:modified_time" content="2025-03-25T01:53:54.360Z">
+<meta property="article:modified_time" content="2025-04-02T07:54:39.396Z">
 <meta property="article:author" content="旺仔">
 <meta property="article:tag" content="后端">
 <meta property="article:tag" content="MySQL">
 <meta property="article:tag" content="索引">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250402094317.png">
 
 
 <link rel="canonical" href="https://ych1016.github.io/2025/03/24/MySQL/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%9ASQL%E4%BC%98%E5%8C%96%E5%92%8C%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96/">
@@ -141,7 +145,14 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E6%85%A2%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E5%9F%BA%E6%9C%AC%E6%AD%A5%E9%AA%A4"><span class="nav-text">一、慢查询优化基本步骤</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%9F%BA%E7%A1%80sql%E4%BC%98%E5%8C%96"><span class="nav-text">二、基础SQL优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E9%AB%98%E7%BA%A7sql%E4%BC%98%E5%8C%96"><span class="nav-text">三、高级SQL优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96"><span class="nav-text">四、索引优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#section"><span class="nav-text">1、</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E6%85%A2%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E5%9F%BA%E6%9C%AC%E6%AD%A5%E9%AA%A4"><span class="nav-text">一、慢查询优化基本步骤</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%9F%BA%E7%A1%80sql%E4%BC%98%E5%8C%96"><span class="nav-text">二、基础SQL优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E9%AB%98%E7%BA%A7sql%E4%BC%98%E5%8C%96"><span class="nav-text">三、高级SQL优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96"><span class="nav-text">四、索引优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#like%E8%AF%AD%E5%8F%A5%E7%9A%84%E5%89%8D%E5%AF%BC%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2%E4%B8%8D%E4%BD%BF%E7%94%A8%E7%B4%A2%E5%BC%95"><span class="nav-text">1、like语句的前导模糊查询不使用索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%9F%E5%90%91%E6%9D%A1%E4%BB%B6%E6%9F%A5%E8%AF%A2%E4%B8%8D%E4%BD%BF%E7%94%A8%E7%B4%A2%E5%BC%95"><span class="nav-text">2、负向条件查询不使用索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8C%83%E5%9B%B4%E6%9D%A1%E4%BB%B6%E5%8F%B3%E8%BE%B9%E7%9A%84%E5%88%97%E4%B8%8D%E8%83%BD%E4%BD%BF%E7%94%A8%E7%B4%A2%E5%BC%95%E8%8C%83%E5%9B%B4%E5%88%97%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E7%B4%A2%E5%BC%95"><span class="nav-text">3、范围条件右边的列不能使用索引（范围列可以使用索引）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E7%B4%A2%E5%BC%95%E5%88%97%E5%81%9A%E4%BB%BB%E4%BD%95%E6%93%8D%E4%BD%9C%E8%AE%A1%E7%AE%97%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%BC%9A%E5%AF%BC%E8%87%B4%E7%B4%A2%E5%BC%95%E5%A4%B1%E6%95%88%E8%80%8C%E8%BD%AC%E5%90%91%E5%85%A8%E8%A1%A8%E6%89%AB%E6%8F%8F"><span class="nav-text">4、在索引列做任何操作（计算、函数、表达式）会导致索引失效而转向全表扫描</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#where%E5%AD%90%E5%8F%A5%E4%B8%AD%E7%B4%A2%E5%BC%95%E5%88%97%E4%BD%BF%E7%94%A8%E5%8F%82%E6%95%B0%E4%B9%9F%E4%BC%9A%E5%AF%BC%E8%87%B4%E7%B4%A2%E5%BC%95%E5%A4%B1%E6%95%88"><span class="nav-text">5、where子句中索引列使用参数，也会导致索引失效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E4%BC%9A%E5%AF%BC%E8%87%B4%E5%85%A8%E8%A1%A8%E6%89%AB%E6%8F%8F"><span class="nav-text">6、强制类型转换会导致全表扫描</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#is-null-is-not-null-%E5%8F%AF%E8%83%BD%E4%BD%BF%E7%94%A8%E7%B4%A2%E5%BC%95%E5%8F%AF%E8%83%BD%E4%B8%8D%E7%94%A8"><span class="nav-text">7、is null, is not
+null 可能使用索引，可能不用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%BB%84%E5%90%88%E7%B4%A2%E5%BC%95%E6%97%B6%E8%A6%81%E7%AC%A6%E5%90%88%E6%9C%80%E5%B7%A6%E5%89%8D%E7%BC%80%E5%8E%9F%E5%88%99"><span class="nav-text">8、使用组合索引时，要符合最左前缀原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E8%A6%86%E7%9B%96%E7%B4%A2%E5%BC%95%E6%9D%A5%E8%BF%9B%E8%A1%8C%E6%9F%A5%E8%AF%A2%E6%93%8D%E4%BD%9C%E9%81%BF%E5%85%8D%E5%9B%9E%E8%A1%A8%E5%87%8F%E5%B0%91select-%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-text">9、利用覆盖索引来进行查询操作，避免回表，减少select
+* 的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8%E5%87%8F%E5%B0%91%E5%9B%9E%E8%A1%A8%E7%9A%84%E6%AC%A1%E6%95%B0"><span class="nav-text">10、利用索引下推减少回表的次数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%89%8D%E7%BC%80%E7%B4%A2%E5%BC%95"><span class="nav-text">11、使用前缀索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#order-bygroup-by%E5%90%8E%E9%9D%A2%E7%9A%84%E5%88%97%E5%A6%82%E6%9E%9C%E6%9C%89%E7%B4%A2%E5%BC%95%E5%8F%AF%E4%BB%A5%E5%88%A9%E7%94%A8%E7%B4%A2%E5%BC%95%E7%9A%84%E6%9C%89%E5%BA%8F%E6%80%A7%E5%8F%AF%E4%BB%A5%E6%B6%88%E9%99%A4%E6%8E%92%E5%BA%8F%E5%B8%A6%E6%9D%A5%E7%9A%84cpu%E5%BC%80%E9%94%80"><span class="nav-text">12、order
+by、group
+by后面的列如果有索引，可以利用索引的有序性可以消除排序带来的CPU开销</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E8%A1%8Cjoin%E8%81%94%E8%A1%A8%E6%9F%A5%E8%AF%A2%E7%9A%84%E5%AD%97%E6%AE%B5%E9%9C%80%E8%A6%81%E5%BB%BA%E7%AB%8B%E7%B4%A2%E5%BC%95join%E6%9C%80%E5%A5%BD%E4%B8%8D%E8%A6%81%E8%B6%85%E8%BF%87%E4%B8%89%E4%B8%AA%E8%A1%A8%E9%9C%80%E8%A6%81-join-%E7%9A%84%E5%AD%97%E6%AE%B5%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%BF%85%E9%A1%BB%E4%B8%80%E8%87%B4"><span class="nav-text">13、进行join联表查询的字段需要建立索引，join最好不要超过三个表，需要
+join 的字段，数据类型必须一致：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E8%A1%A8%E7%B4%A2%E5%BC%95%E5%BB%BA%E8%AE%AE%E6%8E%A7%E5%88%B6%E5%9C%A85%E4%B8%AA%E4%BB%A5%E5%86%85"><span class="nav-text">14、单表索引建议控制在5个以内</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sql-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-explain-%E4%B8%AD%E7%9A%84-type%E8%87%B3%E5%B0%91%E8%A6%81%E8%BE%BE%E5%88%B0-range-%E7%BA%A7%E5%88%AB%E8%A6%81%E6%B1%82%E6%98%AF-ref-%E7%BA%A7%E5%88%AB%E5%A6%82%E6%9E%9C%E5%8F%AF%E4%BB%A5%E6%98%AF-consts-%E6%9C%80%E5%A5%BD"><span class="nav-text">15、SQL
+性能优化 explain 中的 type：至少要达到 range 级别，要求是 ref
+级别，如果可以是 consts 最好</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E4%B8%8A%E5%85%B7%E6%9C%89%E5%94%AF%E4%B8%80%E7%89%B9%E6%80%A7%E7%9A%84%E5%AD%97%E6%AE%B5%E5%8D%B3%E4%BD%BF%E6%98%AF%E5%A4%9A%E4%B8%AA%E5%AD%97%E6%AE%B5%E7%9A%84%E7%BB%84%E5%90%88%E4%B9%9F%E5%BF%85%E9%A1%BB%E5%BB%BA%E6%88%90%E5%94%AF%E4%B8%80%E7%B4%A2%E5%BC%95%E9%98%B2%E6%AD%A2%E8%84%8F%E6%95%B0%E6%8D%AE%E4%BA%A7%E7%94%9F"><span class="nav-text">16、业务上具有唯一特性的字段，即使是多个字段的组合，也必须建成唯一索引，防止脏数据产生</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E5%8D%81%E5%88%86%E9%A2%91%E7%B9%81%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%88%86%E5%BA%A6%E4%B8%8D%E9%AB%98%E7%9A%84%E5%88%97%E4%B8%8D%E5%AE%9C%E5%BB%BA%E7%AB%8B%E7%B4%A2%E5%BC%95"><span class="nav-text">17、更新十分频繁、数据区分度不高的列不宜建立索引</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="nav-text">参考文章</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -156,7 +167,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -238,7 +249,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-25 09:53:54" itemprop="dateModified" datetime="2025-03-25T09:53:54+08:00">2025-03-25</time>
+      <time title="修改时间：2025-04-02 15:54:39" itemprop="dateModified" datetime="2025-04-02T15:54:39+08:00">2025-04-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -264,14 +275,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>211</span>
+      <span>2.7k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>10 分钟</span>
     </span>
 </div>
 
@@ -295,7 +306,130 @@
 <h1 id="二基础sql优化">二、基础SQL优化</h1>
 <h1 id="三高级sql优化">三、高级SQL优化</h1>
 <h1 id="四索引优化">四、索引优化</h1>
-<h2 id="section">1、</h2>
+<h2
+id="like语句的前导模糊查询不使用索引">1、like语句的前导模糊查询不使用索引</h2>
+<p>   因为MySQL的索引底层实现是树结构，如果在最开始就使用 '%'
+，那么下一层压根不知道怎么走
+<img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250402094317.png"  style="zoom: 67%;" /></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> doc <span class="keyword">where</span> title <span class="keyword">like</span> <span class="string">&#x27;%XX&#x27;</span>；   <span class="comment">--不能使用索引</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> doc <span class="keyword">where</span> title <span class="keyword">like</span> <span class="string">&#x27;XX%&#x27;</span>；   <span class="comment">--非前导模糊查询，可以使用索引</span></span><br></pre></td></tr></table></figure>
+<h2 id="负向条件查询不使用索引">2、负向条件查询不使用索引</h2>
+<p>   还是因为底层是树实现的原理，树只能实现精准查询或者范围查询，对于
+"非" 查询，下一步其实是不知道怎么走的，不知道该往左走还是该往右走</p>
+<blockquote>
+<p>其中负向条件有：!=、&lt;&gt;、not in、not exists、not like 等</p>
+</blockquote>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250402094412.png"  style="zoom: 67%;" /></p>
+<p>例如下面SQL语句：（假设status的取值为0、1、2、3、4）
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> doc <span class="keyword">where</span> status <span class="operator">!=</span> <span class="number">1</span> <span class="keyword">and</span> status <span class="operator">!=</span> <span class="number">2</span>;     <span class="comment">--不能使用索引</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> doc <span class="keyword">where</span> status <span class="keyword">in</span> (<span class="number">0</span>,<span class="number">3</span>,<span class="number">4</span>);   <span class="comment">--优化为 in 查询，可以使用索引</span></span><br></pre></td></tr></table></figure></p>
+<h2
+id="范围条件右边的列不能使用索引范围列可以使用索引">3、范围条件右边的列不能使用索引（范围列可以使用索引）</h2>
+<p>  
+以树为前置知识思考问题会很好理解，加入第一个条件是范围索引，第二个不是。那么根据第一个条件走到树的某一层的多个节点，下一步不知道该从当前层的哪一个节点出发。</p>
+<p>索引最多用于一个范围列，如果查询条件中有两个范围列则无法全用到索引。</p>
+<blockquote>
+<p>范围条件有：&lt;、&lt;=、&gt;、&gt;=、between等。</p>
+</blockquote>
+<p><img src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250402094644.png"  style="zoom: 67%;" /></p>
+<p>假如有联合索引 (emp_no 、title、from_date )，那么下面的 SQL 中 emp_no
+可以用到索引，而title 和 from_date 则使用不到索引。 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> employees.titles <span class="keyword">where</span> emp_no <span class="operator">&lt;</span> <span class="number">10010</span><span class="string">&#x27; and title=&#x27;</span>Senior Engineer<span class="string">&#x27;and from_date between &#x27;</span><span class="number">1986</span><span class="number">-01</span><span class="number">-01</span><span class="string">&#x27; and &#x27;</span><span class="number">1986</span><span class="number">-12</span><span class="number">-31</span><span class="string">&#x27;</span></span><br></pre></td></tr></table></figure></p>
+<h2
+id="在索引列做任何操作计算函数表达式会导致索引失效而转向全表扫描">4、在索引列做任何操作（计算、函数、表达式）会导致索引失效而转向全表扫描</h2>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> doc <span class="keyword">where</span> <span class="keyword">YEAR</span>(create_time) <span class="operator">&lt;=</span> <span class="string">&#x27;2016&#x27;</span>;         <span class="comment">-- 不能使用索引</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> doc <span class="keyword">where</span> create_time<span class="operator">&lt;=</span> <span class="string">&#x27;2016-01-01&#x27;</span>;          <span class="comment">-- 可以使用索引</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">order</span> <span class="keyword">where</span> <span class="type">date</span> <span class="operator">&lt;</span> <span class="operator">=</span> CURDATE()；               <span class="comment">-- 不能使用索引</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">order</span> <span class="keyword">where</span> <span class="type">date</span> <span class="operator">&lt;</span> <span class="operator">=</span> <span class="string">&#x27;2018-01-2412:00:00&#x27;</span>;     <span class="comment">-- 可以使用索引</span></span><br><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> <span class="built_in">substring</span>(name,<span class="number">1</span>,<span class="number">3</span>)<span class="operator">=</span>’abc’             <span class="comment">-- 不能使用索引</span></span><br><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> name <span class="keyword">like</span> ‘abc<span class="operator">%</span>’                      <span class="comment">-- 可以使用索引</span></span><br><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> num<span class="operator">/</span><span class="number">2</span><span class="operator">=</span><span class="number">100</span>                             <span class="comment">-- 不能使用索引</span></span><br><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> num<span class="operator">=</span><span class="number">100</span><span class="operator">*</span><span class="number">2</span>                             <span class="comment">-- 可以使用索引</span></span><br></pre></td></tr></table></figure>
+<h2
+id="where子句中索引列使用参数也会导致索引失效">5、where子句中索引列使用参数，也会导致索引失效</h2>
+<p>   
+因为SQL只有在运行时才会解析局部变量，但优化程序不能将访问计划的选择推迟到运行时；它必须在编译时进行选择。
+然而，如果在编译时建立访问计划，变量的值还是未知的，因而无法作为索引选择的输入项。如下面语句将进行全表扫描
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> num<span class="operator">=</span><span class="variable">@num</span>                                   <span class="comment">-- 不能使用索引</span></span><br><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">with</span>(index(索引名)) <span class="keyword">where</span> num<span class="operator">=</span><span class="variable">@num</span>                <span class="comment">--可以改为强制查询使用索引：</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="强制类型转换会导致全表扫描">6、强制类型转换会导致全表扫描</h2>
+<p>字符串类型不加单引号会导致索引失效，因为mysql会自己做类型转换,相当于在索引列上进行了操作。
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 如果 phone 字段是 varchar 类型，则下面的 SQL 不能命中索引，因为内部发生的类型转换。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> phone<span class="operator">=</span><span class="number">13800001234</span>;       <span class="comment">-- 不能使用索引</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> phone<span class="operator">=</span><span class="string">&#x27;13800001234&#x27;</span>;     <span class="comment">-- 可以使用索引</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="is-null-is-not-null-可能使用索引可能不用">7、is null, is not
+null 可能使用索引，可能不用</h2>
+<p>  MySQL中决定使不使用某个索引执行查询的依据就是成本够不够小，如果null值很多，还是会用到索引的。
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> num <span class="keyword">is</span> <span class="keyword">null</span>;     <span class="comment">-- 如果不使用索引</span></span><br><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> num<span class="operator">=</span><span class="number">0</span>;           <span class="comment">-- 可以在num上设置默认值0，确保表中num列没有null值，然后这样查询</span></span><br></pre></td></tr></table></figure></p>
+<h2
+id="使用组合索引时要符合最左前缀原则">8、使用组合索引时，要符合最左前缀原则</h2>
+<p>  组合索引的字段数不允许超过5个。如果在a,b,c三个字段上建立联合索引
+index(a,b,c)，那么他会自动建立 a、(a,b)、(a,b,c) 三组索引。</p>
+<p>（1）建立联合索引的时候，区分度最高的字段在最左边：</p>
+<p>（2）存在等号和非等号混合判断条件时，在建立索引时，把等号条件的列前置，如
+where a &gt; ? and b= ?，那么即使 a 的区分度更高，也必须把 b
+放在索引的最前列。</p>
+<p>（3）最左前缀查询时，并不是指SQL语句的where顺序要和联合索引一致，但还是建议
+where 条件的顺序和联合索引一致。</p>
+<p>（4）假如index(a,b,c), where a=3 and b like 'abc%' and
+c=4，a能用，b能用，c不能用。</p>
+<h2
+id="利用覆盖索引来进行查询操作避免回表减少select-的使用">9、利用覆盖索引来进行查询操作，避免回表，减少select
+* 的使用</h2>
+<p>  覆盖索引：被查询列要被所建的索引覆盖，被查询列的数据能从索引中直接取得，不用通过行定位符
+再到 row 上获取，加速查询速度。</p>
+<p>例如登录业务需求，SQL语句如下。 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> uid, login_time <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> login_name<span class="operator">=</span>? <span class="keyword">and</span> passwd<span class="operator">=</span>?</span><br></pre></td></tr></table></figure> 可以建立(login_name,
+passwd, login_time)的联合索引，由于 login_time
+已经建立在索引中了，被查询的 uid 和 login_time 就不用去 row
+上获取数据了，从而加速查询。</p>
+<h2 id="利用索引下推减少回表的次数">10、利用索引下推减少回表的次数</h2>
+<p>  索引下推是Mysql5.6版本推出的功能，用于优化查询。</p>
+<ul>
+<li><p>不使用索引下推的情况下，在使用非主键索引进行查询时，存储引擎通过索引检索到数据，然后返回给MySQL服务层，服务层然后判断数据是否符合条件
+。</p></li>
+<li><p>使用索引下推的情况下，如果存在某些被索引的列的判断条件时，MySQL服务层将这一部分判断条件传递给存储引擎，然后由存储引擎通过判断索引是否符合MySQL服务层传递的条件，只有当索引符合条件时才会将数据检索出来返回给MySQL服务层。</p></li>
+</ul>
+<p>所以，索引下推就是存储引擎查询数据时，根据查询条件过滤掉一些记录，减少回表的次数，也可以减少MySQL服务层从存储引擎接收数据量。</p>
+<h2 id="使用前缀索引">11、使用前缀索引</h2>
+<p>  如有一个varchar(255)的列，如果该列在前10个或20个字符内，可以做到前缀索引的区分度接近全列索引，那么就不要对整个列进行索引。
+为了减少key_len，可以考虑创建前缀索引，即指定一个前缀长度，可以使用
+<code>count(distinct leftIndex(列名, 索引长度))/count(*)</code>
+来计算前缀索引的区分度</p>
+<blockquote>
+<p>需要注意的是：前缀索引缺点是不能用于 ORDER BY 和 GROUP BY
+操作，也不能用于覆盖索引。</p>
+</blockquote>
+<h2
+id="order-bygroup-by后面的列如果有索引可以利用索引的有序性可以消除排序带来的cpu开销">12、order
+by、group
+by后面的列如果有索引，可以利用索引的有序性可以消除排序带来的CPU开销</h2>
+<p>（1）order by
+最后的字段是组合索引的一部分，并且放在索引组合顺序的最后，避免出现file_sort
+的情况，影响查询性能。例如对于语句
+<code>where a= ? and b= ? order by c</code>，可以建立联合索引(a,b,c)。</p>
+<p>（2）如果索引中有范围查找，那么索引有序性无法利用，如
+<code>WHERE  a &gt; 10 ORDER BY b</code>; 索引(a,b)无法排序。</p>
+<p>（3）如果是前缀索引，是不能消除排序的。</p>
+<p>（4）order
+by排序字段顺序，即asc/desc升降要跟索引保持一致，充分利用索引的有序性来消除排序带来的CPU开销</p>
+<h2
+id="进行join联表查询的字段需要建立索引join最好不要超过三个表需要-join-的字段数据类型必须一致">13、进行join联表查询的字段需要建立索引，join最好不要超过三个表，需要
+join 的字段，数据类型必须一致：</h2>
+<p>  多表关联查询时，保证被关联的字段需要有索引。left
+join是由左边决定的，左边的数据一定都有，所以右边是我们的关键点，建立索引要建右边的。当然如果索引在左边，可以用right
+join。</p>
+<h2 id="单表索引建议控制在5个以内">14、单表索引建议控制在5个以内</h2>
+<p>  索引不是越多越好，索引固然可以提高相应的 select
+的效率，但同时也降低了 insert 及 update 的效率，因为 insert 或 update
+时有可能会重建索引，同时也会暂用空间。一个表的索引数较好不要超过5个。</p>
+<h2
+id="sql-性能优化-explain-中的-type至少要达到-range-级别要求是-ref-级别如果可以是-consts-最好">15、SQL
+性能优化 explain 中的 type：至少要达到 range 级别，要求是 ref
+级别，如果可以是 consts 最好</h2>
+<blockquote>
+<p>consts：单表中最多只有一个匹配行（主键或者唯一索引），在优化阶段即可读取到数据。</p>
+<p>ref：使用普通的索引</p>
+<p>range：对索引进行范围检索。</p>
+<p>当 type=index 时，索引物理文件全扫，速度非常慢。</p>
+</blockquote>
+<h2
+id="业务上具有唯一特性的字段即使是多个字段的组合也必须建成唯一索引防止脏数据产生">16、业务上具有唯一特性的字段，即使是多个字段的组合，也必须建成唯一索引，防止脏数据产生</h2>
+<p>  不要以为唯一索引影响了 insert
+速度，这个速度损耗可以忽略，但提高查找速度是明显的。另外，即使在应用层做了非常完善的校验控制，只要没有唯一索引，根据墨菲定律，必然。</p>
+<h2
+id="更新十分频繁数据区分度不高的列不宜建立索引">17、更新十分频繁、数据区分度不高的列不宜建立索引</h2>
+<p>  数据更新会变更 B+
+树，在更新频繁的字段建立索引会大大降低数据库性能。类似于“性别”这种区分度不大的属性，建立索引是没有什么意义的，不能有效过滤数据，性能与全表扫描类似。
+一般区分度在80%以上的时候就可以建立索引，区分度可以使用<code>count(distinct(列名))/count(*)</code>来计算。</p>
+<h1 id="参考文章">参考文章</h1>
+<p>https://blog.csdn.net/a745233700/article/details/84455241</p>
 
     </div>
 
@@ -422,14 +556,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">95k</span>
+    <span title="站点总字数">103k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">5:45</span>
+    <span title="站点阅读时长">6:15</span>
   </span>
 </div>
 <div class="busuanzi-count">

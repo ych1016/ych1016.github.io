@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ych1016.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.21.1","exturl":false,"sidebar":{"position":"left","width_expanded":300,"width_dual_column":200,"display":"always","padding":20,"offset":200},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":7,"unescape":true,"preload":true}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="详细介绍MySQL的explain工具的使用和输出字段含义">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL分析工具explain">
+<meta property="og:url" content="https://ych1016.github.io/2025/04/02/MySQL/SQL%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7explain/index.html">
+<meta property="og:site_name" content="攻城狮-旺仔">
+<meta property="og:description" content="详细介绍MySQL的explain工具的使用和输出字段含义">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-04-02T00:31:52.000Z">
+<meta property="article:modified_time" content="2025-04-02T01:33:41.950Z">
+<meta property="article:author" content="旺仔">
+<meta property="article:tag" content="后端">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://ych1016.github.io/2025/04/02/MySQL/SQL%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7explain/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ych1016.github.io/2025/04/02/MySQL/SQL%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7explain/","path":"2025/04/02/MySQL/SQL分析工具explain/","title":"SQL分析工具explain"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>SQL分析工具explain | 攻城狮-旺仔</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">攻城狮-旺仔</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">本站为攻城狮旺仔个人博客，仅记录日常编程笔记使用，欢迎各位大佬共同交流</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-首页"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-标签"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-分类"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-日程"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程</a></li><li class="menu-item menu-item-成就"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>成就</a></li><li class="menu-item menu-item-关于"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80explain%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-text">一、explain是什么？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8"><span class="nav-text">二、如何使用？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E5%AD%97%E6%AE%B5%E5%90%AB%E4%B9%89"><span class="nav-text">三、字段含义</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#id"><span class="nav-text">1、id</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#select_type"><span class="nav-text">2、select_type</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#table"><span class="nav-text">3、table</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#partitions"><span class="nav-text">4、partitions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#type"><span class="nav-text">5、type</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#possible_keys"><span class="nav-text">6、possible_keys</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#key"><span class="nav-text">7、key</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#key_len"><span class="nav-text">8、key_len</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ref"><span class="nav-text">9、ref</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rows"><span class="nav-text">10、rows</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#filtered"><span class="nav-text">11、filtered</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#extra"><span class="nav-text">11、Extra</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="nav-text">参考文章</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="旺仔"
+      src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/11zon_cropped.png">
+  <p class="site-author-name" itemprop="name">旺仔</p>
+  <div class="site-description" itemprop="description"><font color="#FFFFFF"; size=5px> 允许一切发生！</font></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ych1016" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ych1016" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2877816340@qq.com" title="E-Mail → mailto:2877816340@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ych1016.github.io/2025/04/02/MySQL/SQL%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7explain/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/11zon_cropped.png">
+      <meta itemprop="name" content="旺仔">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="攻城狮-旺仔">
+      <meta itemprop="description" content="<font color="#FFFFFF"; size=5px> 允许一切发生！</font>">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="SQL分析工具explain | 攻城狮-旺仔">
+      <meta itemprop="description" content="详细介绍MySQL的explain工具的使用和输出字段含义">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SQL分析工具explain
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-04-02 08:31:52 / 修改时间：09:33:41" itemprop="dateCreated datePublished" datetime="2025-04-02T08:31:52+08:00">2025-04-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>8 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">详细介绍MySQL的explain工具的使用和输出字段含义</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="一explain是什么">一、explain是什么？</h1>
+<p>  
+中文意思为解释。在MySQL中，explain命令也叫查询执行计划，是根据表、列、索引和WHERE子句中条件的详细信息。常用为分析SQL执行缓慢的原因。</p>
+<h1 id="二如何使用">二、如何使用？</h1>
+<p>  
+explain使用起来也非常的简单，explain可以与select、update、delete、insert、replace配合使用。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">explain [your_sql]</span><br></pre></td></tr></table></figure>
+<h1 id="三字段含义">三、字段含义</h1>
+<p>   explain执行后，会输出如下图的字段</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250402084209.png" /></p>
+<p>其中，每个字段所表示的意思</p>
+<table>
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 82%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">列名</th>
+<th style="text-align: center;">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">id</td>
+<td
+style="text-align: center;">查询中每个SELECT子句的标识符<br />用于区分联合查询或子查询中各部分，id值较大的部分通常为子查询</td>
+</tr>
+<tr>
+<td style="text-align: center;">select_type</td>
+<td style="text-align: center;">SELECT类型</td>
+</tr>
+<tr>
+<td style="text-align: center;">table</td>
+<td style="text-align: center;">当前访问的表名或派生表的别名</td>
+</tr>
+<tr>
+<td style="text-align: center;">partition</td>
+<td
+style="text-align: center;">使用分区表时显示访问的分区列表，否则为空</td>
+</tr>
+<tr>
+<td style="text-align: center;">type</td>
+<td style="text-align: center;">访问类型，描述查询如何检索行</td>
+</tr>
+<tr>
+<td style="text-align: center;">possible_keys</td>
+<td style="text-align: center;">可能的索引可供选择</td>
+</tr>
+<tr>
+<td style="text-align: center;">key</td>
+<td style="text-align: center;">实际使用的索引名称</td>
+</tr>
+<tr>
+<td style="text-align: center;">key_len</td>
+<td
+style="text-align: center;">MySQL实际使用的索引长度（单位字节），帮助判断索引是否被充分利用</td>
+</tr>
+<tr>
+<td style="text-align: center;">ref</td>
+<td
+style="text-align: center;">指定与key一起使用的列或常量，常用于显示连接条件或索引匹配的常量值</td>
+</tr>
+<tr>
+<td style="text-align: center;">rows</td>
+<td
+style="text-align: center;">估计需要扫描的行数，数值越大通常查询性能越差，仅为估计值</td>
+</tr>
+<tr>
+<td style="text-align: center;">filtered</td>
+<td
+style="text-align: center;">表示通过WHERE条件过滤后剩余行的百分比，数值越高表示符合条件的行越多</td>
+</tr>
+<tr>
+<td style="text-align: center;">Extra</td>
+<td style="text-align: center;">附加信息</td>
+</tr>
+</tbody>
+</table>
+<h2 id="id">1、id</h2>
+<p><strong>（1）含义</strong></p>
+<p>表示查询中每个SELECT语句或子句的标识符。在联合查询（UNION）或子查询中，每个独立的SELECT语句会被分配一个id。</p>
+<p><strong>（2）作用</strong></p>
+<p>通过id可以了解查询的层次结构，id值较小的通常代表主查询，而较大的则代表子查询或派生表。</p>
+<h2 id="select_type">2、select_type</h2>
+<p><strong>（1）含义</strong></p>
+<p>表示每个SELECT语句的类型。类型比较多.</p>
+<table>
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 72%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">select_type</th>
+<th style="text-align: center;">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">SIMPLE</td>
+<td style="text-align: center;">简单SELECT（不使用UNION或子查询）</td>
+</tr>
+<tr>
+<td style="text-align: center;">PRIMARY</td>
+<td style="text-align: center;">最外层SELECT</td>
+</tr>
+<tr>
+<td style="text-align: center;">UNION</td>
+<td style="text-align: center;">第二个或稍后的SELECT语句UNION</td>
+</tr>
+<tr>
+<td style="text-align: center;">DEPENDENT UNION</td>
+<td
+style="text-align: center;">UNION中的第二个或稍后SELECT语句，取决于外部查询</td>
+</tr>
+<tr>
+<td style="text-align: center;">UNION RESULT</td>
+<td style="text-align: center;">UNION的结果</td>
+</tr>
+<tr>
+<td style="text-align: center;">SUBQUERY</td>
+<td style="text-align: center;">子查询中的第一个SELECT</td>
+</tr>
+<tr>
+<td style="text-align: center;">DEPENDENT SUBQUERY</td>
+<td
+style="text-align: center;">子查询中的第一个SELECT，取决于外部查询</td>
+</tr>
+<tr>
+<td style="text-align: center;">DERIVED</td>
+<td style="text-align: center;">派生表</td>
+</tr>
+<tr>
+<td style="text-align: center;">MATERIALIZED</td>
+<td style="text-align: center;">物质化子查询</td>
+</tr>
+<tr>
+<td style="text-align: center;">UNCACHEABLE SUBQUERY</td>
+<td
+style="text-align: center;">无法缓存结果的子查询，必须为外部查询的每一行重新评估</td>
+</tr>
+<tr>
+<td style="text-align: center;">UNCACHEABLE UNION</td>
+<td
+style="text-align: center;">第二个或稍后在UNION中选择属于不可缓存的子查询</td>
+</tr>
+</tbody>
+</table>
+<h2 id="table">3、table</h2>
+<p><strong>（1）含义</strong>
+表示当前正在访问的数据表或派生表的别名。</p>
+<p><strong>（2）作用</strong>
+显示执行计划中涉及的具体数据表，便于识别哪张表在执行过程中占用较大资源。有助于定位慢查询中涉及的数据表，分析是否需要优化表结构或索引。</p>
+<h2 id="partitions">4、partitions</h2>
+<p><strong>（1）含义</strong>
+如果数据表采用了分区策略，该字段会列出查询涉及的分区名称。</p>
+<p><strong>（2）作用</strong>
+帮助了解查询是如何利用分区来提高性能的。检查是否正确使用了分区，有助于确保查询能够充分利用分区裁剪技术来减少扫描的数据量。</p>
+<h2 id="type">5、type</h2>
+<p><strong>（1）含义</strong>
+又称访问类型，用于描述查询从表中查找行的方式。</p>
+<p><strong>（2）类型</strong></p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">类型</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">system</td>
+<td
+style="text-align: left;">该表只有一行（=系统表）。这是const连接类型的特例。</td>
+</tr>
+<tr>
+<td style="text-align: center;">const</td>
+<td
+style="text-align: left;">该表最多有一个匹配的行，在查询开始时读取。因为只有一行，所以该行中列的值可以被优化器的其余部分视为常量。const表非常快，因为它们只读一次。通过PRIMARY
+KEY或UNIQUE索引用=查询，例<code>SELECT * FROM tbl_name WHERE primary_key=1;</code>或者
+<code>SELECT * FROM tbl_name WHERE primary_key_part1=1 AND primary_key_part2=2;</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">eq_ref</td>
+<td
+style="text-align: left;">对于上一个表中的每行组合，都会从此表中读取一行。除了system和const类型外，这是最好的连接类型。当连接使用索引的所有部分，并且索引是PRIMARY
+KEY或UNIQUE NOT
+NULL索引时它使用的类型。<code>SELECT * FROM ref_table,other_table WHERE ref_table.key_column_part1=other_table.column AND ref_table.key_column_part2=1;</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">ref</td>
+<td
+style="text-align: left;">对于之前表中的每个行组合，都会从此表中读取所有具有匹配索引值的行。如果连接仅使用键的最左边前缀，或者如果键不是PRIMARY
+KEY或UNIQUE索引（换句话说，如果连接无法根据键值选择单行），则使用ref，如果使用的键只匹配几行，这是一个很好的连接类型。</td>
+</tr>
+<tr>
+<td style="text-align: center;">ref_or_null</td>
+<td
+style="text-align: left;">这个连接类型类似于ref，但是MySQL会对包含NULL值的行进行额外搜索。这种连接类型优化最常用于解析子查询。在下面的例子中，MySQL可以使用ref_or_null连接来处理ref_table:<code>SELECT * FROM ref_table WHERE key_column=expr OR key_column IS NULL;</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">index_merge</td>
+<td
+style="text-align: left;">此连接类型表示使用了索引合并优化。在这种情况下，输出行中的key列包含所用索引的列表，key_len包含所用索引的最长键部分的列表</td>
+</tr>
+<tr>
+<td style="text-align: center;">unique_subquery</td>
+<td
+style="text-align: left;">此类型替换了以下形式的一些IN子查询的eq_ref：<code>value IN (SELECT primary_key FROM single_table WHERE some_expr)</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">index_subquery</td>
+<td
+style="text-align: left;">此连接类型类似于unique_subquery。它取代了IN子查询，但它适用于子查询中的非唯一索引</td>
+</tr>
+<tr>
+<td style="text-align: center;">range</td>
+<td
+style="text-align: left;">仅检索给定范围内的行，使用索引选择行。输出行中的key列指示使用哪个索引。key_len包含使用过的最长键部分。此类型的ref列为NULL。range当使用任何=、&lt;&gt;、&gt;、&gt;=、&lt;=、IS
+NULL、&lt;=&gt;、BETWEEN、LIKE或IN()运算符将键列与常量进行比较时，可以使用：<code>SELECT * FROM tbl_name WHERE key_part1 = 10 AND key_part2 IN (10,20,30);</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">index</td>
+<td style="text-align: left;">当查询仅使用作为单个索引一部分的列时</td>
+</tr>
+<tr>
+<td style="text-align: center;">ALL</td>
+<td style="text-align: left;">全表扫描</td>
+</tr>
+</tbody>
+</table>
+<p><strong>（3）作用</strong>
+此字段是判断查询效率的关键指标，理想状态下希望看到const、eq_ref或ref，避免全表扫描。</p>
+<h2 id="possible_keys">6、possible_keys</h2>
+<p><strong>（1）含义</strong>
+possible_keys列显示MySQL可以选择使用的索引。请注意，此列与EXPLAIN输出中显示的表格顺序完全无关。这意味着possible_keys中的key与实际使用的不一致。</p>
+<p><strong>（2）作用</strong>
+帮助了解数据库在构建查询计划时可能选择的索引。如果该字段为空，可能说明查询条件未能利用到任何索引；如果不为空，但实际未使用，可能需要检查索引设计或查询条件是否合理。</p>
+<h2 id="key">7、key</h2>
+<p><strong>（1）含义</strong>
+表示MySQL实际选择使用的索引名称。不一定是possible_keys中列出的，因为MyISAM会通过运行ANALYZE
+TABLE来选择更好的索引。</p>
+<p><strong>（2）作用</strong>
+指出在执行查询过程中，MySQL到底利用了哪一个索引。如果该字段为空，则表示没有使用索引，可能导致全表扫描；</p>
+<h2 id="key_len">8、key_len</h2>
+<p><strong>（1）含义</strong>
+key_len列表示MySQL决定使用的索引的长度。key_len的值使您能够确定MySQL实际使用的多部分索引的多少部分。如果key列显示NULL，则key_len列也显示NULL。</p>
+<p><strong>（2）作用</strong>
+如果key_len较短，可能说明索引没有被完全利用；而适当的key_len可以确保查询尽可能利用索引来过滤数据。</p>
+<h2 id="ref">9、ref</h2>
+<p><strong>（1）含义</strong>
+ref列显示哪些列或常量与key列中命名的索引进行比较，以便从表中选择行。</p>
+<p><strong>（2）作用</strong>
+如果值是func，则使用的值是某个函数的结果。要查看哪个功能，请使用EXPLAIN之后SHOW
+WARNINGS来查看扩展的EXPLAIN输出。该函数实际上可能是一个运算符，例如算术运算符。</p>
+<h2 id="rows">10、rows</h2>
+<p><strong>（1）含义</strong>
+rows表示MySQL认为必须检查才能执行查询的行数。</p>
+<p><strong>（2）作用</strong>
+可以根据这个字段来选择使用哪个表查询作为驱动表。</p>
+<h2 id="filtered">11、filtered</h2>
+<p><strong>（1）含义</strong>
+filtered列表示按表条件过滤的表行的估计百分比。</p>
+<p><strong>（2）作用</strong> 越高越好
+.最大值为100，这意味着没有发生行过滤。从100减少的值表示过滤量增加。
+rows显示检查的估计行数，×filteredrows显示与下表连接的行数。例如，如果rows是1000，filtered是50.00（50%），则与下表连接的行数为1000
+× 50% = 500。</p>
+<h2 id="extra">11、Extra</h2>
+<p><strong>（1）含义</strong>
+提供额外的信息，描述MySQL在执行查询时采用的一些特定操作或额外步骤。</p>
+<h1 id="参考文章">参考文章</h1>
+<p>https://blog.csdn.net/weixin_46152127/article/details/129925339</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>旺仔
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://ych1016.github.io/2025/04/02/MySQL/SQL%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7explain/" title="SQL分析工具explain">https://ych1016.github.io/2025/04/02/MySQL/SQL分析工具explain/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/username">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/channel_name">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.png">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag"># 后端</a>
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/03/24/OperatingSystem/%E5%B1%80%E9%83%A8%E6%80%A7%E5%8E%9F%E7%90%86/" rel="prev" title="局部性原理">
+                  <i class="fa fa-angle-left"></i> 局部性原理
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/04/02/MySQL/MySQL%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95%E4%B8%8E%E9%9D%9E%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95/" rel="next" title="MySQL聚簇索引与非聚簇索引">
+                  MySQL聚簇索引与非聚簇索引 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">旺仔</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">103k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">6:15</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.min.js","integrity":"sha256-G8ouPAnw4zzMbnAenHnVz6h9XpKbNdOkrqTh7AadyHs="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right"},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2}});</script></body>
+</html>

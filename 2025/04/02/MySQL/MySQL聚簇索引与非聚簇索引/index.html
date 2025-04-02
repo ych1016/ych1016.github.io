@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ych1016.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.21.1","exturl":false,"sidebar":{"position":"left","width_expanded":300,"width_dual_column":200,"display":"always","padding":20,"offset":200},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":7,"unescape":true,"preload":true}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="详细描述MySQL的聚簇索引和非聚簇索引，举例说明">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL聚簇索引与非聚簇索引">
+<meta property="og:url" content="https://ych1016.github.io/2025/04/02/MySQL/MySQL%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95%E4%B8%8E%E9%9D%9E%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95/index.html">
+<meta property="og:site_name" content="攻城狮-旺仔">
+<meta property="og:description" content="详细描述MySQL的聚簇索引和非聚簇索引，举例说明">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-04-02T02:16:05.000Z">
+<meta property="article:modified_time" content="2025-04-02T07:08:41.289Z">
+<meta property="article:author" content="旺仔">
+<meta property="article:tag" content="后端">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://ych1016.github.io/2025/04/02/MySQL/MySQL%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95%E4%B8%8E%E9%9D%9E%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ych1016.github.io/2025/04/02/MySQL/MySQL%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95%E4%B8%8E%E9%9D%9E%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95/","path":"2025/04/02/MySQL/MySQL聚簇索引与非聚簇索引/","title":"MySQL聚簇索引与非聚簇索引"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>MySQL聚簇索引与非聚簇索引 | 攻城狮-旺仔</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">攻城狮-旺仔</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">本站为攻城狮旺仔个人博客，仅记录日常编程笔记使用，欢迎各位大佬共同交流</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-首页"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-标签"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-分类"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-日程"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程</a></li><li class="menu-item menu-item-成就"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>成就</a></li><li class="menu-item menu-item-关于"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E6%91%98%E8%A6%81"><span class="nav-text">一、摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95%E4%B8%8E%E9%9D%9E%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95%E5%8C%BA%E5%88%AB"><span class="nav-text">（1）聚簇索引与非聚簇索引区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-text">（2）聚簇索引的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-text">（3）非聚簇索引的使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95"><span class="nav-text">二、聚簇索引</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-text">（1）概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BB%80%E4%B9%88"><span class="nav-text">（2）使用聚簇索引需要注意什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95%E4%B8%BB%E9%94%AE%E4%B8%8D%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8uuid"><span class="nav-text">（3）聚簇索引主键不推荐使用uuid</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%B7%A6%E5%89%8D%E7%BC%80%E5%8E%9F%E5%88%99"><span class="nav-text">（4）最左前缀原则</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E9%9D%9E%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95"><span class="nav-text">三、非聚簇索引</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5-1"><span class="nav-text">（1）概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#innodb%E9%9D%9E%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95"><span class="nav-text">（2）Innodb非聚簇索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#myisam%E9%9D%9E%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95"><span class="nav-text">（3）Myisam非聚簇索引</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E8%A6%86%E7%9B%96%E7%B4%A2%E5%BC%95"><span class="nav-text">四、覆盖索引</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9E%E8%A1%A8"><span class="nav-text">（1）回表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E5%85%A5"><span class="nav-text">（2）引入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5-2"><span class="nav-text">（3）概念</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="nav-text">参考文章</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="旺仔"
+      src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/11zon_cropped.png">
+  <p class="site-author-name" itemprop="name">旺仔</p>
+  <div class="site-description" itemprop="description"><font color="#FFFFFF"; size=5px> 允许一切发生！</font></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ych1016" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ych1016" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2877816340@qq.com" title="E-Mail → mailto:2877816340@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ych1016.github.io/2025/04/02/MySQL/MySQL%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95%E4%B8%8E%E9%9D%9E%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/11zon_cropped.png">
+      <meta itemprop="name" content="旺仔">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="攻城狮-旺仔">
+      <meta itemprop="description" content="<font color="#FFFFFF"; size=5px> 允许一切发生！</font>">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="MySQL聚簇索引与非聚簇索引 | 攻城狮-旺仔">
+      <meta itemprop="description" content="详细描述MySQL的聚簇索引和非聚簇索引，举例说明">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MySQL聚簇索引与非聚簇索引
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-04-02 10:16:05 / 修改时间：15:08:41" itemprop="dateCreated datePublished" datetime="2025-04-02T10:16:05+08:00">2025-04-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>10 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">详细描述MySQL的聚簇索引和非聚簇索引，举例说明</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="一摘要">一、摘要</h1>
+<h2 id="聚簇索引与非聚簇索引区别">（1）聚簇索引与非聚簇索引区别</h2>
+<ul>
+<li>聚簇索引：将数据存储和索引放到一块，索引结构的叶子结点保存了行数据。
+<ul>
+<li>在Innodb中，基于主键构建的B+树就使用了聚簇索引</li>
+</ul></li>
+<li>非聚簇索引：将数据与索引分开存储。
+<ul>
+<li>在Innodb中，叶子结点保存了数据的主键；</li>
+<li>在Myisam中，叶子节点保存了数据的地址。</li>
+</ul></li>
+</ul>
+<h2 id="聚簇索引的使用">（2）聚簇索引的使用</h2>
+<p>  
+在MySQL中，只有Innodb会用到聚簇索引，并且是基于主键构建的聚簇索引。简而言之，Innodb会用主键作为索引，构建B+树，这棵B+树的叶子节点就存储了真实数据。</p>
+<h2 id="非聚簇索引的使用">（3）非聚簇索引的使用</h2>
+<p>  
+在MySQL中，Innodb引擎在构建除了主键外的其他索引时，使用的就是非聚簇索引。Innodb会根据选定的字段构建B+树索引，但是此时B+树的叶子节点存储的是对应数据的主键。
+当在使用非主键的索引进行查找数据时，Innodb会先使用非聚簇索引定位到数据的主键，然后再通过主键使用聚簇索引，查找到对应的数据的全部信息。这个操作也被叫做<strong>回表</strong>。</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/innodb%E9%9D%9E%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95.png" /></p>
+<p>  
+在MySQL中，Myisam引擎使用的就是非聚簇索引，Myisam虽然也会构建基于主键的B+树索引，但是，此时的B+树的叶子结点并不存储真实数据，而是存储真实数据的地址。
+Myisam再构建非主键的索引时，使用的也是非聚簇索引，对应的B+树的叶子结点存储的也是真实数据的地址。
+在使用索引进行查找时，Myisam会通过索引的B+树定位到真实数据的地址，再通过地址查找到对应的真实数据。</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/myisam%E9%9D%9E%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95.png" /></p>
+<h1 id="二聚簇索引">二、聚簇索引</h1>
+<h2 id="概念">（1）概念</h2>
+<p>  
+聚簇索引也叫聚集索引，是一种数据存储方式。聚簇索引的叶子节点就是数据节点，也就是说索引和数据行在一起；反之，如果叶子节点没有存储数据行，那么就是非聚簇索引。</p>
+<h2 id="使用聚簇索引需要注意什么">（2）使用聚簇索引需要注意什么？</h2>
+<ul>
+<li>当使用主键为聚簇索引时，主键最好不要使用uuid，因为uuid的值太过离散，不适合排序且可能出现新增加记录的uuid，会插入在索引树中间的位置，导致索引树调整复杂度变大，消耗更多的时间和资源。</li>
+<li>建议使用int类型的自增，方便排序并且默认会在索引树的末尾增加主键值，对素引树的结构影响最小。而且，主键值占用的存储空间越大，辅助素引中保存的主键值也会跟着变大，占用存储空间，也会影响到IO操作读取到的数据量。</li>
+</ul>
+<h2 id="聚簇索引主键不推荐使用uuid">（3）聚簇索引主键不推荐使用uuid</h2>
+<p>  
+聚簇索引的数据的物理存放顺序与索引顺序是一致的，即：只要索引是相邻的，那么对应的数据一定也是相邻地存放在磁盘上的。
+如果主键不是自增id，比如像UUID这样的，那么可以想象，它会干些什么，不断地调整数据的物理地址、分页（索引碎片化），当然也有其他一些措施来减少这些操作，但却无法彻底避免。
+但如果是自增的，那就简单了，它只需要一页一页地写，索引结构相对紧凑，磁盘碎片少，效率也高。</p>
+<blockquote>
+<p>推荐使用UUIDV7，UUIDV7是严格递增的。可以解决上面的问题</p>
+</blockquote>
+<h2 id="最左前缀原则">（4）最左前缀原则</h2>
+<p>  数据库中的“最左前缀原则”主要应用于复合索引（又称联合索引）的使用和优化。
+简单来说，当一个复合索引由多个列构成时（例如：索引 (A, B,
+C)），查询条件必须从索引的最左边开始才能有效利用该索引。</p>
+<p>  下面通过栗子进行说明，本文创建了如下表和复合索引 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t1</span><br><span class="line">(</span><br><span class="line">    a <span class="type">int</span> <span class="keyword">primary</span> key ,</span><br><span class="line">    b <span class="type">int</span>,</span><br><span class="line">    c <span class="type">int</span>,</span><br><span class="line">    d <span class="type">int</span>,</span><br><span class="line">    e <span class="type">varchar</span>(<span class="number">20</span>)</span><br><span class="line">)engine<span class="operator">=</span>InnoDB;</span><br><span class="line"><span class="keyword">create</span> index idx_t1_bcd <span class="keyword">on</span> t1(b,c,d);</span><br></pre></td></tr></table></figure></p>
+<p>   按照最左前缀原则，如下的SQL语句是否走索引如下所示
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">explain <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t1 <span class="keyword">where</span> b <span class="operator">=</span> <span class="number">1</span> <span class="keyword">and</span> c <span class="operator">=</span> <span class="number">1</span> <span class="keyword">and</span> d <span class="operator">=</span> <span class="number">1</span>; <span class="comment">-- 走 idx_t1_bcd 索引</span></span><br><span class="line"></span><br><span class="line"># mysql引擎在查询为了更好利用索引，在查询过程中会动态调整查询字段的顺序以便利用索引</span><br><span class="line">explain <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t1 <span class="keyword">where</span>  d <span class="operator">=</span> <span class="number">1</span> <span class="keyword">and</span>  b <span class="operator">=</span> <span class="number">1</span> <span class="keyword">and</span> c <span class="operator">=</span> <span class="number">1</span>; <span class="comment">-- 走 idx_t1_bcd 索引</span></span><br><span class="line">explain <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t1 <span class="keyword">where</span>  c <span class="operator">=</span> <span class="number">1</span> <span class="keyword">and</span>  d <span class="operator">=</span> <span class="number">1</span> <span class="keyword">and</span> c <span class="operator">=</span> <span class="number">1</span>; <span class="comment">-- 走 idx_t1_bcd 索引</span></span><br><span class="line">explain <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t1 <span class="keyword">where</span>  c <span class="operator">=</span> <span class="number">1</span> <span class="keyword">and</span>  d <span class="operator">=</span> <span class="number">1</span> <span class="keyword">and</span> c <span class="operator">=</span> <span class="number">1</span> <span class="keyword">and</span> a <span class="operator">=</span> <span class="number">1</span>; <span class="comment">-- 如果有主键的查询条件，会走主键索引，因为主键索引可以直接获取到数据，而走 idx_t1_bcd 索引需要回表</span></span><br><span class="line"></span><br><span class="line"># 对b,c,d创建了复合索引，相当于创建了(b),(b,c),(b,d),(b,c,d)索引</span><br><span class="line">explain <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t1 <span class="keyword">where</span>  b <span class="operator">=</span> <span class="number">1</span>; <span class="comment">-- 走 idx_t1_bcd 索引</span></span><br><span class="line">explain <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t1 <span class="keyword">where</span>  b <span class="operator">=</span> <span class="number">1</span> <span class="keyword">and</span> c <span class="operator">=</span> <span class="number">1</span>; <span class="comment">-- 走 idx_t1_bcd 索引</span></span><br><span class="line">explain <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t1 <span class="keyword">where</span>  b <span class="operator">=</span> <span class="number">1</span> <span class="keyword">and</span> d <span class="operator">=</span> <span class="number">1</span>; <span class="comment">-- 走 idx_t1_bcd 索引 //Using index condition</span></span><br><span class="line">explain <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t1 <span class="keyword">where</span>  b <span class="operator">=</span> <span class="number">1</span> <span class="keyword">and</span> e <span class="operator">=</span> <span class="string">&#x27;a&#x27;</span>; <span class="comment">-- 走 idx_t1_bcd 索引 //Using where</span></span><br><span class="line">explain <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t1 <span class="keyword">where</span>  c <span class="operator">=</span> <span class="number">1</span> <span class="keyword">and</span> d <span class="operator">=</span> <span class="number">1</span>; <span class="comment">-- 不走idx_t1_bcd 索引</span></span><br><span class="line">explain <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t1 <span class="keyword">where</span>  c <span class="operator">=</span> <span class="number">1</span>; <span class="comment">-- 不走idx_t1_bcd 索引</span></span><br><span class="line">explain <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t1 <span class="keyword">where</span>  d <span class="operator">=</span> <span class="number">1</span>; <span class="comment">-- 不走idx_t1_bcd 索引</span></span><br><span class="line">explain <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t1 <span class="keyword">where</span>  e <span class="operator">=</span> <span class="string">&#x27;a&#x27;</span>; <span class="comment">-- 不走idx_t1_bcd 索引</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<p>  接下来，以复合索引实际构建的B+树来说明为什么要遵循最左前缀原则。</p>
+<p>  按照上面的SQL语句，我们可以知道Innodb会创建一个基于主键a的聚簇索引和基于复合索引(b,c,d)的非聚簇索引。其结构如下图：
+<img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250402141754.png" /></p>
+<p>  当需要回表查询的时候，首先从复合索引的B+树中找到对应数据的主键ID，然后在去主键索引的B+树中找到具体的数据，如下图。
+<img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250402143236.png" /></p>
+<p>  首先我们来看一下复合索引是如何查询的，比如现在要查询的数据是
+<code>b=2 and c=3 and d=5</code>。
+在执行查询时，Innodb会按照建立索引的顺序进行比较，先比较b，如果b相等再看c，如果c还是相等那就是d，其实就跟字符串的比较是一样的。
+<img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250402143703.png" /></p>
+<p>   如果此时，我们的查询语句变成了
+<code>c=3 &amp; d=5</code>，那么索引就会失效。
+因为Innodb还是会按照最开始建立索引的顺序去匹配条件，但是我们建立的索引是以<code>b</code>为最左元素，此时的条件没有<code>b</code>，所以Innodb压根不知道怎么往下走。
+<img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250402143959.png" /></p>
+<h1 id="三非聚簇索引">三、非聚簇索引</h1>
+<h2 id="概念-1">（1）概念</h2>
+<p>  
+非聚簇索引是数据库的另一种数据存储方式。非聚簇索引的叶子节点不存储真实数据，而是存储真实数据的地址或主键（Innodb存储主键、Myisam存储地址）。</p>
+<h2 id="innodb非聚簇索引">（2）Innodb非聚簇索引</h2>
+<blockquote>
+<p>注意：在innodb中，在聚簇索引之上创建的索引称之为辅助索引，非聚簇索引都是辅助索引，像复合索引、前缀索引、唯一索引。
+辅助索引叶子节点存储的不再是行的物理位置，而是主键值，辅助索引访问数据总是需要二次查找（也叫回表）。</p>
+</blockquote>
+<p>（1）InnoDB使用的是聚簇索引，将主键组织到一棵B+树中，而行数据就储存在叶子节点上，若使用"where
+id=14"这样的条件查找主键，则按照B+树的检索算法即可查找到对应的叶节点，之后获得行数据。</p>
+<p>（2）若对Name列进行条件搜索，则需要两个步骤：第一步在辅助索引B+树中检索Name，到达其叶子节点获取对应的主键。第二步使用主键在主索引B+树种再执行一次B+树检索操作(这个过程也称为回表)，最终到达叶子节点即可获取整行数据。（重点在于通过其他键需要建立辅助索引）
+聚簇索引默认是主键，如果表中没有定义主键，InnoDB会选择一个唯一且非空的索引代替。如果没有这样的索引，InnoDB会隐式定义一个主键（类似oracle中的Rowld）来作为聚簇索引。</p>
+<p>（3）如果已经设置了主键为聚簇索引又希望再单独设置聚簇索引，必须先删除主键，然后添加我们想要的聚簇索引，最后恢复设置主键即可。</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/innodb%E9%9D%9E%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95.png" /></p>
+<h2 id="myisam非聚簇索引">（3）Myisam非聚簇索引</h2>
+<p>  
+MyISAM使用的是非聚簇索引，非聚簇索引的两棵B+树看上去没什么不同，节点的结构完全一致只是存储的内容不同而已，主键索引B+树的节点存储了主键，辅助键索引B+树存储了辅助键。
+表数据存储在独立的地方，这两颗B+树的叶子节点都使用一个地址指向真正的表数据，对于表数据来说，这两个键没有任何差别。由于索引树是独立的，通过辅助键检索无需访问主键的索引树。(所以没有回表这一操作)</p>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/myisam%E9%9D%9E%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95.png" /></p>
+<h1 id="四覆盖索引">四、覆盖索引</h1>
+<h2 id="回表">（1）回表</h2>
+<p>  回表，指的是Innodb在使用非聚簇索引时只能获得查找数据的主键id，还需要在走一次主键的聚簇索引才能获取到真实数据。这种二次查找的动作就叫做回表。</p>
+<h2 id="引入">（2）引入</h2>
+<p>  我们会发现上面的回表，即使使用了索引，还是得查找两次索引，效率不高。那可以怎么解决呢？其实我们知道如果是非聚簇索引，那对应的B+树的节点上会存在真实的索引字段的数据。</p>
+<p>  举个栗子：对于这个复合索引
+<code>(b,c,d)</code>，对应构建的B+树的节点上会有b、c、d列的真实数据，那么现在就会存在这种情况。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> b <span class="operator">=</span> <span class="number">2</span> <span class="keyword">and</span> c <span class="operator">=</span> <span class="number">3</span> <span class="keyword">and</span> d <span class="operator">=</span> <span class="number">5</span>;         <span class="comment">-- 需要回表</span></span><br><span class="line"><span class="keyword">select</span> b,c <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> b <span class="operator">=</span> <span class="number">2</span> <span class="keyword">and</span> c <span class="operator">=</span> <span class="number">3</span> <span class="keyword">and</span> d <span class="operator">=</span> <span class="number">5</span>;       <span class="comment">-- 不需要回表</span></span><br><span class="line"><span class="keyword">select</span> b,c,d <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> b <span class="operator">=</span> <span class="number">2</span> <span class="keyword">and</span> c <span class="operator">=</span> <span class="number">3</span> <span class="keyword">and</span> d <span class="operator">=</span> <span class="number">5</span>;     <span class="comment">-- 不需要回表</span></span><br></pre></td></tr></table></figure>
+<p><img
+src="https://ych-blog.oss-cn-guangzhou.aliyuncs.com/20250402150559.png" /></p>
+<p>  在第二个SQL语句中，我们查询的字段就是复合索引中的字段，所以，Innodb只需要走一次复合索引的B+树就可以获取到对应的真实数据。这也就是我们下面要将的覆盖索引</p>
+<h2 id="概念-2">（3）概念</h2>
+<p>  覆盖索引（covering
+index）指一个查询语句的执行只用从索引中就能够取得，不必从数据表中读取。也可以称之为实现了索引覆盖。</p>
+<p>  当一条查询语句符合覆盖索引条件时，MySQL只需要通过索引就可以返回查询所需要的数据，这样避免了查到索引后再返回表操作，减少I/O提高效率。</p>
+<h1 id="参考文章">参考文章</h1>
+<p>https://blog.csdn.net/cckevincyh/article/details/119618674?spm=1001.2014.3001.5501</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>旺仔
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://ych1016.github.io/2025/04/02/MySQL/MySQL%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95%E4%B8%8E%E9%9D%9E%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95/" title="MySQL聚簇索引与非聚簇索引">https://ych1016.github.io/2025/04/02/MySQL/MySQL聚簇索引与非聚簇索引/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/username">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/channel_name">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.png">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag"># 后端</a>
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/04/02/MySQL/SQL%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7explain/" rel="prev" title="SQL分析工具explain">
+                  <i class="fa fa-angle-left"></i> SQL分析工具explain
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/04/02/MySQL/MySQL%E5%89%8D%E7%BC%80%E7%B4%A2%E5%BC%95/" rel="next" title="MySQL前缀索引">
+                  MySQL前缀索引 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">旺仔</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">103k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">6:15</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.min.js","integrity":"sha256-G8ouPAnw4zzMbnAenHnVz6h9XpKbNdOkrqTh7AadyHs="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right"},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2}});</script></body>
+</html>
